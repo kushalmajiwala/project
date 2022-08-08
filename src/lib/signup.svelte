@@ -22,7 +22,7 @@
     }   
     function validate()
     {
-        
+
     }
     onMount(async() => {
 
@@ -92,14 +92,7 @@
                                     name="re_password"
                                     id="re_password"
                                     placeholder="Confirm password"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <input
-                                    type="checkbox"
-                                    name="agree-term"
-                                    id="agree-term"
-                                    class="agree-term"
+                                    bind:value={rpassword}
                                 />
                             </div>
                             <div class="form-group">
