@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import axios from 'axios';
-    let togglebtn = "bi bi-eye-slash";
+    let togglebtn = "bi bi-eye";
     let passtype = "password";
     let username = "";
     let email = "";
@@ -9,14 +9,14 @@
     let rpassword = ""
     function toggle()
     {
-        if(togglebtn === "bi bi-eye")
+        if(togglebtn === "bi bi-eye-slash")
         {
-            togglebtn = "bi bi-eye-slash";
+            togglebtn = "bi bi-eye";
             passtype = "password";
         }
         else
         {
-            togglebtn = "bi bi-eye";
+            togglebtn = "bi bi-eye-slash";
             passtype = "text";
         }
     }   
@@ -176,13 +176,6 @@ input:focus{
   -o-box-shadow: none !important;
   -ms-box-shadow: none !important; }
 
-input[type=checkbox] {
-  appearance: checkbox !important;
-  -moz-appearance: checkbox !important;
-  -webkit-appearance: checkbox !important;
-  -o-appearance: checkbox !important;
-  -ms-appearance: checkbox !important; }
-
 h2 {
   line-height: 1.66;
   margin: 0;
@@ -305,13 +298,6 @@ body {
   background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
   background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
   background-image: linear-gradient(to left, #74ebd5, #9face6); }
-
-input[type=checkbox]:not(old) {
-  width: 2em;
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
-  display: none; }
 
 .field-icon {
   float: right;
