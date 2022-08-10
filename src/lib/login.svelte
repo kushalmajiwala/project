@@ -49,8 +49,7 @@
     body {
         margin: 0;
         padding: 0;
-        background-image: url("../assets/images/signup-bg.jpg")
-            no-repeat;
+        background-image: url("../assets/images/signup-bg.jpg");
         height: 100vh;
         font-family: sans-serif;
         background-size: cover;
