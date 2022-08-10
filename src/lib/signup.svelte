@@ -163,7 +163,7 @@
   <div class="modals">
     <!-- empty-modal -->
     <Modal header="Message" isOpen={open1}>
-      <ModalBody>Field Cannot be empty...</ModalBody>
+      <ModalBody>Fields Cannot be empty...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle1}
           >Cancel</Button
