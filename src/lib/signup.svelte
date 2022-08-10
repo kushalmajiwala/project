@@ -34,7 +34,7 @@
     } else {
       const options1 = {
         method: "GET",
-        url: "https://localhost:1385/api/signup/username/" + username,
+        url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/username/" + username,
       };
 
       axios
@@ -45,7 +45,7 @@
         .catch(function () {
           const options2 = {
             method: "GET",
-            url: "https://localhost:1385/api/signup/email/" + email,
+            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/email/" + email,
           };
 
           axios
@@ -65,7 +65,7 @@
                   "email": email,
                   "password": password
                 }
-                axios.post('https://localhost:1385/api/signup/', rec).then(function(){
+                axios.post('https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/', rec).then(function(){
                   toggle5();
                 });
               }
@@ -92,9 +92,10 @@
               <h2 class="form-title">Create account</h2>
               <div class="form-group">
                 <input
+                  autocomplete="false"
+                  name="hidden"
                   type="text"
                   class="usernameicon form-input"
-                  name="name"
                   id="name"
                   placeholder="Username"
                   bind:value={username}
@@ -104,7 +105,8 @@
                 <input
                   type="email"
                   class="emailicon form-input"
-                  name="email"
+                  autocomplete="false"
+                  name="hidden"
                   id="email"
                   placeholder="Email"
                   bind:value={email}
@@ -284,14 +286,14 @@
     margin: 0;
   }
 
-  input:focus {
+  /* input:focus {
     outline: none;
     box-shadow: none !important;
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     -o-box-shadow: none !important;
     -ms-box-shadow: none !important;
-  }
+  } */
 
   h2 {
     line-height: 1.66;
