@@ -10,24 +10,22 @@
                 alt="no-image"
             />
             <h3>Sign in here</h3>
-            
-                <div class="inputBox">
-                    <input
-                       
-                        type="text"
-                        name="Username"
-                        placeholder="Username"
-                        class="usernameicon form-input"
-                    />
-                    <input
-                        
-                        type="password"
-                        name="Password"
-                        placeholder="Password"
-                        class="passwordicon form-input"
-                    />
-                </div>
-                <input type="submit" name="" value="Login" />
+
+            <div class="inputBox">
+                <input
+                    type="text"
+                    name="Username"
+                    placeholder="Username"
+                    class="usernameicon form-input"
+                />
+                <input
+                    type="password"
+                    name="Password"
+                    placeholder="Password"
+                    class="passwordicon form-input"
+                />
+            </div>
+            <input type="submit" name="" value="Login" />
         </div>
     </body>
 </main>
@@ -47,14 +45,16 @@
         background-position-x: 10px;
     }
     body {
-        margin: 0;
-        padding: 0;
         background-image: url("../assets/images/signup-bg.jpg");
         height: 100vh;
         font-family: sans-serif;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        -ms-background-size: cover;
     }
     @media screen and (max-width: 600px) {
         body {
