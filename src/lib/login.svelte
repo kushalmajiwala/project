@@ -10,24 +10,22 @@
                 alt="no-image"
             />
             <h3>Sign in here</h3>
-            
-                <div class="inputBox">
-                    <input
-                       
-                        type="text"
-                        name="Username"
-                        placeholder="Username"
-                        class="usernameicon form-input"
-                    />
-                    <input
-                        
-                        type="password"
-                        name="Password"
-                        placeholder="Password"
-                        class="passwordicon form-input"
-                    />
-                </div>
-                <input type="submit" name="" value="Login" />
+
+            <div class="inputBox">
+                <input
+                    type="text"
+                    name="Username"
+                    placeholder="Username"
+                    class="usernameicon form-input"
+                />
+                <input
+                    type="password"
+                    name="Password"
+                    placeholder="Password"
+                    class="passwordicon form-input"
+                />
+            </div>
+            <input type="submit" name="" value="Login" />
         </div>
     </body>
 </main>
@@ -47,14 +45,20 @@
         background-position-x: 10px;
     }
     body {
-        margin: 0;
-        padding: 0;
-        background-image: url("../assets/images/signup-bg1.jpg");
-        height: 100vh;
-        font-family: sans-serif;
-        background-size: cover;
+        font-size: 14px;
+        line-height: 1.8;
+        color: #222;
+        font-weight: 400;
+        font-family: "Montserrat";
+        background-image: url("../assets/images/signup-bg.jpg");
         background-repeat: no-repeat;
+        background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        -ms-background-size: cover;
         background-position: center center;
+        padding: 115px 0;
     }
     @media screen and (max-width: 600px) {
         body {
