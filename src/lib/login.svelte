@@ -50,11 +50,11 @@
         margin: 0;
         padding: 0;
         background-image: url("../assets/images/signup-bg1.jpg");
-        height: 100vh;
+        /* height: 100vh; */
         font-family: sans-serif;
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: center center;
     }
     @media screen and (max-width: 600px) {
         body {
