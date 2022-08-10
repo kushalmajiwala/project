@@ -81,7 +81,6 @@
         border-radius: 10px;
         padding: 40px;
         box-sizing: border-box;
-        opacity: 0.8;
     }
     .user {
         margin: 0 auto;

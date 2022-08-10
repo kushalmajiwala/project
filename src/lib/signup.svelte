@@ -34,7 +34,9 @@
     } else {
       const options1 = {
         method: "GET",
-        url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/username/" + username,
+        url:
+          "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/username/" +
+          username,
       };
 
       axios
@@ -45,7 +47,9 @@
         .catch(function () {
           const options2 = {
             method: "GET",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/email/" + email,
+            url:
+              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/email/" +
+              email,
           };
 
           axios
@@ -54,20 +58,22 @@
               toggle3();
             })
             .catch(function () {
-              if(password !== rpassword)
-              {
+              if (password !== rpassword) {
                 toggle4();
-              }
-              else
-              {
+              } else {
                 let rec = {
-                  "username": username,
-                  "email": email,
-                  "password": password
-                }
-                axios.post('https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/', rec).then(function(){
-                  toggle5();
-                });
+                  username: username,
+                  email: email,
+                  password: password,
+                };
+                axios
+                  .post(
+                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/signup/",
+                    rec
+                  )
+                  .then(function () {
+                    toggle5();
+                  });
               }
             });
         });
@@ -85,6 +91,9 @@
       <title>Sign Up</title>
     </head>
     <body>
+      <div class="logocontainer">
+        <div class="mainlogo" />
+      </div>
       <div class="main">
         <section class="signup">
           <div class="container">
@@ -190,8 +199,8 @@
         >
       </ModalFooter>
     </Modal>
-     <!-- Password Checking Modal -->
-     <Modal header="Message" isOpen={open4}>
+    <!-- Password Checking Modal -->
+    <Modal header="Message" isOpen={open4}>
       <ModalBody>Password and Confirm Password does not match...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle4}
@@ -199,8 +208,8 @@
         >
       </ModalFooter>
     </Modal>
-     <!-- Successfull Registration -->
-     <Modal header="Message" isOpen={open5}>
+    <!-- Successfull Registration -->
+    <Modal header="Message" isOpen={open5}>
       <ModalBody>You are Registered Successfully...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle5}
@@ -212,8 +221,26 @@
 </main>
 
 <style>
+  .logocontainer {
+    display: flex;
+    justify-content: center;
+  }
+  .mainlogo {
+    height: 120px;
+    width: 120px;
+    background-image: url("../assets/images/cvlogo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 100%;
+    position: absolute;
+    margin-top: -5%;
+    z-index: 1;
+    filter: drop-shadow(0 0 0 red); 
+  }
   .form-title {
     white-space: nowrap;
+    margin-top: 5%;
   }
   .usernameicon {
     background-image: url("../assets/images/usernameIcon.png");
@@ -331,17 +358,19 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
+    display: flex;
+    justify-content: center;
   }
 
   .signup-content {
-    background: #fff;
+    background: #ffffff;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
-    padding: 50px 85px;
-    opacity: 0.9;
+    padding: 50px 100px;
+    padding-bottom: 30px;
   }
 
   .form-group {
@@ -367,6 +396,9 @@
     background-size: 25px;
     background-position-y: center;
     background-position-x: 10px;
+  }
+  .form-input{
+    width: 100%;
   }
   .form-input::-webkit-input-placeholder {
     color: #999;
@@ -449,18 +481,101 @@
   }
   @media screen and (max-width: 400px) {
     .signup-content {
-      padding: 10px 30px;
-      width: 340px;
+      padding: 10px 55px;
     }
   }
   @media screen and (max-width: 300px) {
     .signup-content {
       padding: 10px 30px;
-      width: 340px;
     }
     .container {
       width: 270px;
       margin-right: 10px;
+    }
+  }
+  @media screen and (max-width: 1250px) {
+    .mainlogo {
+      margin-top: -5%;
+    }
+  }
+  @media screen and (max-width: 1150px) {
+    .mainlogo {
+      margin-top: -6%;
+    }
+  }
+  @media screen and (max-width: 1050px) {
+    .mainlogo {
+      margin-top: -6.5%;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .mainlogo {
+      margin-top: -7%;
+    }
+  }
+  @media screen and (max-width: 820px) {
+    .mainlogo {
+      margin-top: -7.5%;
+    }
+  }
+  @media screen and (max-width: 770px) {
+    .mainlogo {
+      margin-top: -8%;
+    }
+  }
+  @media screen and (max-width: 720px) {
+    .mainlogo {
+      margin-top: -8.5%;
+    }
+  }
+  @media screen and (max-width: 690px) {
+    .mainlogo {
+      margin-top: -9%;
+    }
+  }
+  @media screen and (max-width: 620px) {
+    .mainlogo {
+      margin-top: -9.5%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .mainlogo {
+      margin-top: -10%;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .mainlogo {
+      margin-top: -11%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .mainlogo {
+      margin-top: -12%;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .mainlogo {
+      margin-top: -13%;
+    }
+  }
+  @media screen and (max-width: 440px) {
+    .mainlogo {
+      margin-top: -14%;
+      height: 110px;
+      width: 110px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .mainlogo {
+      margin-top: -15%;
+    }
+    .form-title {
+      margin-top: 20%;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .mainlogo {
+      margin-top: -17%;
     }
   }
 </style>
