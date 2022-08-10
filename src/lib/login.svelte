@@ -55,7 +55,6 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        overflow: hidden;
     }
     @media screen and (max-width: 600px) {
         body {
