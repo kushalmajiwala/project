@@ -9,7 +9,7 @@
             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
             <title>Login</title>
         </head>
-        <body>
+        <div class="mybody">
             <div class="loginBox">
                 <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
@@ -37,7 +37,7 @@
                 </div>
                 <input type="submit" name="" value="Login" />
             </div>
-        </body>
+        </div>
     </html>
 </main>
 
@@ -55,7 +55,7 @@
         background-position-y: center;
         background-position-x: 10px;
     }
-    body {
+    .mybody {
         margin: 0;
         padding: 0;
         background-image: url("../assets/images/signup-bg.jpg");
