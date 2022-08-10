@@ -1,12 +1,24 @@
 <script>
   import { onMount } from "svelte";
   import axios from "axios";
+  import { Button, Modal, ModalBody, ModalFooter } from "sveltestrap";
   let togglebtn = "bi bi-eye";
   let passtype = "password";
   let username = "";
   let email = "";
   let password = "";
   let rpassword = "";
+  let open1 = false;
+  let open2 = false;
+  let open3 = false;
+  let open4 = false;
+  let open5 = false;
+  const toggle1 = () => (open1 = !open1);
+  const toggle2 = () => (open2 = !open2);
+  const toggle3 = () => (open3 = !open3);
+  const toggle4 = () => (open4 = !open4);
+  const toggle5 = () => (open5 = !open5);
+
   function toggle() {
     if (togglebtn === "bi bi-eye-slash") {
       togglebtn = "bi bi-eye";
@@ -16,7 +28,51 @@
       passtype = "text";
     }
   }
-  function validate() {}
+  function signupAuthentication() {
+    if (username == "" || email == "" || password == "" || rpassword == "") {
+      toggle1();
+    } else {
+      const options1 = {
+        method: "GET",
+        url: "https://localhost:1385/api/signup/username/" + username,
+      };
+
+      axios
+        .request(options1)
+        .then(function () {
+          toggle2();
+        })
+        .catch(function () {
+          const options2 = {
+            method: "GET",
+            url: "https://localhost:1385/api/signup/email/" + email,
+          };
+
+          axios
+            .request(options2)
+            .then(function () {
+              toggle3();
+            })
+            .catch(function () {
+              if(password !== rpassword)
+              {
+                toggle4();
+              }
+              else
+              {
+                let rec = {
+                  "username": username,
+                  "email": email,
+                  "password": password
+                }
+                axios.post('https://localhost:1385/api/signup/', rec).then(function(){
+                  toggle5();
+                });
+              }
+            });
+        });
+    }
+  }
   onMount(async () => {});
 </script>
 
@@ -93,7 +149,7 @@
                   id="submit"
                   class="form-submit"
                   value="Sign up"
-                  on:click={validate}
+                  on:click={signupAuthentication}
                 />
               </div>
             </div>
@@ -102,23 +158,72 @@
       </div>
     </body>
   </html>
+  <div class="modals">
+    <!-- empty-modal -->
+    <Modal header="Modal title" isOpen={open1}>
+      <ModalBody>Field Cannot be empty...</ModalBody>
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle1}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+    <!-- username Checking Modal -->
+    <Modal header="Modal title" isOpen={open2}>
+      <ModalBody
+        >Username Already Exists...Please Select other username...</ModalBody
+      >
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle2}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+    <!-- email Checking Modal -->
+    <Modal header="Modal title" isOpen={open3}>
+      <ModalBody>Email Already Exists...Please Select other email...</ModalBody>
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle3}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+     <!-- Password Checking Modal -->
+     <Modal header="Modal title" isOpen={open4}>
+      <ModalBody>Password and Confirm Password does not match...</ModalBody>
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle4}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+     <!-- Successfull Registration -->
+     <Modal header="Modal title" isOpen={open5}>
+      <ModalBody>You are Registered Successfully...</ModalBody>
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle5}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+  </div>
 </main>
 
 <style>
-  .form-title{
+  .form-title {
     white-space: nowrap;
   }
   .usernameicon {
-    background-image: url('../assets/images/usernameIcon.png');
+    background-image: url("../assets/images/usernameIcon.png");
   }
   .emailicon {
-    background-image: url('../assets/images/mailIcon.png');
+    background-image: url("../assets/images/mailIcon.png");
   }
   .passwordicon {
-    background-image: url('../assets/images/passwordIcon.png');
+    background-image: url("../assets/images/passwordIcon.png");
   }
   .confirmpasswordicon {
-    background-image: url('../assets/images/confirmPasswordIcon.png');
+    background-image: url("../assets/images/confirmPasswordIcon.png");
   }
   @font-face {
     font-family: "Montserrat";
@@ -353,7 +458,6 @@
     }
     .container {
       width: 270px;
-     
       margin-right: 10px;
     }
   }
