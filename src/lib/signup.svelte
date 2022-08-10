@@ -37,7 +37,7 @@
               <div class="form-group">
                 <input
                   type="text"
-                  class="form-input"
+                  class="usernameicon form-input"
                   name="name"
                   id="name"
                   placeholder="Username"
@@ -47,7 +47,7 @@
               <div class="form-group">
                 <input
                   type="email"
-                  class="form-input"
+                  class="emailicon form-input"
                   name="email"
                   id="email"
                   placeholder="Email"
@@ -58,14 +58,14 @@
                 {#if passtype === "password"}
                   <input
                     type="password"
-                    class="form-input"
+                    class="passwordicon form-input"
                     placeholder="Password"
                     bind:value={password}
                   />
                 {:else}
                   <input
                     type="text"
-                    class="form-input"
+                    class="passwordicon form-input"
                     placeholder="Password"
                     bind:value={password}
                   />
@@ -79,7 +79,7 @@
               <div class="form-group">
                 <input
                   type="password"
-                  class="form-input"
+                  class="confirmpasswordicon form-input"
                   name="re_password"
                   id="re_password"
                   placeholder="Confirm password"
@@ -105,6 +105,18 @@
 </main>
 
 <style>
+  .usernameicon {
+    background-image: url('../assets/images/usernameIcon.png');
+  }
+  .emailicon {
+    background-image: url('../assets/images/mailIcon.png');
+  }
+  .passwordicon {
+    background-image: url('../assets/images/passwordIcon.png');
+  }
+  .confirmpasswordicon {
+    background-image: url('../assets/images/confirmPasswordIcon.png');
+  }
   @font-face {
     font-family: "Montserrat";
     font-style: normal;
@@ -237,6 +249,11 @@
     font-size: 14px;
     font-weight: 500;
     color: #222;
+    background-repeat: no-repeat;
+    padding-left: 50px;
+    background-size: 25px;
+    background-position-y: center;
+    background-position-x: 10px;
   }
   .form-input::-webkit-input-placeholder {
     color: #999;
@@ -261,26 +278,6 @@
   }
   .form-input:-moz-placeholder {
     font-weight: 500;
-  }
-  .form-input:focus {
-    border: 1px solid transparent;
-    -webkit-border-image-source: -webkit-linear-gradient(
-      to right,
-      #9face6,
-      #74ebd5
-    );
-    -moz-border-image-source: -moz-linear-gradient(to right, #9face6, #74ebd5);
-    -o-border-image-source: -o-linear-gradient(to right, #9face6, #74ebd5);
-    border-image-source: linear-gradient(to right, #9face6, #74ebd5);
-    -webkit-border-image-slice: 1;
-    border-image-slice: 1;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -o-border-radius: 5px;
-    -ms-border-radius: 5px;
-    background-origin: border-box;
-    background-clip: content-box, border-box;
   }
   .form-input:focus::-webkit-input-placeholder {
     color: #222;
