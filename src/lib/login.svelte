@@ -1,16 +1,26 @@
 <main>
-    <body>
-        <div class="loginBox">
-            <!-- svelte-ignore a11y-img-redundant-alt -->
-            <img
-                class="user"
-                src="https://i.ibb.co/yVGxFPR/2.png"
-                height="100px"
-                width="100px"
-                alt="no-image"
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
             />
-            <h3>Sign in here</h3>
-            
+            <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+            <title>Login</title>
+        </head>
+        <body>
+            <div class="loginBox">
+                <!-- svelte-ignore a11y-img-redundant-alt -->
+                <img
+                    class="user"
+                    src="https://i.ibb.co/yVGxFPR/2.png"
+                    height="100px"
+                    width="100px"
+                    alt="no-image"
+                />
+                <h3>Sign in here</h3>
+
                 <div class="inputBox">
                     <input
                         type="text"
@@ -26,8 +36,9 @@
                     />
                 </div>
                 <input type="submit" name="" value="Login" />
-        </div>
-    </body>
+            </div>
+        </body>
+    </html>
 </main>
 
 <style>
