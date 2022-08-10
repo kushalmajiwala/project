@@ -111,9 +111,9 @@
     .loginBox input[type="password"]:focus {
         border-bottom: 2px solid #42f3fa;
     }
-    /* .inputBox {
+    .inputBox {
         position: relative;
-    } */
+    }
     .loginBox input[type="submit"] {
         border: none;
         outline: none;
