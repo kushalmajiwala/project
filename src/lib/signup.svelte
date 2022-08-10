@@ -219,9 +219,11 @@
   }
 
   .container {
-    width: 660px;
+    width: 535px;
     position: relative;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
   }
 
   .signup-content {
@@ -330,7 +332,7 @@
   @media screen and (max-width: 768px) {
     .container {
       width: calc(100% - 40px);
-      max-width: 100%;
+      /* max-width: 100%; */
     }
   }
   @media screen and (max-width: 480px) {
@@ -342,7 +344,17 @@
     .signup-content {
       padding: 10px 30px;
       width: 340px;
-      margin-left: -17px;
+    }
+  }
+  @media screen and (max-width: 300px) {
+    .signup-content {
+      padding: 10px 30px;
+      width: 340px;
+    }
+    .container {
+      width: 270px;
+     
+      margin-right: 10px;
     }
   }
 </style>
