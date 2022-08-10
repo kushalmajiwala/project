@@ -162,7 +162,7 @@
   </html>
   <div class="modals">
     <!-- empty-modal -->
-    <Modal header="Modal title" isOpen={open1}>
+    <Modal header="Message" isOpen={open1}>
       <ModalBody>Field Cannot be empty...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle1}
@@ -171,7 +171,7 @@
       </ModalFooter>
     </Modal>
     <!-- username Checking Modal -->
-    <Modal header="Modal title" isOpen={open2}>
+    <Modal header="Message" isOpen={open2}>
       <ModalBody
         >Username Already Exists...Please Select other username...</ModalBody
       >
@@ -182,7 +182,7 @@
       </ModalFooter>
     </Modal>
     <!-- email Checking Modal -->
-    <Modal header="Modal title" isOpen={open3}>
+    <Modal header="Message" isOpen={open3}>
       <ModalBody>Email Already Exists...Please Select other email...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle3}
@@ -191,7 +191,7 @@
       </ModalFooter>
     </Modal>
      <!-- Password Checking Modal -->
-     <Modal header="Modal title" isOpen={open4}>
+     <Modal header="Message" isOpen={open4}>
       <ModalBody>Password and Confirm Password does not match...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle4}
@@ -200,7 +200,7 @@
       </ModalFooter>
     </Modal>
      <!-- Successfull Registration -->
-     <Modal header="Modal title" isOpen={open5}>
+     <Modal header="Message" isOpen={open5}>
       <ModalBody>You are Registered Successfully...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle5}
