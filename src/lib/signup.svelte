@@ -105,6 +105,9 @@
 </main>
 
 <style>
+  .form-title{
+    white-space: nowrap;
+  }
   .usernameicon {
     background-image: url('../assets/images/usernameIcon.png');
   }
@@ -229,6 +232,7 @@
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
     padding: 50px 85px;
+    opacity: 0.9;
   }
 
   .form-group {
@@ -331,7 +335,14 @@
   }
   @media screen and (max-width: 480px) {
     .signup-content {
-      padding: 50px 25px;
+      padding: 40px 40px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .signup-content {
+      padding: 10px 30px;
+      width: 340px;
+      margin-left: -17px;
     }
   }
 </style>
