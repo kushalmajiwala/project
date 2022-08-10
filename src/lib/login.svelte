@@ -13,14 +13,12 @@
             
                 <div class="inputBox">
                     <input
-                       
                         type="text"
                         name="Username"
                         placeholder="Username"
                         class="usernameicon form-input"
                     />
                     <input
-                        
                         type="password"
                         name="Password"
                         placeholder="Password"
@@ -56,11 +54,11 @@
         background-repeat: no-repeat;
         background-position: center center;
     }
-    @media screen and (max-width: 600px) {
+    /* @media screen and (max-width: 600px) {
         body {
             background-size: cover;
         }
-    }
+    } */
     .loginBox {
         position: absolute;
         top: 50%;
@@ -102,7 +100,7 @@
     }
     .loginBox input[type="text"]:hover,
     .loginBox input[type="password"]:hover {
-        color: #42f3fa;
+        color: #2a2c2c;
         border: 1px solid #42f3fa;
         box-shadow: 0 0 5px rgba(0, 255, 0, 0.3), 0 0 10px rgba(0, 255, 0, 0.2),
             0 0 15px rgba(0, 255, 0, 0.1), 0 2px 0 black;
