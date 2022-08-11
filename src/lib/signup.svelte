@@ -13,11 +13,13 @@
   let open3 = false;
   let open4 = false;
   let open5 = false;
+  let btnname = "SIGN UP";
   const toggle1 = () => (open1 = !open1);
   const toggle2 = () => (open2 = !open2);
   const toggle3 = () => (open3 = !open3);
   const toggle4 = () => (open4 = !open4);
   const toggle5 = () => (open5 = !open5);
+  const changeName = () => (btnname = "SIGN UP");
 
   function toggle() {
     if (togglebtn === "bi bi-eye-slash") {
@@ -29,6 +31,7 @@
     }
   }
   function signupAuthentication() {
+    btnname = "PLEASE WAIT..."
     if (username == "" || email == "" || password == "" || rpassword == "") {
       toggle1();
     } else {
@@ -159,7 +162,7 @@
                   name="submit"
                   id="submit"
                   class="form-submit"
-                  value="Sign up"
+                  value={btnname}
                   on:click={signupAuthentication}
                 />
               </div>
@@ -174,7 +177,7 @@
     <Modal header="Message" isOpen={open1}>
       <ModalBody>Fields Cannot be empty...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle1}
+        <Button color="danger" class="float-right" on:click={toggle1} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
@@ -185,7 +188,7 @@
         >Username Already Exists...Please Select other username...</ModalBody
       >
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle2}
+        <Button color="danger" class="float-right" on:click={toggle2} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
@@ -194,7 +197,7 @@
     <Modal header="Message" isOpen={open3}>
       <ModalBody>Email Already Exists...Please Select other email...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle3}
+        <Button color="danger" class="float-right" on:click={toggle3} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
@@ -203,7 +206,7 @@
     <Modal header="Message" isOpen={open4}>
       <ModalBody>Password and Confirm Password does not match...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle4}
+        <Button color="danger" class="float-right" on:click={toggle4} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
@@ -212,7 +215,7 @@
     <Modal header="Message" isOpen={open5}>
       <ModalBody>You are Registered Successfully...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle5}
+        <Button color="danger" class="float-right" on:click={toggle5} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
