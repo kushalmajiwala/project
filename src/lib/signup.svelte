@@ -13,12 +13,20 @@
   let open3 = false;
   let open4 = false;
   let open5 = false;
+  let open6 = false;
+  let open7 = false;
   let btnname = "SIGN UP";
+  let borderUsername = "border: 2px solid #ebebeb";
+  let borderEmail = "border: 2px solid #ebebeb";
+  let borderPassword = "border: 2px solid #ebebeb";
+  let borderRpassword = "border: 2px solid #ebebeb";
   const toggle1 = () => (open1 = !open1);
   const toggle2 = () => (open2 = !open2);
   const toggle3 = () => (open3 = !open3);
   const toggle4 = () => (open4 = !open4);
   const toggle5 = () => (open5 = !open5);
+  const toggle6 = () => (open6 = !open6);
+  const toggle7 = () => (open7 = !open7);
   const changeName = () => (btnname = "SIGN UP");
 
   function toggle() {
@@ -32,9 +40,30 @@
   }
   function signupAuthentication() {
     btnname = "PLEASE WAIT..."
-    if (username == "" || email == "" || password == "" || rpassword == "") {
+    if (username !== "" && email !== "" && password !== "" && rpassword !== "") {
+      borderUsername = "border: 2px solid #ebebeb";
+      borderEmail = "border: 2px solid #ebebeb";
+      borderPassword = "border: 2px solid #ebebeb";
+      borderRpassword = "border: 2px solid #ebebeb";
+    } 
+    if (username == "" || email == "" || password == "" || rpassword == "") 
+    {
       toggle1();
-    } else {
+      if(username == "") borderUsername = "border: 2px solid red"; else borderUsername = "border: 2px solid #ebebeb";
+      if(email == "") borderEmail = "border: 2px solid red"; else borderEmail = "border: 2px solid #ebebeb";
+      if(password == "") borderPassword = "border: 2px solid red"; else borderPassword = "border: 2px solid #ebebeb";
+      if(rpassword == "") borderRpassword = "border: 2px solid red"; else borderRpassword = "border: 2px solid #ebebeb";
+    } 
+    else if(!email.includes('@') || !email.includes('.')) 
+    {
+      toggle6();
+    }
+    else if(password.length < 8)
+    {
+      toggle7();
+    } 
+    else 
+    {
       const options1 = {
         method: "GET",
         url:
@@ -111,6 +140,7 @@
                   id="name"
                   placeholder="Username"
                   bind:value={username}
+                  style={borderUsername}
                 />
               </div>
               <div class="form-group">
@@ -122,6 +152,7 @@
                   id="email"
                   placeholder="Email"
                   bind:value={email}
+                  style={borderEmail}
                 />
               </div>
               <div class="form-group">
@@ -131,6 +162,7 @@
                     class="passwordicon form-input"
                     placeholder="Password"
                     bind:value={password}
+                    style={borderPassword}
                   />
                 {:else}
                   <input
@@ -138,6 +170,7 @@
                     class="passwordicon form-input"
                     placeholder="Password"
                     bind:value={password}
+                    style={borderPassword}
                   />
                 {/if}
                 <i
@@ -154,6 +187,7 @@
                   id="re_password"
                   placeholder="Confirm password"
                   bind:value={rpassword}
+                  style={borderRpassword}
                 />
               </div>
               <div class="form-group">
@@ -207,6 +241,24 @@
       <ModalBody>Password and Confirm Password does not match...</ModalBody>
       <ModalFooter>
         <Button color="danger" class="float-right" on:click={toggle4} on:click={changeName}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+    <!-- Email Validation  -->
+    <Modal header="Message" isOpen={open6}>
+      <ModalBody>Invalid Email...</ModalBody>
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle6} on:click={changeName}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+     <!-- Password Validation  -->
+     <Modal header="Message" isOpen={open7}>
+      <ModalBody>Password must be 8 characters long...</ModalBody>
+      <ModalFooter>
+        <Button color="danger" class="float-right" on:click={toggle7} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
@@ -383,7 +435,6 @@
 
   .form-input {
     width: 100%;
-    border: 1px solid #ebebeb;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
