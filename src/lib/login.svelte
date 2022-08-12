@@ -1,44 +1,171 @@
-<main>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            />
-            <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-            <title>Login</title>
-        </head>
-        <div class="mybody">
-            <div class="loginBox">
-                <!-- svelte-ignore a11y-img-redundant-alt -->
-                <img
-                    class="user"
-                    src="https://i.ibb.co/yVGxFPR/2.png"
-                    height="100px"
-                    width="100px"
-                    alt="no-image"
-                />
-                <h3>Sign in here</h3>
+<script>
+    import { onMount } from "svelte";
+    import Dashboard from "./dashboard.svelte";
+    import axios from "axios";
+    import { Button, Modal, ModalBody, ModalFooter } from "sveltestrap";
+    let btnname = "LOGIN";
+    let password = "";
+    let open1 = false;
+    let open2 = false;
+    let open3 = false;
+    let showDashboard = false;
+    let borderUsername = "border-bottom: 2px solid black";
 
-                <div class="inputBox">
-                    <input
-                        type="text"
-                        name="Username"
-                        placeholder="Username"
-                        class="usernameicon form-input"
+    onMount(async () => {
+        if(localStorage.getItem(username))
+        {
+            showDashboard = true;
+        }
+        else
+        {
+            showDashboard = false;
+        }
+    });
+
+    const toggle1 = () => (open1 = !open1);
+    const toggle2 = () => (open2 = !open2);
+    const toggle3 = () => (open3 = !open3);
+
+    function changeName() {
+        btnname = "LOGIN";
+    }
+    function loginAuthentication() {
+        btnname = "PLEASE WAIT...";
+        if(password !== "")
+        {
+            borderUsername = "border-bottom: 2px solid black";
+        }
+        if (username == "" || password == "") {
+            toggle1();
+            borderUsername = "border-bottom: 2px solid red";
+        } else {
+            const options = {
+                method: "GET",
+                url:
+                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/login/username/" +
+                    username,
+            };
+            axios
+                .request(options)
+                .then(function (response) {
+                    if (password !== response.data.password) {
+                        toggle2();
+                    } else {
+                        localStorage.setItem(
+                            response.data.username,
+                            response.data.userId
+                        );
+                        if (localStorage.getItem(username)) {
+                            changeName();
+                        }
+                        showDashboard = true;
+                    }
+                })
+                .catch(function (error) {
+                    toggle3();
+                });
+        }
+    }
+    export let username;
+</script>
+
+<main>
+    {#if showDashboard == false}
+        <div>
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8" />
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0"
                     />
-                    <input
-                        type="password"
-                        name="Password"
-                        placeholder="Password"
-                        class="passwordicon form-input"
-                    />
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+                    <title>Login</title>
+                </head>
+                <div class="mybody">
+                    <div class="loginBox">
+                        <!-- svelte-ignore a11y-img-redundant-alt -->
+                        <img
+                            class="user"
+                            src="https://i.ibb.co/yVGxFPR/2.png"
+                            height="100px"
+                            width="100px"
+                            alt="no-image"
+                        />
+                        <h3>Sign in here</h3>
+
+                        <div class="inputBox">
+                            <input
+                                type="text"
+                                name="Username"
+                                placeholder="Username"
+                                class="usernameicon form-input"
+                                bind:value={username}
+                                disabled
+                            />
+                            <input
+                                type="password"
+                                name="Password"
+                                placeholder="Password"
+                                class="passwordicon form-input"
+                                bind:value={password}
+                                style={borderUsername}
+                            />
+                        </div>
+                        <input
+                            type="submit"
+                            name=""
+                            value={btnname}
+                            on:click={loginAuthentication}
+                        />
+                    </div>
                 </div>
-                <input type="submit" name="" value="Login" />
+            </html>
+            <div class="modals">
+                <!-- empty-modal -->
+                <Modal header="Message" isOpen={open1}>
+                    <ModalBody>Fields Cannot be empty...</ModalBody>
+                    <ModalFooter>
+                        <Button
+                            color="danger"
+                            class="float-right"
+                            on:click={toggle1}
+                            on:click={changeName}>Cancel</Button
+                        >
+                    </ModalFooter>
+                </Modal>
+                <!-- Invalid Password -->
+                <Modal header="Message" isOpen={open2}>
+                    <ModalBody>Invalid Password...</ModalBody>
+                    <ModalFooter>
+                        <Button
+                            color="danger"
+                            class="float-right"
+                            on:click={toggle2}
+                            on:click={changeName}>Cancel</Button
+                        >
+                    </ModalFooter>
+                </Modal>
+                <!-- Invalid Username -->
+                <Modal header="Message" isOpen={open3}>
+                    <ModalBody>Invalid Username...</ModalBody>
+                    <ModalFooter>
+                        <Button
+                            color="danger"
+                            class="float-right"
+                            on:click={toggle3}
+                            on:click={changeName}>Cancel</Button
+                        >
+                    </ModalFooter>
+                </Modal>
             </div>
         </div>
-    </html>
+    {/if}
+    <div>
+        {#if showDashboard == true}
+            <Dashboard />
+        {/if}
+    </div>
 </main>
 
 <style>
@@ -104,7 +231,6 @@
         border-bottom: 2px solid #464444;
         outline: none;
         height: 40px;
-        color: #fff;
         font-size: 16px;
         box-sizing: border-box;
     }

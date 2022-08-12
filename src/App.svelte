@@ -11,8 +11,8 @@
     <div>
       <Route path="/" component="{Usernotfound}" />
       <Route path="/signup" component="{Signup}" />
-      <Route path="/:username" component="{Home}" />
-      <Route path="/:username/manage" component="{Login}"/>
+      <Route path="/:username" let:params><Home username={params.username} /></Route>
+      <Route path="/:username/manage" let:params><Login username={params.username} /></Route>
     </div>
   </Router>
 </main>
