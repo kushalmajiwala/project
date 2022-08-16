@@ -1,16 +1,23 @@
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>User Not Found</title>
-    </head>
-    <body>
-        <div>
-            <h1>User Not Found</h1>
-        </div>
-    </body>
-</html>
+<script>
+    import { onMount } from 'svelte';
+    let msg = "Loading...";
+    
+    function changeMsg()
+    {
+        msg = "User Not Found";
+    }
+
+    onMount(async () => {
+        setTimeout(() => {
+            changeMsg()
+        }, 3000);
+    })
+</script>
+<main>
+    <div>
+        <h1>{msg}</h1>
+    </div>
+</main>
 <style>
     div {
         display: flex;
