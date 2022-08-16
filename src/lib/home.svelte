@@ -1,8 +1,10 @@
 <script>
     import { onMount } from "svelte";
     import axios from "axios";
+    import Nocv from "./nocv.svelte";
     import Usernotfound from "./usernotfound.svelte";
     let userFound = false;
+    let cvFound = false;
 
     function checkUserExist() {
         const options = {
@@ -19,6 +21,9 @@
                 userFound = false;
             });
     }
+    function checkCvExist() {
+
+    }
 
     onMount(async () => {
         await checkUserExist();
@@ -30,8 +35,13 @@
 <main>
     <div>
         {#if userFound == true}
-            {username}
-            <h1>Home Page</h1>
+           {#if cvFound == false}
+                <Nocv />
+            {:else}
+                <div>
+                    <h1>MyCV</h1>
+                </div>
+           {/if}
         {/if}
     </div>
     <div>
