@@ -163,7 +163,7 @@
     {/if}
     <div>
         {#if showDashboard == true}
-            <Dashboard />
+            <Dashboard username={username}/>
         {/if}
     </div>
 </main>
