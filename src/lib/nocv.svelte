@@ -1,5 +1,5 @@
 <script>
-   let msg = "No CVs Added Yet";
+   let msg = "No CV Added Yet";
 </script>
 <main>
     <div>
