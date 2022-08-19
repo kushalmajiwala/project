@@ -128,7 +128,7 @@
     }
     @media screen and (min-width: 1350px) {
         .header {
-            padding: 0.7%;
+            padding: 0.8%;
         }
     }
     @media screen and (max-width: 1350px) {
