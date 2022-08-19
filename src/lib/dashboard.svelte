@@ -33,6 +33,30 @@
                     <div class="showusername">{username}</div>
                 </div>
             </div>
+            <div class="nav-content">
+                <i class="bi bi-list-ul myicon"></i>
+                Dashboard
+            </div>
+            <div class="nav-content">
+                <i class="bi bi-file-earmark-fill myicon"></i>
+                My CV
+            </div>
+            <div class="nav-content">
+                <i class="bi bi-file-earmark-fill myicon"></i>
+                My Cover Letter
+            </div>
+            <div class="nav-content">
+                <i class="bi bi-person-fill myicon"></i>
+                Profile
+            </div>
+            <div class="nav-content">
+                <i class="bi bi-lock-fill myicon"></i>
+                Password
+            </div>
+            <div class="nav-content">
+                <i class="bi bi-box-arrow-right myicon"></i>
+                Signout
+            </div>
         </nav>
         <div
             class="w3-overlay w3-hide-large w3-animate-opacity"
@@ -61,6 +85,23 @@
 </main>
 
 <style>
+    .nav-content {
+        display: flex;
+        justify-content: left;
+        padding: 15px;
+        font-size: 25px;
+        border-bottom: 1px solid #92aad8;
+        cursor: pointer;
+        color: #3A4394;
+    }
+    .nav-content:hover {
+        background-color: #646CBC;
+        color: white;
+    }
+    .myicon {
+        margin-right: 7%;
+        margin-left: 2%;
+    }
     nav {
         border-right: 2px solid #646cbc;
     }
@@ -79,7 +120,7 @@
     .closelogo {
         font-size: 30px;
         margin-top: -10%;
-        margin-right: -5%;
+        margin-right: -12%;
     }
     .page-content {
         width: 100%;
