@@ -20,19 +20,18 @@
             style="z-index:3;width:300px;"
             id="mySidebar"
         >
-            <br />
             <div class="firstmenu">
-            <div class="w3-container">
-                <div
-                    on:click={w3_close}
-                    class="w3-right closelogo w3-hide-large"
-                    title="close menu"
-                >
-                    <i class="fa fa-remove" style="color:red"/>
+                <div class="w3-container">
+                    <div
+                        on:click={w3_close}
+                        class="w3-right closelogo w3-hide-large"
+                        title="close menu"
+                    >
+                        <i class="fa fa-remove" style="color:red" />
+                    </div>
+                    <div class="defaultimg" />
+                    <div class="showusername">{username}</div>
                 </div>
-                <div class="defaultimg" />
-                <div class="showusername">{username}</div>
-            </div>
             </div>
         </nav>
         <div
@@ -51,7 +50,14 @@
             </header>
         </div>
     </div>
-    <div class="page-content">Hello</div>
+    <div class="page-content">
+        <div class="header">
+            <div class="set-header w3-container">
+                <div class="mainlogo" />
+                <div class="head-text"><p>My CV Creator</p></div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <style>
@@ -64,7 +70,7 @@
         background-position: center center;
         border-radius: 100%;
         position: relative;
-        margin-top: -5%;
+        margin-top: 0%;
         filter: drop-shadow(0 0 0 red);
     }
     .closelogo {
@@ -76,6 +82,36 @@
         width: 100%;
         height: 1000px;
         background-color: #dde0f2;
+        position: relative;
+    }
+    .header {
+        background-color: white;
+        width: 100%;
+        border-bottom: 2px solid #646cbc;
+        position: fixed;
+        padding: 1.17%;
+    }
+    .mainlogo {
+        height: 80px;
+        width: 80px;
+        background-image: url("../assets/images/cvlogo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        border-radius: 100%;
+        margin-top: 0%;
+        box-shadow: 0px 0px 7px 3px rgba(153, 153, 153, 0.8);
+        margin-right: 3%;
+    }
+    .set-header {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-left: -12%;
+    }
+    .head-text {
+        font-size: 35px;
+        margin-top: 1%;
     }
     .showusername {
         margin-left: 30%;
@@ -84,12 +120,60 @@
         position: absolute;
     }
     .firstmenu {
-        border-bottom: 1px solid rgb(181, 181, 216);
-        padding-bottom: 5%;
+        border-bottom: 2px solid #646cbc;
+        border-right: 2px solid #646cbc;
+        padding: 5%;
+    }
+    @media screen and (max-width: 1230px) {
+        .header {
+            padding: 0.9%;
+        }
+    }
+    @media screen and (max-width: 1165px) {
+        .header {
+            padding: 1%;
+        }
+    }
+    @media screen and (max-width: 1055px) {
+        .header {
+            padding: 1.1%;
+        }
     }
     @media screen and (min-width: 993px) {
         .page-content {
             margin-left: 300px;
+        }
+    }
+    @media screen and (max-width: 993px) {
+        .firstmenu {
+            border-right: none;
+        }
+        .header {
+            position: absolute;
+            height: 12%;
+            display: flex;
+            justify-content: center;
+            padding: 2%;
+        }
+    }
+    @media screen and (max-width: 740px) {
+        .firstmenu {
+            border-right: none;
+        }
+        .header {
+            position: absolute;
+            height: 10%;
+            padding-left: -7%;
+        }
+        .head-text {
+            font-size: 27px;
+            margin-top: 2%;
+        }
+    }
+    @media screen and (max-width: 500px) {
+        .head-text {
+            font-size: 25px;
+            margin-top: 4%;
         }
     }
 </style>
