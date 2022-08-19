@@ -150,7 +150,7 @@
         margin-left: 2%;
     }
     nav {
-        box-shadow: 2px 2px 15px 2px grey;
+        box-shadow: 2px 2px 15px 0px grey;
     }
     .defaultimg {
         height: 80px;
@@ -183,7 +183,7 @@
         width: 100%;
         position: fixed;
         padding: 1.17%;
-        box-shadow: 2px 2px 20px 2px grey;
+        box-shadow: 2px 2px 20px 0px grey;
     }
     .mainlogo {
         height: 80px;
@@ -194,7 +194,7 @@
         background-position: center center;
         border-radius: 100%;
         margin-top: 0%;
-        box-shadow: 0px 0px 7px 3px rgba(153, 153, 153, 0.8);
+        box-shadow: 0px 0px 10px 0px rgba(153, 153, 153, 0.8);
         margin-right: 3%;
     }
     .set-header {
@@ -215,7 +215,7 @@
     }
     .firstmenu {
         padding: 5%;
-        box-shadow: 2px 2px 5px 2px grey;
+        box-shadow: 2px 2px 5px 0px grey;
     }
     @media screen and (min-width: 1350px) {
         .header {
