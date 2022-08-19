@@ -136,9 +136,10 @@
         justify-content: left;
         padding: 15px;
         font-size: 25px;
-        border-bottom: 1px solid #92aad8;
+        /* border-bottom: 1px solid #92aad8; */
         cursor: pointer;
         color: #3a4394;
+        box-shadow: 2px 2px 3px 0px #92aad8;
     }
     .nav-content:hover {
         background-color: #646cbc;
