@@ -164,7 +164,7 @@
     {/if}
     <div>
         {#if showDashboard == true}
-            <Dashboard username={username} url={url}/>
+            <Dashboard username={username} url={url} operation/>
         {/if}
     </div>
 </main>

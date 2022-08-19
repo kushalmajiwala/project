@@ -2,6 +2,9 @@
     import { Router, Link, Route } from "svelte-routing";
     import Dashboardhome from "../Routes/dashboardhome.svelte";
     import Mycv from "../Routes/mycv.svelte";
+    import Mycover from "../Routes/myletter.svelte";
+    import Profile from "../Routes/profile.svelte";
+    import Password from "../Routes/password.svelte";
     // Script to open and close sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
@@ -14,15 +17,19 @@
     }
     function signout() {
         localStorage.removeItem(username);
-        let path = window.location.href;
-        window.location.replace(path);
+        let path = window.location.pathname;
+        if(!path.includes('mycv') && !path.includes('mycover') && !path.includes('profile') && !path.includes('password'))
+        {
+            window.location.replace(path);
+        }
     }
     export let username;
     export let url = "";
+    export let operation;
 </script>
 
 <main>
-    <Router url="{url}">
+    <Router {url}>
         <div class="w3-light-grey w3-content" style="max-width:1600px">
             <!-- Sidebar/menu -->
             <nav
@@ -43,30 +50,36 @@
                         <div class="showusername">{username}</div>
                     </div>
                 </div>
-                <Link to="/">
+                <Link to="/{username}/manage">
                     <div class="nav-content">
                         <i class="bi bi-list-ul myicon" />
                         Dashboard
                     </div>
                 </Link>
-                <Link to="mycv">
+                <Link to="/{username}/manage/mycv">
                     <div class="nav-content">
                         <i class="bi bi-file-earmark-fill myicon" />
                         My CV
                     </div>
                 </Link>
-                <div class="nav-content">
-                    <i class="bi bi-file-earmark-fill myicon" />
-                    My Cover Letter
-                </div>
-                <div class="nav-content">
-                    <i class="bi bi-person-fill myicon" />
-                    Profile
-                </div>
-                <div class="nav-content">
-                    <i class="bi bi-lock-fill myicon" />
-                    Password
-                </div>
+                <Link to="/{username}/manage/mycover">
+                    <div class="nav-content">
+                        <i class="bi bi-file-earmark-fill myicon" />
+                        My Cover Letter
+                    </div>
+                </Link>
+                <Link to="/{username}/manage/profile">
+                    <div class="nav-content">
+                        <i class="bi bi-person-fill myicon" />
+                        Profile
+                    </div>
+                </Link>
+                <Link to="/{username}/manage/password">
+                    <div class="nav-content">
+                        <i class="bi bi-lock-fill myicon" />
+                        Password
+                    </div>
+                </Link>
                 <Link to="/{username}/manage">
                     <div class="nav-content" on:click={signout}>
                         <i class="bi bi-box-arrow-right myicon" />
@@ -99,8 +112,19 @@
             </div>
             <br /><br /><br /><br /><br /><br /><br /><br />
             <div class="route-content">
-                <Route path="/" component="{Dashboardhome}" />
-                <Route path="mycv" component="{Mycv}" />
+                {#if operation == "mycv"}
+                    <Route path="/" component={Mycv} />
+                {/if}
+                {#if operation == "mycover"}
+                    <Route path="/" component={Mycover} />
+                {/if}
+                {#if operation == "profile"}
+                    <Route path="/" component={Profile} />
+                {/if}
+                {#if operation == "password"}
+                    <Route path="/" component={Password} />
+                {/if}
+                <Route path="/" component={Dashboardhome} />
             </div>
         </div>
     </Router>
