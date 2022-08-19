@@ -1,4 +1,7 @@
 <script>
+    import { Router, Link, Route } from "svelte-routing";
+    import Dashboardhome from "../Routes/dashboardhome.svelte";
+    import Mycv from "../Routes/mycv.svelte";
     // Script to open and close sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
@@ -9,79 +12,98 @@
         document.getElementById("mySidebar").style.display = "none";
         document.getElementById("myOverlay").style.display = "none";
     }
+    function signout() {
+        localStorage.removeItem(username);
+        let path = window.location.href;
+        window.location.replace(path);
+    }
     export let username;
+    export let url = "";
 </script>
 
 <main>
-    <div class="w3-light-grey w3-content" style="max-width:1600px">
-        <!-- Sidebar/menu -->
-        <nav
-            class="w3-sidebar w3-collapse w3-white w3-animate-left"
-            style="z-index:3;width:300px;"
-            id="mySidebar"
-        >
-            <div class="firstmenu">
-                <div class="w3-container">
-                    <div
-                        on:click={w3_close}
-                        class="w3-right closelogo w3-hide-large"
-                        title="close menu"
-                    >
-                        <i class="fa fa-remove" style="color:red" />
+    <Router url="{url}">
+        <div class="w3-light-grey w3-content" style="max-width:1600px">
+            <!-- Sidebar/menu -->
+            <nav
+                class="w3-sidebar w3-collapse w3-white w3-animate-left"
+                style="z-index:3;width:300px;"
+                id="mySidebar"
+            >
+                <div class="firstmenu">
+                    <div class="w3-container">
+                        <div
+                            on:click={w3_close}
+                            class="w3-right closelogo w3-hide-large"
+                            title="close menu"
+                        >
+                            <i class="fa fa-remove" style="color:red" />
+                        </div>
+                        <div class="defaultimg" />
+                        <div class="showusername">{username}</div>
                     </div>
-                    <div class="defaultimg" />
-                    <div class="showusername">{username}</div>
+                </div>
+                <Link to="/">
+                    <div class="nav-content">
+                        <i class="bi bi-list-ul myicon" />
+                        Dashboard
+                    </div>
+                </Link>
+                <Link to="mycv">
+                    <div class="nav-content">
+                        <i class="bi bi-file-earmark-fill myicon" />
+                        My CV
+                    </div>
+                </Link>
+                <div class="nav-content">
+                    <i class="bi bi-file-earmark-fill myicon" />
+                    My Cover Letter
+                </div>
+                <div class="nav-content">
+                    <i class="bi bi-person-fill myicon" />
+                    Profile
+                </div>
+                <div class="nav-content">
+                    <i class="bi bi-lock-fill myicon" />
+                    Password
+                </div>
+                <Link to="/{username}/manage">
+                    <div class="nav-content" on:click={signout}>
+                        <i class="bi bi-box-arrow-right myicon" />
+                        Signout
+                    </div>
+                </Link>
+            </nav>
+            <div
+                class="w3-overlay w3-hide-large w3-animate-opacity"
+                on:click={w3_close}
+                style="cursor:pointer"
+                title="close side menu"
+                id="myOverlay"
+            />
+            <div class="w3-main" style="margin-left:300px">
+                <header id="portfolio">
+                    <span
+                        class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
+                        on:click={w3_open}><i class="fa fa-bars" /></span
+                    >
+                </header>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="header">
+                <div class="set-header w3-container">
+                    <div class="mainlogo" />
+                    <div class="head-text"><p>My CV Creator</p></div>
                 </div>
             </div>
-            <div class="nav-content">
-                <i class="bi bi-list-ul myicon"></i>
-                Dashboard
-            </div>
-            <div class="nav-content">
-                <i class="bi bi-file-earmark-fill myicon"></i>
-                My CV
-            </div>
-            <div class="nav-content">
-                <i class="bi bi-file-earmark-fill myicon"></i>
-                My Cover Letter
-            </div>
-            <div class="nav-content">
-                <i class="bi bi-person-fill myicon"></i>
-                Profile
-            </div>
-            <div class="nav-content">
-                <i class="bi bi-lock-fill myicon"></i>
-                Password
-            </div>
-            <div class="nav-content">
-                <i class="bi bi-box-arrow-right myicon"></i>
-                Signout
-            </div>
-        </nav>
-        <div
-            class="w3-overlay w3-hide-large w3-animate-opacity"
-            on:click={w3_close}
-            style="cursor:pointer"
-            title="close side menu"
-            id="myOverlay"
-        />
-        <div class="w3-main" style="margin-left:300px">
-            <header id="portfolio">
-                <span
-                    class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
-                    on:click={w3_open}><i class="fa fa-bars" /></span
-                >
-            </header>
-        </div>
-    </div>
-    <div class="page-content">
-        <div class="header">
-            <div class="set-header w3-container">
-                <div class="mainlogo" />
-                <div class="head-text"><p>My CV Creator</p></div>
+            <br /><br /><br /><br /><br /><br /><br /><br />
+            <div class="route-content">
+                <Route path="/" component="{Dashboardhome}" />
+                <Route path="mycv" component="{Mycv}" />
             </div>
         </div>
-    </div>
+    </Router>
 </main>
 
 <style>
@@ -92,10 +114,10 @@
         font-size: 25px;
         border-bottom: 1px solid #92aad8;
         cursor: pointer;
-        color: #3A4394;
+        color: #3a4394;
     }
     .nav-content:hover {
-        background-color: #646CBC;
+        background-color: #646cbc;
         color: white;
     }
     .myicon {
@@ -126,6 +148,9 @@
         width: 100%;
         height: 1000px;
         background-color: #dde0f2;
+        position: relative;
+    }
+    .route-content {
         position: relative;
     }
     .header {

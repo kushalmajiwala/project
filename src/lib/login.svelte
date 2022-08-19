@@ -10,6 +10,7 @@
     let open3 = false;
     let showDashboard = false;
     let borderUsername = "border-bottom: 2px solid black";
+    let url = window.location.href;
 
     onMount(async () => {
         if(localStorage.getItem(username))
@@ -163,7 +164,7 @@
     {/if}
     <div>
         {#if showDashboard == true}
-            <Dashboard username={username}/>
+            <Dashboard username={username} url={url}/>
         {/if}
     </div>
 </main>
