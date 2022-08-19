@@ -126,6 +126,11 @@
         border-bottom: 2px solid #646cbc;
         padding: 5%;
     }
+    @media screen and (min-width: 1230px) {
+        .header {
+            padding: 0%;
+        }
+    }
     @media screen and (max-width: 1230px) {
         .header {
             padding: 0.9%;
