@@ -61,6 +61,9 @@
 </main>
 
 <style>
+    nav {
+        border-right: 2px solid #646cbc;
+    }
     .defaultimg {
         height: 80px;
         width: 80px;
@@ -121,7 +124,6 @@
     }
     .firstmenu {
         border-bottom: 2px solid #646cbc;
-        border-right: 2px solid #646cbc;
         padding: 5%;
     }
     @media screen and (max-width: 1230px) {
@@ -154,6 +156,9 @@
             display: flex;
             justify-content: center;
             padding: 2%;
+        }
+        nav {
+            border: none;
         }
     }
     @media screen and (max-width: 740px) {
