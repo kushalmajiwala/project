@@ -149,7 +149,7 @@
         margin-left: 2%;
     }
     nav {
-        border-right: 2px solid #646cbc;
+        box-shadow: 2px 2px 15px 2px grey;
     }
     .defaultimg {
         height: 80px;
@@ -180,9 +180,9 @@
     .header {
         background-color: white;
         width: 100%;
-        border-bottom: 2px solid #646cbc;
         position: fixed;
         padding: 1.17%;
+        box-shadow: 2px 2px 20px 2px grey;
     }
     .mainlogo {
         height: 80px;
@@ -213,8 +213,8 @@
         position: absolute;
     }
     .firstmenu {
-        border-bottom: 2px solid #646cbc;
         padding: 5%;
+        box-shadow: 2px 2px 5px 2px grey;
     }
     @media screen and (min-width: 1350px) {
         .header {

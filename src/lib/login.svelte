@@ -254,9 +254,12 @@
         outline: none;
         height: 40px;
         font-size: 16px;
-        background: #59238f;
+        background: #7d3bc4;
         color: #fff;
         border-radius: 20px;
         cursor: pointer;
+    }
+    .loginBox input[type="submit"]:hover {
+        background-color: #652f9e;
     }
 </style>
