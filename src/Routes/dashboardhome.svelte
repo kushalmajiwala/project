@@ -3,7 +3,6 @@
 
     export let username;
     export let url = "";
-    export let operation;
 </script>
 
 <main>
