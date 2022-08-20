@@ -25,6 +25,7 @@
         line-height: 140px;
         cursor: pointer;
         box-shadow: 3px 3px 5px 0px grey;
+        border-radius: 3%;
     }
     .text-content {
         font-size: 20px;
