@@ -64,6 +64,7 @@
         .add-container {
             display: inline-block;
             justify-content: center;
+            margin-top: -11%;
         }
         .add-content {
             margin-left: 57%;
