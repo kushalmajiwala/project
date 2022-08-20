@@ -50,37 +50,37 @@
                         <div class="showusername">{username}</div>
                     </div>
                 </div>
-                <Link to="/{username}/manage">
+                <Link to="/{username}/manage" style="text-decoration: none;">
                     <div class="nav-content">
                         <i class="bi bi-list-ul myicon" />
                         Dashboard
                     </div>
                 </Link>
-                <Link to="/{username}/manage/mycv">
+                <Link to="/{username}/manage/mycv" style="text-decoration: none;">
                     <div class="nav-content">
                         <i class="bi bi-file-earmark-fill myicon" />
                         My CV
                     </div>
                 </Link>
-                <Link to="/{username}/manage/mycover">
+                <Link to="/{username}/manage/mycover" style="text-decoration: none;">
                     <div class="nav-content">
                         <i class="bi bi-file-earmark-fill myicon" />
                         My Cover Letter
                     </div>
                 </Link>
-                <Link to="/{username}/manage/profile">
+                <Link to="/{username}/manage/profile" style="text-decoration: none;">
                     <div class="nav-content">
                         <i class="bi bi-person-fill myicon" />
                         Profile
                     </div>
                 </Link>
-                <Link to="/{username}/manage/password">
+                <Link to="/{username}/manage/password" style="text-decoration: none;">
                     <div class="nav-content">
                         <i class="bi bi-lock-fill myicon" />
                         Password
                     </div>
                 </Link>
-                <Link to="/{username}/manage">
+                <Link to="/{username}/manage" style="text-decoration: none;">
                     <div class="nav-content" on:click={signout}>
                         <i class="bi bi-box-arrow-right myicon" />
                         Signout
@@ -107,7 +107,7 @@
             <div class="header">
                 <div class="set-header w3-container">
                     <div class="mainlogo" />
-                    <div class="head-text"><p>My CV Creator</p></div>
+                    <div class="head-text"><p>CV Creator</p></div>
                 </div>
             </div>
             <br /><br /><br /><br /><br /><br /><br /><br />
@@ -177,6 +177,7 @@
     }
     .route-content {
         position: relative;
+        z-index: 0;
     }
     .header {
         background-color: white;
@@ -184,6 +185,7 @@
         position: fixed;
         padding: 1.17%;
         box-shadow: 2px 2px 20px 0px grey;
+        z-index: 1;
     }
     .mainlogo {
         height: 80px;
