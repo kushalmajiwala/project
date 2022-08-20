@@ -22,7 +22,7 @@
 </main>
 <style>
     .pass-container {
-        height: 400px;
+        height: 420px;
         width: 45%;
         background-color: white;
         margin-top: -2%;
