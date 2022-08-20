@@ -39,6 +39,16 @@
           <Dashboard username={params.username} operation="password" />
           {/if}
         </Route>
+        <Route path="/:username/manage/addcv" let:params>
+          {#if localStorage.getItem(params.username)}
+          <Dashboard username={params.username} operation="addcv" />
+          {/if}
+        </Route>
+        <Route path="/:username/manage/addletter" let:params>
+          {#if localStorage.getItem(params.username)}
+          <Dashboard username={params.username} operation="addletter" />
+          {/if}
+        </Route>
     </div>
   </Router>
 </main>

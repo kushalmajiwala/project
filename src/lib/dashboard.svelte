@@ -5,6 +5,10 @@
     import Mycover from "../Routes/myletter.svelte";
     import Profile from "../Routes/profile.svelte";
     import Password from "../Routes/password.svelte";
+    import Addcv from "../Routes/addcv.svelte";
+    import Addletter from "../Routes/addletter.svelte";
+    import { Tooltip } from "sveltestrap";
+    let showProfile;
     // Script to open and close sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
@@ -18,8 +22,14 @@
     function signout() {
         localStorage.removeItem(username);
         let path = window.location.pathname;
-        if(!path.includes('mycv') && !path.includes('mycover') && !path.includes('profile') && !path.includes('password'))
-        {
+        if (
+            !path.includes("mycv") &&
+            !path.includes("mycover") &&
+            !path.includes("profile") &&
+            !path.includes("password") &&
+            !path.includes("addcv") &&
+            !path.includes("addletter")
+        ) {
             window.location.replace(path);
         }
     }
@@ -37,6 +47,8 @@
                 style="z-index:3;width:300px;"
                 id="mySidebar"
             >
+                <Tooltip target={showProfile}>Profile</Tooltip>
+
                 <div class="firstmenu">
                     <div class="w3-container">
                         <div
@@ -46,8 +58,16 @@
                         >
                             <i class="fa fa-remove" style="color:red" />
                         </div>
+
                         <div class="defaultimg" />
-                        <div class="showusername">{username}</div>
+                        <Link
+                            to="/{username}/manage/profile"
+                            style="text-decoration: none;"
+                        >
+                            <div class="showusername" bind:this={showProfile}>
+                                {username}
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <Link to="/{username}/manage" style="text-decoration: none;">
@@ -56,25 +76,37 @@
                         Dashboard
                     </div>
                 </Link>
-                <Link to="/{username}/manage/mycv" style="text-decoration: none;">
+                <Link
+                    to="/{username}/manage/mycv"
+                    style="text-decoration: none;"
+                >
                     <div class="nav-content">
                         <i class="bi bi-file-earmark-fill myicon" />
                         My CV
                     </div>
                 </Link>
-                <Link to="/{username}/manage/mycover" style="text-decoration: none;">
+                <Link
+                    to="/{username}/manage/mycover"
+                    style="text-decoration: none;"
+                >
                     <div class="nav-content">
                         <i class="bi bi-file-earmark-fill myicon" />
                         My Cover Letter
                     </div>
                 </Link>
-                <Link to="/{username}/manage/profile" style="text-decoration: none;">
+                <Link
+                    to="/{username}/manage/profile"
+                    style="text-decoration: none;"
+                >
                     <div class="nav-content">
                         <i class="bi bi-person-fill myicon" />
                         Profile
                     </div>
                 </Link>
-                <Link to="/{username}/manage/password" style="text-decoration: none;">
+                <Link
+                    to="/{username}/manage/password"
+                    style="text-decoration: none;"
+                >
                     <div class="nav-content">
                         <i class="bi bi-lock-fill myicon" />
                         Password
@@ -123,6 +155,12 @@
                 {/if}
                 {#if operation == "password"}
                     <Route path="/" component={Password} />
+                {/if}
+                {#if operation == "addcv"}
+                    <Route path="/" component={Addcv} />
+                {/if}
+                {#if operation == "addletter"}
+                    <Route path="/" component={Addletter} />
                 {/if}
                 <Route path="/" component={Dashboardhome} />
             </div>
@@ -218,6 +256,7 @@
     .firstmenu {
         padding: 5%;
         box-shadow: 2px 2px 5px 0px grey;
+        cursor: pointer;
     }
     @media screen and (min-width: 1350px) {
         .header {
