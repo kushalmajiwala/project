@@ -4,7 +4,8 @@
     import Nocv from "./nocv.svelte";
     import Usernotfound from "./usernotfound.svelte";
     let userFound = false;
-    let cvFound = false;
+    let cvFound = true;
+    let showLoading = true;
 
     function checkUserExist() {
         const options = {
@@ -16,9 +17,13 @@
             .then(function (response) {
                 console.log(response.data);
                 userFound = true;
+                cvFound = false;
+                showLoading = false;
             })
             .catch(function (error) {
                 userFound = false;
+                cvFound = false;
+                showLoading = false;
             });
     }
     function checkCvExist() {
@@ -34,19 +39,16 @@
 
 <main>
     <div>
-        {#if userFound == true}
-           {#if cvFound == false}
-                <Nocv />
-            {:else}
+        {#if showLoading == true}
+            <h1>Loading...</h1>
+            {:else if userFound == true && cvFound == false}
+                 <Nocv />
+            {:else if userFound == true && cvFound == true}
                 <div>
                     <h1>MyCV</h1>
                 </div>
-           {/if}
-        {/if}
-    </div>
-    <div>
-        {#if userFound == false}
-            <Usernotfound />
+            {:else if userFound == false}
+                <Usernotfound />
         {/if}
     </div>
 </main>

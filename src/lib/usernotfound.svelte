@@ -1,30 +1,21 @@
 <script>
-    import { onMount } from 'svelte';
-    let msg = "Loading...";
-    
-    function changeMsg()
-    {
-        msg = "User Not Found";
-    }
-
-    onMount(async () => {
-        setTimeout(() => {
-            changeMsg()
-        }, 3000);
-    })
+    import { onMount } from "svelte";
+    let msg = "User Not Found";
 </script>
+
 <main>
     <div>
         <h1>{msg}</h1>
     </div>
 </main>
+
 <style>
     div {
         display: flex;
-        justify-content: center;  
+        justify-content: center;
     }
     h1 {
-       margin-top: 20%;
+        margin-top: 20%;
     }
     @media screen and (max-width: 1000px) {
         h1 {
