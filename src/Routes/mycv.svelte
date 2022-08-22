@@ -164,8 +164,9 @@
             margin-top: 75%;
         }
         .none-added {
-            margin-top: 18%;
-            margin-left: 18%;
+            margin-top: 25%;
+            margin-left: 26%;
+            font-size: 25px;
         }
         .plusbtn {
             font-size: 70px;
