@@ -70,6 +70,22 @@
         position: absolute;
         margin-left: 1%;
     }
+    @media screen and (min-width: 1350px) {
+        .add-content1 {
+            height: 160px;
+            width: 350px;
+            line-height: 160px;
+            margin-left: 70%;
+            margin-top: 55%;
+        }
+        .add-content2 {
+            height: 160px;
+            width: 350px;
+            line-height: 160px;
+            margin-left: 90%;
+            margin-top: 55%;
+        }
+    }
     @media screen and (max-width: 1250px) {
         .add-content1 {
             height: 160px;
