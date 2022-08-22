@@ -129,7 +129,7 @@
             <div class="w3-main" style="margin-left:300px">
                 <header id="portfolio">
                     <span
-                        class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
+                        class="w3-button w3-hide-large w3-large w3-hover-text-grey"
                         on:click={w3_open}><i class="fa fa-bars" /></span
                     >
                 </header>
@@ -224,6 +224,7 @@
         padding: 1.17%;
         box-shadow: 2px 2px 20px 0px grey;
         z-index: 1;
+        
     }
     .mainlogo {
         height: 80px;
@@ -257,6 +258,8 @@
         padding: 5%;
         box-shadow: 2px 2px 5px 0px grey;
         cursor: pointer;
+        /* border-radius: 25px; */
+        background-color:rgb(228, 245, 245);
     }
     @media screen and (min-width: 1350px) {
         .header {
