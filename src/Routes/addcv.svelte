@@ -122,7 +122,7 @@
     .all-content {
         margin-top: 2%;
     }
-    @media screen and (max-width: 1350px) {
+    @media screen and (min-width: 1350px) {
       .my-content {
         width: 80%;
       }
