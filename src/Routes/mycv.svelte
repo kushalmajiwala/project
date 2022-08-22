@@ -39,12 +39,12 @@
     .plusbtn:hover {
         color:rgb(85, 69, 155); 
     }
-    /* @media screen and (min-width: 1350px) {
+    @media screen and (min-width: 1350px) {
         .add-content {
-            margin-left: 70%;
-            margin-top: 70%;
+            margin-left: 80%;
+            margin-top: 85%;
         }
-    } */
+    }
     @media screen and (max-width: 1230px) {
         .add-content {
             margin-left: 70%;
