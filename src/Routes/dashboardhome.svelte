@@ -76,14 +76,14 @@
             width: 350px;
             line-height: 160px;
             margin-left: 70%;
-            margin-top: 52%;
+            margin-top: 50%;
         }
         .add-content2 {
             height: 160px;
             width: 350px;
             line-height: 160px;
             margin-left: 90%;
-            margin-top: 52%;
+            margin-top: 50%;
         }
     }
     @media screen and (max-width: 1250px) {
