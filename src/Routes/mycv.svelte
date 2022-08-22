@@ -44,7 +44,7 @@
     }
     .plusbtn {
         color:rgb(100, 86, 167); 
-        font-size:90px; 
+        font-size: 90px; 
         cursor: pointer;
     }
     .plusbtn:hover {
@@ -161,11 +161,17 @@
     @media screen and (max-width: 400px) {
         .add-content {
             margin-left: 70%;
-            margin-top: 65%;
+            margin-top: 75%;
         }
         .none-added {
             margin-top: 18%;
             margin-left: 18%;
+        }
+        .plusbtn {
+            font-size: 70px;
+        }
+        .add-txt {
+            margin-left: -10%;
         }
     }
     @media screen and (max-width: 360px) {
