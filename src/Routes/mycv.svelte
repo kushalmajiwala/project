@@ -26,7 +26,7 @@
         position: absolute;
         font-size: 35px;
         font-weight: 400;
-        margin-left: 30%;
+        margin-left: 28%;
         margin-top: 10%;
         text-shadow: 0px 5px 10px rgba(61, 51, 51, 0.25);
     }

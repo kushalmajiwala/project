@@ -173,11 +173,11 @@
         display: flex;
         justify-content: left;
         padding: 15px;
-        font-size: 25px;
-        /* border-bottom: 1px solid #92aad8; */
+        font-size: 18px;
+        /* border-bottom: 1px solid #d7ddea; */
         cursor: pointer;
         color: #3a4394;
-        box-shadow: 2px 2px 3px 0px #92aad8;
+        box-shadow: 1px 1px 1px 0px #bfcade;
     }
     .nav-content:hover {
         background-color: #646cbc;
@@ -224,7 +224,6 @@
         padding: 1.17%;
         box-shadow: 2px 2px 20px 0px grey;
         z-index: 1;
-        
     }
     .mainlogo {
         height: 80px;
