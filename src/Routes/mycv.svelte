@@ -6,6 +6,9 @@
 </script>
 
 <main>
+    <div class="none-added">
+        <p>No CV Added Yet</p>
+    </div>
     <Router {url}>
         <div class="add-content">
             <Link to="/{username}/manage/addcv" style="text-decoration: none;">
@@ -19,6 +22,14 @@
 </main>
 
 <style>
+    .none-added {
+        position: absolute;
+        font-size: 35px;
+        font-weight: 400;
+        margin-left: 30%;
+        margin-top: 10%;
+        text-shadow: 0px 5px 10px rgba(61, 51, 51, 0.25);
+    }
     .add-content {
         margin-left: 65%;
         margin-top: 20%;
@@ -50,6 +61,10 @@
             margin-left: 70%;
             margin-top: 30%;
         }
+        .none-added {
+            margin-left: 40%;
+            margin-top: 18%;
+        }
     }
     @media screen and (max-width: 1170px) {
         .add-content {
@@ -68,17 +83,27 @@
             margin-left: 67%;
             margin-top: 38%;
         }
+        .none-added {
+            margin-top: 23%;
+        }
     }
     @media screen and (max-width: 995px) {
         .add-content {
             margin-left: 85%;
             margin-top: 25%;
         }
+        .none-added {
+            margin-top: 10%;
+        }
     }
     @media screen and (max-width: 900px) {
         .add-content {
             margin-left: 85%;
             margin-top: 27%;
+        }
+        .none-added {
+            margin-top: 12%;
+            margin-left: 35%;
         }
     }
     @media screen and (max-width: 820px) {
@@ -92,11 +117,19 @@
             margin-left: 85%;
             margin-top: 35%;
         }
+        .none-added {
+            margin-top: 14%;
+            margin-left: 32%;
+        }
     }
     @media screen and (max-width: 640px) {
         .add-content {
             margin-left: 83%;
             margin-top: 40%;
+        }
+        .none-added {
+            margin-top: 15%;
+            margin-left: 30%;
         }
     }
     @media screen and (max-width: 580px) {
@@ -110,11 +143,19 @@
             margin-left: 78%;
             margin-top: 50%;
         }
+        .none-added {
+            margin-top: 16%;
+            margin-left: 26%;
+        }
     }
     @media screen and (max-width: 450px) {
         .add-content {
             margin-left: 75%;
             margin-top: 55%;
+        }
+        .none-added {
+            margin-top: 17%;
+            margin-left: 23%;
         }
     }
     @media screen and (max-width: 400px) {
@@ -122,11 +163,19 @@
             margin-left: 70%;
             margin-top: 65%;
         }
+        .none-added {
+            margin-top: 18%;
+            margin-left: 18%;
+        }
     }
     @media screen and (max-width: 360px) {
         .add-content {
             margin-left: 70%;
             margin-top: 70%;
+        }
+        .none-added {
+            margin-top: 19%;
+            margin-left: 16%;
         }
     }
     @media screen and (max-width: 340px) {
