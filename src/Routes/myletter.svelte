@@ -181,7 +181,7 @@
             font-size: 70px;
         }
         .add-txt {
-            margin-left: -10%;
+            margin-left: -17%;
         }
     }
     @media screen and (max-width: 360px) {
