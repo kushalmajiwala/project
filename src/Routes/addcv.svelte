@@ -124,7 +124,7 @@
     }
     @media screen and (min-width: 1350px) {
       .my-content {
-        width: 75%;
+        width: 75.5%;
       }
     }
     @media screen and (max-width: 1230px) {
