@@ -123,7 +123,10 @@
         margin-top: 2%;
     }
     @media screen and (min-width: 1350px) {
-      
+      .navbar {
+        margin-top: -1%;
+        margin-left: 32%;
+      }
       .my-content {
         width: 76%;
       }
