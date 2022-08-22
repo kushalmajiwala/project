@@ -41,8 +41,8 @@
     }
     @media screen and (min-width: 1350px) {
         .add-content {
-            margin-left: 72%;
-            margin-top: 28%;
+            margin-left: 71%;
+            margin-top: 26%;
         }
     }
     @media screen and (max-width: 1230px) {
