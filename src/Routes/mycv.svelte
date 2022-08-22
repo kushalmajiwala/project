@@ -164,15 +164,8 @@
             margin-top: 75%;
         }
         .none-added {
-            margin-top: 25%;
-            margin-left: 26%;
-            font-size: 25px;
-        }
-        .plusbtn {
-            font-size: 70px;
-        }
-        .add-txt {
-            margin-left: -10%;
+            margin-top: 20%;
+            margin-left: 18%;
         }
     }
     @media screen and (max-width: 360px) {
