@@ -26,7 +26,7 @@
         position: absolute;
         font-size: 35px;
         font-weight: 400;
-        margin-left: 30%;
+        margin-left: 27%;
         margin-top: 10%;
         text-shadow: 0px 5px 10px rgba(61, 51, 51, 0.25);
     }
@@ -180,12 +180,12 @@
     }
     @media screen and (max-width: 360px) {
         .add-content {
-            margin-left: 70%;
+            margin-left: 68%;
             margin-top: 70%;
         }
         .none-added {
             margin-top: 20%;
-            margin-left: 10%;
+            margin-left: 8%;
         }
     }
     @media screen and (max-width: 340px) {
