@@ -241,9 +241,6 @@
             width: 80%;
             height: 450;
         }
-        .changePasswordbtn {
-            margin-left: 15%;
-        }
         .image-container {
             margin-left: 24%;
         }
@@ -285,17 +282,11 @@
             margin-left: 5%;
             height: 450px;
         }
-        .changePasswordbtn {
-            margin-left: 12%;
-        }
         .image-container {
             margin-left: 18%;
         }
     }
     @media screen and (max-width: 450px) {
-        .changePasswordbtn {
-            margin-left: 8%;
-        }
         .image-container {
             margin-left: 16%;
         }
@@ -308,9 +299,6 @@
     @media screen and (max-width: 400px) {
         .pass-container {
             height: 430px;
-        }
-        .changePasswordbtn {
-            margin-left: 5%;
         }
         .image-container {
             margin-left: 11%;
