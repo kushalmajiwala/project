@@ -318,7 +318,8 @@
     }
     @media screen and (max-width: 380px) {
         .image-container {
-            margin-left: 10%;
+            margin-left: 5%;
+            width: 90%;
         }
     }
     @media screen and (max-width: 350px) {
