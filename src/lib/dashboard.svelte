@@ -209,7 +209,7 @@
     }
     .page-content {
         width: 100%;
-        height: 1000px;
+        height: 1200px;
         background-color: #dde0f2;
         position: relative;
     }
