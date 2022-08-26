@@ -1,7 +1,19 @@
 <script>
-    import { Badge, Form, FormGroup, Input, Label } from "sveltestrap";
+    import {
+        Badge,
+        Form,
+        FormGroup,
+        Input,
+        Label,
+        Button,
+        Modal,
+        ModalBody,
+        ModalFooter,
+    } from "sveltestrap";
+    import axios from "axios";
     import { createEventDispatcher } from "svelte";
     import { SupabaseStorageClient } from "@supabase/storage-js";
+    import { onMount } from "svelte";
 
     const STORAGE_URL = "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1";
     const SERVICE_KEY =
@@ -20,6 +32,25 @@
     let src;
     let files;
     let image_url = "";
+    let imageurl = "";
+    let btnname1 = "Save";
+    let btnname2 = "Save";
+    let userid = "";
+
+    function changeName1() {
+        btnname1 = "Save";
+    }
+
+    function changeName2() {
+        btnname2 = "Save";
+    }
+    let open1 = false;
+    let open2 = false;
+    let open3 = false;
+
+    const toggle1 = () => (open1 = !open1);
+    const toggle2 = () => (open2 = !open2);
+    const toggle3 = () => (open3 = !open3);
 
     const dispatch = createEventDispatcher();
 
@@ -62,49 +93,151 @@
             uploading = false;
         }
     }
+    function saveImage() {
+        btnname1 = "PLEASE WAIT..."
+        if (avatar == undefined) {
+            toggle1();
+        } else {
+            userid = localStorage.getItem(username);
+            const options = {
+                method: "GET",
+                url:
+                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" +
+                    userid,
+            };
+
+            axios
+                .request(options)
+                .then(function (response) {
+                    let updateImage = {
+                        UserId: userid,
+                        image: image_url,
+                    };
+                    axios
+                        .put(
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/" +
+                                userid,
+                            updateImage
+                        )
+                        .then(function () {
+                            toggle2();
+                        });
+                })
+                .catch(function (error) {
+                    let rec = {
+                        UserId: userid,
+                        image: image_url,
+                    };
+                    axios
+                        .post(
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/saveimage/",
+                            rec
+                        )
+                        .then(function () {
+                            toggle3();
+                        });
+                });
+        }
+    }
+    onMount(async () => {
+        userid = localStorage.getItem(username);
+        const options = {
+            method: "GET",
+            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" + userid,
+        };
+        axios
+            .request(options)
+            .then(function (response) {
+                imageurl = response.data.image;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    });
+    export let username;
 </script>
 
 <main>
     <div class="main-container">
         <div class="image-container">
-                <div id="app">
-                    <h1>Upload Image</h1>
-                    {#if avatar}
-                        <img class="avatar" src={avatar} alt="d" />
-                    {:else}
-                        <img
-                            class="avatar"
-                            src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
-                            alt=""
-                        />
-                    {/if}
+            <div id="app">
+                <h1>Upload Image</h1>
+                {#if avatar}
+                    <img class="avatar" src={avatar} alt="d" />
+                {:else if imageurl !== ""}
+                    <img class="avatar" src={imageurl} alt="d" />
+                {:else}
+                    <img
+                        class="avatar"
+                        src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
+                        alt=""
+                    />
+                {/if}
 
-                    <label class="button primary block uploadbtn" for="single"><i class="bi bi-upload"></i>
-                        {uploading ? "Uploading ..." : "Upload"}
-                    </label>
-                </div>
-                <input
-                    style="display:none"
-                    type="file"
-                    id="single"
-                    accept="image/*"
-                    bind:files
-                    bind:this={fileinput}
-                    on:change={(e) => onFileSelected(e)}
-                    disabled={uploading}
-                />
-                <div class="save-upload">
-                    <button class="changeImagebtn">Save</button>
-                </div>
+                <label class="button primary block uploadbtn" for="single"
+                    ><i class="bi bi-upload" />
+                    {uploading ? "Uploading ..." : "Upload"}
+                </label>
+            </div>
+            <input
+                style="display:none"
+                type="file"
+                id="single"
+                accept="image/*"
+                bind:files
+                bind:this={fileinput}
+                on:change={(e) => onFileSelected(e)}
+                disabled={uploading}
+            />
+            <div class="save-upload">
+                <button class="changeImagebtn" on:click={saveImage}>{btnname1}</button
+                >
+            </div>
         </div>
         <div class="pass-container">
-            <div class="pass-header">
-                Edit Account
-            </div>
+            <div class="pass-header">Edit Account</div>
             <div class="pass-content">
-                <button class="changePasswordbtn">Save</button>
+                <button class="changePasswordbtn">{btnname2}</button>
             </div>
         </div>
+    </div>
+    <div class="Modals">
+        <!-- No Image Selected... -->
+        <Modal header="Message" isOpen={open1}>
+            <ModalBody>Please Select an Image First...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle1}
+                    on:click={changeName1}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Profile Image Updated... -->
+        <Modal header="Message" isOpen={open2}>
+            <ModalBody>Profile Image Updated Successfully...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle2}
+                    on:click={changeName1}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Profile Image Set...  -->
+        <Modal header="Message" isOpen={open3}>
+            <ModalBody>Profile Image Set Successfully...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle3}
+                    on:click={changeName1}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
     </div>
 </main>
 
@@ -167,7 +300,6 @@
         margin-left: 3.5%;
         box-shadow: 2px 2px 10px 0px grey;
         border-radius: 1%;
-        
     }
     .image-container {
         height: 350px;
@@ -215,7 +347,7 @@
             margin-left: 20%;
             height: 450px;
         }
-        .image-container{
+        .image-container {
             margin-left: 30%;
         }
     }

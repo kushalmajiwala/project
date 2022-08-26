@@ -7,8 +7,13 @@
     import Password from "../Routes/password.svelte";
     import Addcv from "../Routes/addcv.svelte";
     import Addletter from "../Routes/addletter.svelte";
+    import { onMount } from "svelte";
     import { Tooltip } from "sveltestrap";
+    import axios from "axios";
     let showProfile;
+    let userid = "";
+    let imageurl = "";
+    let profile_image_style = "height: 80px;width: 80px;border-radius: 100%;background-repeat: no-repeat;background-size: cover;background-position: center center;position: relative; margin-top: 0%;filter: drop-shadow(0 0 0 red);";
     // Script to open and close sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
@@ -36,6 +41,22 @@
     export let username;
     export let url = "";
     export let operation;
+
+    onMount(async () => {
+        userid = localStorage.getItem(username);
+        const options = {
+            method: "GET",
+            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" + userid,
+        };
+        axios
+            .request(options)
+            .then(function (response) {
+                imageurl = response.data.image;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    });
 </script>
 
 <main>
@@ -58,8 +79,14 @@
                         >
                             <i class="fa fa-remove" style="color:red" />
                         </div>
+                        {#if imageurl === ""}
+                            <div class="defaultimage"/>
+                        {/if}
+                        {#if imageurl !== ""}
+                            <!-- svelte-ignore a11y-img-redundant-alt -->
+                            <img src={imageurl} alt="no-image" style={profile_image_style}>
+                        {/if}
 
-                        <div class="defaultimg" />
                         <Link
                             to="/{username}/manage/profile"
                             style="text-decoration: none;"
@@ -169,6 +196,18 @@
 </main>
 
 <style>
+    .defaultimage {
+        height: 80px;
+        width: 80px;
+        border-radius: 100%;
+        background-image: url("../assets/images/defaultimg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+        margin-top: 0%;
+        filter: drop-shadow(0 0 0 red);
+    }
     .nav-content {
         display: flex;
         justify-content: left;
@@ -189,18 +228,6 @@
     }
     nav {
         box-shadow: 2px 2px 15px 0px grey;
-    }
-    .defaultimg {
-        height: 80px;
-        width: 80px;
-        background-image: url("../assets/images/defaultimg.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        border-radius: 100%;
-        position: relative;
-        margin-top: 0%;
-        filter: drop-shadow(0 0 0 red);
     }
     .closelogo {
         font-size: 30px;
@@ -258,7 +285,7 @@
         box-shadow: 2px 2px 5px 0px grey;
         cursor: pointer;
         /* border-radius: 25px; */
-        background-color:rgb(228, 245, 245);
+        background-color: rgb(228, 245, 245);
     }
     @media screen and (min-width: 1350px) {
         .header {
