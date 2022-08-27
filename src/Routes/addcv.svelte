@@ -6,9 +6,9 @@
   let interest = false;
 
   let personalActive = true;
-  let educationActive; 
-  let skillActive;
-  let interestActive;
+  let educationActive = false; 
+  let skillActive = false;
+  let interestActive = false;
   
   function showPersonal() {
     //Showing the page of the content
