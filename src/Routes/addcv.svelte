@@ -237,4 +237,10 @@
       margin-top: -14%;
     }
   }
+  @media screen and (max-width: 330px) {
+    .navbar {
+      padding-left: 18%;
+      margin-top: -14%;
+    }
+  }
 </style>
