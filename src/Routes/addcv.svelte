@@ -233,7 +233,7 @@
   }
   @media screen and (max-width: 360px) {
     .navbar {
-      padding-left: 20%;
+      padding-left: 19.5%;
       margin-top: -14%;
     }
   }
