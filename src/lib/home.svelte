@@ -3,6 +3,7 @@
     import axios from "axios";
     import Nocv from "./nocv.svelte";
     import Usernotfound from "./usernotfound.svelte";
+    import { Spinner } from 'sveltestrap';
     let userFound = false;
     let cvFound = true;
     let showLoading = true;
@@ -41,16 +42,16 @@
     <div>
         {#if showLoading == true}
             <div class="loading">
-                <h1>Loading...</h1>
+                <Spinner />
             </div>
-            {:else if userFound == true && cvFound == false}
-                 <Nocv />
-            {:else if userFound == true && cvFound == true}
-                <div>
-                    <h1>MyCV</h1>
-                </div>
-            {:else if userFound == false}
-                <Usernotfound />
+        {:else if userFound == true && cvFound == false}
+                <Nocv />
+        {:else if userFound == true && cvFound == true}
+            <div>
+                <h1>MyCV</h1>
+            </div>
+        {:else if userFound == false}
+            <Usernotfound />
         {/if}
     </div>
 </main>
