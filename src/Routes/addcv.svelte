@@ -4,30 +4,57 @@
   let education = false;
   let skill = false;
   let interest = false;
+  
+  let personalActive = true;
+  let educationActive = false;
+  let skillActive = false;
+  let interestActive = false;
 
   function showPersonal() {
+    //Showing the page of the content
     personal = true;
     education = false;
     skill = false;
     interest = false;
+
+    //Showing the Active page tab
+    personalActive = true;
+    educationActive = false;
+    skillActive = false;
+    interestActive = false;
   }
   function showEducation() {
     personal = false;
     education = true;
     skill = false;
     interest = false;
+
+    personalActive = false;
+    educationActive = true;
+    skillActive = false;
+    interestActive = false;
   }
   function showSkill() {
     personal = false;
     education = false;
     skill = true;
     interest = false;
+
+    personalActive = false;
+    educationActive = false;
+    skillActive = true;
+    interestActive = false;
   }
   function showInterest() {
     personal = false;
     education = false;
     skill = false;
     interest = true;
+
+    personalActive = false;
+    educationActive = false;
+    skillActive = false;
+    interestActive = true;
   }
 </script>
 
@@ -35,16 +62,16 @@
   <div class="navbar">
     <TabContent vertical pills>
       <div on:click={showPersonal}>
-        <TabPane tabId="Personal-Details" tab="Personal-Details" active />
+        <TabPane tabId="Personal-Details" tab="Personal-Details" active={personalActive} />
       </div>
       <div on:click={showEducation}>
-        <TabPane tabId="education-Details" tab="education-Details" />
+        <TabPane tabId="education-Details" tab="education-Details" active={educationActive}/>
       </div>
       <div on:click={showSkill}>
-        <TabPane tabId="skill" tab="skills" />
+        <TabPane tabId="skill" tab="skills" active={skillActive}/>
       </div>
       <div on:click={showInterest}>
-        <TabPane tabId="interest" tab="interest" />
+        <TabPane tabId="interest" tab="interest" active={interestActive}/>
       </div>
     </TabContent>
   </div>
@@ -147,12 +174,14 @@
       width: 76%;
     }
     .navbar {
-      margin-top: -3%;
+      margin-top: -1%;
+      padding-left: 33%;
     }
   }
   @media screen and (max-width: 1230px) {
     .navbar {
-      padding-left: 40%;
+      padding-left: 41.5%;
+      margin-top: 0%;
     }
     .my-content {
       width: 96%;
@@ -165,47 +194,41 @@
   }
   @media screen and (max-width: 800px) {
     .navbar {
-      padding-left: 32%;
+      margin-top: -1%;
+      padding-left: 37%;
     }
     .all-content {
       margin-top: 3%;
-    }
-    .navbar {
-      margin-top: -5%;
     }
   }
   @media screen and (max-width: 620px) {
     .navbar {
       padding-left: 30%;
-    }
-    .navbar {
-      margin-top: -7%;
+      margin-top: -2%;
     }
   }
   @media screen and (max-width: 520px) {
     .navbar {
       padding-left: 28%;
-    }
-    .navbar {
-      margin-top: -10%;
+      margin-top: -3.5%;
     }
   }
   @media screen and (max-width: 470px) {
     .navbar {
       padding-left: 26%;
-    }
-    .navbar {
-      margin-top: -15%;
+      margin-top: -9%;
     }
   }
   @media screen and (max-width: 410px) {
     .navbar {
       padding-left: 24%;
+      margin-top: -10%;
     }
   }
   @media screen and (max-width: 390px) {
     .navbar {
       padding-left: 22%;
+      margin-top: -12%;
     }
   }
 </style>

@@ -292,6 +292,7 @@
     @media screen and (min-width: 1350px) {
         .header {
             padding: 0.9%;
+            height: 15%;
         }
         .mainlogo {
             height: 80px;
