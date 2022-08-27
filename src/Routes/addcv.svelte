@@ -4,12 +4,12 @@
   let education = false;
   let skill = false;
   let interest = false;
-  
-  let personalActive = true;
-  let educationActive = false;
-  let skillActive = false;
-  let interestActive = false;
 
+  let personalActive = true;
+  let educationActive; 
+  let skillActive;
+  let interestActive;
+  
   function showPersonal() {
     //Showing the page of the content
     personal = true;
@@ -41,7 +41,7 @@
     interest = false;
 
     personalActive = false;
-    educationActive = false;
+    educationActive = true;
     skillActive = true;
     interestActive = false;
   }
@@ -52,7 +52,7 @@
     interest = true;
 
     personalActive = false;
-    educationActive = false;
+    educationActive = true;
     skillActive = false;
     interestActive = true;
   }
@@ -229,6 +229,12 @@
     .navbar {
       padding-left: 22%;
       margin-top: -12%;
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .navbar {
+      padding-left: 20%;
+      margin-top: -14%;
     }
   }
 </style>
