@@ -40,7 +40,9 @@
 <main>
     <div>
         {#if showLoading == true}
-            <h1>Loading...</h1>
+            <div class="loading">
+                <h1>Loading...</h1>
+            </div>
             {:else if userFound == true && cvFound == false}
                  <Nocv />
             {:else if userFound == true && cvFound == true}
@@ -52,3 +54,11 @@
         {/if}
     </div>
 </main>
+<style>
+    .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 600px;
+    }
+</style>
