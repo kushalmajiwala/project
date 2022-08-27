@@ -13,7 +13,7 @@
     let showProfile;
     let userid = "";
     let imageurl = "";
-    let profile_image_style = "height: 80px;width: 80px;border-radius: 100%;background-repeat: no-repeat;background-size: cover;background-position: center center;position: relative; margin-top: 0%;filter: drop-shadow(0 0 0 red);";
+    let profile_image_style = "height: 70px;width: 70px;border-radius: 100%;background-repeat: no-repeat;background-size: cover;background-position: center center;position: relative; margin-top: 0%;filter: drop-shadow(0 0 0 red);";
     // Script to open and close sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
@@ -77,7 +77,7 @@
                             class="w3-right closelogo w3-hide-large"
                             title="close menu"
                         >
-                            <i class="fa fa-remove" style="color:red" />
+                            <i class="fa fa-remove" style="color:red; font-size: 25px;" />
                         </div>
                         {#if imageurl === ""}
                             <div class="defaultimage"/>
@@ -169,7 +169,7 @@
                     <div class="head-text"><p>CV Creator</p></div>
                 </div>
             </div>
-            <br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br /><br />
             <div class="route-content">
                 {#if operation == "mycv"}
                     <Route path="/" component={Mycv} />
@@ -197,8 +197,8 @@
 
 <style>
     .defaultimage {
-        height: 80px;
-        width: 80px;
+        height: 70px;
+        width: 70px;
         border-radius: 100%;
         background-image: url("../assets/images/defaultimg.png");
         background-repeat: no-repeat;
@@ -251,17 +251,19 @@
         padding: 1.17%;
         box-shadow: 2px 2px 20px 0px grey;
         z-index: 1;
+        height: 14.9%;
+        line-height: 13%;
     }
     .mainlogo {
-        height: 80px;
-        width: 80px;
+        height: 65px;
+        width: 65px;
         background-image: url("../assets/images/cvlogo.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
         border-radius: 100%;
         margin-top: 0%;
-        box-shadow: 0px 0px 10px 0px rgba(153, 153, 153, 0.8);
+        box-shadow: 0px 0px 5px 0px rgba(171, 158, 158, 0.8);
         margin-right: 3%;
     }
     .set-header {
@@ -272,16 +274,16 @@
     }
     .head-text {
         font-size: 35px;
-        margin-top: 1%;
+        margin-top: 2.6%;
     }
     .showusername {
         margin-left: 30%;
-        margin-top: -17%;
+        margin-top: -15.5%;
         font-size: 17px;
         position: absolute;
     }
     .firstmenu {
-        padding: 5%;
+        padding: 3.6%;
         box-shadow: 2px 2px 5px 0px grey;
         cursor: pointer;
         /* border-radius: 25px; */
@@ -290,6 +292,13 @@
     @media screen and (min-width: 1350px) {
         .header {
             padding: 0.9%;
+        }
+        .mainlogo {
+            height: 80px;
+            width: 80px;
+        }
+        .firstmenu {
+            padding: 7.4%;
         }
     }
     @media screen and (max-width: 1350px) {
@@ -301,15 +310,36 @@
         .header {
             padding: 0.9%;
         }
+        .mainlogo {
+            height: 80px;
+            width: 80px;
+        }
+        .firstmenu {
+            padding: 9%;
+        }
     }
     @media screen and (max-width: 1165px) {
         .header {
-            padding: 1%;
+            padding: 1.5%;
+        }
+        .mainlogo {
+            height: 80px;
+            width: 80px;
+        }
+        .firstmenu {
+            padding: 9.5%;
         }
     }
     @media screen and (max-width: 1055px) {
         .header {
-            padding: 1.1%;
+            padding: 2%;
+        }
+        .mainlogo {
+            height: 80px;
+            width: 80px;
+        }
+        .firstmenu {
+            padding: 9.8%;
         }
     }
     @media screen and (min-width: 993px) {
@@ -323,10 +353,14 @@
         }
         .header {
             position: absolute;
-            height: 12%;
+            height: 10%;
             display: flex;
             justify-content: center;
             padding: 2%;
+            line-height: 10%;
+        }
+        .head-text {
+            margin-top: 4.5%;
         }
         nav {
             border: none;
@@ -335,6 +369,7 @@
     @media screen and (max-width: 740px) {
         .firstmenu {
             border-right: none;
+            padding: 4%;
         }
         .header {
             position: absolute;
@@ -343,13 +378,25 @@
         }
         .head-text {
             font-size: 27px;
-            margin-top: 2%;
+            margin-top: 6%;
         }
     }
     @media screen and (max-width: 500px) {
         .head-text {
             font-size: 25px;
-            margin-top: 4%;
+            margin-top: 10%;
+        }
+        .header {
+            height: 8%;
+        }
+    }
+    @media screen and (max-width: 400px) {
+        .head-text {
+            font-size: 25px;
+            margin-top: 12%;
+        }
+        .header {
+            height: 8%;
         }
     }
 </style>
