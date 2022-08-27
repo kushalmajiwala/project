@@ -258,6 +258,7 @@
         .pass-container {
             height: 500px;
             width: 60%;
+            margin-top: 1%;
         }
         .changePasswordbtn {
             margin-left: 22%;

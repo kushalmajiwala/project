@@ -341,6 +341,9 @@
             height: 500px;
             width: 60%;
         }
+        .image-container {
+            margin-top: 0.5%;
+        }
     }
     @media screen and (max-width: 995px) {
         .pass-container {
