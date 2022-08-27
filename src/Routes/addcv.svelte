@@ -231,6 +231,12 @@
       margin-top: -12%;
     }
   }
+  @media screen and (max-width: 360px) {
+    .navbar {
+      padding-left: 20%;
+      margin-top: -14%;
+    }
+  }
   @media screen and (max-width: 350px) {
     .navbar {
       padding-left: 20%;
