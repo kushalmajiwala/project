@@ -6,7 +6,7 @@
   let interest = false;
 
   let personalActive = true;
-  let educationActive = false; 
+  let educationActive = false;
   let skillActive = false;
   let interestActive = false;
   
@@ -41,7 +41,7 @@
     interest = false;
 
     personalActive = false;
-    educationActive = true;
+    educationActive = false;
     skillActive = true;
     interestActive = false;
   }
@@ -52,10 +52,12 @@
     interest = true;
 
     personalActive = false;
-    educationActive = true;
+    educationActive = false;
     skillActive = false;
     interestActive = true;
   }
+  export let username;
+  export let location;
 </script>
 
 <main>
