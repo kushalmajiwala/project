@@ -139,6 +139,11 @@
                 });
         }
     }
+    function refreshPage()
+    {
+        let page_url = window.location.href;
+        window.location.replace(page_url);
+    }
     onMount(async () => {
         userid = localStorage.getItem(username);
         const options = {
@@ -222,7 +227,8 @@
                     color="danger"
                     class="float-right"
                     on:click={toggle2}
-                    on:click={changeName1}>Cancel</Button
+                    on:click={changeName1}
+                    on:click={refreshPage}>Cancel</Button
                 >
             </ModalFooter>
         </Modal>
@@ -234,7 +240,8 @@
                     color="danger"
                     class="float-right"
                     on:click={toggle3}
-                    on:click={changeName1}>Cancel</Button
+                    on:click={changeName1}
+                    on:click={refreshPage}>Cancel</Button
                 >
             </ModalFooter>
         </Modal>
