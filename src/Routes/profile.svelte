@@ -37,6 +37,18 @@
     let btnname2 = "Save";
     let userid = "";
 
+    let new_username = "";
+    let new_email = "";
+
+    let border_new_username =
+        "width: 80%; border: 1px solid rgb(130, 130, 224);";
+    let border_new_email = "width: 80%; border: 1px solid rgb(130, 130, 224)";
+
+    let outer_username =
+        "width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;";
+    let outer_email =
+        "width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;margin-top:7%;";
+
     function changeName1() {
         btnname1 = "Save";
     }
@@ -47,10 +59,28 @@
     let open1 = false;
     let open2 = false;
     let open3 = false;
+    let open4 = false;
+    let open5 = false;
+    let open6 = false;
+    let open7 = false;
+    let open8 = false;
+    let open9 = false;
+    let open10 = false;
+    let open11 = false;
+    let open12 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
+    const toggle4 = () => (open4 = !open4);
+    const toggle5 = () => (open5 = !open5);
+    const toggle6 = () => (open6 = !open6);
+    const toggle7 = () => (open7 = !open7);
+    const toggle8 = () => (open8 = !open8);
+    const toggle9 = () => (open9 = !open9);
+    const toggle10 = () => (open10 = !open10);
+    const toggle11 = () => (open11 = !open11);
+    const toggle12 = () => (open12 = !open12);
 
     const dispatch = createEventDispatcher();
 
@@ -94,7 +124,7 @@
         }
     }
     function saveImage() {
-        btnname1 = "PLEASE WAIT..."
+        btnname1 = "PLEASE WAIT...";
         if (avatar == undefined) {
             toggle1();
         } else {
@@ -139,21 +169,142 @@
                 });
         }
     }
-    function refreshPage()
-    {
+    function refreshPage() {
         let page_url = window.location.href;
         window.location.replace(page_url);
+    }
+    function editAuthenticationUsername() {
+        btnname2 = "PLEASE WAIT...";
+        if (new_username !== "") {
+            border_new_username =
+                "width: 80%; border: 1px solid rgb(130, 130, 224)";
+        }
+        if (new_username == "") {
+            toggle4();
+            if (new_username == "")
+                border_new_username = "width: 80%; border: 1px solid red";
+            else
+                border_new_username =
+                    "width: 80%; border: 1px solid rgb(130, 130, 224)";
+        } else {
+            const options = {
+                method: "GET",
+                url:
+                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/editprofile/username/" +
+                    new_username,
+            };
+            axios
+                .request(options)
+                .then(function (response) {
+                    toggle6();
+                })
+                .catch(function (error) {
+                    let rec = {
+                        username: new_username,
+                        email: "dummyEmail",
+                        password: "dummyPassword",
+                    };
+                    axios
+                        .put(
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/editprofile/editusername/" +
+                                localStorage.getItem(username),
+                            rec
+                        )
+                        .then(function (response) {
+                            toggle9();
+                        })
+                        .catch(function (error) {
+                            toggle8();
+                        });
+                });
+        }
+    }
+    function editAuthenticationEmail() {
+        btnname2 = "PLEASE WAIT...";
+        if (new_email !== "") {
+            border_new_email =
+                "width: 80%; border: 1px solid rgb(130, 130, 224)";
+        }
+        if (new_email == "") {
+            toggle4();
+            if (new_email == "")
+                border_new_email = "width: 80%; border: 1px solid red";
+            else
+                border_new_email =
+                    "width: 80%; border: 1px solid rgb(130, 130, 224)";
+        } else if (!new_email.includes("@") || !new_email.includes(".")) {
+            toggle5();
+        } else {
+            const options = {
+                method: "GET",
+                url:
+                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/editprofile/email/" +
+                    new_email,
+            };
+            axios
+                .request(options)
+                .then(function (response) {
+                    toggle7();
+                })
+                .catch(function (error) {
+                    let rec = {
+                        username: "",
+                        email: new_email,
+                        password: "dummyPassword",
+                    };
+                    axios
+                        .put(
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/editprofile/editemail/" +
+                                localStorage.getItem(username),
+                            rec
+                        )
+                        .then(function (response) {
+                            toggle10();
+                        })
+                        .catch(function (error) {
+                            toggle8();
+                        });
+                });
+        }
+    }
+    function loggingOut() {
+        if (username !== new_username) {
+            localStorage.removeItem(username);
+            var page_url = window.location.href;
+            let new_url = page_url.replace("/profile", "");
+            let final_url = new_url.replace(username, new_username);
+            window.location.replace(final_url);
+        }
     }
     onMount(async () => {
         userid = localStorage.getItem(username);
         const options = {
             method: "GET",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" + userid,
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" +
+                userid,
         };
         axios
             .request(options)
             .then(function (response) {
                 imageurl = response.data.image;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+
+        userid = localStorage.getItem(username);
+        const options1 = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/editprofile/" +
+                userid,
+        };
+        axios
+            .request(options1)
+            .then(function (response) {
+                new_username = response.data.username;
+                new_email = response.data.email;
             })
             .catch(function (error) {
                 console.error(error);
@@ -195,14 +346,40 @@
                 disabled={uploading}
             />
             <div class="save-upload">
-                <button class="changeImagebtn" on:click={saveImage}>{btnname1}</button
+                <button class="changeImagebtn" on:click={saveImage}
+                    >{btnname1}</button
                 >
             </div>
         </div>
         <div class="pass-container">
             <div class="pass-header">Edit Account</div>
             <div class="pass-content">
-                <button class="changePasswordbtn">{btnname2}</button>
+                <div on:click={toggle11}>
+                    <FormGroup floating label="Enter New Username">
+                        <Input
+                            type="text"
+                            bind:value={new_username}
+                            placeholder="Enter New Username"
+                            style={outer_username}
+                        />
+                    </FormGroup>
+                </div>
+                <div on:click={toggle12}>
+                    <FormGroup floating label="Enter New Email">
+                        <Input
+                            type="text"
+                            bind:value={new_email}
+                            placeholder="Enter New Email"
+                            style={outer_email}
+                        />
+                    </FormGroup>
+                </div>
+                <!-- <div class="savebtn">
+                    <button
+                        class="changePasswordbtn"
+                        on:click={editAuthentication}>{btnname2}</button
+                    >
+                </div> -->
             </div>
         </div>
     </div>
@@ -245,10 +422,139 @@
                 >
             </ModalFooter>
         </Modal>
+        <!-- Empty Fields...  -->
+        <Modal header="Message" isOpen={open4}>
+            <ModalBody>Fields Cannot be empty...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle4}
+                    on:click={changeName2}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Invalid Email...  -->
+        <Modal header="Message" isOpen={open5}>
+            <ModalBody>Invalid Email...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle5}
+                    on:click={changeName2}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Username Already exists...  -->
+        <Modal header="Message" isOpen={open6}>
+            <ModalBody>Username Already Exists...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle6}
+                    on:click={changeName2}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Email Already exists...  -->
+        <Modal header="Message" isOpen={open7}>
+            <ModalBody>Email Already Exists...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle7}
+                    on:click={changeName2}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Something Went Wrong...  -->
+        <Modal header="Message" isOpen={open8}>
+            <ModalBody>Somthing went wrong...Please Try Again...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle8}
+                    on:click={changeName2}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Updated Successfully...  -->
+        <Modal header="Message" isOpen={open9}>
+            <ModalBody>Data Updated...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle9}
+                    on:click={changeName2}
+                    on:click={loggingOut}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <Modal header="Message" isOpen={open10}>
+            <ModalBody>Data Updated...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle10}
+                    on:click={changeName2}
+                    on:click={refreshPage}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <Modal header="Update Username" isOpen={open11}>
+            <ModalBody>
+                <FormGroup floating label="Enter New Username">
+                    <Input
+                        type="text"
+                        bind:value={new_username}
+                        placeholder="Enter New Username"
+                        style={border_new_username}
+                    />
+                </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary" class="float-right" on:click={editAuthenticationUsername}
+                    >Save</Button
+                >
+                <Button color="danger" class="float-right" on:click={toggle11}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <Modal header="Update Email" isOpen={open12}>
+            <ModalBody>
+                <FormGroup floating label="Enter New Email">
+                    <Input
+                        type="text"
+                        bind:value={new_email}
+                        placeholder="Enter New Email"
+                        style={border_new_email}
+                    />
+                </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary" class="float-right" on:click={editAuthenticationEmail}
+                    >Save</Button
+                >
+                <Button color="danger" class="float-right" on:click={toggle12}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
     </div>
 </main>
 
 <style>
+    .savebtn {
+        width: 83%;
+        text-align: center;
+    }
     .uploadbtn {
         cursor: pointer;
         color: white;
@@ -325,9 +631,8 @@
         padding: 15px;
     }
     .pass-content {
-        width: 100%;
-        text-align: center;
-        margin-top: 5%;
+        margin-left: 15%;
+        margin-top: 8%;
     }
     .changePasswordbtn {
         margin-top: 5%;
