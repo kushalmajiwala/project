@@ -374,12 +374,6 @@
                         />
                     </FormGroup>
                 </div>
-                <!-- <div class="savebtn">
-                    <button
-                        class="changePasswordbtn"
-                        on:click={editAuthentication}>{btnname2}</button
-                    >
-                </div> -->
             </div>
         </div>
     </div>
@@ -551,10 +545,6 @@
 </main>
 
 <style>
-    .savebtn {
-        width: 83%;
-        text-align: center;
-    }
     .uploadbtn {
         cursor: pointer;
         color: white;
@@ -634,20 +624,6 @@
         margin-left: 15%;
         margin-top: 8%;
     }
-    .changePasswordbtn {
-        margin-top: 5%;
-        border: 2px solid rgb(40, 43, 125);
-        border-radius: 20px;
-        height: 45px;
-        width: 200px;
-        font-size: 20px;
-        background-color: rgb(77, 80, 148);
-        color: white;
-    }
-    .changePasswordbtn:hover {
-        background-color: rgb(40, 43, 125);
-        color: white;
-    }
     @media screen and (max-width: 1235px) {
         .pass-container {
             height: 500px;
@@ -664,6 +640,9 @@
         }
         .image-container {
             margin-left: 30%;
+        }
+        .pass-header {
+            margin-bottom: 12%;
         }
     }
     @media screen and (max-width: 925px) {
@@ -711,6 +690,9 @@
         .image-container {
             margin-left: 16%;
         }
+        .pass-header {
+            margin-bottom: 15%;
+        }
     }
     @media screen and (max-width: 580px) {
         .image-container {
@@ -737,6 +719,9 @@
         .image-container {
             margin-left: 16%;
         }
+        .pass-header {
+            margin-bottom: 18%;
+        }
     }
     @media screen and (max-width: 420px) {
         .image-container {
@@ -756,13 +741,11 @@
             margin-left: 5%;
             width: 90%;
         }
+        .pass-header {
+            margin-bottom: 20%;
+        }
     }
     @media screen and (max-width: 350px) {
-        .changePasswordbtn {
-            margin-left: 5%;
-            width: 60%;
-            font-size: 10px;
-        }
         .image-container {
             width: 90%;
             margin-left: 5%;
