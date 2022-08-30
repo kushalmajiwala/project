@@ -303,7 +303,7 @@
         <div class="form-row form-content image-form">
           <div class="image-container">
             <div id="app">
-              <h1>Upload Image</h1>
+              <h3 style="margin-bottom: 7%;">Upload Image For CV</h3>
               {#if avatar}
                 <img class="avatar" src={avatar} alt="d" />
               {:else }
