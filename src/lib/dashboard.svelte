@@ -236,7 +236,7 @@
     }
     .page-content {
         width: 100%;
-        height: 1200px;
+        height: 2000px;
         background-color: #dde0f2;
         position: relative;
     }
@@ -354,14 +354,14 @@
         }
         .header {
             position: absolute;
-            height: 10%;
+            height: 120px;
             display: flex;
             justify-content: center;
             padding: 2%;
-            line-height: 10%;
+            line-height: 120px;
         }
         .head-text {
-            margin-top: 4.5%;
+            margin-top: -2%;
         }
         nav {
             border: none;
@@ -374,30 +374,32 @@
         }
         .header {
             position: absolute;
-            height: 10%;
+            height: 120px;
             padding-left: -7%;
+            line-height: 120px;
         }
         .head-text {
             font-size: 27px;
-            margin-top: 6%;
+            margin-top: -20px;
         }
     }
     @media screen and (max-width: 500px) {
         .head-text {
             font-size: 25px;
-            margin-top: 10%;
         }
         .header {
-            height: 8%;
+            height: 110px;
+            padding-left: -7%;
+            line-height: 110px;
         }
     }
     @media screen and (max-width: 400px) {
         .head-text {
             font-size: 25px;
-            margin-top: 12%;
         }
         .header {
-            height: 8%;
+            height: 110px;
+            line-height: 110px;
         }
     }
 </style>

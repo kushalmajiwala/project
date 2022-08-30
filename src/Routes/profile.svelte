@@ -9,6 +9,7 @@
         Modal,
         ModalBody,
         ModalFooter,
+        Tooltip
     } from "sveltestrap";
     import axios from "axios";
     import { createEventDispatcher } from "svelte";
@@ -45,7 +46,7 @@
     let border_new_email = "width: 80%; border: 1px solid rgb(130, 130, 224)";
 
     let outer_username =
-        "width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;";
+        'width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;';
     let outer_email =
         "width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;margin-top:7%;";
 
@@ -276,7 +277,8 @@
             window.location.replace(final_url);
         }
     }
-    onMount(async () => {
+    function startPoint()
+    {
         userid = localStorage.getItem(username);
         const options = {
             method: "GET",
@@ -309,6 +311,9 @@
             .catch(function (error) {
                 console.error(error);
             });
+    }
+    onMount(async () => {
+        startPoint();
     });
     export let username;
 </script>
@@ -353,24 +358,30 @@
         </div>
         <div class="pass-container">
             <div class="pass-header">Edit Account</div>
+            <div>
+                <Tooltip target="edittip1" placement="top">Click to Edit</Tooltip>
+                <Tooltip target="edittip2" placement="top">Click to Edit</Tooltip>
+            </div>
             <div class="pass-content">
                 <div on:click={toggle11}>
-                    <FormGroup floating label="Enter New Username">
+                    <FormGroup floating label="Enter New Username" id="edittip1">
                         <Input
                             type="text"
                             bind:value={new_username}
                             placeholder="Enter New Username"
                             style={outer_username}
+                            disabled
                         />
                     </FormGroup>
                 </div>
                 <div on:click={toggle12}>
-                    <FormGroup floating label="Enter New Email">
+                    <FormGroup floating label="Enter New Email" id="edittip2">
                         <Input
                             type="text"
                             bind:value={new_email}
                             placeholder="Enter New Email"
                             style={outer_email}
+                            disabled
                         />
                     </FormGroup>
                 </div>
@@ -516,7 +527,7 @@
                 <Button color="primary" class="float-right" on:click={editAuthenticationUsername}
                     >Save</Button
                 >
-                <Button color="danger" class="float-right" on:click={toggle11}
+                <Button color="danger" class="float-right" on:click={toggle11} on:click={startPoint}
                     >Cancel</Button
                 >
             </ModalFooter>
@@ -536,7 +547,7 @@
                 <Button color="primary" class="float-right" on:click={editAuthenticationEmail}
                     >Save</Button
                 >
-                <Button color="danger" class="float-right" on:click={toggle12}
+                <Button color="danger" class="float-right" on:click={toggle12} on:click={startPoint}
                     >Cancel</Button
                 >
             </ModalFooter>
