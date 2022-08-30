@@ -176,7 +176,6 @@
     experienceActive = false;
   }
   export let username;
-  export let location;
   export let path;
 </script>
 
@@ -301,7 +300,7 @@
             </FormGroup>
           </div>
         </div>
-        <div class="form-row form-content">
+        <div class="form-row form-content image-form">
           <div class="image-container">
             <div id="app">
               <h1>Upload Image</h1>
@@ -420,7 +419,7 @@
         width: 300px;
         background-color: white;
         margin-top: 0%;
-        margin-left: 30%;
+        margin-left: 31%;
         box-shadow: 0px 0px 7px 0px grey;
         border-radius: 1%;
         margin-bottom: 4%;
@@ -479,6 +478,7 @@
   }
   .all-content {
     margin-top: 2%;
+    width: 100%;
   }
   @media screen and (min-width: 1350px) {
     .my-content {
@@ -495,13 +495,20 @@
       margin-top: 0%;
     }
     .my-content {
-      width: 93%;
+      width: 92%;
+      margin: 3.5%;
+    }
+    .image-container {
+      margin-left: 35%;
     }
   }
   @media screen and (max-width: 993px) {
     .navbar {
       padding-left: 35%;
       margin-top: -10px;
+    }
+    .image-container {
+      margin-left: 33%;
     }
   }
   @media screen and (max-width: 800px) {
@@ -512,22 +519,64 @@
     .all-content {
       margin-top: 3%;
     }
+    .image-container {
+      margin-left: 30%;
+    }
   }
   @media screen and (max-width: 770px) {
    .my-content {
     height: 1450px;
    }
+   .image-container {
+      margin-left: 26%;
+    }
+    .btncontainer {
+      margin-left: -3.5%;
+    }
+  }
+  @media screen and (max-width: 670px) {
+    .image-container {
+      margin-left: 23%;
+    }
+    .btncontainer {
+      margin-left: -5%;
+    }
   }
   @media screen and (max-width: 620px) {
     .navbar {
       padding-left: 30%;
       margin-top: -2%;
     }
+    .image-container {
+      margin-left: 20%;
+    }
+  }
+  @media screen and (max-width: 570px) {
+    .image-container {
+      margin-left: 18%;
+    }
+    .btncontainer {
+      margin-left: -6%;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    .image-container {
+      margin-left: 15%;
+    }
+    .btncontainer {
+      margin-left: -8%;
+    }
   }
   @media screen and (max-width: 520px) {
     .navbar {
       padding-left: 28%;
-      margin-top: -3.5%;
+      margin-top: -7%;
+    }
+    .image-container {
+      margin-left: 13%;
+    }
+    .btncontainer {
+      margin-left: -8%;
     }
   }
   @media screen and (max-width: 470px) {
@@ -535,17 +584,51 @@
       padding-left: 26%;
       margin-top: -5%;
     }
+    .image-container {
+      margin-left: 11.5%;
+    }
+    .btncontainer {
+      margin-left: -8%;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .image-container {
+      margin-left: 9.5%;
+    }
+    .btncontainer {
+      margin-left: -10%;
+    }
+  }
+  @media screen and (max-width: 430px) {
+    .image-container {
+      margin-left: 7%;
+    }
+    .btncontainer {
+      margin-left: -10%;
+    }
   }
   @media screen and (max-width: 410px) {
     .navbar {
       padding-left: 24%;
       margin-top: -7%;
     }
+    .image-container {
+      margin-left: 5%;
+    }
+    .btncontainer {
+      margin-left: -11%;
+    }
   }
   @media screen and (max-width: 390px) {
     .navbar {
       padding-left: 22%;
       margin-top: -10%;
+    }
+    .image-container {
+      margin-left: 1%;
+    }
+    .btncontainer {
+      margin-left: -13%;
     }
   }
   @media screen and (max-width: 360px) {

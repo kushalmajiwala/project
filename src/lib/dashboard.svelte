@@ -386,11 +386,12 @@
     @media screen and (max-width: 500px) {
         .head-text {
             font-size: 25px;
+            margin-top: -2%;
         }
         .header {
-            height: 110px;
+            height: 105px;
             padding-left: -7%;
-            line-height: 110px;
+            line-height: 105px;
         }
     }
     @media screen and (max-width: 400px) {
