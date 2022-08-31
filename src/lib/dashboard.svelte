@@ -71,14 +71,14 @@
                 <Tooltip target={showProfile}>Profile</Tooltip>
 
                 <div class="firstmenu">
-                    <div class="w3-container">
-                        <div
+                    <div
                             on:click={w3_close}
                             class="w3-right closelogo w3-hide-large"
                             title="close menu"
                         >
                             <i class="fa fa-remove" style="color:red; font-size: 25px;" />
                         </div>
+                    <div class="w3-container firstmenu1">
                         {#if imageurl === ""}
                             <div class="defaultimage"/>
                         {/if}
@@ -231,8 +231,11 @@
     }
     .closelogo {
         font-size: 30px;
-        margin-top: -10%;
-        margin-right: -12%;
+        margin-top: -15px;
+        margin-left: 280px;
+        /* margin-right: -12%; */
+        /* z-index: 3; */
+        position: absolute;
     }
     .page-content {
         width: 100%;
@@ -248,11 +251,11 @@
         background-color: white;
         width: 100%;
         position: fixed;
-        padding: 1.17%;
+        padding: 10px;
         box-shadow: 2px 2px 20px 0px grey;
         z-index: 1;
-        height: 14.9%;
-        line-height: 13%;
+        height: 92px; 
+        line-height: 92px;
     }
     .mainlogo {
         height: 65px;
@@ -262,86 +265,89 @@
         background-size: cover;
         background-position: center center;
         border-radius: 100%;
-        margin-top: 0%;
+        /* margin-top: 0%; */
         box-shadow: 0px 0px 5px 0px rgba(171, 158, 158, 0.8);
-        margin-right: 3%;
+        /* margin-right: 3%; */
+        /* margin-left: -300px; */
     }
     .set-header {
         display: flex;
-        justify-content: center;
-        width: 100%;
-        margin-left: -12%;
+        padding-left: 30%;
     }
     .head-text {
-        font-size: 35px;
-        margin-top: 2.6%;
+       margin-left: 2%;
+       font-size: 25px;
+       margin-top: -1.3%;
     }
     .showusername {
-        margin-left: 30%;
-        margin-top: -15.5%;
-        font-size: 17px;
-        position: absolute;
+        /* margin-left: 30%; */
+        margin-top: -10px;
+        /* font-size: 17px; */
+        /* position: absolute; */
+    }
+    .firstmenu1 {
+        display: flex;
+        justify-content: space-evenly;
+        height: 92px;
+        line-height: 92px;
+        padding: 10px;
     }
     .firstmenu {
-        padding: 3.6%;
+        /* padding: 3.6%; */
+        /* display: flex;
+        justify-content: space-between; */
         box-shadow: 2px 2px 5px 0px grey;
         cursor: pointer;
+       
         /* border-radius: 25px; */
         background-color: rgb(228, 245, 245);
     }
     @media screen and (min-width: 1350px) {
-        .header {
-            padding: 0.9%;
-            height: 15%;
-        }
-        .mainlogo {
-            height: 80px;
-            width: 80px;
-        }
-        .firstmenu {
-            padding: 7.4%;
-        }
+        
     }
     @media screen and (max-width: 1350px) {
-        .header {
+        /* .header {
             padding: 1.17%;
-        }
+        } */
     }
     @media screen and (max-width: 1230px) {
-        .header {
+        /* .header {
             padding: 0.9%;
-        }
-        .mainlogo {
+        } */
+        /* .mainlogo {
             height: 80px;
             width: 80px;
-        }
-        .firstmenu {
-            padding: 9%;
+        } */
+        .set-header {
+            /* display: flex; */
+            padding-left: 32%;
         }
     }
     @media screen and (max-width: 1165px) {
-        .header {
+        /* .header {
             padding: 1.5%;
-        }
-        .mainlogo {
+        } */
+        /* .mainlogo {
             height: 80px;
             width: 80px;
-        }
-        .firstmenu {
-            padding: 9.5%;
+        } */
+        .set-header {
+            /* display: flex; */
+            padding-left: 34%;
         }
     }
     @media screen and (max-width: 1055px) {
-        .header {
+        /* .header {
             padding: 2%;
-        }
-        .mainlogo {
+        } */
+        /* .mainlogo {
             height: 80px;
             width: 80px;
-        }
-        .firstmenu {
-            padding: 9.8%;
-        }
+        } */
+        .set-header {
+        display: flex;
+        padding-left: 32%;
+    }
     }
     @media screen and (min-width: 993px) {
         .page-content {
@@ -349,58 +355,81 @@
         }
     }
     @media screen and (max-width: 993px) {
-        .firstmenu {
-            border-right: none;
-        }
-        .header {
+        /* .header {
             position: absolute;
             height: 120px;
             display: flex;
             justify-content: center;
             padding: 2%;
             line-height: 120px;
-        }
-        .head-text {
+        } */
+        /* .head-text {
             margin-top: -2%;
+        } */
+        .header {
+            position: absolute;
         }
         nav {
             border: none;
         }
-    }
-    @media screen and (max-width: 740px) {
-        .firstmenu {
-            border-right: none;
-            padding: 4%;
+        .set-header {
+            /* display: flex; */
+            padding-left: 39%;
         }
-        .header {
+    }
+    @media screen and (max-width: 600px) {
+        /* .header {
             position: absolute;
             height: 120px;
             padding-left: -7%;
             line-height: 120px;
-        }
-        .head-text {
+        } */
+        /* .head-text {
             font-size: 27px;
             margin-top: -20px;
+        } */
+        .set-header {
+            /* display: flex; */
+            padding-left: 32%;
+        }
+        .head-text {
+            margin-top: -10px;
         }
     }
     @media screen and (max-width: 500px) {
-        .head-text {
+        /* .head-text {
             font-size: 25px;
             margin-top: -2%;
-        }
-        .header {
+        } */
+        /* .header {
             height: 105px;
             padding-left: -7%;
             line-height: 105px;
+        } */
+    }
+    @media screen and (max-width: 460px) {
+        .set-header {
+            /* display: flex; */
+            padding-left: 28%;
+        }
+        .head-text {
+            margin-top: -10px;
         }
     }
     @media screen and (max-width: 400px) {
-        .head-text {
+        /* .head-text {
             font-size: 25px;
         }
         .header {
             height: 110px;
             line-height: 110px;
+        } */
+        .set-header {
+            /* display: flex; */
+            padding-left: 23%;
+        }
+        .head-text {
+            margin-top: -10px;
         }
     }
 </style>

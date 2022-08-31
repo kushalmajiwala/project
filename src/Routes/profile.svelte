@@ -46,7 +46,7 @@
     let border_new_email = "width: 80%; border: 1px solid rgb(130, 130, 224)";
 
     let outer_username =
-        'width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;';
+        'width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;background=url("../assets/images/usernameIcon.png");';
     let outer_email =
         "width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;margin-top:7%;";
 
@@ -366,6 +366,7 @@
                 <div on:click={toggle11}>
                     <FormGroup floating label="Enter New Username" id="edittip1">
                         <Input
+                            
                             type="text"
                             bind:value={new_username}
                             placeholder="Enter New Username"
@@ -525,7 +526,7 @@
             </ModalBody>
             <ModalFooter>
                 <Button color="primary" class="float-right" on:click={editAuthenticationUsername}
-                    >Save</Button
+                    >{btnname2}</Button
                 >
                 <Button color="danger" class="float-right" on:click={toggle11} on:click={startPoint}
                     >Cancel</Button
@@ -545,7 +546,7 @@
             </ModalBody>
             <ModalFooter>
                 <Button color="primary" class="float-right" on:click={editAuthenticationEmail}
-                    >Save</Button
+                    >{btnname2}</Button
                 >
                 <Button color="danger" class="float-right" on:click={toggle12} on:click={startPoint}
                     >Cancel</Button
@@ -641,7 +642,7 @@
             width: 60%;
         }
         .image-container {
-            margin-top: 0.5%;
+            margin-top: -2%;
         }
     }
     @media screen and (max-width: 995px) {
@@ -700,6 +701,7 @@
     @media screen and (max-width: 600px) {
         .image-container {
             margin-left: 16%;
+            margin-top: -7%;
         }
         .pass-header {
             margin-bottom: 15%;

@@ -220,12 +220,12 @@
         <div class="form-row form-content">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter First Name">
-              <Input placeholder="Enter First Name" />
+              <Input placeholder="Enter First Name" style="border: 1px solid #4c89ca;"/>
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Last Name">
-              <Input placeholder="Enter Last Name" />
+              <Input placeholder="Enter Last Name" style="border: 1px solid #4c89ca;"/>
             </FormGroup>
           </div>
         </div>
@@ -236,7 +236,7 @@
                 type="select"
                 name="select"
                 id="exampleSelect"
-                style="cursor:pointer;"
+                style="cursor:pointer; border: 1px solid #4c89ca;"
               >
                 <option style="cursor:pointer;">Male</option>
                 <option style="cursor:pointer;">Female</option>
@@ -247,7 +247,7 @@
           <div class="form-group col-md-4">
             <FormGroup floating label="Select Date of Birth">
               <Input
-                style="cursor:pointer;"
+                style="cursor:pointer; border: 1px solid #4c89ca;"
                 type="date"
                 name="date"
                 id="exampleDate"
@@ -257,36 +257,36 @@
           </div>
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter Profession">
-              <Input placeholder="Enter Profession" />
+              <Input placeholder="Enter Profession" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
         </div>
         <div class="form-row form-content">
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter Address">
-              <Input placeholder="Enter Address" />
+              <Input placeholder="Enter Address" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter City">
-              <Input placeholder="Enter City" />
+              <Input placeholder="Enter City" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter State">
-              <Input placeholder="Enter State" />
+              <Input placeholder="Enter State" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
         </div>
         <div class="form-row form-content">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Phone Number">
-              <Input placeholder="Enter Phone Number" />
+              <Input placeholder="Enter Phone Number" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Email">
-              <Input placeholder="Enter Email" />
+              <Input placeholder="Enter Email" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
         </div>
@@ -296,7 +296,7 @@
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter CV Title">
-              <Input placeholder="Enter CV Title" />
+              <Input placeholder="Enter CV Title" style="border: 1px solid #4c89ca;" />
             </FormGroup>
           </div>
         </div>
@@ -341,7 +341,7 @@
         <div class="page-header">
           <h1>Education-page</h1>
         </div>
-        <div class="pagination">
+        <div class="btncontainer">
           <p class="previous pagebtn" on:click={showPersonal}>
             &laquo; Previous
           </p>
@@ -354,7 +354,7 @@
         <div class="page-header">
           <h1>Experience-page</h1>
         </div>
-        <div class="pagination">
+        <div class="btncontainer">
           <p class="previous pagebtn" on:click={showEducation}>
             &laquo; Previous
           </p>
@@ -367,7 +367,7 @@
         <div class="page-header">
           <h1>Skill-page</h1>
         </div>
-        <div class="pagination">
+        <div class="btncontainer">
           <p class="previous pagebtn" on:click={showExperience}>
             &laquo; Previous
           </p>
@@ -380,7 +380,7 @@
         <div class="page-header">
           <h1>Interest-page</h1>
         </div>
-        <div class="pagination">
+        <div class="btncontainer">
           <p class="previous pagebtn" on:click={showSkill}>&laquo; Previous</p>
         </div>
       </div>
@@ -415,23 +415,25 @@
         background-color: #0772e3;
     }
   .image-container {
-        height: 290px;
-        width: 300px;
-        background-color: white;
-        margin-top: 0%;
-        margin-left: 31%;
-        box-shadow: 0px 0px 7px 0px grey;
-        border-radius: 1%;
-        margin-bottom: 4%;
-        text-align: center;
-    }
+      height: 290px;
+      width: 300px;
+      background-color: white;
+      margin-top: 0%;
+      margin-left: 31%;
+      box-shadow: 0px 0px 7px 0px grey;
+      border-radius: 1%;
+      margin-bottom: 4%;
+      text-align: center;
+  }
   .form-content {
     width: 90%;
     margin-left: 5%;
   }
   .btncontainer {
     width: 100%;
-    padding-left: 43%;
+    display: flex;
+    justify-content: space-around;
+    /* padding-left: 43%; */
   }
   .pagebtn {
     padding: 10px;
@@ -446,9 +448,6 @@
   }
   .pagebtn:hover {
     background-color: rgb(21, 80, 168);
-  }
-  .pagination {
-    padding: 2%;
   }
   .navbar {
     margin-top: -4%;
@@ -488,11 +487,14 @@
       margin-top: -1%;
       padding-left: 33%;
     }
+    .image-container {
+      margin-left: 36%;
+    }
   }
   @media screen and (max-width: 1230px) {
     .navbar {
       padding-left: 41.5%;
-      margin-top: 0%;
+      margin-top: -3%;
     }
     .my-content {
       width: 92%;
@@ -505,7 +507,7 @@
   @media screen and (max-width: 993px) {
     .navbar {
       padding-left: 35%;
-      margin-top: -10px;
+      margin-top: -5%;
     }
     .image-container {
       margin-left: 33%;
@@ -513,7 +515,7 @@
   }
   @media screen and (max-width: 800px) {
     .navbar {
-      margin-top: -1%;
+      margin-top: -5%;
       padding-left: 37%;
     }
     .all-content {
@@ -530,22 +532,16 @@
    .image-container {
       margin-left: 26%;
     }
-    .btncontainer {
-      margin-left: -3.5%;
-    }
   }
   @media screen and (max-width: 670px) {
     .image-container {
       margin-left: 23%;
     }
-    .btncontainer {
-      margin-left: -5%;
-    }
   }
   @media screen and (max-width: 620px) {
     .navbar {
       padding-left: 30%;
-      margin-top: -2%;
+      margin-top: -5%;
     }
     .image-container {
       margin-left: 20%;
@@ -555,16 +551,10 @@
     .image-container {
       margin-left: 18%;
     }
-    .btncontainer {
-      margin-left: -6%;
-    }
   }
   @media screen and (max-width: 540px) {
     .image-container {
       margin-left: 15%;
-    }
-    .btncontainer {
-      margin-left: -8%;
     }
   }
   @media screen and (max-width: 520px) {
@@ -575,36 +565,24 @@
     .image-container {
       margin-left: 13%;
     }
-    .btncontainer {
-      margin-left: -8%;
-    }
   }
   @media screen and (max-width: 470px) {
     .navbar {
       padding-left: 26%;
-      margin-top: -5%;
+      margin-top: -9%;
     }
     .image-container {
       margin-left: 11.5%;
-    }
-    .btncontainer {
-      margin-left: -8%;
     }
   }
   @media screen and (max-width: 450px) {
     .image-container {
       margin-left: 9.5%;
     }
-    .btncontainer {
-      margin-left: -10%;
-    }
   }
   @media screen and (max-width: 430px) {
     .image-container {
       margin-left: 7%;
-    }
-    .btncontainer {
-      margin-left: -10%;
     }
   }
   @media screen and (max-width: 410px) {
@@ -615,38 +593,32 @@
     .image-container {
       margin-left: 5%;
     }
-    .btncontainer {
-      margin-left: -11%;
-    }
   }
   @media screen and (max-width: 390px) {
     .navbar {
       padding-left: 22%;
-      margin-top: -10%;
+      margin-top: -12%;
     }
     .image-container {
       margin-left: 1%;
-    }
-    .btncontainer {
-      margin-left: -13%;
     }
   }
   @media screen and (max-width: 360px) {
     .navbar {
       padding-left: 19.5%;
-      margin-top: -10%;
+      margin-top: -13%;
     }
   }
   @media screen and (max-width: 350px) {
     .navbar {
       padding-left: 20%;
-      margin-top: -10%;
+      margin-top: -14%;
     }
   }
   @media screen and (max-width: 330px) {
     .navbar {
       padding-left: 18%;
-      margin-top: -10%;
+      margin-top: -15%;
     }
   }
 </style>
