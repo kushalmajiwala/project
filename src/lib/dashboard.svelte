@@ -65,11 +65,9 @@
             <!-- Sidebar/menu -->
             <nav
                 class="w3-sidebar w3-collapse w3-white w3-animate-left"
-                style="z-index:3;width:300px;"
+                style="z-index:3;width:280px;"
                 id="mySidebar"
             >
-                <Tooltip target={showProfile}>Profile</Tooltip>
-
                 <div class="firstmenu">
                     <div
                             on:click={w3_close}
@@ -94,6 +92,7 @@
                             <div class="showusername" bind:this={showProfile}>
                                 {username}
                             </div>
+                            <Tooltip target={showProfile} placement="bottom">Profile</Tooltip>
                         </Link>
                     </div>
                 </div>
@@ -232,7 +231,7 @@
     .closelogo {
         font-size: 30px;
         margin-top: -15px;
-        margin-left: 280px;
+        margin-left: 260px;
         /* margin-right: -12%; */
         /* z-index: 3; */
         position: absolute;
@@ -282,6 +281,8 @@
     .showusername {
         /* margin-left: 30%; */
         margin-top: -10px;
+        /* background-color: black; */
+        height: 60px;
         /* font-size: 17px; */
         /* position: absolute; */
     }
@@ -351,7 +352,7 @@
     }
     @media screen and (min-width: 993px) {
         .page-content {
-            margin-left: 300px;
+            margin-left: 280px;
         }
     }
     @media screen and (max-width: 993px) {

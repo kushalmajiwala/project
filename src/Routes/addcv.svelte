@@ -471,20 +471,22 @@
   .my-content {
     background-color: white;
     height: 950px;
-    width: 72%;
-    margin-left: 2.2%;
+    width: 74%;
+    margin-left: 2%;
     box-shadow: 2px 2px 5px 0px grey;
   }
   .all-content {
     margin-top: 2%;
     width: 100%;
+    text-align: center;
   }
   @media screen and (min-width: 1350px) {
     .my-content {
       width: 76%;
+      margin-left: 3%;
     }
     .navbar {
-      margin-top: -1%;
+      margin-top: -2.5%;
       padding-left: 33%;
     }
     .image-container {
@@ -497,8 +499,8 @@
       margin-top: -3%;
     }
     .my-content {
-      width: 92%;
-      margin: 3.5%;
+      width: 90%;
+      margin-left: 4.8%;
     }
     .image-container {
       margin-left: 35%;
@@ -555,6 +557,12 @@
   @media screen and (max-width: 540px) {
     .image-container {
       margin-left: 15%;
+    }
+    .page-header {
+      margin-bottom: 9%;
+    }
+    .form-content {
+      margin-top: -2%;
     }
   }
   @media screen and (max-width: 520px) {
