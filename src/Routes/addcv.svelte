@@ -12,7 +12,7 @@
     ModalBody,
     ModalFooter,
     ModalHeader,
-Spinner
+    Spinner,
   } from "sveltestrap";
   import { createEventDispatcher } from "svelte";
   import axios from "axios";
@@ -34,6 +34,8 @@ Spinner
   let open3 = false;
   let open4 = false;
   let open5 = false;
+  let open6 = false;
+  let open7 = false;
 
   //Modals Functions
   const toggle1 = () => (open1 = !open1);
@@ -41,6 +43,8 @@ Spinner
   const toggle3 = () => (open3 = !open3);
   const toggle4 = () => (open4 = !open4);
   const toggle5 = () => (open5 = !open5);
+  const toggle6 = () => (open6 = !open6);
+  const toggle7 = () => (open7 = !open7);
 
   let progress = false;
   let uploading = false;
@@ -100,10 +104,40 @@ Spinner
   let degree_border = "border: 1px solid #4c89ca;";
   let field_border = "border: 1px solid #4c89ca;";
 
-  function personalValidate()
-  {
-    if(fname !== "" && lname !== "" && gender !== "" && dob !== "" && profession !== "" && address !== "" && personal_city !== "" && personal_state !== "" && phoneno !== "" && email !== "" && cv_title !== "")
-    {
+  //Experience Page Borders
+  let job_title_border = "border: 1px solid #4c89ca;";
+  let company_name_border = "border: 1px solid #4c89ca;";
+  let experience_state_border = "border: 1px solid #4c89ca;";
+  let experience_city_border = "border: 1px solid #4c89ca;";
+  let experience_year_border = "border: 1px solid #4c89ca;";
+
+  //Skill Page Borders
+  let skill1_border = "border: 1px solid #4c89ca;";
+  let skill2_border = "border: 1px solid #4c89ca;";
+  let skill3_border = "border: 1px solid #4c89ca;";
+  let level1_border = "border: 1px solid #4c89ca;";
+  let level2_border = "border: 1px solid #4c89ca;";
+  let level3_border = "border: 1px solid #4c89ca;";
+
+  //Interest Page Borders
+  let interest1_border = "border: 1px solid #4c89ca;";
+  let interest2_border = "border: 1px solid #4c89ca;";
+  let interest3_border = "border: 1px solid #4c89ca;";
+
+  function personalValidate() {
+    if (
+      fname !== "" &&
+      lname !== "" &&
+      gender !== "" &&
+      dob !== "" &&
+      profession !== "" &&
+      address !== "" &&
+      personal_city !== "" &&
+      personal_state !== "" &&
+      phoneno !== "" &&
+      email !== "" &&
+      cv_title !== ""
+    ) {
       fname_border = "border: 1px solid #4c89ca;";
       lname_border = "border: 1px solid #4c89ca;";
       gender_border = "border: 1px solid #4c89ca;";
@@ -116,25 +150,46 @@ Spinner
       email_border = "border: 1px solid #4c89ca;";
       cv_title_border = "border: 1px solid #4c89ca;";
     }
-    if(fname == "" || lname == "" || gender == "" || dob == "" || profession == "" || address == "" || personal_city == "" || personal_state == "" || phoneno == "" ||email == "" || cv_title == "")
-    {
-      if(fname == "") fname_border = "border: 1px solid red;"; else fname_border = "border: 1px solid #4c89ca;";
-      if(lname == "") lname_border = "border: 1px solid red;"; else lname_border = "border: 1px solid #4c89ca;";
-      if(gender == "") gender_border = "border: 1px solid red;"; else gender_border = "border: 1px solid #4c89ca;";
-      if(dob == "") dob_border = "border: 1px solid red;"; else dob_border = "border: 1px solid #4c89ca;";
-      if(profession == "") profession_border = "border: 1px solid red;"; else profession_border = "border: 1px solid #4c89ca;";
-      if(address == "") address_border = "border: 1px solid red;"; else address_border = "border: 1px solid #4c89ca;";
-      if(personal_city == "") personal_city_border = "border: 1px solid red;"; else personal_city = "border: 1px solid #4c89ca;";
-      if(personal_state == "") personal_state_border = "border: 1px solid red;"; else personal_state = "border: 1px solid #4c89ca;";
-      if(phoneno == "") phoneno_border = "border: 1px solid red;"; else phoneno_border = "border: 1px solid #4c89ca;";
-      if(email == "") email_border = "border: 1px solid red;"; else email_border = "border: 1px solid #4c89ca;";
-      if(cv_title == "") cv_title_border = "border: 1px solid red;"; else cv_title = "border: 1px solid #4c89ca;";
+    if (
+      fname == "" ||
+      lname == "" ||
+      gender == "" ||
+      dob == "" ||
+      profession == "" ||
+      address == "" ||
+      personal_city == "" ||
+      personal_state == "" ||
+      phoneno == "" ||
+      email == "" ||
+      cv_title == ""
+    ) {
+      if (fname == "") fname_border = "border: 1px solid red;";
+      else fname_border = "border: 1px solid #4c89ca;";
+      if (lname == "") lname_border = "border: 1px solid red;";
+      else lname_border = "border: 1px solid #4c89ca;";
+      if (gender == "") gender_border = "border: 1px solid red;";
+      else gender_border = "border: 1px solid #4c89ca;";
+      if (dob == "") dob_border = "border: 1px solid red;";
+      else dob_border = "border: 1px solid #4c89ca;";
+      if (profession == "") profession_border = "border: 1px solid red;";
+      else profession_border = "border: 1px solid #4c89ca;";
+      if (address == "") address_border = "border: 1px solid red;";
+      else address_border = "border: 1px solid #4c89ca;";
+      if (personal_city == "") personal_city_border = "border: 1px solid red;";
+      else personal_city = "border: 1px solid #4c89ca;";
+      if (personal_state == "")
+        personal_state_border = "border: 1px solid red;";
+      else personal_state = "border: 1px solid #4c89ca;";
+      if (phoneno == "") phoneno_border = "border: 1px solid red;";
+      else phoneno_border = "border: 1px solid #4c89ca;";
+      if (email == "") email_border = "border: 1px solid red;";
+      else email_border = "border: 1px solid #4c89ca;";
+      if (cv_title == "") cv_title_border = "border: 1px solid red;";
+      else cv_title = "border: 1px solid #4c89ca;";
       toggle1();
       showPersonal();
-      return false
-    }
-    else
-    {
+      return false;
+    } else {
       return true;
     }
   }
@@ -146,26 +201,42 @@ Spinner
   let degree = "";
   let field = "";
 
-  function educationValidate()
-  {
-    if (schoolname !== "" && education_city !== "" && education_state !== "" && degree !== "" && field !== "") {
+  function educationValidate() {
+    if (
+      schoolname !== "" &&
+      education_city !== "" &&
+      education_state !== "" &&
+      degree !== "" &&
+      field !== ""
+    ) {
       schoolname_border = "border: 1px solid #4c89ca;";
       education_state_border = "border: 1px solid #4c89ca;";
       education_city_border = "border: 1px solid #4c89ca;";
       degree_border = "border: 1px solid #4c89ca;";
       field_border = "border: 1px solid #4c89ca;";
-    } 
-    if (schoolname == "" || education_city == "" || education_state == "" || degree == "" || field == "") 
-    {
-      if(schoolname == "") schoolname_border = "border: 1px solid red"; else schoolname_border = "border: 1px solid #4c89ca;";
-      if(education_city == "") education_city_border = "border: 1px solid red"; else education_city_border = "border: 1px solid #4c89ca;";
-      if(education_state == "") education_state_border = "border: 1px solid red"; else education_state_border = "border: 1px solid #4c89ca;";
-      if(degree == "") degree_border = "border: 1px solid red"; else degree_border = "border: 1px solid #4c89ca;"
-      if(field == "") field_border = "border: 1px solid red"; else field_border = "border: 1px solid #4c89ca;";
+    }
+    if (
+      schoolname == "" ||
+      education_city == "" ||
+      education_state == "" ||
+      degree == "" ||
+      field == ""
+    ) {
+      if (schoolname == "") schoolname_border = "border: 1px solid red";
+      else schoolname_border = "border: 1px solid #4c89ca;";
+      if (education_city == "") education_city_border = "border: 1px solid red";
+      else education_city_border = "border: 1px solid #4c89ca;";
+      if (education_state == "")
+        education_state_border = "border: 1px solid red";
+      else education_state_border = "border: 1px solid #4c89ca;";
+      if (degree == "") degree_border = "border: 1px solid red";
+      else degree_border = "border: 1px solid #4c89ca;";
+      if (field == "") field_border = "border: 1px solid red";
+      else field_border = "border: 1px solid #4c89ca;";
       toggle2();
       showEducation();
       return false;
-    } 
+    }
     return true;
   }
 
@@ -176,9 +247,45 @@ Spinner
   let experience_state = "";
   let experience_year = "";
 
-  function experienceValidate()
-  {
-    
+  function experienceValidate() {
+    if (
+      job_title !== "" &&
+      company_name !== "" &&
+      experience_city !== "" &&
+      experience_state !== "" &&
+      experience_year !== ""
+    ) {
+      job_title_border = "border: 1px solid #4c89ca;";
+      company_name_border = "border: 1px solid #4c89ca;";
+      experience_city_border = "border: 1px solid #4c89ca;";
+      experience_state_border = "border: 1px solid #4c89ca;";
+      experience_year_border = "border: 1px solid #4c89ca;";
+    }
+    if (
+      job_title == "" ||
+      company_name == "" ||
+      experience_city == "" ||
+      experience_state == "" ||
+      experience_year == ""
+    ) {
+      if (job_title == "") job_title_border = "border: 1px solid red";
+      else job_title_border = "border: 1px solid #4c89ca;";
+      if (experience_city == "")
+        experience_city_border = "border: 1px solid red";
+      else experience_city_border = "border: 1px solid #4c89ca;";
+      if (experience_state == "")
+        experience_state_border = "border: 1px solid red";
+      else experience_state_border = "border: 1px solid #4c89ca;";
+      if (company_name == "") company_name_border = "border: 1px solid red";
+      else company_name_border = "border: 1px solid #4c89ca;";
+      if (experience_year == "")
+        experience_year_border = "border: 1px solid red";
+      else experience_year_border = "border: 1px solid #4c89ca;";
+      toggle3();
+      showExperience();
+      return false;
+    }
+    return true;
   }
 
   //Skill Page Variables
@@ -188,10 +295,52 @@ Spinner
   let level1 = "";
   let level2 = "";
   let level3 = "";
-  
-  function skillValidate()
-  {
-    
+
+  function skillValidate() {
+    if (skill1 !== "" || skill2 !== "" || skill3 !== "") {
+      skill1_border = "border: 1px solid #4c89ca;";
+      skill2_border = "border: 1px solid #4c89ca;";
+      skill3_border = "border: 1px solid #4c89ca;";
+      level1_border = "border: 1px solid #4c89ca;";
+      level2_border = "border: 1px solid #4c89ca;";
+      level3_border = "border: 1px solid #4c89ca;";
+    }
+    if (
+      skill1 == "" &&
+      skill2 == "" &&
+      skill3 == "" &&
+      level1 == "" &&
+      level2 == "" &&
+      level3 == ""
+    ) {
+      skill1_border = "border: 1px solid red";
+      skill2_border = "border: 1px solid red";
+      skill3_border = "border: 1px solid red";
+      level1_border = "border: 1px solid red";
+      level2_border = "border: 1px solid red";
+      level3_border = "border: 1px solid red";
+      toggle4();
+      showSkill();
+      return false;
+    } else if (
+      (skill1 !== "" && level1 == "") ||
+      (skill2 !== "" && level2 == "") ||
+      (skill3 !== "" && level3 == "")
+    ) {
+      if (skill1 !== "" && level1 == "")
+        level1_border = "border: 1px solid red";
+      else level1_border = "border: 1px solid #4c89ca;";
+      if (skill2 !== "" && level2 == "")
+        level2_border = "border: 1px solid red";
+      else level2_border = "border: 1px solid #4c89ca;";
+      if (skill3 !== "" && level3 == "")
+        level3_border = "border: 1px solid red";
+      else level3_border = "border: 1px solid #4c89ca;";
+      toggle6();
+      showSkill();
+      return false;
+    }
+    return true;
   }
 
   //Interest Page variables
@@ -199,17 +348,267 @@ Spinner
   let interest2 = "";
   let interest3 = "";
 
-  function submitCV()
-  {
+  function interestValidate() {
+    if (interest1 == "" && interest2 == "" && interest3 == "") {
+      interest1_border = "border: 1px solid red";
+      interest2_border = "border: 1px solid red";
+      interest3_border = "border: 1px solid red";
+      toggle5();
+      showInterest();
+      return false;
+    }
+    if (interest1 !== "" || interest2 !== "" || interest3 !== "") {
+      interest1_border = "border: 1px solid #4c89ca;";
+      interest2_border = "border: 1px solid #4c89ca;";
+      interest3_border = "border: 1px solid #4c89ca;";
+    }
+    return true;
+  }
+
+  function submitCV() {
     progress = true;
-    if(personalValidate())
-    {
-      educationValidate();
+    if (personalValidate()) {
+      if (educationValidate()) {
+        if (experienceValidate()) {
+          if (skillValidate()) {
+            if (interestValidate()) {
+              //Personal Details Table Insert
+              let rec = {
+                UserId: userid,
+                cvtitle: cv_title,
+                fname: fname,
+                lname: lname,
+                gender: gender,
+                dob: dob,
+                profession: profession,
+                address: address,
+                city: personal_city,
+                state: personal_state,
+                phone: phoneno,
+                email: email,
+                pic: personal_pic_url,
+              };
+              axios
+                .post(
+                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/",
+                  rec
+                )
+                .then(function (response) {
+                  // console.log(response.data);
+                  cvid = response.data.cvid;
+                  // console.log(cvid);
+
+                  let rec_education = {
+                    UserId: userid,
+                    cvid: cvid,
+                    schoolname: schoolname,
+                    city: education_city,
+                    state: education_state,
+                    degree: degree,
+                    field: field,
+                  };
+                  axios
+                    .post(
+                      "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/",
+                      rec_education
+                    )
+                    .then(function (response) {
+                      let rec_experience = {
+                        UserId: userid,
+                        cvid: cvid,
+                        job_title: job_title,
+                        company_name: company_name,
+                        city: experience_city,
+                        state: experience_state,
+                        experience: experience_year,
+                      };
+                      axios
+                        .post(
+                          "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/",
+                          rec_experience
+                        )
+                        .then(function (response) {
+                          // Skill Table Insert
+                          if (skill1 !== "" && skill2 !== "" && skill3 !== "") {
+                            let rec_skill1 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              skill: skill1,
+                              level: level1,
+                            };
+                            let rec_skill2 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              skill: skill2,
+                              level: level2,
+                            };
+                            let rec_skill3 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              skill: skill3,
+                              level: level3,
+                            };
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                              rec_skill1
+                            );
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                              rec_skill2
+                            );
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                              rec_skill3
+                            );
+                          } else if (skill1 !== "" && skill2 !== "") {
+                            let rec_skill1 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              skill: skill1,
+                              level: level1,
+                            };
+                            let rec_skill2 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              skill: skill2,
+                              level: level2,
+                            };
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                              rec_skill1
+                            );
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                              rec_skill2
+                            );
+                          } else {
+                            let rec_skill1 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              skill: skill1,
+                              level: level1,
+                            };
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                              rec_skill1
+                            );
+                          }
+                          //Interest Table Insert
+                          if (
+                            interest1 !== "" &&
+                            interest2 !== "" &&
+                            interest3 !== ""
+                          ) {
+                            let rec_interest1 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              interest: interest1,
+                            };
+                            let rec_interest2 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              interest: interest2,
+                            };
+                            let rec_interest3 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              interest: interest3,
+                            };
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                              rec_interest1
+                            );
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                              rec_interest2
+                            );
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                              rec_interest3
+                            );
+                          } else if (interest1 !== "" && interest2 !== "") {
+                            let rec_interest1 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              interest: interest1,
+                            };
+                            let rec_interest2 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              interest: interest2,
+                            };
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                              rec_interest1
+                            );
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                              rec_interest2
+                            );
+                          } else {
+                            let rec_interest1 = {
+                              UserId: userid,
+                              cvid: cvid,
+                              interest: interest1,
+                            };
+                            axios.post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                              rec_interest1
+                            );
+                          }
+                          toggle7();
+                        });
+                    });
+                })
+                .catch(function (error) {
+                  console.error(error);
+                });
+            }
+          }
+        }
+      }
     }
   }
-  function progressStop()
-  {
+  function progressStop() {
     progress = false;
+  }
+  function resetAll()
+  {
+    fname = "";
+    lname = "";
+    gender = "";
+    dob = "";
+    profession = "";
+    address = "";
+    personal_city = "";
+    personal_state = "";
+    phoneno = "";
+    email = "";
+    personal_pic_url = "";
+    cv_title = "";
+
+    schoolname = "";
+    education_city = "";
+    education_state = "";
+    degree = "";
+    field = "";
+
+    job_title = "";
+    company_name = "";
+    experience_city = "";
+    experience_state = "";
+    experience_year = "";
+
+    skill1 = "";
+    skill2 = "";
+    skill3 = "";
+    level1 = "";
+    level2 = "";
+    level3 = "";
+
+    interest1 = "";
+    interest2 = "";
+    interest3 = "";
   }
 
   const dispatch = createEventDispatcher();
@@ -255,28 +654,26 @@ Spinner
     }
   }
 
-  function startPoint()
-  {
+  function startPoint() {
     userid = localStorage.getItem(username);
-        const options = {
-            method: "GET",
-            url:
-                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" +
-                userid,
-        };
-        axios
-            .request(options)
-            .then(function (response) {
-                imageurl = response.data.image;
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
-
+    const options = {
+      method: "GET",
+      url:
+        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" +
+        userid,
+    };
+    axios
+      .request(options)
+      .then(function (response) {
+        imageurl = response.data.image;
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   }
 
   onMount(async () => {
-        startPoint();
+    startPoint();
   });
 
   function showPersonal() {
@@ -392,12 +789,20 @@ Spinner
         <div class="form-row form-content" style="margin-top: 5%;">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter First Name">
-              <Input placeholder="Enter First Name" style={fname_border} bind:value={fname}/>
+              <Input
+                placeholder="Enter First Name"
+                style={fname_border}
+                bind:value={fname}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Last Name">
-              <Input placeholder="Enter Last Name" style={lname_border} bind:value={lname}/>
+              <Input
+                placeholder="Enter Last Name"
+                style={lname_border}
+                bind:value={lname}
+              />
             </FormGroup>
           </div>
         </div>
@@ -431,36 +836,60 @@ Spinner
           </div>
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter Profession">
-              <Input placeholder="Enter Profession" style={profession_border} bind:value={profession}/>
+              <Input
+                placeholder="Enter Profession"
+                style={profession_border}
+                bind:value={profession}
+              />
             </FormGroup>
           </div>
         </div>
         <div class="form-row form-content">
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter Address">
-              <Input placeholder="Enter Address" style={address_border} bind:value={address}/>
+              <Input
+                placeholder="Enter Address"
+                style={address_border}
+                bind:value={address}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter City">
-              <Input placeholder="Enter City" style={personal_city_border} bind:value={personal_city}/>
+              <Input
+                placeholder="Enter City"
+                style={personal_city_border}
+                bind:value={personal_city}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-4">
             <FormGroup floating label="Enter State">
-              <Input placeholder="Enter State" style={personal_state_border} bind:value={personal_state}/>
+              <Input
+                placeholder="Enter State"
+                style={personal_state_border}
+                bind:value={personal_state}
+              />
             </FormGroup>
           </div>
         </div>
         <div class="form-row form-content">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Phone Number">
-              <Input placeholder="Enter Phone Number" style={phoneno_border} bind:value={phoneno}/>
+              <Input
+                placeholder="Enter Phone Number"
+                style={phoneno_border}
+                bind:value={phoneno}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Email">
-              <Input placeholder="Enter Email" style={email_border} bind:value={email}/>
+              <Input
+                placeholder="Enter Email"
+                style={email_border}
+                bind:value={email}
+              />
             </FormGroup>
           </div>
         </div>
@@ -470,7 +899,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter CV Title">
-              <Input placeholder="Enter CV Title" style={cv_title_border} bind:value={cv_title}/>
+              <Input
+                placeholder="Enter CV Title"
+                style={cv_title_border}
+                bind:value={cv_title}
+              />
             </FormGroup>
           </div>
         </div>
@@ -480,7 +913,7 @@ Spinner
               <h3 style="margin-bottom: 7%;">Upload Image For CV</h3>
               {#if avatar}
                 <img class="avatar" src={avatar} alt="d" />
-              {:else }
+              {:else}
                 <img
                   class="avatar"
                   src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
@@ -522,7 +955,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter School Name">
-              <Input placeholder="Enter School Name" style={schoolname_border} bind:value={schoolname}/>
+              <Input
+                placeholder="Enter School Name"
+                style={schoolname_border}
+                bind:value={schoolname}
+              />
             </FormGroup>
           </div>
         </div>
@@ -532,7 +969,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter City">
-              <Input placeholder="Enter City" style={education_city_border} bind:value={education_city}/>
+              <Input
+                placeholder="Enter City"
+                style={education_city_border}
+                bind:value={education_city}
+              />
             </FormGroup>
           </div>
         </div>
@@ -542,7 +983,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter State">
-              <Input placeholder="Enter State" style={education_state_border} bind:value={education_state}/>
+              <Input
+                placeholder="Enter State"
+                style={education_state_border}
+                bind:value={education_state}
+              />
             </FormGroup>
           </div>
         </div>
@@ -552,7 +997,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Degree">
-              <Input placeholder="Enter Degree" style={degree_border} bind:value={degree}/>
+              <Input
+                placeholder="Enter Degree"
+                style={degree_border}
+                bind:value={degree}
+              />
             </FormGroup>
           </div>
         </div>
@@ -562,7 +1011,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Field">
-              <Input placeholder="Enter Field" style={field_border}  bind:value={field}/>
+              <Input
+                placeholder="Enter Field"
+                style={field_border}
+                bind:value={field}
+              />
             </FormGroup>
           </div>
         </div>
@@ -586,7 +1039,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Job Title">
-              <Input placeholder="Enter Job Title" style="border: 1px solid #4c89ca;" bind:value={job_title}/>
+              <Input
+                placeholder="Enter Job Title"
+                style={job_title_border}
+                bind:value={job_title}
+              />
             </FormGroup>
           </div>
         </div>
@@ -596,7 +1053,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Company Name">
-              <Input placeholder="Enter Company Name" style="border: 1px solid #4c89ca;" bind:value={company_name}/>
+              <Input
+                placeholder="Enter Company Name"
+                style={company_name_border}
+                bind:value={company_name}
+              />
             </FormGroup>
           </div>
         </div>
@@ -606,7 +1067,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter City">
-              <Input placeholder="Enter City" style="border: 1px solid #4c89ca;" bind:value={experience_city}/>
+              <Input
+                placeholder="Enter City"
+                style={experience_city_border}
+                bind:value={experience_city}
+              />
             </FormGroup>
           </div>
         </div>
@@ -616,7 +1081,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter State">
-              <Input placeholder="Enter State" style="border: 1px solid #4c89ca;" bind:value={experience_state}/>
+              <Input
+                placeholder="Enter State"
+                style={experience_state_border}
+                bind:value={experience_state}
+              />
             </FormGroup>
           </div>
         </div>
@@ -626,7 +1095,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Experience(Years)">
-              <Input placeholder="Enter Experience" style="border: 1px solid #4c89ca;" bind:value={experience_year}/>
+              <Input
+                placeholder="Enter Experience"
+                style={experience_year_border}
+                bind:value={experience_year}
+              />
             </FormGroup>
           </div>
         </div>
@@ -647,7 +1120,11 @@ Spinner
         <div class="form-row form-content" style="margin-top: 5%;">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Skill">
-              <Input placeholder="Enter Skill" style="border: 1px solid #4c89ca;" bind:value={skill1}/>
+              <Input
+                placeholder="Enter Skill"
+                style={skill1_border}
+                bind:value={skill1}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
@@ -656,7 +1133,7 @@ Spinner
                 type="select"
                 name="select"
                 id="exampleSelect"
-                style="cursor:pointer; border: 1px solid #4c89ca;"
+                style={level1_border}
                 bind:value={level1}
               >
                 <option style="cursor:pointer;">Beginner</option>
@@ -669,7 +1146,11 @@ Spinner
         <div class="form-row form-content">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Skill">
-              <Input placeholder="Enter Skill" style="border: 1px solid #4c89ca;" bind:value={skill2}/>
+              <Input
+                placeholder="Enter Skill"
+                style={skill2_border}
+                bind:value={skill2}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
@@ -678,7 +1159,7 @@ Spinner
                 type="select"
                 name="select"
                 id="exampleSelect"
-                style="cursor:pointer; border: 1px solid #4c89ca;"
+                style={level2_border}
                 bind:value={level2}
               >
                 <option style="cursor:pointer;">Beginner</option>
@@ -691,7 +1172,11 @@ Spinner
         <div class="form-row form-content" style="margin-bottom: 5%;">
           <div class="form-group col-md-6">
             <FormGroup floating label="Enter Skill">
-              <Input placeholder="Enter Skill" style="border: 1px solid #4c89ca;" bind:value={skill3}/>
+              <Input
+                placeholder="Enter Skill"
+                style={skill3_border}
+                bind:value={skill3}
+              />
             </FormGroup>
           </div>
           <div class="form-group col-md-6">
@@ -700,7 +1185,7 @@ Spinner
                 type="select"
                 name="select"
                 id="exampleSelect"
-                style="cursor:pointer; border: 1px solid #4c89ca;"
+                style={level3_border}
                 bind:value={level3}
               >
                 <option style="cursor:pointer;">Beginner</option>
@@ -730,7 +1215,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Interest">
-              <Input placeholder="Enter Interest" style="border: 1px solid #4c89ca;" bind:value={interest1}/>
+              <Input
+                placeholder="Enter Interest"
+                style={interest1_border}
+                bind:value={interest1}
+              />
             </FormGroup>
           </div>
         </div>
@@ -740,7 +1229,11 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Interest">
-              <Input placeholder="Enter Interest" style="border: 1px solid #4c89ca;" bind:value={interest2}/>
+              <Input
+                placeholder="Enter Interest"
+                style={interest2_border}
+                bind:value={interest2}
+              />
             </FormGroup>
           </div>
         </div>
@@ -750,17 +1243,25 @@ Spinner
         >
           <div class="form-group" style="width: 80%">
             <FormGroup floating label="Enter Interest">
-              <Input placeholder="Enter Interest" style="border: 1px solid #4c89ca;" bind:value={interest3}/>
+              <Input
+                placeholder="Enter Interest"
+                style={interest3_border}
+                bind:value={interest3}
+              />
             </FormGroup>
           </div>
         </div>
         <div class="btncontainer">
           <p class="previous pagebtn" on:click={showSkill}>&laquo; Previous</p>
-          <Button color="success" on:click={submitCV} style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;">
+          <Button
+            color="success"
+            on:click={submitCV}
+            style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;"
+          >
             {#if progress}
-              <p><Spinner size="sm"/> Saving</p>
+              <p><Spinner size="sm" /> Saving</p>
             {:else}
-              <p><i class="bi bi-file-earmark-check-fill"></i>  Save </p>
+              <p><i class="bi bi-file-earmark-check-fill" /> Save</p>
             {/if}
           </Button>
         </div>
@@ -768,48 +1269,89 @@ Spinner
     {/if}
   </div>
   <div class="Modals">
-     <!-- empty-modal -->
-     <Modal header="Message" isOpen={open1}>
+    <!-- empty-modal -->
+    <Modal header="Message" isOpen={open1}>
       <ModalBody>Fields Cannot be empty on Personal Details Page...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle1} on:click={progressStop}
-          >Cancel</Button
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle1}
+          on:click={progressStop}>Cancel</Button
         >
       </ModalFooter>
     </Modal>
-     <!-- empty-modal -->
-     <Modal header="Message" isOpen={open2}>
+    <!-- empty-modal -->
+    <Modal header="Message" isOpen={open2}>
       <ModalBody>Fields Cannot be empty on Education Details Page...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle2} on:click={progressStop}
-          >Cancel</Button
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle2}
+          on:click={progressStop}>Cancel</Button
         >
       </ModalFooter>
     </Modal>
-     <!-- empty-modal -->
-     <Modal header="Message" isOpen={open3}>
-      <ModalBody>Fields Cannot be empty on Experience Details Page...</ModalBody>
+    <!-- empty-modal -->
+    <Modal header="Message" isOpen={open3}>
+      <ModalBody>Fields Cannot be empty on Experience Details Page...</ModalBody
+      >
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle3} on:click={progressStop}
-          >Cancel</Button
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle3}
+          on:click={progressStop}>Cancel</Button
         >
       </ModalFooter>
     </Modal>
-     <!-- empty-modal -->
-     <Modal header="Message" isOpen={open4}>
-      <ModalBody>Fields Cannot be empty on Skill Details Page...</ModalBody>
+    <!-- empty-modal -->
+    <Modal header="Message" isOpen={open4}>
+      <ModalBody>Please select Atleast one skill...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle4} on:click={progressStop}
-          >Cancel</Button
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle4}
+          on:click={progressStop}>Cancel</Button
         >
       </ModalFooter>
     </Modal>
     <!-- empty-modal -->
     <Modal header="Message" isOpen={open5}>
-      <ModalBody>Fields Cannot be empty on Interest Details Page...</ModalBody>
+      <ModalBody>Please select Atleast one Interest...</ModalBody>
       <ModalFooter>
-        <Button color="danger" class="float-right" on:click={toggle5} on:click={progressStop}
-          >Cancel</Button
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle5}
+          on:click={progressStop}>Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+    <!-- empty-Level in Skill -->
+    <Modal header="Message" isOpen={open6}>
+      <ModalBody>Please Select the Level of your skill...</ModalBody>
+      <ModalFooter>
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle6}
+          on:click={progressStop}>Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
+    <!-- CV created Successfully -->
+    <Modal header="Message" isOpen={open7}>
+      <ModalBody>CV Created Successfully...</ModalBody>
+      <ModalFooter>
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle7}
+          on:click={progressStop}
+          on:click={resetAll}>Cancel</Button
         >
       </ModalFooter>
     </Modal>
@@ -818,40 +1360,40 @@ Spinner
 
 <style>
   .avatar {
-        display: flex;
-        height: 150px;
-        width: 150px;
-        margin-top: 2%;
-        margin-left: 25%;
-        box-shadow: 0px 0px 2px 0px grey;
-    }
+    display: flex;
+    height: 150px;
+    width: 150px;
+    margin-top: 2%;
+    margin-left: 25%;
+    box-shadow: 0px 0px 2px 0px grey;
+  }
   .uploadbtn {
-        cursor: pointer;
-        color: white;
-        background-color: #007bff;
-        filter: blur(2%);
-        height: 38px;
-        width: 120px;
-        line-height: 38px;
-        text-align: center;
-        border-radius: 10px;
-        margin-top: 3%;
-        border: 1px solid #0772e3;
-        filter: saturate(200%);
-    }
-    .uploadbtn:hover {
-        background-color: #0772e3;
-    }
+    cursor: pointer;
+    color: white;
+    background-color: #007bff;
+    filter: blur(2%);
+    height: 38px;
+    width: 120px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 3%;
+    border: 1px solid #0772e3;
+    filter: saturate(200%);
+  }
+  .uploadbtn:hover {
+    background-color: #0772e3;
+  }
   .image-container {
-      height: 290px;
-      width: 300px;
-      background-color: white;
-      margin-top: 0%;
-      margin-left: 31%;
-      box-shadow: 0px 0px 7px 0px grey;
-      border-radius: 1%;
-      margin-bottom: 4%;
-      text-align: center;
+    height: 290px;
+    width: 300px;
+    background-color: white;
+    margin-top: 0%;
+    margin-left: 31%;
+    box-shadow: 0px 0px 7px 0px grey;
+    border-radius: 1%;
+    margin-bottom: 4%;
+    text-align: center;
   }
   .form-content {
     width: 90%;
@@ -956,10 +1498,10 @@ Spinner
     }
   }
   @media screen and (max-width: 770px) {
-   .my-content {
-    height: 1450px;
-   }
-   .image-container {
+    .my-content {
+      height: 1450px;
+    }
+    .image-container {
       margin-left: 26%;
     }
   }
