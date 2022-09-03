@@ -46,7 +46,7 @@
     let border_new_email = "width: 80%; border: 1px solid rgb(130, 130, 224)";
 
     let outer_username =
-        'width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;background=url("../assets/images/usernameIcon.png");';
+        'width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;';
     let outer_email =
         "width: 80%; border: 1px solid rgb(130, 130, 224);cursor:pointer;margin-top:7%;";
 
@@ -364,7 +364,7 @@
             </div>
             <div class="pass-content">
                 <div on:click={toggle11}>
-                    <FormGroup floating label="Enter New Username" id="edittip1">
+                    <FormGroup floating label="Update Username" id="edittip1">
                         <Input
                             
                             type="text"
@@ -376,7 +376,7 @@
                     </FormGroup>
                 </div>
                 <div on:click={toggle12}>
-                    <FormGroup floating label="Enter New Email" id="edittip2">
+                    <FormGroup floating label="Update Email" id="edittip2">
                         <Input
                             type="text"
                             bind:value={new_email}
