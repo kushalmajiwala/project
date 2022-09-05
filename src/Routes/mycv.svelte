@@ -2,6 +2,7 @@
     import { Router, Link, Route } from "svelte-routing";
     import { onMount } from "svelte";
     import axios from "axios";
+    import { Button, Tooltip } from 'sveltestrap';
 
     let totalCV = [];
     let checking = false;
@@ -10,6 +11,11 @@
     export let url = "";
 
     let userid = localStorage.getItem(username);
+
+    function editCV(cvid)
+    {
+        console.log(cvid);
+    }   
 
     function checkCvExist()
     {
@@ -30,7 +36,6 @@
                 console.error(error);
             });
     }
-
     onMount(async () => {
        await checkCvExist();
     });
@@ -42,11 +47,22 @@
         <p>No CV Added Yet</p>
     </div>
     {:else }
+    <div class="tooltip">
+        <Tooltip target="myedit" placement="bottom">
+            Edit
+        </Tooltip>
+        <Tooltip target="mydownload" placement="bottom">
+            Download
+        </Tooltip>
+        <Tooltip target="myview" placement="bottom">
+            View
+        </Tooltip>
+        <Tooltip target="mydelete" placement="bottom">
+            Delete
+        </Tooltip>
+    </div>
     <div class="cv-details">
         {#each totalCV[0] as rec}
-            <!-- <div class="card inner-cv">
-                hello
-            </div> -->
             <div class="card inner-cv">
                 <div>
                     <i class="bi bi-file-earmark-person-fill" style="font-size: 70px; color: #598496;"></i>
@@ -57,10 +73,10 @@
                     </div>
                 </div>
                 <div class="inner-icon">
-                    <i class="bi bi-pencil-fill editIcon"></i>
-                    <i class="bi bi-file-earmark-arrow-down-fill downloadIcon"></i>
-                    <i class="bi bi-eye-fill showIcon"></i>
-                    <i class="bi bi-trash-fill deleteIcon"></i>
+                    <i class="bi bi-pencil-fill editIcon" id="myedit" on:click={() => editCV(rec.cvid)}></i>
+                    <i class="bi bi-file-earmark-arrow-down-fill downloadIcon" id="mydownload"></i>
+                    <i class="bi bi-eye-fill showIcon" id="myview"></i>
+                    <i class="bi bi-trash-fill deleteIcon" id="mydelete"></i>
                 </div>
             </div>
         {/each}
@@ -80,10 +96,34 @@
 <style>
     .editIcon, .downloadIcon, .showIcon, .deleteIcon {
         cursor: pointer;
-        font-size: 25px;
+        font-size: 15px;
+        color: rgb(73, 61, 128);
+        border: 0.5px solid rgb(98, 93, 125);
+        border-radius: 15px;
+        width: 10%;
+        text-align: center;
+        height: 35px;
+        line-height: 35px;
+        background-color: aliceblue;
+    }
+    .editIcon:hover {
+        background-color: rgb(118, 115, 156);
+        color: white;
+    }
+    .downloadIcon:hover {
+        background-color: rgb(118, 115, 156);
+        color: white;
+    }
+    .showIcon:hover {
+        background-color: rgb(118, 115, 156);
+        color: white;
     }
     .deleteIcon {
         color: red;
+    }
+    .deleteIcon:hover {
+        color: red;
+        background-color: rgb(5, 58, 67);
     }
     .cv-details {
         position: absolute;
@@ -258,6 +298,9 @@
             margin-top: 15%;
             margin-left: 30%;
         }
+        .inner-icon {
+          margin-top: -18%;
+        }
     }
     @media screen and (max-width: 580px) {
         .add-content {
@@ -282,7 +325,7 @@
             width: 95%;
         }
         .inner-icon {
-          margin-top: -11%;
+          margin-top: -13%;
           margin-left: 10%;
         }
     }
@@ -306,7 +349,7 @@
             margin-left: 18%;
         }
         .inner-icon {
-          margin-top: -15%;
+          margin-top: -16%;
           margin-left: 15%;
         }
         .cv-details {
