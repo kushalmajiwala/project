@@ -9,10 +9,38 @@
         ModalBody,
         ModalFooter,
         ModalHeader,
+        FormGroup,
+        Input,
     } from "sveltestrap";
 
     let totalCV = [];
     let checking = false;
+
+    //Personal Details Variables
+    let fname = "";
+    let lname = "";
+    let gender = "";
+    let dob = "";
+    let profession = "";
+    let address = "";
+    let personal_city = "";
+    let personal_state = "";
+    let phoneno = "";
+    let email = "";
+    let personal_pic_url = "";
+    let cv_title = "";
+
+    let fname_border = "border: 1px solid #4c89ca;";
+    let lname_border = "border: 1px solid #4c89ca;";
+    let gender_border = "border: 1px solid #4c89ca;";
+    let dob_border = "border: 1px solid #4c89ca;";
+    let profession_border = "border: 1px solid #4c89ca;";
+    let address_border = "border: 1px solid #4c89ca;";
+    let personal_city_border = "border: 1px solid #4c89ca;";
+    let personal_state_border = "border: 1px solid #4c89ca;";
+    let phoneno_border = "border: 1px solid #4c89ca;";
+    let email_border = "border: 1px solid #4c89ca;";
+    let cv_title_border = "border: 1px solid #4c89ca;";
 
     let open1 = false;
     let open2 = false;
@@ -124,12 +152,9 @@
                 totalCV = [];
                 totalCV.push(response.data);
                 console.log(totalCV[0].length);
-                if(totalCV[0].length == 0)
-                {
+                if (totalCV[0].length == 0) {
                     checking = false;
-                }
-                else
-                {
+                } else {
                     checking = true;
                 }
             })
@@ -140,8 +165,7 @@
     onMount(async () => {
         await checkCvExist();
     });
-    function temp()
-    {
+    function temp() {
         toggle2();
         checkCvExist();
     }
@@ -235,20 +259,199 @@
         <Modal isOpen={open2}>
             <ModalFooter>
                 <div class="delete-symbol-container">
-                    <i class="bi bi-check-circle deleted-symbol"></i>
+                    <i class="bi bi-check-circle deleted-symbol" />
                 </div>
                 <div class="delete-symbol-container">
-                    <p class="delete-txt">
-                        Your CV is Deleted...
-                    </p>
+                    <p class="delete-txt">Your CV is Deleted...</p>
                 </div>
-                <Button color="primary" on:click={toggle2} on:click={checkCvExist} style="width: 100px;">OK</Button>
+                <Button
+                    color="primary"
+                    on:click={toggle2}
+                    on:click={checkCvExist}
+                    style="width: 100px;">OK</Button
+                >
             </ModalFooter>
         </Modal>
         <!-- Edit Modal -->
-        <Modal isOpen={open3} fullscreen>
-            <ModalFooter >
-                <!-- <p style="white-space: nowrap;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est quo cum vel rerum nihil adipisci voluptas. Ab in ipsam maiores atque? Possimus inventore est facilis nisi fugiat quidem in amet.</p> -->
+
+        <Modal isOpen={open3} size="lg">
+           
+                <div class="personal-page my-content">
+                    <ModalHeader>
+                        <div class="page-header">
+                            <h1>Personal-page</h1>
+                        </div>
+                    </ModalHeader>
+                    <ModalBody>
+                    <div class="form-row form-content" style="margin-top: 5%;">
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter First Name">
+                                <Input
+                                    placeholder="Enter First Name"
+                                    style={fname_border}
+                                    bind:value={fname}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter Last Name">
+                                <Input
+                                    placeholder="Enter Last Name"
+                                    style={lname_border}
+                                    bind:value={lname}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div class="form-row form-content">
+                        <div class="form-group col-md-4">
+                            <FormGroup floating label="Select Gender">
+                                <Input
+                                    type="select"
+                                    name="select"
+                                    id="exampleSelect"
+                                    style={gender_border}
+                                    bind:value={gender}
+                                >
+                                    <option style="cursor:pointer;">Male</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Female</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Other</option
+                                    >
+                                </Input>
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <FormGroup floating label="Select Date of Birth">
+                                <Input
+                                    style={dob_border}
+                                    type="date"
+                                    name="date"
+                                    id="exampleDate"
+                                    placeholder="date placeholder"
+                                    bind:value={dob}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <FormGroup floating label="Enter Profession">
+                                <Input
+                                    placeholder="Enter Profession"
+                                    style={profession_border}
+                                    bind:value={profession}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div class="form-row form-content">
+                        <div class="form-group col-md-4">
+                            <FormGroup floating label="Enter Address">
+                                <Input
+                                    placeholder="Enter Address"
+                                    style={address_border}
+                                    bind:value={address}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <FormGroup floating label="Enter City">
+                                <Input
+                                    placeholder="Enter City"
+                                    style={personal_city_border}
+                                    bind:value={personal_city}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <FormGroup floating label="Enter State">
+                                <Input
+                                    placeholder="Enter State"
+                                    style={personal_state_border}
+                                    bind:value={personal_state}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div class="form-row form-content">
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter Phone Number">
+                                <Input
+                                    placeholder="Enter Phone Number"
+                                    style={phoneno_border}
+                                    bind:value={phoneno}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter Email">
+                                <Input
+                                    placeholder="Enter Email"
+                                    style={email_border}
+                                    bind:value={email}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter CV Title">
+                                <Input
+                                    placeholder="Enter CV Title"
+                                    style={cv_title_border}
+                                    bind:value={cv_title}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <!-- <div class="form-row form-content image-form">
+                        <div class="image-container" style="margin-bottom: 2%;">
+                            <div id="app">
+                                <h3 style="margin-bottom: 7%;">
+                                    Upload Image For CV
+                                </h3>
+                                {#if avatar}
+                                    <img class="avatar" src={avatar} alt="d" />
+                                {:else}
+                                    <img
+                                        class="avatar"
+                                        src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
+                                        alt=""
+                                    />
+                                {/if}
+
+                                <label
+                                    class="button primary block uploadbtn"
+                                    for="single"
+                                    ><i class="bi bi-upload" />
+                                    {uploading ? "Uploading ..." : "Upload"}
+                                </label>
+                            </div>
+                            <input
+                                style="display:none"
+                                type="file"
+                                id="single"
+                                accept="image/*"
+                                bind:files
+                                bind:this={fileinput}
+                                on:change={(e) => onFileSelected(e)}
+                                disabled={uploading}
+                            />
+                        </div>
+                    </div>
+                    <div class="btncontainer">
+                        <p class="next pagebtn" on:click={showEducation}>
+                            Next &raquo;
+                        </p>
+                    </div> -->
+                <!-- </div> -->
+            </ModalBody>
+            <ModalFooter>
                 <Button color="primary" on:click={toggle3}>OK</Button>
             </ModalFooter>
         </Modal>
