@@ -2,87 +2,203 @@
     import { Router, Link, Route } from "svelte-routing";
     import { onMount } from "svelte";
     import axios from "axios";
-    import { Button, Tooltip } from 'sveltestrap';
+    import { Tooltip } from "sveltestrap";
+    import {
+        Button,
+        Modal,
+        ModalBody,
+        ModalFooter,
+        ModalHeader,
+    } from "sveltestrap";
 
     let totalCV = [];
     let checking = false;
+
+    let open1 = false;
+    let open2 = false;
+    let open3 = false;
+
+    const toggle1 = () => (open1 = !open1);
+    const toggle2 = () => (open2 = !open2);
+    const toggle3 = () => (open3 = !open3);
 
     export let username;
     export let url = "";
 
     let userid = localStorage.getItem(username);
 
-    function editCV(cvid)
-    {
-        console.log(cvid);
-    }   
+    let delete_cvid = "";
+    let edit_cvid = "";
 
-    function checkCvExist()
-    {
-        
+    function setDeleteCV(cvid) {
+        delete_cvid = cvid;
+        toggle1();
+    }
+    function setEditCV(cvid) {
+        edit_cvid = cvid;
+        console.log(edit_cvid);
+        toggle3();
+    }
+    // function editCV(cvid) {
+    //     console.log(cvid);
+    // }
+    function deleteCV(cvid) {
+        const options = {
+            method: "DELETE",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/cvid/" +
+                cvid,
+        };
+        axios
+            .request(options)
+            .then(function (response) {
+                const options = {
+                    method: "DELETE",
+                    url:
+                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/cvid/" +
+                        cvid,
+                };
+                axios
+                    .request(options)
+                    .then(function (response) {
+                        const options = {
+                            method: "DELETE",
+                            url:
+                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/cvid/" +
+                                cvid,
+                        };
+                        axios
+                            .request(options)
+                            .then(function (response) {
+                                const options = {
+                                    method: "DELETE",
+                                    url:
+                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/cvid/" +
+                                        cvid,
+                                };
+                                axios
+                                    .request(options)
+                                    .then(function (response) {
+                                        const options = {
+                                            method: "DELETE",
+                                            url:
+                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/cvid/" +
+                                                cvid,
+                                        };
+                                        axios
+                                            .request(options)
+                                            .then(function (response) {
+                                                toggle2();
+                                            })
+                                            .catch(function (error) {
+                                                console.error(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        console.error(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
+    function checkCvExist() {
         const options = {
             method: "GET",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/userid/" + userid,
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/userid/" +
+                userid,
         };
 
         axios
             .request(options)
             .then(function (response) {
+                totalCV = [];
                 totalCV.push(response.data);
                 console.log(totalCV[0].length);
-                checking = true;
+                if(totalCV[0].length == 0)
+                {
+                    checking = false;
+                }
+                else
+                {
+                    checking = true;
+                }
             })
             .catch(function (error) {
                 console.error(error);
             });
     }
     onMount(async () => {
-       await checkCvExist();
+        await checkCvExist();
     });
+    function temp()
+    {
+        toggle2();
+        checkCvExist();
+    }
 </script>
 
 <main>
     {#if checking == false}
-    <div class="none-added">
-        <p>No CV Added Yet</p>
-    </div>
-    {:else }
-    <div class="tooltip">
-        <Tooltip target="myedit" placement="bottom">
-            Edit
-        </Tooltip>
-        <Tooltip target="mydownload" placement="bottom">
-            Download
-        </Tooltip>
-        <Tooltip target="myview" placement="bottom">
-            View
-        </Tooltip>
-        <Tooltip target="mydelete" placement="bottom">
-            Delete
-        </Tooltip>
-    </div>
-    <div class="cv-details">
-        {#each totalCV[0] as rec}
-            <div class="card inner-cv">
-                <div>
-                    <i class="bi bi-file-earmark-person-fill" style="font-size: 70px; color: #598496;"></i>
+        <div class="none-added">
+            <p>No CV Added Yet</p>
+        </div>
+    {:else}
+        <div class="cv-details">
+            {#each totalCV[0] as rec}
+                <div class="tooltip">
+                    <Tooltip target="myedit" placement="bottom">Edit</Tooltip>
+                    <Tooltip target="mydownload" placement="bottom">
+                        Download
+                    </Tooltip>
+                    <Tooltip target="myview" placement="bottom">View</Tooltip>
+                    <Tooltip target="mydelete" placement="bottom">
+                        Delete
+                    </Tooltip>
                 </div>
-                <div class="inner-content">
+                <div class="card inner-cv">
                     <div>
-                        <p class="cv-title">{rec.cvtitle}</p>
+                        <i
+                            class="bi bi-file-earmark-person-fill"
+                            style="font-size: 70px; color: #598496;"
+                        />
+                    </div>
+                    <div class="inner-content">
+                        <div>
+                            <p class="cv-title">{rec.cvtitle}</p>
+                        </div>
+                    </div>
+                    <div class="inner-icon">
+                        <i
+                            class="bi bi-pencil-fill editIcon"
+                            id="myedit"
+                            on:click={() => setEditCV(rec.cvid)}
+                        />
+                        <i
+                            class="bi bi-file-earmark-arrow-down-fill downloadIcon"
+                            id="mydownload"
+                        />
+                        <i class="bi bi-eye-fill showIcon" id="myview" />
+                        <i
+                            class="bi bi-trash-fill deleteIcon"
+                            id="mydelete"
+                            on:click={() => setDeleteCV(rec.cvid)}
+                        />
                     </div>
                 </div>
-                <div class="inner-icon">
-                    <i class="bi bi-pencil-fill editIcon" id="myedit" on:click={() => editCV(rec.cvid)}></i>
-                    <i class="bi bi-file-earmark-arrow-down-fill downloadIcon" id="mydownload"></i>
-                    <i class="bi bi-eye-fill showIcon" id="myview"></i>
-                    <i class="bi bi-trash-fill deleteIcon" id="mydelete"></i>
-                </div>
-            </div>
-        {/each}
-    </div>
+            {/each}
+            <!-- <Button on:click={temp}>Click</Button> -->
+        </div>
     {/if}
-    <!-- <button on:click={checkCvExist}>Click</button> -->
     <Router {url}>
         <div class="add-content">
             <Link to="/{username}/manage/addcv" style="text-decoration: none;">
@@ -91,10 +207,76 @@
             <p class="add-txt">New CV</p>
         </div>
     </Router>
+    <div class="Modals">
+        <!-- Confirm Delete -->
+        <Modal isOpen={open1}>
+            <ModalFooter>
+                <div class="delete-symbol-container">
+                    <p style="font-size: 30px; font-weight: 500;">DELETE CV</p>
+                </div>
+                <div class="delete-symbol-container">
+                    <i class="bi bi-exclamation-circle delete-symbol" />
+                </div>
+                <br />
+                <div class="delete-symbol-container">
+                    <p class="delete-txt">
+                        Are you sure you want to delete this CV ?
+                    </p>
+                </div>
+                <Button color="primary" on:click={toggle1}>Cancle</Button>
+                <Button
+                    color="danger"
+                    on:click={toggle1}
+                    on:click={() => deleteCV(delete_cvid)}>Delete</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Deleted Successfully... -->
+        <Modal isOpen={open2}>
+            <ModalFooter>
+                <div class="delete-symbol-container">
+                    <i class="bi bi-check-circle deleted-symbol"></i>
+                </div>
+                <div class="delete-symbol-container">
+                    <p class="delete-txt">
+                        Your CV is Deleted...
+                    </p>
+                </div>
+                <Button color="primary" on:click={toggle2} on:click={checkCvExist} style="width: 100px;">OK</Button>
+            </ModalFooter>
+        </Modal>
+        <!-- Edit Modal -->
+        <Modal isOpen={open3} fullscreen>
+            <ModalFooter >
+                <!-- <p style="white-space: nowrap;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est quo cum vel rerum nihil adipisci voluptas. Ab in ipsam maiores atque? Possimus inventore est facilis nisi fugiat quidem in amet.</p> -->
+                <Button color="primary" on:click={toggle3}>OK</Button>
+            </ModalFooter>
+        </Modal>
+    </div>
 </main>
 
 <style>
-    .editIcon, .downloadIcon, .showIcon, .deleteIcon {
+    .delete-txt {
+        font-size: 20px;
+    }
+    .delete-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .delete-symbol {
+        font-size: 70px;
+        color: rgb(234, 187, 100);
+    }
+    .deleted-symbol {
+        font-size: 70px;
+        color: rgb(39, 138, 63);
+    }
+    .editIcon,
+    .downloadIcon,
+    .showIcon,
+    .deleteIcon {
         cursor: pointer;
         font-size: 15px;
         color: rgb(73, 61, 128);
@@ -141,8 +323,7 @@
         padding-left: 0.5%;
         box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
     }
-    .inner-content
-    {
+    .inner-content {
         display: flex;
         justify-content: center;
         width: 100%;
@@ -159,7 +340,7 @@
         font-size: 27px;
         margin-top: 0%;
         font-weight: bolder;
-        color:rgb(73, 61, 128);
+        color: rgb(73, 61, 128);
         text-shadow: 0px 5px 5px rgba(183, 82, 82, 0.25);
     }
     .none-added {
@@ -272,7 +453,7 @@
             margin-top: 30%;
         }
         .inner-icon {
-          margin-top: -12%;
+            margin-top: -12%;
         }
     }
     @media screen and (max-width: 740px) {
@@ -285,8 +466,8 @@
             margin-left: 32%;
         }
         .inner-icon {
-          margin-top: -13%;
-          margin-left: 15%;
+            margin-top: -13%;
+            margin-left: 15%;
         }
     }
     @media screen and (max-width: 640px) {
@@ -299,7 +480,7 @@
             margin-left: 30%;
         }
         .inner-icon {
-          margin-top: -18%;
+            margin-top: -18%;
         }
     }
     @media screen and (max-width: 580px) {
@@ -318,15 +499,15 @@
             margin-left: 26%;
         }
         .cv-details {
-           width: 100%;
-           padding-left: 5%;
+            width: 100%;
+            padding-left: 5%;
         }
         .inner-cv {
             width: 95%;
         }
         .inner-icon {
-          margin-top: -13%;
-          margin-left: 10%;
+            margin-top: -13%;
+            margin-left: 10%;
         }
     }
     @media screen and (max-width: 450px) {
@@ -349,8 +530,8 @@
             margin-left: 18%;
         }
         .inner-icon {
-          margin-top: -16%;
-          margin-left: 15%;
+            margin-top: -16%;
+            margin-left: 15%;
         }
         .cv-details {
             margin-top: -15%;
