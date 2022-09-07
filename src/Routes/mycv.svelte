@@ -125,7 +125,7 @@
     const toggle7 = () => (open7 = !open7);
     const toggle8 = () => (open8 = !open8);
     const toggle9 = () => (open9 = !open9);
-    
+
     let totalCV = [];
     let checking = false;
 
@@ -404,21 +404,14 @@
         return true;
     }
 
-    function EditCV()
-    {
+    function EditCV() {
         progress = true;
-        if(personalValidate())
-        {
+        if (personalValidate()) {
             console.log("Kushal");
-            if(educationValidate())
-            {
-                if(experienceValidate())
-                {
-                    if(skillValidate())
-                    {
-                        if(interestValidate())
-                        {
-
+            if (educationValidate()) {
+                if (experienceValidate()) {
+                    if (skillValidate()) {
+                        if (interestValidate()) {
                         }
                     }
                 }
@@ -441,7 +434,116 @@
     function setEditCV(cvid) {
         edit_cvid = cvid;
         console.log(edit_cvid);
+        getData(edit_cvid);
         toggle3();
+    }
+    function getData(cvid) {
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/cvid/" +
+                cvid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                console.log(response.data);
+                fname = response.data[0].fname;
+                lname = response.data[0].lname;
+                gender = response.data[0].gender;
+                dob = response.data[0].dob;
+                profession = response.data[0].profession;
+                address = response.data[0].address;
+                personal_city = response.data[0].city;
+                personal_state = response.data[0].state;
+                phoneno = response.data[0].phone;
+                email = response.data[0].email;
+                personal_pic_url = response.data[0].pic;
+                cv_title = response.data[0].cvtitle;
+
+                const options = {
+                    method: "GET",
+                    url:
+                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/cvid/" +
+                        cvid,
+                };
+
+                axios
+                    .request(options)
+                    .then(function (response) {
+                        schoolname = response.data[0].schoolname;
+                        education_city = response.data[0].city;
+                        education_state = response.data[0].state;
+                        degree = response.data[0].degree;
+                        field = response.data[0].field;
+
+                        const options = {
+                            method: "GET",
+                            url:
+                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/cvid/" +
+                                cvid,
+                        };
+
+                        axios
+                            .request(options)
+                            .then(function (response) {
+                                job_title = response.data[0].job_title;
+                                company_name = response.data[0].company_name;
+                                experience_city = response.data[0].city;
+                                experience_state = response.data[0].state;
+                                experience_year = response.data[0].experience;
+
+                                const options = {
+                                    method: "GET",
+                                    url:
+                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/cvid/" +
+                                        cvid,
+                                };
+
+                                axios
+                                    .request(options)
+                                    .then(function (response) {
+                                        skill1 = response.data[0].skill;
+                                        skill2 = response.data[0].skill2;
+                                        skill3 = response.data[0].skill3;
+                                        level1 = response.data[0].level;
+                                        level2 = response.data[0].level2;
+                                        level3 = response.data[0].level3;
+
+                                        const options = {
+                                            method: "GET",
+                                            url:
+                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/cvid/" +
+                                                cvid,
+                                        };
+
+                                        axios
+                                            .request(options)
+                                            .then(function (response) {
+                                                interest1 = response.data[0].interest;
+                                                interest2 = response.data[0].level3;
+                                                interest3 = response.data[0].level3;
+                                            })
+                                            .catch(function (error) {
+                                                console.error(error);
+                                            });
+                                    })
+                                    .catch(function (error) {
+                                        console.error(error);
+                                    });
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
     const dispatch = createEventDispatcher();
 
@@ -486,9 +588,6 @@
             uploading = false;
         }
     }
-    // function editCV(cvid) {
-    //     console.log(cvid);
-    // }
     function deleteCV(cvid) {
         const options = {
             method: "DELETE",
