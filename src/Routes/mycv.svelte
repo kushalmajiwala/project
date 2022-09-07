@@ -25,60 +25,6 @@
         Authorization: `Bearer ${SERVICE_KEY}`,
     });
 
-    let totalCV = [];
-    let checking = false;
-
-    let progress = false;
-    let uploading = false;
-    let avatar;
-    let imageurl = "";
-    let files;
-    let fileinput;
-    let image_url = "";
-
-    let personal = true;
-    let education = false;
-    let skill = false;
-    let interest = false;
-    let experience = false;
-
-    function showPersonal() {
-        //Showing the page of the content
-        personal = true;
-        education = false;
-        skill = false;
-        interest = false;
-        experience = false;
-    }
-    function showEducation() {
-        personal = false;
-        education = true;
-        skill = false;
-        interest = false;
-        experience = false;
-    }
-    function showExperience() {
-        personal = false;
-        education = false;
-        skill = false;
-        interest = false;
-        experience = true;
-    }
-    function showSkill() {
-        personal = false;
-        education = false;
-        skill = true;
-        interest = false;
-        experience = false;
-    }
-    function showInterest() {
-        personal = false;
-        education = false;
-        skill = false;
-        interest = true;
-        experience = false;
-    }
-
     //Personal Details Variables
     let fname = "";
     let lname = "";
@@ -163,11 +109,322 @@
     let open1 = false;
     let open2 = false;
     let open3 = false;
+    let open4 = false;
+    let open5 = false;
+    let open6 = false;
+    let open7 = false;
+    let open8 = false;
+    let open9 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
+    const toggle4 = () => (open4 = !open4);
+    const toggle5 = () => (open5 = !open5);
+    const toggle6 = () => (open6 = !open6);
+    const toggle7 = () => (open7 = !open7);
+    const toggle8 = () => (open8 = !open8);
+    const toggle9 = () => (open9 = !open9);
+    
+    let totalCV = [];
+    let checking = false;
 
+    let progress = false;
+    let uploading = false;
+    let avatar;
+    let showImage = true;
+    let imageurl = "";
+    let files;
+    let fileinput;
+    let image_url = "";
+
+    let personal = true;
+    let education = false;
+    let skill = false;
+    let interest = false;
+    let experience = false;
+
+    function resetImage() {
+        showImage = false;
+        console.log(showImage);
+    }
+
+    function progressStop() {
+        progress = false;
+    }
+
+    function showPersonal() {
+        //Showing the page of the content
+        personal = true;
+        education = false;
+        skill = false;
+        interest = false;
+        experience = false;
+    }
+    function showEducation() {
+        personal = false;
+        education = true;
+        skill = false;
+        interest = false;
+        experience = false;
+    }
+    function showExperience() {
+        personal = false;
+        education = false;
+        skill = false;
+        interest = false;
+        experience = true;
+    }
+    function showSkill() {
+        personal = false;
+        education = false;
+        skill = true;
+        interest = false;
+        experience = false;
+    }
+    function showInterest() {
+        personal = false;
+        education = false;
+        skill = false;
+        interest = true;
+        experience = false;
+    }
+
+    //Validation
+    function personalValidate() {
+        if (
+            fname !== "" &&
+            lname !== "" &&
+            gender !== "" &&
+            dob !== "" &&
+            profession !== "" &&
+            address !== "" &&
+            personal_city !== "" &&
+            personal_state !== "" &&
+            phoneno !== "" &&
+            email !== "" &&
+            cv_title !== ""
+        ) {
+            fname_border = "border: 1px solid #4c89ca;";
+            lname_border = "border: 1px solid #4c89ca;";
+            gender_border = "border: 1px solid #4c89ca;";
+            dob_border = "border: 1px solid #4c89ca;";
+            profession_border = "border: 1px solid #4c89ca;";
+            address_border = "border: 1px solid #4c89ca;";
+            personal_city_border = "border: 1px solid #4c89ca;";
+            personal_state_border = "border: 1px solid #4c89ca;";
+            phoneno_border = "border: 1px solid #4c89ca;";
+            email_border = "border: 1px solid #4c89ca;";
+            cv_title_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            fname == "" ||
+            lname == "" ||
+            gender == "" ||
+            dob == "" ||
+            profession == "" ||
+            address == "" ||
+            personal_city == "" ||
+            personal_state == "" ||
+            phoneno == "" ||
+            email == "" ||
+            cv_title == ""
+        ) {
+            if (fname == "") fname_border = "border: 1px solid red;";
+            else fname_border = "border: 1px solid #4c89ca;";
+            if (lname == "") lname_border = "border: 1px solid red;";
+            else lname_border = "border: 1px solid #4c89ca;";
+            if (gender == "") gender_border = "border: 1px solid red;";
+            else gender_border = "border: 1px solid #4c89ca;";
+            if (dob == "") dob_border = "border: 1px solid red;";
+            else dob_border = "border: 1px solid #4c89ca;";
+            if (profession == "") profession_border = "border: 1px solid red;";
+            else profession_border = "border: 1px solid #4c89ca;";
+            if (address == "") address_border = "border: 1px solid red;";
+            else address_border = "border: 1px solid #4c89ca;";
+            if (personal_city == "")
+                personal_city_border = "border: 1px solid red;";
+            else personal_city = "border: 1px solid #4c89ca;";
+            if (personal_state == "")
+                personal_state_border = "border: 1px solid red;";
+            else personal_state = "border: 1px solid #4c89ca;";
+            if (phoneno == "") phoneno_border = "border: 1px solid red;";
+            else phoneno_border = "border: 1px solid #4c89ca;";
+            if (email == "") email_border = "border: 1px solid red;";
+            else email_border = "border: 1px solid #4c89ca;";
+            if (cv_title == "") cv_title_border = "border: 1px solid red;";
+            else cv_title = "border: 1px solid #4c89ca;";
+            toggle4();
+            showPersonal();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function educationValidate() {
+        if (
+            schoolname !== "" &&
+            education_city !== "" &&
+            education_state !== "" &&
+            degree !== "" &&
+            field !== ""
+        ) {
+            schoolname_border = "border: 1px solid #4c89ca;";
+            education_state_border = "border: 1px solid #4c89ca;";
+            education_city_border = "border: 1px solid #4c89ca;";
+            degree_border = "border: 1px solid #4c89ca;";
+            field_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            schoolname == "" ||
+            education_city == "" ||
+            education_state == "" ||
+            degree == "" ||
+            field == ""
+        ) {
+            if (schoolname == "") schoolname_border = "border: 1px solid red";
+            else schoolname_border = "border: 1px solid #4c89ca;";
+            if (education_city == "")
+                education_city_border = "border: 1px solid red";
+            else education_city_border = "border: 1px solid #4c89ca;";
+            if (education_state == "")
+                education_state_border = "border: 1px solid red";
+            else education_state_border = "border: 1px solid #4c89ca;";
+            if (degree == "") degree_border = "border: 1px solid red";
+            else degree_border = "border: 1px solid #4c89ca;";
+            if (field == "") field_border = "border: 1px solid red";
+            else field_border = "border: 1px solid #4c89ca;";
+            toggle5();
+            showEducation();
+            return false;
+        }
+        return true;
+    }
+    function experienceValidate() {
+        if (
+            job_title !== "" &&
+            company_name !== "" &&
+            experience_city !== "" &&
+            experience_state !== "" &&
+            experience_year !== ""
+        ) {
+            job_title_border = "border: 1px solid #4c89ca;";
+            company_name_border = "border: 1px solid #4c89ca;";
+            experience_city_border = "border: 1px solid #4c89ca;";
+            experience_state_border = "border: 1px solid #4c89ca;";
+            experience_year_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            job_title == "" ||
+            company_name == "" ||
+            experience_city == "" ||
+            experience_state == "" ||
+            experience_year == ""
+        ) {
+            if (job_title == "") job_title_border = "border: 1px solid red";
+            else job_title_border = "border: 1px solid #4c89ca;";
+            if (experience_city == "")
+                experience_city_border = "border: 1px solid red";
+            else experience_city_border = "border: 1px solid #4c89ca;";
+            if (experience_state == "")
+                experience_state_border = "border: 1px solid red";
+            else experience_state_border = "border: 1px solid #4c89ca;";
+            if (company_name == "")
+                company_name_border = "border: 1px solid red";
+            else company_name_border = "border: 1px solid #4c89ca;";
+            if (experience_year == "")
+                experience_year_border = "border: 1px solid red";
+            else experience_year_border = "border: 1px solid #4c89ca;";
+            toggle6();
+            showExperience();
+            return false;
+        }
+        return true;
+    }
+    function skillValidate() {
+        if (skill1 !== "" || skill2 !== "" || skill3 !== "") {
+            skill1_border = "border: 1px solid #4c89ca;";
+            skill2_border = "border: 1px solid #4c89ca;";
+            skill3_border = "border: 1px solid #4c89ca;";
+            level1_border = "border: 1px solid #4c89ca;";
+            level2_border = "border: 1px solid #4c89ca;";
+            level3_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            skill1 == "" &&
+            skill2 == "" &&
+            skill3 == "" &&
+            level1 == "" &&
+            level2 == "" &&
+            level3 == ""
+        ) {
+            skill1_border = "border: 1px solid red";
+            skill2_border = "border: 1px solid red";
+            skill3_border = "border: 1px solid red";
+            level1_border = "border: 1px solid red";
+            level2_border = "border: 1px solid red";
+            level3_border = "border: 1px solid red";
+            toggle7();
+            showSkill();
+            return false;
+        } else if (
+            (skill1 !== "" && level1 == "") ||
+            (skill2 !== "" && level2 == "") ||
+            (skill3 !== "" && level3 == "")
+        ) {
+            if (skill1 !== "" && level1 == "")
+                level1_border = "border: 1px solid red";
+            else level1_border = "border: 1px solid #4c89ca;";
+            if (skill2 !== "" && level2 == "")
+                level2_border = "border: 1px solid red";
+            else level2_border = "border: 1px solid #4c89ca;";
+            if (skill3 !== "" && level3 == "")
+                level3_border = "border: 1px solid red";
+            else level3_border = "border: 1px solid #4c89ca;";
+            toggle9();
+            showSkill();
+            return false;
+        }
+        return true;
+    }
+    function interestValidate() {
+        if (interest1 == "" && interest2 == "" && interest3 == "") {
+            interest1_border = "border: 1px solid red";
+            interest2_border = "border: 1px solid red";
+            interest3_border = "border: 1px solid red";
+            toggle8();
+            showInterest();
+            return false;
+        }
+        if (interest1 !== "" || interest2 !== "" || interest3 !== "") {
+            interest1_border = "border: 1px solid #4c89ca;";
+            interest2_border = "border: 1px solid #4c89ca;";
+            interest3_border = "border: 1px solid #4c89ca;";
+        }
+        return true;
+    }
+
+    function EditCV()
+    {
+        progress = true;
+        if(personalValidate())
+        {
+            console.log("Kushal");
+            if(educationValidate())
+            {
+                if(experienceValidate())
+                {
+                    if(skillValidate())
+                    {
+                        if(interestValidate())
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
     export let username;
     export let url = "";
     export let path;
@@ -194,6 +451,7 @@
         reader.readAsDataURL(image);
         reader.onload = (e) => {
             avatar = e.target.result;
+            showImage = true;
         };
         try {
             uploading = true;
@@ -586,7 +844,7 @@
                                     <h3 style="margin-bottom: 7%;">
                                         Upload Image For CV
                                     </h3>
-                                    {#if avatar}
+                                    {#if avatar && showImage}
                                         <img
                                             class="avatar"
                                             src={avatar}
@@ -625,8 +883,11 @@
                             <Button color="primary" on:click={showEducation}
                                 >Next &raquo;</Button
                             >
-                            <Button color="danger" on:click={toggle3}
-                                >CANCEL</Button
+                            <Button
+                                color="danger"
+                                on:click={toggle3}
+                                on:click={resetImage}
+                                on:click={progressStop}>CANCEL</Button
                             >
                         </div>
                     </ModalFooter>
@@ -718,7 +979,12 @@
                         <Button color="primary" on:click={showExperience}
                             >Next &raquo;</Button
                         >
-                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        <Button
+                            color="danger"
+                            on:click={toggle3}
+                            on:click={showPersonal}
+                            on:click={resetImage}
+                            on:click={progressStop}>CANCEL</Button
                         >
                     </div>
                 </ModalFooter>
@@ -809,7 +1075,12 @@
                         <Button color="primary" on:click={showSkill}
                             >Next &raquo;</Button
                         >
-                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        <Button
+                            color="danger"
+                            on:click={toggle3}
+                            on:click={showPersonal}
+                            on:click={resetImage}
+                            on:click={progressStop}>CANCEL</Button
                         >
                     </div>
                 </ModalFooter>
@@ -929,7 +1200,12 @@
                         <Button color="primary" on:click={showInterest}
                             >Next &raquo;</Button
                         >
-                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        <Button
+                            color="danger"
+                            on:click={toggle3}
+                            on:click={showPersonal}
+                            on:click={resetImage}
+                            on:click={progressStop}>CANCEL</Button
                         >
                     </div>
                 </ModalFooter>
@@ -992,6 +1268,7 @@
                         <Button
                             color="success"
                             style="width: 120px; height: 38px; border-radius: 15px; font-size: 17px; display: flex; justify-content:center;"
+                            on:click={EditCV}
                         >
                             {#if progress}
                                 <p><Spinner size="sm" /> Saving</p>
@@ -1001,11 +1278,94 @@
                                 </p>
                             {/if}
                         </Button>
-                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        <Button
+                            color="danger"
+                            on:click={toggle3}
+                            on:click={showPersonal}
+                            on:click={resetImage}
+                            on:click={progressStop}>CANCEL</Button
                         >
                     </div>
                 </ModalFooter>
             {/if}
+        </Modal>
+        <!-- Empty Personal Page -->
+        <Modal header="Message" isOpen={open4}>
+            <ModalBody
+                >Fields Cannot be empty on Personal Details Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle4}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Empty Education Page -->
+        <Modal header="Message" isOpen={open5}>
+            <ModalBody
+                >Fields Cannot be empty on Education Details Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle5}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Empty Experience Page -->
+        <Modal header="Message" isOpen={open6}>
+            <ModalBody
+                >Fields Cannot be empty on Experience Details Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle6}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open7}>
+            <ModalBody>Please select Atleast one skill...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle7}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- empty-Level in Skill -->
+        <Modal header="Message" isOpen={open9}>
+            <ModalBody>Please Select the Level of your skill...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle9}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open8}>
+            <ModalBody>Please select Atleast one Interest...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle8}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
         </Modal>
     </div>
 </main>
