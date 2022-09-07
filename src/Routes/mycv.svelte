@@ -3,6 +3,8 @@
     import { onMount } from "svelte";
     import axios from "axios";
     import { Tooltip } from "sveltestrap";
+    import { SupabaseStorageClient } from "@supabase/storage-js";
+    import { createEventDispatcher } from "svelte";
     import {
         Button,
         Modal,
@@ -11,10 +13,71 @@
         ModalHeader,
         FormGroup,
         Input,
+        Spinner,
     } from "sveltestrap";
+
+    const STORAGE_URL = "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1";
+    const SERVICE_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aXlob21xd2t5c3Fzd2xraXB4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY1OTYxMjE0MywiZXhwIjoxOTc1MTg4MTQzfQ.AeJz_85Sbinf0ExIyk7V8cgQ8N_eQqOcyyRwf4BkDVU";
+
+    const storageClient = new SupabaseStorageClient(STORAGE_URL, {
+        apikey: SERVICE_KEY,
+        Authorization: `Bearer ${SERVICE_KEY}`,
+    });
 
     let totalCV = [];
     let checking = false;
+
+    let progress = false;
+    let uploading = false;
+    let avatar;
+    let imageurl = "";
+    let files;
+    let fileinput;
+    let image_url = "";
+
+    let personal = true;
+    let education = false;
+    let skill = false;
+    let interest = false;
+    let experience = false;
+
+    function showPersonal() {
+        //Showing the page of the content
+        personal = true;
+        education = false;
+        skill = false;
+        interest = false;
+        experience = false;
+    }
+    function showEducation() {
+        personal = false;
+        education = true;
+        skill = false;
+        interest = false;
+        experience = false;
+    }
+    function showExperience() {
+        personal = false;
+        education = false;
+        skill = false;
+        interest = false;
+        experience = true;
+    }
+    function showSkill() {
+        personal = false;
+        education = false;
+        skill = true;
+        interest = false;
+        experience = false;
+    }
+    function showInterest() {
+        personal = false;
+        education = false;
+        skill = false;
+        interest = true;
+        experience = false;
+    }
 
     //Personal Details Variables
     let fname = "";
@@ -30,6 +93,34 @@
     let personal_pic_url = "";
     let cv_title = "";
 
+    //Education Details Variables
+    let schoolname = "";
+    let education_city = "";
+    let education_state = "";
+    let degree = "";
+    let field = "";
+
+    //Experience Page Variables
+    let job_title = "";
+    let company_name = "";
+    let experience_city = "";
+    let experience_state = "";
+    let experience_year = "";
+
+    //Skill Page Variables
+    let skill1 = "";
+    let skill2 = "";
+    let skill3 = "";
+    let level1 = "";
+    let level2 = "";
+    let level3 = "";
+
+    //Interest Page variables
+    let interest1 = "";
+    let interest2 = "";
+    let interest3 = "";
+
+    //Personal Page Borders
     let fname_border = "border: 1px solid #4c89ca;";
     let lname_border = "border: 1px solid #4c89ca;";
     let gender_border = "border: 1px solid #4c89ca;";
@@ -42,6 +133,33 @@
     let email_border = "border: 1px solid #4c89ca;";
     let cv_title_border = "border: 1px solid #4c89ca;";
 
+    //Education Page Borders
+    let schoolname_border = "border: 1px solid #4c89ca;";
+    let education_state_border = "border: 1px solid #4c89ca;";
+    let education_city_border = "border: 1px solid #4c89ca;";
+    let degree_border = "border: 1px solid #4c89ca;";
+    let field_border = "border: 1px solid #4c89ca;";
+
+    //Experience Page Borders
+    let job_title_border = "border: 1px solid #4c89ca;";
+    let company_name_border = "border: 1px solid #4c89ca;";
+    let experience_state_border = "border: 1px solid #4c89ca;";
+    let experience_city_border = "border: 1px solid #4c89ca;";
+    let experience_year_border = "border: 1px solid #4c89ca;";
+
+    //Skill Page Borders
+    let skill1_border = "border: 1px solid #4c89ca;";
+    let skill2_border = "border: 1px solid #4c89ca;";
+    let skill3_border = "border: 1px solid #4c89ca;";
+    let level1_border = "border: 1px solid #4c89ca;";
+    let level2_border = "border: 1px solid #4c89ca;";
+    let level3_border = "border: 1px solid #4c89ca;";
+
+    //Interest Page Borders
+    let interest1_border = "border: 1px solid #4c89ca;";
+    let interest2_border = "border: 1px solid #4c89ca;";
+    let interest3_border = "border: 1px solid #4c89ca;";
+
     let open1 = false;
     let open2 = false;
     let open3 = false;
@@ -52,6 +170,7 @@
 
     export let username;
     export let url = "";
+    export let path;
 
     let userid = localStorage.getItem(username);
 
@@ -66,6 +185,48 @@
         edit_cvid = cvid;
         console.log(edit_cvid);
         toggle3();
+    }
+    const dispatch = createEventDispatcher();
+
+    async function onFileSelected(e) {
+        let image = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = (e) => {
+            avatar = e.target.result;
+        };
+        try {
+            uploading = true;
+
+            if (!files || files.length === 0) {
+                throw new Error("You must select an image to upload.");
+            }
+
+            const file = files[0];
+            const fileExt = file.name.split(".").pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            const { data, error } = await storageClient
+                .from("images")
+                .upload(filePath, file);
+            if (data) {
+                image_url =
+                    "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/" +
+                    data.Key;
+                personal_pic_url = image_url;
+                console.log(image_url);
+            }
+
+            if (error) throw error;
+
+            path = filePath;
+            dispatch("upload");
+        } catch (error) {
+            alert(error.message);
+        } finally {
+            uploading = false;
+        }
     }
     // function editCV(cvid) {
     //     console.log(cvid);
@@ -275,122 +436,219 @@
         <!-- Edit Modal -->
 
         <Modal isOpen={open3} size="lg">
-           
+            {#if personal}
                 <div class="personal-page my-content">
-                    <ModalHeader>
+                    <ModalHeader style="padding-left: 35%;">
                         <div class="page-header">
                             <h1>Personal-page</h1>
                         </div>
                     </ModalHeader>
                     <ModalBody>
-                    <div class="form-row form-content" style="margin-top: 5%;">
-                        <div class="form-group col-md-6">
-                            <FormGroup floating label="Enter First Name">
-                                <Input
-                                    placeholder="Enter First Name"
-                                    style={fname_border}
-                                    bind:value={fname}
-                                />
-                            </FormGroup>
+                        <div
+                            class="form-row form-content"
+                            style="margin-top: 5%;"
+                        >
+                            <div class="form-group col-md-6">
+                                <FormGroup floating label="Enter First Name">
+                                    <Input
+                                        placeholder="Enter First Name"
+                                        style={fname_border}
+                                        bind:value={fname}
+                                    />
+                                </FormGroup>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <FormGroup floating label="Enter Last Name">
+                                    <Input
+                                        placeholder="Enter Last Name"
+                                        style={lname_border}
+                                        bind:value={lname}
+                                    />
+                                </FormGroup>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <FormGroup floating label="Enter Last Name">
-                                <Input
-                                    placeholder="Enter Last Name"
-                                    style={lname_border}
-                                    bind:value={lname}
-                                />
-                            </FormGroup>
-                        </div>
-                    </div>
-                    <div class="form-row form-content">
-                        <div class="form-group col-md-4">
-                            <FormGroup floating label="Select Gender">
-                                <Input
-                                    type="select"
-                                    name="select"
-                                    id="exampleSelect"
-                                    style={gender_border}
-                                    bind:value={gender}
+                        <div class="form-row form-content">
+                            <div class="form-group col-md-4">
+                                <FormGroup floating label="Select Gender">
+                                    <Input
+                                        type="select"
+                                        name="select"
+                                        id="exampleSelect"
+                                        style={gender_border}
+                                        bind:value={gender}
+                                    >
+                                        <option style="cursor:pointer;"
+                                            >Male</option
+                                        >
+                                        <option style="cursor:pointer;"
+                                            >Female</option
+                                        >
+                                        <option style="cursor:pointer;"
+                                            >Other</option
+                                        >
+                                    </Input>
+                                </FormGroup>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <FormGroup
+                                    floating
+                                    label="Select Date of Birth"
                                 >
-                                    <option style="cursor:pointer;">Male</option
-                                    >
-                                    <option style="cursor:pointer;"
-                                        >Female</option
-                                    >
-                                    <option style="cursor:pointer;"
-                                        >Other</option
-                                    >
-                                </Input>
-                            </FormGroup>
+                                    <Input
+                                        style={dob_border}
+                                        type="date"
+                                        name="date"
+                                        id="exampleDate"
+                                        placeholder="date placeholder"
+                                        bind:value={dob}
+                                    />
+                                </FormGroup>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <FormGroup floating label="Enter Profession">
+                                    <Input
+                                        placeholder="Enter Profession"
+                                        style={profession_border}
+                                        bind:value={profession}
+                                    />
+                                </FormGroup>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <FormGroup floating label="Select Date of Birth">
-                                <Input
-                                    style={dob_border}
-                                    type="date"
-                                    name="date"
-                                    id="exampleDate"
-                                    placeholder="date placeholder"
-                                    bind:value={dob}
+                        <div class="form-row form-content">
+                            <div class="form-group col-md-4">
+                                <FormGroup floating label="Enter Address">
+                                    <Input
+                                        placeholder="Enter Address"
+                                        style={address_border}
+                                        bind:value={address}
+                                    />
+                                </FormGroup>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <FormGroup floating label="Enter City">
+                                    <Input
+                                        placeholder="Enter City"
+                                        style={personal_city_border}
+                                        bind:value={personal_city}
+                                    />
+                                </FormGroup>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <FormGroup floating label="Enter State">
+                                    <Input
+                                        placeholder="Enter State"
+                                        style={personal_state_border}
+                                        bind:value={personal_state}
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+                        <div class="form-row form-content">
+                            <div class="form-group col-md-6">
+                                <FormGroup floating label="Enter Phone Number">
+                                    <Input
+                                        placeholder="Enter Phone Number"
+                                        style={phoneno_border}
+                                        bind:value={phoneno}
+                                    />
+                                </FormGroup>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <FormGroup floating label="Enter Email">
+                                    <Input
+                                        placeholder="Enter Email"
+                                        style={email_border}
+                                        bind:value={email}
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+                        <div
+                            class="form-row form-content"
+                            style="width: 100%; padding-left: 7%;"
+                        >
+                            <div class="form-group" style="width: 80%">
+                                <FormGroup floating label="Enter CV Title">
+                                    <Input
+                                        placeholder="Enter CV Title"
+                                        style={cv_title_border}
+                                        bind:value={cv_title}
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+                        <div class="form-row form-content image-form">
+                            <div
+                                class="image-container"
+                                style="margin-bottom: 2%;"
+                            >
+                                <div id="app">
+                                    <h3 style="margin-bottom: 7%;">
+                                        Upload Image For CV
+                                    </h3>
+                                    {#if avatar}
+                                        <img
+                                            class="avatar"
+                                            src={avatar}
+                                            alt="d"
+                                        />
+                                    {:else}
+                                        <img
+                                            class="avatar"
+                                            src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
+                                            alt=""
+                                        />
+                                    {/if}
+
+                                    <label
+                                        class="button primary block uploadbtn"
+                                        for="single"
+                                        ><i class="bi bi-upload" />
+                                        {uploading ? "Uploading ..." : "Upload"}
+                                    </label>
+                                </div>
+                                <input
+                                    style="display:none"
+                                    type="file"
+                                    id="single"
+                                    accept="image/*"
+                                    bind:files
+                                    bind:this={fileinput}
+                                    on:change={(e) => onFileSelected(e)}
+                                    disabled={uploading}
                                 />
-                            </FormGroup>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <FormGroup floating label="Enter Profession">
-                                <Input
-                                    placeholder="Enter Profession"
-                                    style={profession_border}
-                                    bind:value={profession}
-                                />
-                            </FormGroup>
+                    </ModalBody>
+                    <ModalFooter>
+                        <div class="btncontainer">
+                            <Button color="primary" on:click={showEducation}
+                                >Next &raquo;</Button
+                            >
+                            <Button color="danger" on:click={toggle3}
+                                >CANCEL</Button
+                            >
                         </div>
+                    </ModalFooter>
+                </div>
+            {/if}
+            {#if education}
+                <ModalHeader style="padding-left: 35%;">
+                    <div class="page-header education-page">
+                        <h1>Education-page</h1>
                     </div>
-                    <div class="form-row form-content">
-                        <div class="form-group col-md-4">
-                            <FormGroup floating label="Enter Address">
+                </ModalHeader>
+                <ModalBody>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-top: 5%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter School Name">
                                 <Input
-                                    placeholder="Enter Address"
-                                    style={address_border}
-                                    bind:value={address}
-                                />
-                            </FormGroup>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <FormGroup floating label="Enter City">
-                                <Input
-                                    placeholder="Enter City"
-                                    style={personal_city_border}
-                                    bind:value={personal_city}
-                                />
-                            </FormGroup>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <FormGroup floating label="Enter State">
-                                <Input
-                                    placeholder="Enter State"
-                                    style={personal_state_border}
-                                    bind:value={personal_state}
-                                />
-                            </FormGroup>
-                        </div>
-                    </div>
-                    <div class="form-row form-content">
-                        <div class="form-group col-md-6">
-                            <FormGroup floating label="Enter Phone Number">
-                                <Input
-                                    placeholder="Enter Phone Number"
-                                    style={phoneno_border}
-                                    bind:value={phoneno}
-                                />
-                            </FormGroup>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <FormGroup floating label="Enter Email">
-                                <Input
-                                    placeholder="Enter Email"
-                                    style={email_border}
-                                    bind:value={email}
+                                    placeholder="Enter School Name"
+                                    style={schoolname_border}
+                                    bind:value={schoolname}
                                 />
                             </FormGroup>
                         </div>
@@ -400,65 +658,409 @@
                         style="width: 100%; padding-left: 7%;"
                     >
                         <div class="form-group" style="width: 80%">
-                            <FormGroup floating label="Enter CV Title">
+                            <FormGroup floating label="Enter City">
                                 <Input
-                                    placeholder="Enter CV Title"
-                                    style={cv_title_border}
-                                    bind:value={cv_title}
+                                    placeholder="Enter City"
+                                    style={education_city_border}
+                                    bind:value={education_city}
                                 />
                             </FormGroup>
                         </div>
                     </div>
-                    <!-- <div class="form-row form-content image-form">
-                        <div class="image-container" style="margin-bottom: 2%;">
-                            <div id="app">
-                                <h3 style="margin-bottom: 7%;">
-                                    Upload Image For CV
-                                </h3>
-                                {#if avatar}
-                                    <img class="avatar" src={avatar} alt="d" />
-                                {:else}
-                                    <img
-                                        class="avatar"
-                                        src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
-                                        alt=""
-                                    />
-                                {/if}
-
-                                <label
-                                    class="button primary block uploadbtn"
-                                    for="single"
-                                    ><i class="bi bi-upload" />
-                                    {uploading ? "Uploading ..." : "Upload"}
-                                </label>
-                            </div>
-                            <input
-                                style="display:none"
-                                type="file"
-                                id="single"
-                                accept="image/*"
-                                bind:files
-                                bind:this={fileinput}
-                                on:change={(e) => onFileSelected(e)}
-                                disabled={uploading}
-                            />
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter State">
+                                <Input
+                                    placeholder="Enter State"
+                                    style={education_state_border}
+                                    bind:value={education_state}
+                                />
+                            </FormGroup>
                         </div>
                     </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Degree">
+                                <Input
+                                    placeholder="Enter Degree"
+                                    style={degree_border}
+                                    bind:value={degree}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-bottom: 3%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Field">
+                                <Input
+                                    placeholder="Enter Field"
+                                    style={field_border}
+                                    bind:value={field}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
                     <div class="btncontainer">
-                        <p class="next pagebtn" on:click={showEducation}>
-                            Next &raquo;
-                        </p>
-                    </div> -->
-                <!-- </div> -->
-            </ModalBody>
-            <ModalFooter>
-                <Button color="primary" on:click={toggle3}>OK</Button>
-            </ModalFooter>
+                        <Button color="primary" on:click={showPersonal}
+                            >&laquo; Previous</Button
+                        >
+                        <Button color="primary" on:click={showExperience}
+                            >Next &raquo;</Button
+                        >
+                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        >
+                    </div>
+                </ModalFooter>
+            {/if}
+            {#if experience}
+                <ModalHeader style="padding-left: 32%;">
+                    <div class="page-header">
+                        <h1>Experience-page</h1>
+                    </div>
+                </ModalHeader>
+                <ModalBody>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-top: 5%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Job Title">
+                                <Input
+                                    placeholder="Enter Job Title"
+                                    style={job_title_border}
+                                    bind:value={job_title}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Company Name">
+                                <Input
+                                    placeholder="Enter Company Name"
+                                    style={company_name_border}
+                                    bind:value={company_name}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter City">
+                                <Input
+                                    placeholder="Enter City"
+                                    style={experience_city_border}
+                                    bind:value={experience_city}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter State">
+                                <Input
+                                    placeholder="Enter State"
+                                    style={experience_state_border}
+                                    bind:value={experience_state}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-bottom: 3%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Experience(Years)">
+                                <Input
+                                    placeholder="Enter Experience"
+                                    style={experience_year_border}
+                                    bind:value={experience_year}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <div class="btncontainer">
+                        <Button color="primary" on:click={showEducation}
+                            >&laquo; Previous</Button
+                        >
+                        <Button color="primary" on:click={showSkill}
+                            >Next &raquo;</Button
+                        >
+                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        >
+                    </div>
+                </ModalFooter>
+            {/if}
+            {#if skill}
+                <ModalHeader style="padding-left: 40%;">
+                    <div class="page-header">
+                        <h1>Skill-page</h1>
+                    </div>
+                </ModalHeader>
+                <ModalBody>
+                    <div class="form-row form-content" style="margin-top: 5%;">
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter Skill">
+                                <Input
+                                    placeholder="Enter Skill"
+                                    style={skill1_border}
+                                    bind:value={skill1}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Select Level">
+                                <Input
+                                    type="select"
+                                    name="select"
+                                    id="exampleSelect"
+                                    style={level1_border}
+                                    bind:value={level1}
+                                >
+                                    <option style="cursor:pointer;"
+                                        >Beginner</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Intermediate</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Expert</option
+                                    >
+                                </Input>
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div class="form-row form-content">
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter Skill">
+                                <Input
+                                    placeholder="Enter Skill"
+                                    style={skill2_border}
+                                    bind:value={skill2}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Select Level">
+                                <Input
+                                    type="select"
+                                    name="select"
+                                    id="exampleSelect"
+                                    style={level2_border}
+                                    bind:value={level2}
+                                >
+                                    <option style="cursor:pointer;"
+                                        >Beginner</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Intermediate</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Expert</option
+                                    >
+                                </Input>
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="margin-bottom: 5%;"
+                    >
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Enter Skill">
+                                <Input
+                                    placeholder="Enter Skill"
+                                    style={skill3_border}
+                                    bind:value={skill3}
+                                />
+                            </FormGroup>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <FormGroup floating label="Select Level">
+                                <Input
+                                    type="select"
+                                    name="select"
+                                    id="exampleSelect"
+                                    style={level3_border}
+                                    bind:value={level3}
+                                >
+                                    <option style="cursor:pointer;"
+                                        >Beginner</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Intermediate</option
+                                    >
+                                    <option style="cursor:pointer;"
+                                        >Expert</option
+                                    >
+                                </Input>
+                            </FormGroup>
+                        </div>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <div class="btncontainer">
+                        <Button color="primary" on:click={showExperience}
+                            >&laquo; Previous</Button
+                        >
+                        <Button color="primary" on:click={showInterest}
+                            >Next &raquo;</Button
+                        >
+                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        >
+                    </div>
+                </ModalFooter>
+            {/if}
+            {#if interest}
+                <ModalHeader style="padding-left: 36%;">
+                    <div class="page-header">
+                        <h1>Interest-page</h1>
+                    </div>
+                </ModalHeader>
+                <ModalBody>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-top: 5%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Interest">
+                                <Input
+                                    placeholder="Enter Interest"
+                                    style={interest1_border}
+                                    bind:value={interest1}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Interest">
+                                <Input
+                                    placeholder="Enter Interest"
+                                    style={interest2_border}
+                                    bind:value={interest2}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-bottom: 5%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Interest">
+                                <Input
+                                    placeholder="Enter Interest"
+                                    style={interest3_border}
+                                    bind:value={interest3}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <div class="btncontainer">
+                        <Button color="primary" on:click={showSkill}
+                            >&laquo; Previous</Button
+                        >
+                        <Button
+                            color="success"
+                            style="width: 120px; height: 38px; border-radius: 15px; font-size: 17px; display: flex; justify-content:center;"
+                        >
+                            {#if progress}
+                                <p><Spinner size="sm" /> Saving</p>
+                            {:else}
+                                <p>
+                                    <i class="bi bi-file-earmark-check-fill" /> Save
+                                </p>
+                            {/if}
+                        </Button>
+                        <Button color="danger" on:click={toggle3} on:click={showPersonal}>CANCEL</Button
+                        >
+                    </div>
+                </ModalFooter>
+            {/if}
         </Modal>
     </div>
 </main>
 
 <style>
+    .avatar {
+        display: flex;
+        height: 150px;
+        width: 150px;
+        margin-top: 2%;
+        margin-left: 25%;
+        box-shadow: 0px 0px 2px 0px grey;
+    }
+    .uploadbtn {
+        cursor: pointer;
+        color: white;
+        background-color: #007bff;
+        filter: blur(2%);
+        height: 38px;
+        width: 120px;
+        line-height: 38px;
+        text-align: center;
+        border-radius: 10px;
+        margin-top: 3%;
+        border: 1px solid #0772e3;
+        filter: saturate(200%);
+    }
+    .uploadbtn:hover {
+        background-color: #0772e3;
+    }
+    .image-container {
+        height: 290px;
+        width: 300px;
+        background-color: white;
+        margin-top: 0%;
+        /* margin-left: 31%; */
+        box-shadow: 0px 0px 7px 0px grey;
+        border-radius: 1%;
+        margin-bottom: 4%;
+        text-align: center;
+    }
+    .image-form {
+        display: flex;
+        justify-content: center;
+    }
+    .form-content {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .btncontainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        /* padding-left: 43%; */
+    }
     .delete-txt {
         font-size: 20px;
     }
@@ -639,6 +1241,9 @@
         .cv-details {
             padding-left: 25%;
         }
+        .page-header {
+            margin-left: -20%;
+        }
     }
     @media screen and (max-width: 900px) {
         .add-content {
@@ -713,6 +1318,19 @@
             margin-left: 10%;
         }
     }
+    @media screen and (max-width: 480px) {
+        .add-content {
+            margin-left: 75%;
+            margin-top: 55%;
+        }
+        .none-added {
+            margin-top: 17%;
+            margin-left: 23%;
+        }
+        .education-page {
+            margin-left: -25%;
+        }
+    }
     @media screen and (max-width: 450px) {
         .add-content {
             margin-left: 75%;
@@ -721,6 +1339,9 @@
         .none-added {
             margin-top: 17%;
             margin-left: 23%;
+        }
+        .education-page {
+            margin-left: -28%;
         }
     }
     @media screen and (max-width: 400px) {
@@ -741,6 +1362,12 @@
         }
         .inner-cv {
             margin-top: 5%;
+        }
+        .page-header {
+            margin-left: -28%;
+        }
+        .education-page {
+            margin-left: -35%;
         }
     }
     @media screen and (max-width: 360px) {
