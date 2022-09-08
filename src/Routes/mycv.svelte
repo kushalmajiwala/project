@@ -974,14 +974,14 @@
         </div>
     {:else}
         <div class="cv-details">
-            {#each totalCV[0] as rec}
+            {#each totalCV[0] as rec, i}
                 <div class="tooltip">
-                    <Tooltip target="myedit" placement="bottom">Edit</Tooltip>
-                    <Tooltip target="mydownload" placement="bottom">
+                    <Tooltip target="myedit-{i}" placement="bottom">Edit</Tooltip>
+                    <Tooltip target="mydownload-{i}" placement="bottom">
                         Download
                     </Tooltip>
-                    <Tooltip target="myview" placement="bottom">View</Tooltip>
-                    <Tooltip target="mydelete" placement="bottom">
+                    <Tooltip target="myview-{i}" placement="bottom">View</Tooltip>
+                    <Tooltip target="mydelete-{i}" placement="bottom">
                         Delete
                     </Tooltip>
                 </div>
@@ -1000,17 +1000,17 @@
                     <div class="inner-icon">
                         <i
                             class="bi bi-pencil-fill editIcon"
-                            id="myedit"
+                            id="myedit-{i}"
                             on:click={() => setEditCV(rec.cvid)}
                         />
                         <i
                             class="bi bi-file-earmark-arrow-down-fill downloadIcon"
-                            id="mydownload"
+                            id="mydownload-{i}"
                         />
-                        <i class="bi bi-eye-fill showIcon" id="myview" />
+                        <i class="bi bi-eye-fill showIcon" id="myview-{i}" />
                         <i
                             class="bi bi-trash-fill deleteIcon"
-                            id="mydelete"
+                            id="mydelete-{i}"
                             on:click={() => setDeleteCV(rec.cvid)}
                         />
                     </div>
