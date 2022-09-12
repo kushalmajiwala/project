@@ -823,6 +823,10 @@
                 console.error(error);
             });
     }
+    function refreshPage() {
+        let page_url = window.location.href;
+        window.location.replace(page_url);
+    }
     const dispatch = createEventDispatcher();
 
     async function onFileSelected(e) {
@@ -1760,7 +1764,8 @@
                     on:click={toggle10}
                     on:click={progressStop}
                     on:click={toggle3}
-                    on:click={showPersonal}>Cancel</Button
+                    on:click={showPersonal}
+                    on:click={refreshPage}>Cancel</Button
                 >
             </ModalFooter>
         </Modal>
