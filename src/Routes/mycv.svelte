@@ -2446,7 +2446,7 @@
         }
         .cv-image {
             margin-left: 55%;
-            margin-top: -55%;
+            margin-top: -50%;
         }
     }
     @media screen and (max-width: 360px) {
