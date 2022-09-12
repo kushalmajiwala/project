@@ -2458,6 +2458,10 @@
             margin-top: 19%;
             margin-left: 16%;
         }
+        .cv-image {
+            margin-left: 50%;
+            margin-top: -55%;
+        }
     }
     @media screen and (max-width: 340px) {
         .add-content {
