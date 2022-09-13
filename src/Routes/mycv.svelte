@@ -2042,13 +2042,13 @@
         justify-content: space-evenly;
     } */
     .inner-class {
-        margin-left: -1.8%;
+        margin-left: -8%;
         font-size: 30px;
         font-family: bolder;
         margin-top: -17px;
     }
     .inner-class-education {
-        margin-left: -1.8%;
+        margin-left: -10%;
         font-size: 23px;
         font-family: bolder;
         margin-top: -20px;
