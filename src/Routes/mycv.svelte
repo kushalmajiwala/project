@@ -644,6 +644,8 @@ import { get_current_component } from "svelte/internal";
         // @ts-ignore
         page.setWidth(1200);
         page.setHeight(2000);
+
+        //CURRICULUM VITAE
         page.drawRectangle({
             width: 1200,
             height: 100,
@@ -660,6 +662,110 @@ import { get_current_component } from "svelte/internal";
             font: timesRomanFont,
             color: rgb(0.00, 0.00, 0.00),
         });
+        page.drawLine({
+            start: {x: 370, y: 1935},
+            end: {x: 870, y: 1935},
+            thickness: 3,
+            color: rgb(0.00, 0.00, 0.00),
+        });
+        //EDUCATION
+        page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 1470,
+        });
+        page.drawText("EDUCATION", {
+            x: 490,
+            y: 1500,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.00, 0.00, 0.00),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: {x: 490, y: 1495},
+            end: {x: 755, y: 1495},
+            thickness: 3,
+            color: rgb(0.00, 0.00, 0.00),
+        });
+         //EXPERIENCE
+         page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 1030,
+        });
+        page.drawText("EXPERIENCE", {
+            x: 480,
+            y: 1060,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.00, 0.00, 0.00),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: {x: 480, y: 1055},
+            end: {x: 758, y: 1055},
+            thickness: 3,
+            color: rgb(0.00, 0.00, 0.00),
+        });
+         //SKILLS
+         page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 590,
+        });
+        page.drawText("SKILLS", {
+            x: 535,
+            y: 620,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.00, 0.00, 0.00),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: {x: 535, y: 615},
+            end: {x: 690, y: 615},
+            thickness: 3,
+            color: rgb(0.00, 0.00, 0.00),
+        });
+         //INTERESTS
+         page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 150,
+        });
+        page.drawText("INTERESTS", {
+            x: 500,
+            y: 180,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.00, 0.00, 0.00),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: {x: 500, y: 175},
+            end: {x: 740, y: 175},
+            thickness: 3,
+            color: rgb(0.00, 0.00, 0.00),
+        });
+
+
         page.drawText("NAME :- " + fname + " " + lname, {
             x: 50,
             y: 1800,
@@ -677,11 +783,7 @@ import { get_current_component } from "svelte/internal";
             width: 180,
             height: 250,
         });
-        // const page1 = pdfDoc.addPage();
-        // @ts-ignore
-        // page.setHeight(500);
-        // page.setWidth(800);
-
+    
         const pdfBytes = await pdfDoc.save();
         const arr = new Uint8Array(pdfBytes);
         const blob = new Blob([arr], { type: "application/pdf" });
