@@ -15,6 +15,7 @@
         Input,
         Spinner,
     } from "sveltestrap";
+    import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
     const STORAGE_URL = "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1";
     const SERVICE_KEY =
@@ -617,6 +618,7 @@
     let delete_cvid = "";
     let edit_cvid = "";
     let show_cvid = "";
+    let download_cvid = "";
 
     function setDeleteCV(cvid) {
         delete_cvid = cvid;
@@ -627,6 +629,52 @@
         console.log(edit_cvid);
         getData(edit_cvid);
         toggle3();
+    }
+    async function generatePDF(cvid) {
+        const pdfDoc = await PDFDocument.create();
+
+        // Embed the Times Roman font
+        const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+        // Add a blank page to the document
+        // Get the width and height of the page
+        //const { width, height } = page.getSize();
+        const fontSize = 30;
+        let xpos = 400;
+        let ypos = 900;
+        let xqrpos = 350;
+        let yqrpos = 200;
+
+        const page = pdfDoc.addPage();
+        // @ts-ignore
+        page.setHeight(1000);
+        page.setWidth(1200);
+        page.drawText(cvid, {
+            x: xpos,
+            y: ypos,
+            size: fontSize,
+            font: timesRomanFont,
+            color: rgb(0, 0.53, 0.71),
+        });
+        // const page1 = pdfDoc.addPage();
+        // @ts-ignore
+        // page.setHeight(500);
+        // page.setWidth(800);
+
+        const pdfBytes = await pdfDoc.save();
+        const arr = new Uint8Array(pdfBytes);
+        const blob = new Blob([arr], { type: "application/pdf" });
+        var a = window.document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = "card.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+    function setDownloadCV(cvid) {
+        download_cvid = cvid;
+        console.log(cvid);
+        generatePDF(download_cvid);
     }
     function setShowCV(cvid) {
         show_cvid = cvid;
@@ -1023,6 +1071,7 @@
                         <i
                             class="bi bi-file-earmark-arrow-down-fill downloadIcon"
                             id="mydownload-{i}"
+                            on:click={() => setDownloadCV(rec.cvid)}
                         />
                         <i
                             class="bi bi-eye-fill showIcon"
@@ -1789,221 +1838,230 @@
         <!-- Show CV -->
         <Modal isOpen={open11} size="lg">
             <div class="cv-border">
-            <ModalHeader
-                style="position: relative; height: 60px;  background-color: rgb(203, 201, 201);"
-            >
-                <div class="header-class">
-                    <p class="inner-class"><u>CURRICULUM VITAE</u></p>
-                </div>
-            </ModalHeader>
-            <ModalHeader style="position: relative; height: 280px;">
-                <div class="personal-container">
+                <ModalHeader
+                    style="position: relative; height: 60px;  background-color: rgb(203, 201, 201);"
+                >
+                    <div class="header-class">
+                        <p class="inner-class"><u>CURRICULUM VITAE</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 280px;">
+                    <div class="personal-container">
+                        <div>
+                            <p class="main-name">
+                                <b>NAME</b> :- {fname}
+                                {lname}
+                            </p>
+                            <p class="main-name"><b>GENDER</b> :- {gender}</p>
+                            <p class="main-name">
+                                <b>DATE OF BIRTH</b> :- {dob}
+                            </p>
+                            <p class="main-name">
+                                <b>PROFESSION</b> :- {profession}
+                            </p>
+                            <p class="main-name">
+                                <b>ADDRESS</b> :- {address}, {personal_city}, {personal_state}.
+                            </p>
+                            <p class="main-name">
+                                <b>PHONE NO</b> :- {phoneno}
+                            </p>
+                            <p class="main-name"><b>EMAIL</b> :- {email}</p>
+                        </div>
+                        {#if personal_pic_url !== ""}
+                            <div class="cv-image">
+                                <img
+                                    class="avatar1"
+                                    src={personal_pic_url}
+                                    alt="d"
+                                />
+                            </div>
+                        {/if}
+                    </div>
+                </ModalHeader>
+                <!-- Education Details -->
+                <ModalHeader
+                    style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
+                >
+                    <div class="header-class">
+                        <p class="inner-class-education"><u>EDUCATION</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 180px;">
                     <div>
-                        <p class="main-name"><b>NAME</b> :- {fname} {lname}</p>
-                        <p class="main-name"><b>GENDER</b> :- {gender}</p>
-                        <p class="main-name"><b>DATE OF BIRTH</b> :- {dob}</p>
                         <p class="main-name">
-                            <b>PROFESSION</b> :- {profession}
+                            <b>SECONDARY EDUCATION</b> :- {schoolname}
                         </p>
                         <p class="main-name">
-                            <b>ADDRESS</b> :- {address}, {personal_city}, {personal_state}.
+                            <b>EDUCATION ADDRESS</b> :- {education_city}, {education_state}.
                         </p>
-                        <p class="main-name"><b>PHONE NO</b> :- {phoneno}</p>
-                        <p class="main-name"><b>EMAIL</b> :- {email}</p>
+                        <p class="main-name"><b>DEGREE</b> :- {degree}</p>
+                        <p class="main-name"><b>FIELD</b> :- {field}</p>
                     </div>
-                    {#if personal_pic_url !== ""}
-                        <div class="cv-image">
-                            <img
-                                class="avatar1"
-                                src={personal_pic_url}
-                                alt="d"
-                            />
-                        </div>
-                    {/if}
-                </div>
-            </ModalHeader>
-            <!-- Education Details -->
-            <ModalHeader
-                style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
-            >
-                <div class="header-class">
-                    <p class="inner-class-education"><u>EDUCATION</u></p>
-                </div>
-            </ModalHeader>
-            <ModalHeader style="position: relative; height: 180px;">
-                <div>
-                    <p class="main-name">
-                        <b>SECONDARY EDUCATION</b> :- {schoolname}
-                    </p>
-                    <p class="main-name">
-                        <b>EDUCATION ADDRESS</b> :- {education_city}, {education_state}.
-                    </p>
-                    <p class="main-name"><b>DEGREE</b> :- {degree}</p>
-                    <p class="main-name"><b>FIELD</b> :- {field}</p>
-                </div>
-            </ModalHeader>
-            <!-- Experience Details -->
-            <ModalHeader
-                style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
-            >
-                <div class="header-class">
-                    <p class="inner-class-education"><u>EXPERIENCE</u></p>
-                </div>
-            </ModalHeader>
-            <ModalHeader style="position: relative; height: 180px;">
-                <div>
-                    <p class="main-name"><b>JOB TITLE</b> :- {job_title}</p>
-                    <p class="main-name">
-                        <b>COMPANY NAME</b> :- {company_name}
-                    </p>
-                    <p class="main-name">
-                        <b>COMAPNY ADDRESS</b> :- {experience_city}, {experience_state}.
-                    </p>
-                    <p class="main-name">
-                        <b>YEAR OF EXPERIENCE</b> :- {experience_year} years.
-                    </p>
-                </div>
-            </ModalHeader>
-            <ModalHeader
-                style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
-            >
-                <div class="header-class">
-                    <p class="inner-class-education"><u>SKILLS</u></p>
-                </div>
-            </ModalHeader>
-            <ModalHeader style="position: relative; height: 140px;">
-                <div class="skill-show">
-                    {#if skill1 !== "" && skill2 !== "" && skill3 !== ""}
-                        <div>
-                            {skill1}:-
-                            {#if level1 === "Beginner"}
-                                <i class="bi bi-star-fill" />
-                            {:else if level1 === "Intermediate"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {:else if level1 === "Expert"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {/if}
-                        </div>
-                        <div>
-                            {skill2}:-
-                            {#if level2 === "Beginner"}
-                                <i class="bi bi-star-fill" />
-                            {:else if level2 === "Intermediate"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {:else if level2 === "Expert"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {/if}
-                        </div>
-                        <div>
-                            {skill3}:-
-                            {#if level3 === "Beginner"}
-                                <i class="bi bi-star-fill" />
-                            {:else if level3 === "Intermediate"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {:else if level3 === "Expert"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {/if}
-                        </div>
-                    {:else if skill1 !== "" && skill2 !== ""}
-                        <div>
-                            {skill1}:-
-                            {#if level1 === "Beginner"}
-                                <i class="bi bi-star-fill" />
-                            {:else if level1 === "Intermediate"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {:else if level1 === "Expert"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {/if}
-                        </div>
-                        <div>
-                            {skill2}:-
-                            {#if level2 === "Beginner"}
-                                <i class="bi bi-star-fill" />
-                            {:else if level2 === "Intermediate"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {:else if level2 === "Expert"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {/if}
-                        </div>
-                    {:else}
-                        <div>
-                            {skill1}:-
-                            {#if level1 === "Beginner"}
-                                <i class="bi bi-star-fill" />
-                            {:else if level1 === "Intermediate"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {:else if level1 === "Expert"}
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                                <i class="bi bi-star-fill" />
-                            {/if}
-                        </div>
-                    {/if}
-                </div>
-            </ModalHeader>
-            <ModalHeader
-            style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
-        >
-            <div class="header-class">
-                <p class="inner-class-education"><u>INTERESTS</u></p>
-            </div>
-        </ModalHeader>
-        <ModalHeader style="position: relative; height: 140px;">
-            <div class="interest-show">
-                {#if interest1 !== "" && interest2 !== "" && interest3 !== ""}
-                    <div>
-                        {interest1}
-                    </div>
-                    <div>
-                        {interest2}       
-                    </div>
-                    <div>
-                        {interest3}
-                    </div>
-                {:else if interest1 !== "" && interest2 !== ""}
-                    <div>
-                        {interest1}
-                    </div>
-                    <div>
-                        {interest2}
-                    </div>
-                {:else}
-                    <div>
-                        {interest1}
-                    </div>
-                {/if}
-            </div>
-        </ModalHeader>
-            
-            <!-- Download or Cancel Buttons -->
-            <ModalFooter>
-                <Button color="primary" class="float-right">
-                    <i
-                        style="margin-right: 5px;"
-                        class="bi bi-file-earmark-arrow-down-fill"
-                    />Download</Button
+                </ModalHeader>
+                <!-- Experience Details -->
+                <ModalHeader
+                    style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
                 >
-                <Button color="danger" class="float-right" on:click={toggle11}
-                    >Cancel</Button
+                    <div class="header-class">
+                        <p class="inner-class-education"><u>EXPERIENCE</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 180px;">
+                    <div>
+                        <p class="main-name"><b>JOB TITLE</b> :- {job_title}</p>
+                        <p class="main-name">
+                            <b>COMPANY NAME</b> :- {company_name}
+                        </p>
+                        <p class="main-name">
+                            <b>COMAPNY ADDRESS</b> :- {experience_city}, {experience_state}.
+                        </p>
+                        <p class="main-name">
+                            <b>YEAR OF EXPERIENCE</b> :- {experience_year} years.
+                        </p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader
+                    style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
                 >
-            </ModalFooter>
-        </div>
+                    <div class="header-class">
+                        <p class="inner-class-education"><u>SKILLS</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 140px;">
+                    <div class="skill-show">
+                        {#if skill1 !== "" && skill2 !== "" && skill3 !== ""}
+                            <div>
+                                {skill1}:-
+                                {#if level1 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                            <div>
+                                {skill2}:-
+                                {#if level2 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                            <div>
+                                {skill3}:-
+                                {#if level3 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level3 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level3 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                        {:else if skill1 !== "" && skill2 !== ""}
+                            <div>
+                                {skill1}:-
+                                {#if level1 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                            <div>
+                                {skill2}:-
+                                {#if level2 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                        {:else}
+                            <div>
+                                {skill1}:-
+                                {#if level1 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                        {/if}
+                    </div>
+                </ModalHeader>
+                <ModalHeader
+                    style="position: relative; height: 45px;  background-color: rgb(203, 201, 201);"
+                >
+                    <div class="header-class">
+                        <p class="inner-class-education"><u>INTERESTS</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 140px;">
+                    <div class="interest-show">
+                        {#if interest1 !== "" && interest2 !== "" && interest3 !== ""}
+                            <div>
+                                {interest1}
+                            </div>
+                            <div>
+                                {interest2}
+                            </div>
+                            <div>
+                                {interest3}
+                            </div>
+                        {:else if interest1 !== "" && interest2 !== ""}
+                            <div>
+                                {interest1}
+                            </div>
+                            <div>
+                                {interest2}
+                            </div>
+                        {:else}
+                            <div>
+                                {interest1}
+                            </div>
+                        {/if}
+                    </div>
+                </ModalHeader>
+
+                <!-- Download or Cancel Buttons -->
+                <ModalFooter>
+                    <Button color="primary" class="float-right">
+                        <i
+                            style="margin-right: 5px;"
+                            class="bi bi-file-earmark-arrow-down-fill"
+                        />Download</Button
+                    >
+                    <Button
+                        color="danger"
+                        class="float-right"
+                        on:click={toggle11}>Cancel</Button
+                    >
+                </ModalFooter>
+            </div>
         </Modal>
     </div>
 </main>
