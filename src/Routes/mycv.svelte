@@ -16,6 +16,7 @@
         Spinner,
     } from "sveltestrap";
     import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { get_current_component } from "svelte/internal";
 
     const STORAGE_URL = "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1";
     const SERVICE_KEY =
@@ -639,22 +640,42 @@
         // Add a blank page to the document
         // Get the width and height of the page
         //const { width, height } = page.getSize();
-        const fontSize = 30;
-        let xpos = 400;
-        let ypos = 900;
-        let xqrpos = 350;
-        let yqrpos = 200;
-
         const page = pdfDoc.addPage();
         // @ts-ignore
-        page.setHeight(1000);
         page.setWidth(1200);
-        page.drawText(cvid, {
-            x: xpos,
-            y: ypos,
-            size: fontSize,
+        page.setHeight(2000);
+        page.drawRectangle({
+            width: 1200,
+            height: 100,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 1910,
+        });
+        page.drawText("CURRICULUM VITAE", {
+            x: 370,
+            y: 1940,
+            size: 50,
             font: timesRomanFont,
-            color: rgb(0, 0.53, 0.71),
+            color: rgb(0.00, 0.00, 0.00),
+        });
+        page.drawText("NAME :- " + fname + " " + lname, {
+            x: 50,
+            y: 1800,
+            size: 30,
+            color: rgb(0.00, 0.00, 0.00),
+        });
+        const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
+            res.arrayBuffer()
+        );
+
+        const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
+        page.drawImage(jpgImage, {
+            x: 900,
+            y: 1600,
+            width: 180,
+            height: 250,
         });
         // const page1 = pdfDoc.addPage();
         // @ts-ignore
@@ -674,7 +695,11 @@
     function setDownloadCV(cvid) {
         download_cvid = cvid;
         console.log(cvid);
-        generatePDF(download_cvid);
+        getData(download_cvid);
+        console.log(fname);
+        console.log(personal_pic_url);
+        console.log(lname);
+        setTimeout(function(){generatePDF(download_cvid)}, 1000);
     }
     function setShowCV(cvid) {
         show_cvid = cvid;
@@ -2049,7 +2074,7 @@
 
                 <!-- Download or Cancel Buttons -->
                 <ModalFooter>
-                    <Button color="primary" class="float-right">
+                    <Button color="primary" class="float-right" on:click={() => setDownloadCV(show_cvid)}>
                         <i
                             style="margin-right: 5px;"
                             class="bi bi-file-earmark-arrow-down-fill"
