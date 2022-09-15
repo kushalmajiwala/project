@@ -16,7 +16,7 @@
         Spinner,
     } from "sveltestrap";
     import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import { get_current_component } from "svelte/internal";
+    import { get_current_component } from "svelte/internal";
 
     const STORAGE_URL = "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1";
     const SERVICE_KEY =
@@ -660,13 +660,104 @@ import { get_current_component } from "svelte/internal";
             y: 1940,
             size: 50,
             font: timesRomanFont,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
         });
         page.drawLine({
-            start: {x: 370, y: 1935},
-            end: {x: 870, y: 1935},
+            start: { x: 370, y: 1935 },
+            end: { x: 870, y: 1935 },
             thickness: 3,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        //Name
+        page.drawText("=> NAME :- ", {
+            x: 50,
+            y: 1850,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(fname + " " + lname, {
+            x: 163,
+            y: 1850,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Gender
+        page.drawText("=> GENDER :- ", {
+            x: 50,
+            y: 1810,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(gender, {
+            x: 190,
+            y: 1810,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Date Of Birth
+        page.drawText("=> DATE OF BIRTH :- ", {
+            x: 50,
+            y: 1770,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(dob, {
+            x: 255,
+            y: 1770,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Profession
+        page.drawText("=> PROFESSION :- ", {
+            x: 50,
+            y: 1730,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(profession, {
+            x: 235,
+            y: 1730,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Address
+        page.drawText("=> ADDRESS :- ", {
+            x: 50,
+            y: 1690,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(address, {
+            x: 200,
+            y: 1690,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Phoneno
+        page.drawText("=> PHONE NO :- ", {
+            x: 50,
+            y: 1650,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(phoneno, {
+            x: 210,
+            y: 1650,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Phoneno
+        page.drawText("=> EMAIL :- ", {
+            x: 50,
+            y: 1610,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(email, {
+            x: 165,
+            y: 1610,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
         });
         //EDUCATION
         page.drawRectangle({
@@ -683,95 +774,656 @@ import { get_current_component } from "svelte/internal";
             y: 1500,
             size: 45,
             font: timesRomanFont,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: {x: 490, y: 1495},
-            end: {x: 755, y: 1495},
+            start: { x: 490, y: 1495 },
+            end: { x: 755, y: 1495 },
             thickness: 3,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
         });
-         //EXPERIENCE
-         page.drawRectangle({
+        //Schoolname
+        page.drawText("=> SECONDARY EDUCATION :- ", {
+            x: 50,
+            y: 1410,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(schoolname, {
+            x: 355,
+            y: 1410,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Education Address
+        page.drawText("=> EDUCATION ADDRESS :- ", {
+            x: 50,
+            y: 1370,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(education_city + ", " + education_state + ".", {
+            x: 325,
+            y: 1370,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Degree
+        page.drawText("=> DEGREE :- ", {
+            x: 50,
+            y: 1330,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(degree, {
+            x: 190,
+            y: 1330,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Field
+        page.drawText("=> Field :- ", {
+            x: 50,
+            y: 1290,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(field, {
+            x: 150,
+            y: 1290,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //EXPERIENCE
+        page.drawRectangle({
             width: 1200,
             height: 80,
             borderWidth: 1,
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 1030,
+            y: 1160,
         });
         page.drawText("EXPERIENCE", {
             x: 480,
-            y: 1060,
+            y: 1190,
             size: 45,
             font: timesRomanFont,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: {x: 480, y: 1055},
-            end: {x: 758, y: 1055},
+            start: { x: 480, y: 1185 },
+            end: { x: 758, y: 1185 },
             thickness: 3,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
         });
-         //SKILLS
-         page.drawRectangle({
+        //Job Title
+        page.drawText("=> JOB TITLE :- ", {
+            x: 50,
+            y: 1100,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(job_title, {
+            x: 205,
+            y: 1100,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Company Name
+        page.drawText("=> COMPANY NAME :- ", {
+            x: 50,
+            y: 1060,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(company_name, {
+            x: 270,
+            y: 1060,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Company Address
+        page.drawText("=> COMPANY ADDRESS :- ", {
+            x: 50,
+            y: 1020,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(experience_city + ", " + experience_state + ".", {
+            x: 310,
+            y: 1020,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //Company Address
+        page.drawText("=> YEAR OF EXPERIENCE :- ", {
+            x: 50,
+            y: 980,
+            size: 20,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(experience_year + " Years", {
+            x: 330,
+            y: 980,
+            size: 20,
+            color: rgb(0.4, 0.4, 0.4),
+        });
+        //SKILLS
+        page.drawRectangle({
             width: 1200,
             height: 80,
             borderWidth: 1,
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 590,
+            y: 850,
         });
         page.drawText("SKILLS", {
             x: 535,
-            y: 620,
+            y: 880,
             size: 45,
             font: timesRomanFont,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: {x: 535, y: 615},
-            end: {x: 690, y: 615},
+            start: { x: 535, y: 875 },
+            end: { x: 690, y: 875 },
             thickness: 3,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
         });
-         //INTERESTS
-         page.drawRectangle({
+        if (skill1 !== "" && skill2 !== "" && skill3 !== "") {
+            page.drawText("=> " + skill1 + " :-", {
+                x: 50,
+                y: 790,
+                size: 20,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            if (level1 === "Beginner") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level1 === "Intermediate") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level1 === "Expert") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes3 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
+                page.drawImage(jpgImage3, {
+                    x: 440,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            }
+            page.drawText("=> " + skill2 + " :-", {
+                x: 50,
+                y: 750,
+                size: 20,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            if (level2 === "Beginner") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level2 === "Intermediate") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level2 === "Expert") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes3 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
+                page.drawImage(jpgImage3, {
+                    x: 440,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+            }
+            page.drawText("=> " + skill3 + " :-", {
+                x: 50,
+                y: 710,
+                size: 20,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            if (level3 === "Beginner") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 695,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level3 === "Intermediate") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 695,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 695,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level3 === "Expert") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 695,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 695,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes3 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
+                page.drawImage(jpgImage3, {
+                    x: 440,
+                    y: 695,
+                    width: 70,
+                    height: 50,
+                });
+            }
+        }
+        else if(skill1 !== "" && skill2 !== "")
+        {
+            page.drawText("=> " + skill1 + " :-", {
+                x: 50,
+                y: 790,
+                size: 20,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            if (level1 === "Beginner") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level1 === "Intermediate") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level1 === "Expert") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes3 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
+                page.drawImage(jpgImage3, {
+                    x: 440,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            }
+            page.drawText("=> " + skill2 + " :-", {
+                x: 50,
+                y: 750,
+                size: 20,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            if (level2 === "Beginner") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level2 === "Intermediate") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level2 === "Expert") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes3 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
+                page.drawImage(jpgImage3, {
+                    x: 440,
+                    y: 735,
+                    width: 70,
+                    height: 50,
+                });
+            }
+        }
+        else if(skill1 !== "")
+        {
+            page.drawText("=> " + skill1 + " :-", {
+                x: 50,
+                y: 790,
+                size: 20,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            if (level1 === "Beginner") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level1 === "Intermediate") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            } else if (level1 === "Expert") {
+                const jpgImageBytes1 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
+                page.drawImage(jpgImage1, {
+                    x: 340,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes2 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
+                page.drawImage(jpgImage2, {
+                    x: 390,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+                const jpgImageBytes3 = await fetch(
+                    "https://media.istockphoto.com/vectors/five-point-star-vector-icon-isolated-gold-star-rating-flat-symbol-vector-id1295967422?k=20&m=1295967422&s=612x612&w=0&h=6G6WYoO_3MCi6ILsC2GWwTf9hxIDXyWainB21GU0gjw="
+                ).then((res) => res.arrayBuffer());
+
+                const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
+                page.drawImage(jpgImage3, {
+                    x: 440,
+                    y: 775,
+                    width: 70,
+                    height: 50,
+                });
+            }
+        }
+        //INTERESTS
+        page.drawRectangle({
             width: 1200,
             height: 80,
             borderWidth: 1,
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 150,
+            y: 580,
         });
         page.drawText("INTERESTS", {
             x: 500,
-            y: 180,
+            y: 610,
             size: 45,
             font: timesRomanFont,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: {x: 500, y: 175},
-            end: {x: 740, y: 175},
+            start: { x: 500, y: 605 },
+            end: { x: 740, y: 605 },
             thickness: 3,
-            color: rgb(0.00, 0.00, 0.00),
+            color: rgb(0.0, 0.0, 0.0),
         });
 
-
-        page.drawText("NAME :- " + fname + " " + lname, {
-            x: 50,
-            y: 1800,
-            size: 30,
-            color: rgb(0.00, 0.00, 0.00),
-        });
         const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
             res.arrayBuffer()
         );
@@ -783,7 +1435,7 @@ import { get_current_component } from "svelte/internal";
             width: 180,
             height: 250,
         });
-    
+
         const pdfBytes = await pdfDoc.save();
         const arr = new Uint8Array(pdfBytes);
         const blob = new Blob([arr], { type: "application/pdf" });
@@ -801,7 +1453,9 @@ import { get_current_component } from "svelte/internal";
         console.log(fname);
         console.log(personal_pic_url);
         console.log(lname);
-        setTimeout(function(){generatePDF(download_cvid)}, 1000);
+        setTimeout(function () {
+            generatePDF(download_cvid);
+        }, 1000);
     }
     function setShowCV(cvid) {
         show_cvid = cvid;
@@ -1976,23 +2630,25 @@ import { get_current_component } from "svelte/internal";
                     <div class="personal-container">
                         <div>
                             <p class="main-name">
-                                <b>NAME</b> :- {fname}
+                                <b>=> NAME</b> :- {fname}
                                 {lname}
                             </p>
-                            <p class="main-name"><b>GENDER</b> :- {gender}</p>
                             <p class="main-name">
-                                <b>DATE OF BIRTH</b> :- {dob}
+                                <b>=> GENDER</b> :- {gender}
                             </p>
                             <p class="main-name">
-                                <b>PROFESSION</b> :- {profession}
+                                <b>=> DATE OF BIRTH</b> :- {dob}
                             </p>
                             <p class="main-name">
-                                <b>ADDRESS</b> :- {address}, {personal_city}, {personal_state}.
+                                <b>=> PROFESSION</b> :- {profession}
                             </p>
                             <p class="main-name">
-                                <b>PHONE NO</b> :- {phoneno}
+                                <b>=> ADDRESS</b> :- {address}, {personal_city}, {personal_state}.
                             </p>
-                            <p class="main-name"><b>EMAIL</b> :- {email}</p>
+                            <p class="main-name">
+                                <b>=> PHONE NO</b> :- {phoneno}
+                            </p>
+                            <p class="main-name"><b>=> EMAIL</b> :- {email}</p>
                         </div>
                         {#if personal_pic_url !== ""}
                             <div class="cv-image">
@@ -2016,13 +2672,13 @@ import { get_current_component } from "svelte/internal";
                 <ModalHeader style="position: relative; height: 180px;">
                     <div>
                         <p class="main-name">
-                            <b>SECONDARY EDUCATION</b> :- {schoolname}
+                            <b>=> SECONDARY EDUCATION</b> :- {schoolname}
                         </p>
                         <p class="main-name">
-                            <b>EDUCATION ADDRESS</b> :- {education_city}, {education_state}.
+                            <b>=> EDUCATION ADDRESS</b> :- {education_city}, {education_state}.
                         </p>
-                        <p class="main-name"><b>DEGREE</b> :- {degree}</p>
-                        <p class="main-name"><b>FIELD</b> :- {field}</p>
+                        <p class="main-name"><b>=> DEGREE</b> :- {degree}</p>
+                        <p class="main-name"><b>=> FIELD</b> :- {field}</p>
                     </div>
                 </ModalHeader>
                 <!-- Experience Details -->
@@ -2035,15 +2691,17 @@ import { get_current_component } from "svelte/internal";
                 </ModalHeader>
                 <ModalHeader style="position: relative; height: 180px;">
                     <div>
-                        <p class="main-name"><b>JOB TITLE</b> :- {job_title}</p>
                         <p class="main-name">
-                            <b>COMPANY NAME</b> :- {company_name}
+                            <b>=> JOB TITLE</b> :- {job_title}
                         </p>
                         <p class="main-name">
-                            <b>COMAPNY ADDRESS</b> :- {experience_city}, {experience_state}.
+                            <b>=> COMPANY NAME</b> :- {company_name}
                         </p>
                         <p class="main-name">
-                            <b>YEAR OF EXPERIENCE</b> :- {experience_year} years.
+                            <b>=> COMAPNY ADDRESS</b> :- {experience_city}, {experience_state}.
+                        </p>
+                        <p class="main-name">
+                            <b>=> YEAR OF EXPERIENCE</b> :- {experience_year} years.
                         </p>
                     </div>
                 </ModalHeader>
@@ -2176,7 +2834,11 @@ import { get_current_component } from "svelte/internal";
 
                 <!-- Download or Cancel Buttons -->
                 <ModalFooter>
-                    <Button color="primary" class="float-right" on:click={() => setDownloadCV(show_cvid)}>
+                    <Button
+                        color="primary"
+                        class="float-right"
+                        on:click={() => setDownloadCV(show_cvid)}
+                    >
                         <i
                             style="margin-right: 5px;"
                             class="bi bi-file-earmark-arrow-down-fill"
