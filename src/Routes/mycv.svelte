@@ -1423,6 +1423,57 @@
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
+        if(interest1 !== "" && interest2 !== "" && interest3 !== "")
+        {
+            page.drawText("=> " + interest1, {
+                x: 50,
+                y: 520,
+                size: 25,
+                font: timesRomanFont,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            page.drawText("=> " + interest2, {
+                x: 50,
+                y: 470,
+                size: 25,
+                font: timesRomanFont,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            page.drawText("=> " + interest3, {
+                x: 50,
+                y: 420,
+                size: 25,
+                font: timesRomanFont,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+        }
+        else if(interest1 !== "" && interest2 !== "")
+        {
+            page.drawText("=> " + interest1, {
+                x: 50,
+                y: 520,
+                size: 25,
+                font: timesRomanFont,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+            page.drawText("=> " + interest2, {
+                x: 50,
+                y: 470,
+                size: 25,
+                font: timesRomanFont,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+        }
+        else if(interest1 !== "")
+        {
+            page.drawText("=> " + interest1, {
+                x: 50,
+                y: 520,
+                size: 25,
+                font: timesRomanFont,
+                color: rgb(0.0, 0.0, 0.0),
+            });
+        }
 
         const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
             res.arrayBuffer()
