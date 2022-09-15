@@ -1164,9 +1164,7 @@
                     height: 50,
                 });
             }
-        }
-        else if(skill1 !== "" && skill2 !== "")
-        {
+        } else if (skill1 !== "" && skill2 !== "") {
             page.drawText("=> " + skill1 + " :-", {
                 x: 50,
                 y: 790,
@@ -1319,9 +1317,7 @@
                     height: 50,
                 });
             }
-        }
-        else if(skill1 !== "")
-        {
+        } else if (skill1 !== "") {
             page.drawText("=> " + skill1 + " :-", {
                 x: 50,
                 y: 790,
@@ -1423,8 +1419,7 @@
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
-        if(interest1 !== "" && interest2 !== "" && interest3 !== "")
-        {
+        if (interest1 !== "" && interest2 !== "" && interest3 !== "") {
             page.drawText("=> " + interest1, {
                 x: 50,
                 y: 520,
@@ -1446,9 +1441,7 @@
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
             });
-        }
-        else if(interest1 !== "" && interest2 !== "")
-        {
+        } else if (interest1 !== "" && interest2 !== "") {
             page.drawText("=> " + interest1, {
                 x: 50,
                 y: 520,
@@ -1463,9 +1456,7 @@
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
             });
-        }
-        else if(interest1 !== "")
-        {
+        } else if (interest1 !== "") {
             page.drawText("=> " + interest1, {
                 x: 50,
                 y: 520,
@@ -1475,17 +1466,19 @@
             });
         }
 
-        const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
-            res.arrayBuffer()
-        );
+        if (personal_pic_url !== "") {
+            const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
+                res.arrayBuffer()
+            );
 
-        const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
-        page.drawImage(jpgImage, {
-            x: 900,
-            y: 1600,
-            width: 180,
-            height: 250,
-        });
+            const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
+            page.drawImage(jpgImage, {
+                x: 900,
+                y: 1600,
+                width: 180,
+                height: 250,
+            });
+        }
 
         const pdfBytes = await pdfDoc.save();
         const arr = new Uint8Array(pdfBytes);
