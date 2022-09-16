@@ -119,6 +119,7 @@
     let open9 = false;
     let open10 = false;
     let open11 = false;
+    let open12 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -131,6 +132,8 @@
     const toggle9 = () => (open9 = !open9);
     const toggle10 = () => (open10 = !open10);
     const toggle11 = () => (open11 = !open11);
+    const toggle12 = () => (open12 = !open12);
+
 
     let totalCV = [];
     let checking = false;
@@ -620,6 +623,7 @@
     let edit_cvid = "";
     let show_cvid = "";
     let download_cvid = "";
+    let qr_cvid = "";
 
     function setDeleteCV(cvid) {
         delete_cvid = cvid;
@@ -630,6 +634,11 @@
         console.log(edit_cvid);
         getData(edit_cvid);
         toggle3();
+    }
+    function generateQRCode(cvid) {
+        qr_cvid = cvid;
+        getData(qr_cvid);
+        toggle12();
     }
     async function generatePDF(cvid) {
         const pdfDoc = await PDFDocument.create();
@@ -1485,7 +1494,7 @@
         const blob = new Blob([arr], { type: "application/pdf" });
         var a = window.document.createElement("a");
         a.href = window.URL.createObjectURL(blob);
-        a.download = "card.pdf";
+        a.download = cv_title + ".pdf";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1871,6 +1880,9 @@
                     <Tooltip target="myview-{i}" placement="bottom"
                         >View</Tooltip
                     >
+                    <Tooltip target="myqr-{i}" placement="bottom">
+                        Generate QR
+                    </Tooltip>
                     <Tooltip target="mydelete-{i}" placement="bottom">
                         Delete
                     </Tooltip>
@@ -1902,6 +1914,10 @@
                             class="bi bi-eye-fill showIcon"
                             id="myview-{i}"
                             on:click={() => setShowCV(rec.cvid)}
+                        />
+                        <i class="bi bi-qr-code qrIcon" 
+                           id="myqr-{i}" 
+                           on:click={() => generateQRCode(rec.cvid)}
                         />
                         <i
                             class="bi bi-trash-fill deleteIcon"
@@ -2896,10 +2912,35 @@
                 </ModalFooter>
             </div>
         </Modal>
+         <!-- QR Code Popup -->
+         <Modal isOpen={open12}>
+            <ModalHeader style="padding-top: 10px; padding-bottom: 10px; display:flex; justify-content: center;">
+                <div class="qr-title-container">
+                    <p class="qr-title">{cv_title}</p>
+                </div>
+            </ModalHeader>
+            <ModalBody style="padding-top: 25px; padding-bottom: 25px; display:flex; justify-content: center;">
+                <!-- svelte-ignore a11y-img-redundant-alt -->
+                <img on:click={() => setDownloadCV(qr_cvid)} src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}" alt="no-image" />
+            </ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle12}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
     </div>
 </main>
 
 <style>
+    .qr-title {
+        font-size: 25px;
+        white-space: nowrap;
+        font-weight: 500;
+    }
     .cv-image {
         position: absolute;
         margin-left: 70%;
@@ -3028,6 +3069,7 @@
     .editIcon,
     .downloadIcon,
     .showIcon,
+    .qrIcon,
     .deleteIcon {
         cursor: pointer;
         font-size: 15px;
@@ -3049,6 +3091,10 @@
         color: white;
     }
     .showIcon:hover {
+        background-color: rgb(118, 115, 156);
+        color: white;
+    }
+    .qrIcon:hover {
         background-color: rgb(118, 115, 156);
         color: white;
     }

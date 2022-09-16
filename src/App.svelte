@@ -5,6 +5,7 @@
   import Home from "./lib/home.svelte";
   import Login from "./lib/login.svelte";
   import Dashboard from "./lib/dashboard.svelte";
+  import DownloadCv from "./Routes/downloadCV.svelte";
   export let url = "";
 </script>
 
@@ -48,6 +49,12 @@
           {#if localStorage.getItem(params.username)}
           <Dashboard username={params.username} operation="addletter" />
           {/if}
+        </Route>
+        <Route path="/download/cv/:cvid" let:params>
+          <!-- {#if localStorage.getItem(params.username)} -->
+          <!-- <Dashboard username={params.username} operation="addletter" /> -->
+          <!-- {/if} -->
+          <downloadCv cvid={params.cvid}/>
         </Route>
     </div>
   </Router>
