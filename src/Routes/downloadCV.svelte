@@ -1,5 +1,5 @@
 <main>
-    {cvid}
+   
 </main>
 <script>
     import { onMount } from "svelte";
