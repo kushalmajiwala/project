@@ -10,6 +10,7 @@
     div {
         display: flex;
         justify-content: center;  
+        color: white;
     }
     h1 {
        margin-top: 20%;

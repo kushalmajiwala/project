@@ -45,7 +45,9 @@
                 <Spinner />
             </div>
         {:else if userFound == true && cvFound == false}
+            <div class="home-image">
                 <Nocv />
+            </div>
         {:else if userFound == true && cvFound == true}
             <div>
                 <h1>MyCV</h1>
@@ -61,5 +63,18 @@
         align-items: center;
         justify-content: center;
         height: 600px;
+    }
+    .home-image {
+        background-image: url("../assets/images/homeimage.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        height: 615px;
+        width: 100%;
+        background-position: center;
+    }
+    @media screen and (max-width: 1250px) {
+        .home-image {
+            height: 675px;
+        }
     }
 </style>
