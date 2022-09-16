@@ -2921,7 +2921,7 @@
             </ModalHeader>
             <ModalBody style="padding-top: 25px; padding-bottom: 25px; display:flex; justify-content: center;">
                 <!-- svelte-ignore a11y-img-redundant-alt -->
-                <img on:click={() => setDownloadCV(qr_cvid)} src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}" alt="no-image" />
+                <img  src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}" alt="no-image" />
             </ModalBody>
             <ModalFooter>
                 <Button
