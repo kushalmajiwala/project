@@ -81,7 +81,7 @@
 
 <body>
 <header class="w3-display-container w3-content w3-center" style="max-width:1500px">
-    <img class="w3-image" src="/public/homeimage2.png" alt="Me" width="1500" height="800">
+    <img class="w3-image" src="https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-118143566.jpg" alt="Me" width="1500" height="800">
     <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
       <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">JANE DOE</h1>
       <h5 class="w3-hide-large" style="white-space:nowrap">JANE DOE</h5>
