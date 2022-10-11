@@ -81,7 +81,7 @@
 
 <body>
 <header class="w3-display-container w3-content w3-center" style="max-width:1500px">
-    <img class="w3-image" src="https://png.pngtree.com/thumb_back/fh260/back_pic/03/80/06/3757c30a762387b.jpg" alt="Me" width="1500" height="800">
+    <img class="w3-image homeimage" src="https://png.pngtree.com/thumb_back/fh260/back_pic/03/80/06/3757c30a762387b.jpg" alt="Me" width="1500" height="800">
     <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
       <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">JANE DOE</h1>
       <h5 class="w3-hide-large" style="white-space:nowrap">JANE DOE</h5>
@@ -160,5 +160,10 @@
         justify-content: center;
         align-items: center;
         height: 500px;
+    }
+    @media screen and (max-width: 530px) {
+        .homeimage {
+            height: 270px;
+        }
     }
   </style>
