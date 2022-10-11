@@ -81,7 +81,7 @@
 
 <body>
 <header class="w3-display-container w3-content w3-center" style="max-width:1500px">
-    <img class="w3-image" src="https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-118143566.jpg" alt="Me" width="1500" height="800">
+    <img class="w3-image" src="/public/homeimage2.png" alt="Me" width="1500" height="800">
     <div class="w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
       <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">JANE DOE</h1>
       <h5 class="w3-hide-large" style="white-space:nowrap">JANE DOE</h5>
@@ -91,7 +91,8 @@
     <!-- Navbar (placed at the bottom of the header image) -->
     <div class="w3-bar w3-light-grey w3-round w3-display-bottommiddle w3-hide-small" style="bottom:-16px">
       <a href="#" class="w3-bar-item w3-button">Home</a>
-      <a href="#portfolio" class="w3-bar-item w3-button">Portfolio</a>
+      <a href="#mycv" class="w3-bar-item w3-button">My-CV</a>
+      <a href="#myletter" class="w3-bar-item w3-button">My-Letters</a>
       <a href="#contact" class="w3-bar-item w3-button">Contact</a>
     </div>
   </header>
@@ -100,12 +101,18 @@
   <div class="w3-center w3-light-grey w3-padding-16 w3-hide-large w3-hide-medium">
   <div class="w3-bar w3-light-grey">
     <a href="#" class="w3-bar-item w3-button">Home</a>
-    <a href="#portfolio" class="w3-bar-item w3-button">Portfolio</a>
+    <a href="#mycv" class="w3-bar-item w3-button">My-CV</a>
+    <a href="#myletter" class="w3-bar-item w3-button">My-Letters</a>
     <a href="#contact" class="w3-bar-item w3-button">Contact</a>
   </div>
   </div>
   <!-- Page content -->
-  <div class="w3-content w3-padding-large w3-margin-top" id="portfolio">
+  <div class="mycv" id="mycv">
+    my CV
+  </div>
+  <div class="myletter" id="myletter">
+    my Letters
+  </div>
   
     <!-- Images (Portfolio) -->
     <!-- <img src="/w3images/ocean.jpg" alt="Ocean" class="w3-image" width="1000" height="500">
@@ -118,7 +125,7 @@
     <div class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top" id="contact">
       <h3 class="w3-center">Contact</h3>
       <hr>
-      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus.</p>
+      <p></p>
   
       <form action="/action_page.php" target="_blank">
         <div class="w3-section">
@@ -135,12 +142,23 @@
         </div>
         <button type="submit" class="w3-button w3-block w3-dark-grey">Send</button>
       </form><br>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-  
+      <!-- <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p> -->
     </div>
-  
-  <!-- End page content -->
-  </div>
-  
   </body>
 
+  <style>
+    .mycv {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+    }
+    .myletter {
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 500px;
+    }
+  </style>
