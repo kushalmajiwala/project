@@ -1986,7 +1986,7 @@
                 <div class="personal-page my-content">
                     <ModalHeader style="padding-left: 35%;">
                         <div class="page-header">
-                            <h1>Personal-page</h1>
+                            <h1>Personal-Page</h1>
                         </div>
                     </ModalHeader>
                     <ModalBody>
