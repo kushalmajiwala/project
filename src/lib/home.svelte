@@ -1315,8 +1315,8 @@
             </div>
         </div>
         <!-- Page content -->
-        <div class="mycv" id="mycv" on:click={toggle1}>
-            <div class="mycvinner">
+        <div class="mycv" id="mycv">
+            <div class="mycvinner" on:click={toggle1}>
                 <p class="cvicon">
                     <i
                         class="bi bi-file-person-fill"
@@ -1849,14 +1849,7 @@
         color: rgb(73, 61, 128);
         text-shadow: 0px 5px 5px rgba(183, 82, 82, 0.25);
     }
-    .none-added {
-        position: absolute;
-        font-size: 35px;
-        font-weight: 400;
-        margin-left: 28%;
-        margin-top: 10%;
-        text-shadow: 0px 5px 10px rgba(61, 51, 51, 0.25);
-    }
+
     @media screen and (max-width: 1230px) {
         .inner-cv {
             width: 70%;
@@ -1931,7 +1924,7 @@
         justify-content: center;
         align-items: center;
         height: 500px;
-        background-image: url("https://media.istockphoto.com/photos/dark-street-asphalt-abstract-dark-blue-background-picture-id1348169049?b=1&k=20&m=1348169049&s=170667a&w=0&h=nZSKsO_2UMZfE06RGlFD5gzUHQng6PwTG6xBVOznGvo=");
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvsPtlayIOCOfQEMwNEKM7cILG0GfbhgGaWg&usqp=CAU");
         background-repeat: no-repeat;
         background-size: cover;
         color: white;
