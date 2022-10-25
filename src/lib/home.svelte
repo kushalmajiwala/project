@@ -26,6 +26,11 @@
     let download_cvid = "";
     let qr_cvid = "";
 
+    //Contact Us Form
+    let cname = "";
+    let cemail = "";
+    let cmsg = "";
+
     let edit_skillid1 = "";
     let edit_skillid2 = "";
     let edit_skillid3 = "";
@@ -37,10 +42,14 @@
     let open1 = false;
     let open2 = false;
     let open3 = false;
+    let open4 = false;
+    let open5 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
+    const toggle4 = () => (open4 = !open4);
+    const toggle5 = () => (open5 = !open5);
 
     let checking = false;
 
@@ -84,6 +93,18 @@
     let interest1 = "";
     let interest2 = "";
     let interest3 = "";
+
+    function showMsg()
+    {
+        if(cname !== '' && cemail !== '' && cmsg !== '')
+        {
+            toggle4();
+        }
+        else
+        {
+            toggle5();
+        }
+    }
 
     function checkUserExist() {
         const options = {
@@ -1325,14 +1346,13 @@
                 <hr />
                 <p />
     
-                <form>
                     <div class="w3-section">
                         <label>Name</label>
                         <input
                             class="w3-input w3-border"
                             type="text"
                             required
-                            name="Name"
+                            bind:value={cname}
                         />
                     </div>
                     <div class="w3-section">
@@ -1341,17 +1361,16 @@
                             class="w3-input w3-border"
                             type="text"
                             required
-                            name="Email"
+                            bind:value={cemail}
                         />
                     </div>
                     <div class="w3-section">
                         <label>Message</label>
-                        <input class="w3-input w3-border" required name="Message" />
+                        <input class="w3-input w3-border" required bind:value={cmsg}/>
                     </div>
-                    <button type="submit" class="w3-button w3-block w3-dark-grey"
-                        >Send</button
+                    <button class="w3-button w3-block w3-dark-grey"
+                        on:click={showMsg}>Send</button
                     >
-                </form>
                 <br />
                 <!-- <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p> -->
             </div>
@@ -1717,6 +1736,24 @@
                             >
                         </ModalFooter>
                     </div>
+                </Modal>
+                <Modal isOpen={open4} backdrop="static">
+                    <ModalHeader>Contact-Us</ModalHeader>
+                    <ModalBody>
+                      Your response Submitted...
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" on:click={toggle4}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
+                <Modal isOpen={open5} backdrop="static">
+                    <ModalHeader>Contact-Us</ModalHeader>
+                    <ModalBody>
+                      Contact us Fields Cannot be empty...
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" on:click={toggle5}>Cancel</Button>
+                    </ModalFooter>
                 </Modal>
             </div>
         </Router>
