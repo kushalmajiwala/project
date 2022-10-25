@@ -1176,7 +1176,7 @@
     div {
         display: flex;
         justify-content: center;  
-        color: white;
+        color: black;
     }
     h1 {
        margin-top: 20%;
