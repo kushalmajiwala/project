@@ -139,6 +139,7 @@
     let open10 = false;
     let open11 = false;
     let open12 = false;
+    let open13 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -152,6 +153,7 @@
     const toggle10 = () => (open10 = !open10);
     const toggle11 = () => (open11 = !open11);
     const toggle12 = () => (open12 = !open12);
+    const toggle13 = () => (open13 = !open13);
 
     let totalCV = [];
     let checking = false;
@@ -470,7 +472,7 @@
     function summaryValidate() {
         if (my_summary == "") {
             summary_border = "border: 1px solid red; height: 200px";
-            toggle8();
+            toggle13();
             showSummary();
             return false;
         }
@@ -3212,6 +3214,18 @@
                 >
             </ModalFooter>
         </Modal>
+        <Modal header="Message" isOpen={open13}>
+            <ModalBody>Fields Cannot be empty on Summary Details Page...</ModalBody>
+            <ModalFooter>
+              <Button
+                color="danger"
+                class="float-right"
+                on:click={toggle13}
+                on:click={progressStop}
+                >Cancel</Button
+              >
+            </ModalFooter>
+          </Modal>
     </div>
 </main>
 
