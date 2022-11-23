@@ -603,7 +603,24 @@
                               rec_interest1
                             );
                           }
-                          toggle7();
+                          //summary table insert
+                          let rec_summary = {
+                            UserId: userid,
+                            cvid: cvid,
+                            summary: my_summary
+                          };
+                          axios.post("https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/summary/", rec_summary).then(function(response){
+                            let rec_social = {
+                              UserId: userid,
+                              cvid: cvid,
+                              facebook: facebook_link,
+                              twitter: twitter_link,
+                              linkedin: linkedin_link,
+                              website: website_link
+                            }
+                            axios.post("https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/social/", rec_social);
+                            toggle7();
+                          });
                         });
                     });
                 })
@@ -658,6 +675,13 @@
     interest1 = "";
     interest2 = "";
     interest3 = "";
+
+    my_summary = "";
+
+    facebook_link = "";
+    twitter_link = "";
+    linkedin_link = "";
+    website_link = ""
   }
 
   const dispatch = createEventDispatcher();
