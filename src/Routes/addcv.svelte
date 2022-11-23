@@ -13,6 +13,7 @@
     ModalFooter,
     ModalHeader,
     Spinner,
+    Label
   } from "sveltestrap";
   import { createEventDispatcher } from "svelte";
   import axios from "axios";
@@ -36,6 +37,7 @@
   let open5 = false;
   let open6 = false;
   let open7 = false;
+  let open8 = false;
 
   //Modals Functions
   const toggle1 = () => (open1 = !open1);
@@ -45,6 +47,7 @@
   const toggle5 = () => (open5 = !open5);
   const toggle6 = () => (open6 = !open6);
   const toggle7 = () => (open7 = !open7);
+  const toggle8 = () => (open8 = !open8);
 
   let progress = false;
   let uploading = false;
@@ -59,12 +62,16 @@
   let skill = false;
   let interest = false;
   let experience = false;
+  let summary = false;
+  let social = false;
 
   let personalActive = true;
   let educationActive = false;
   let experienceActive = false;
   let skillActive = false;
   let interestActive = false;
+  let summaryActive = false;
+  let socialActive = false;
 
   //Common Variables for all the pages
   let userid = "";
@@ -123,6 +130,15 @@
   let interest1_border = "border: 1px solid #4c89ca;";
   let interest2_border = "border: 1px solid #4c89ca;";
   let interest3_border = "border: 1px solid #4c89ca;";
+
+  //Summary Page Borders
+  let summary_border = "border: 1px solid #4c89ca;height: 200px";
+
+  //Social Page Borders
+  let facebook_link_border = "border: 1px solid #4c89ca;";
+  let twitter_link_border = "border: 1px solid #4c89ca;";
+  let linkedin_link_border = "border: 1px solid #4c89ca;";
+  let website_link_border = "border: 1px solid #4c89ca;";
 
   function personalValidate() {
     if (
@@ -365,6 +381,35 @@
     return true;
   }
 
+  //Summary Page Variables
+  let my_summary = "";
+
+  function summaryValidate() {
+    if(my_summary == "")
+    {
+      summary_border = "border: 1px solid red; height: 200px";
+      toggle8();
+      showSummary();
+      return false;
+    }
+    if(my_summary !== "")
+    {
+      summary_border = "border: 1px solid #4c89ca;  height: 200px";
+    }
+    return true;
+  }
+
+  //Social Page Variables
+  let facebook_link = "";
+  let twitter_link = "";
+  let linkedin_link = "";
+  let website_link = "";
+
+  function socialValidate()
+  {
+    return true;
+  }
+
   function submitCV() {
     progress = true;
     if (personalValidate()) {
@@ -372,7 +417,9 @@
         if (experienceValidate()) {
           if (skillValidate()) {
             if (interestValidate()) {
-              //Personal Details Table Insert
+              if(summaryValidate()) {
+                if(socialValidate()) {
+                  //Personal Details Table Insert
               let rec = {
                 UserId: userid,
                 cvtitle: cv_title,
@@ -563,6 +610,8 @@
                 .catch(function (error) {
                   console.error(error);
                 });
+                }
+              }
             }
           }
         }
@@ -683,6 +732,8 @@
     skill = false;
     interest = false;
     experience = false;
+    summary = false;
+    social = false;
 
     //Showing the Active page tab
     personalActive = true;
@@ -690,6 +741,8 @@
     skillActive = false;
     interestActive = false;
     experienceActive = false;
+    socialActive = false;
+    summaryActive = false;
   }
   function showEducation() {
     personal = false;
@@ -697,12 +750,16 @@
     skill = false;
     interest = false;
     experience = false;
+    summary = false;
+    social = false;
 
     personalActive = false;
     educationActive = true;
     skillActive = false;
     interestActive = false;
     experienceActive = false;
+    socialActive = false;
+    summaryActive = false;
   }
   function showExperience() {
     personal = false;
@@ -710,12 +767,16 @@
     skill = false;
     interest = false;
     experience = true;
+    summary = false;
+    social = false;
 
     personalActive = false;
     educationActive = false;
     skillActive = false;
     interestActive = false;
     experienceActive = true;
+    socialActive = false;
+    summaryActive = false;
   }
   function showSkill() {
     personal = false;
@@ -723,12 +784,16 @@
     skill = true;
     interest = false;
     experience = false;
+    summary = false;
+    social = false;
 
     personalActive = false;
     educationActive = false;
     skillActive = true;
     interestActive = false;
     experienceActive = false;
+    socialActive = false;
+    summaryActive = false;
   }
   function showInterest() {
     personal = false;
@@ -736,13 +801,52 @@
     skill = false;
     interest = true;
     experience = false;
+    summary = false;
+    social = false;
 
     personalActive = false;
     educationActive = false;
     skillActive = false;
     interestActive = true;
     experienceActive = false;
+    socialActive = false;
+    summaryActive = false;
   }
+  function showSummary() {
+    personal = false;
+    education = false;
+    skill = false;
+    interest = false;
+    experience = false;
+    summary = true;
+    social = false;
+
+    personalActive = false;
+    educationActive = false;
+    skillActive = false;
+    interestActive = false;
+    experienceActive = false;
+    socialActive = false;
+    summaryActive = true;
+  }
+  function showSocial() {
+    personal = false;
+    education = false;
+    skill = false;
+    interest = false;
+    experience = false;
+    summary = false;
+    social = true;
+
+    personalActive = false;
+    educationActive = false;
+    skillActive = false;
+    interestActive = false;
+    experienceActive = false;
+    socialActive = true;
+    summaryActive = false;
+  }
+
   export let username;
   export let path;
 </script>
@@ -776,6 +880,12 @@
       </div>
       <div on:click={showInterest}>
         <TabPane tabId="interest" tab="interest" active={interestActive} />
+      </div>
+      <div on:click={showSummary}>
+        <TabPane tabId="summary" tab="summary" active={summaryActive} />
+      </div>
+      <div on:click={showSocial}>
+        <TabPane tabId="social" tab="social" active={socialActive} />
       </div>
     </TabContent>
   </div>
@@ -1252,20 +1362,110 @@
           </div>
         </div>
         <div class="btncontainer">
-          <p class="previous pagebtn" on:click={showSkill}>&laquo; Previous</p>
-          <Button
-            color="success"
-            on:click={submitCV}
-            style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;"
-          >
-            {#if progress}
-              <p><Spinner size="sm" /> Saving</p>
-            {:else}
-              <p><i class="bi bi-file-earmark-check-fill" /> Save</p>
-            {/if}
-          </Button>
+          <p class="previous pagebtn" on:click={showSkill}>
+            &laquo; Previous
+          </p>
+          <p class="next pagebtn" on:click={showSummary}>Next &raquo;</p>
         </div>
       </div>
+    {/if}
+    {#if summary}
+    <div class="skill-page my-content">
+      <div class="page-header">
+        <h1>Summary-page</h1>
+      </div>
+      <div style="width: 100%; margin-top: 80px; padding-left: 16%;">
+        <div style="width: 80%;">
+          <FormGroup>
+            <Label for="exampleText" style="font-size: 25px;">Add-Summary</Label>
+            <Input type="textarea" name="text" id="exampleText" bind:value={my_summary} style={summary_border}/>
+          </FormGroup>
+        </div>
+      </div>
+      <div class="btncontainer">
+        <p class="previous pagebtn" on:click={showInterest}>
+          &laquo; Previous
+        </p>
+        <p class="next pagebtn" on:click={showSocial}>Next &raquo;</p>
+      </div>
+    </div>
+    {/if}
+    {#if social}
+    <div class="interest-page my-content">
+      <div class="page-header">
+        <h1>Social-page</h1>
+      </div>
+      <div
+      class="form-row form-content"
+      style="width: 100%; padding-left: 7%; margin-top: 5%;"
+    >
+      <div class="form-group" style="width: 80%">
+        <FormGroup floating label="Enter Facebook Link">
+          <Input
+            placeholder="Enter Facebook Link"
+            style={facebook_link_border}
+            bind:value={facebook_link}
+          />
+        </FormGroup>
+      </div>
+    </div>
+    <div
+      class="form-row form-content"
+      style="width: 100%; padding-left: 7%;"
+    >
+      <div class="form-group" style="width: 80%">
+        <FormGroup floating label="Enter Twitter Link">
+          <Input
+            placeholder="Enter Twitter Link"
+            style={twitter_link_border}
+            bind:value={twitter_link}
+          />
+        </FormGroup>
+      </div>
+    </div>
+    <div
+      class="form-row form-content"
+      style="width: 100%; padding-left: 7%;"
+    >
+      <div class="form-group" style="width: 80%">
+        <FormGroup floating label="Enter Linkedin Link">
+          <Input
+            placeholder="Enter Linkedin Link"
+            style={linkedin_link_border}
+            bind:value={linkedin_link}
+          />
+        </FormGroup>
+      </div>
+    </div>
+    <div
+      class="form-row form-content"
+      style="width: 100%; padding-left: 7%;"
+    >
+      <div class="form-group" style="width: 80%">
+        <FormGroup floating label="Enter Website Link">
+          <Input
+            placeholder="Enter Website Link"
+            style={website_link_border}
+            bind:value={website_link}
+          />
+        </FormGroup>
+      </div>
+    </div>
+      <div class="btncontainer">
+        <p class="previous pagebtn" on:click={showSummary}>&laquo; Previous</p>
+        <Button
+          color="success"
+          on:click={submitCV}
+          style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;"
+        >
+          {#if progress}
+            <p><Spinner size="sm" /> Saving</p>
+          {:else}
+            <p><i class="bi bi-file-earmark-check-fill" /> Save</p>
+          {/if}
+        </Button>
+      </div>
+    </div>
     {/if}
   </div>
   <div class="Modals">
@@ -1355,6 +1555,18 @@
         >
       </ModalFooter>
     </Modal>
+    <Modal header="Message" isOpen={open8}>
+      <ModalBody>Fields Cannot be empty on Summary Details Page...</ModalBody>
+      <ModalFooter>
+        <Button
+          color="danger"
+          class="float-right"
+          on:click={toggle8}
+          on:click={progressStop}
+          >Cancel</Button
+        >
+      </ModalFooter>
+    </Modal>
   </div>
 </main>
 
@@ -1427,8 +1639,8 @@
     background-color: white;
     width: 100%;
     opacity: 0.8;
-    font-size: 25px;
-    padding-left: 30%;
+    font-size: 20px;
+    padding-left: 32%;
     box-shadow: 2px 2px 5px 0px grey;
   }
   .page-header {
