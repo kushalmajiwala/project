@@ -14,6 +14,7 @@
         FormGroup,
         Input,
         Spinner,
+        Label,
     } from "sveltestrap";
     import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
     import { get_current_component } from "svelte/internal";
@@ -68,6 +69,15 @@
     let interest2 = "";
     let interest3 = "";
 
+    //Summary Page Variables
+    let my_summary = "";
+
+    //Social Page Variables
+    let facebook_link = "";
+    let twitter_link = "";
+    let linkedin_link = "";
+    let website_link = "";
+
     //Personal Page Borders
     let fname_border = "border: 1px solid #4c89ca;";
     let lname_border = "border: 1px solid #4c89ca;";
@@ -108,6 +118,15 @@
     let interest2_border = "border: 1px solid #4c89ca;";
     let interest3_border = "border: 1px solid #4c89ca;";
 
+    //Summary Page Borders
+    let summary_border = "border: 1px solid #4c89ca;height: 200px";
+
+    //Social Page Borders
+    let facebook_link_border = "border: 1px solid #4c89ca;";
+    let twitter_link_border = "border: 1px solid #4c89ca;";
+    let linkedin_link_border = "border: 1px solid #4c89ca;";
+    let website_link_border = "border: 1px solid #4c89ca;";
+
     let open1 = false;
     let open2 = false;
     let open3 = false;
@@ -134,7 +153,6 @@
     const toggle11 = () => (open11 = !open11);
     const toggle12 = () => (open12 = !open12);
 
-
     let totalCV = [];
     let checking = false;
 
@@ -160,6 +178,8 @@
     let skill = false;
     let interest = false;
     let experience = false;
+    let social = false;
+    let summary = false;
 
     function resetImage() {
         showImage = false;
@@ -177,6 +197,8 @@
         skill = false;
         interest = false;
         experience = false;
+        summary = false;
+        social = false;
     }
     function showEducation() {
         personal = false;
@@ -184,6 +206,8 @@
         skill = false;
         interest = false;
         experience = false;
+        summary = false;
+        social = false;
     }
     function showExperience() {
         personal = false;
@@ -191,6 +215,8 @@
         skill = false;
         interest = false;
         experience = true;
+        summary = false;
+        social = false;
     }
     function showSkill() {
         personal = false;
@@ -198,6 +224,8 @@
         skill = true;
         interest = false;
         experience = false;
+        summary = false;
+        social = false;
     }
     function showInterest() {
         personal = false;
@@ -205,8 +233,27 @@
         skill = false;
         interest = true;
         experience = false;
+        summary = false;
+        social = false;
     }
-
+    function showSummary() {
+        personal = false;
+        education = false;
+        skill = false;
+        interest = false;
+        experience = false;
+        summary = true;
+        social = false;
+    }
+    function showSocial() {
+        personal = false;
+        education = false;
+        skill = false;
+        interest = false;
+        experience = false;
+        social = true;
+        summary = false;
+    }
     //Validation
     function personalValidate() {
         if (
@@ -420,6 +467,18 @@
         }
         return true;
     }
+    function summaryValidate() {
+        if (my_summary == "") {
+            summary_border = "border: 1px solid red; height: 200px";
+            toggle8();
+            showSummary();
+            return false;
+        }
+        if (my_summary !== "") {
+            summary_border = "border: 1px solid #4c89ca;  height: 200px";
+        }
+        return true;
+    }
 
     function EditCV() {
         progress = true;
@@ -429,184 +488,213 @@
                 if (experienceValidate()) {
                     if (skillValidate()) {
                         if (interestValidate()) {
-                            let rec1 = {
-                                UserId: userid,
-                                cvtitle: cv_title,
-                                fname: fname,
-                                lname: lname,
-                                address: address,
-                                city: personal_city,
-                                state: personal_state,
-                                phone: phoneno,
-                                email: email,
-                                pic: personal_pic_url,
-                                dob: dob,
-                                gender: gender,
-                                profession: profession,
-                            };
-                            axios
-                                .put(
-                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/cvid/" +
-                                        edit_cvid,
-                                    rec1
-                                )
-                                .then(function () {
-                                    let rec2 = {
-                                        UserId: userid,
-                                        schoolname: schoolname,
-                                        degree: degree,
-                                        field: field,
-                                        city: education_city,
-                                        state: education_state,
-                                    };
-                                    axios
-                                        .put(
-                                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/cvid/" +
-                                                edit_cvid,
-                                            rec2
-                                        )
-                                        .then(function () {
-                                            let rec3 = {
-                                                UserId: userid,
-                                                job_title: job_title,
-                                                company_name: company_name,
-                                                experience: experience_year,
-                                                city: experience_city,
-                                                state: experience_state,
-                                            };
-                                            axios
-                                                .put(
-                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/cvid/" +
-                                                        edit_cvid,
-                                                    rec3
-                                                )
-                                                .then(function () {
-                                                    let rec4 = {
-                                                        UserId: userid,
-                                                        cvid: edit_cvid,
-                                                        skill: skill1,
-                                                        level: level1,
-                                                    };
-                                                    let rec5 = {
-                                                        UserId: userid,
-                                                        cvid: edit_cvid,
-                                                        skill: skill2,
-                                                        level: level2,
-                                                    };
-                                                    let rec6 = {
-                                                        UserId: userid,
-                                                        cvid: edit_cvid,
-                                                        skill: skill3,
-                                                        level: level3,
-                                                    };
-                                                    axios
-                                                        .put(
-                                                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/skillid/" +
-                                                                edit_skillid1,
-                                                            rec4
-                                                        )
-                                                        .then(function () {
-                                                            if (
-                                                                edit_skillid2 ==
-                                                                    "" &&
-                                                                skill2 != "" &&
-                                                                level2 != ""
-                                                            ) {
-                                                                axios.post(
-                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill",
-                                                                    rec5
-                                                                );
-                                                            } else {
-                                                                axios.put(
-                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/skillid/" +
-                                                                        edit_skillid2,
-                                                                    rec5
-                                                                );
-                                                            }
-                                                            if (
-                                                                edit_skillid3 ==
-                                                                    "" &&
-                                                                skill3 != "" &&
-                                                                level3 != ""
-                                                            ) {
-                                                                axios.post(
-                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill",
-                                                                    rec6
-                                                                );
-                                                            } else {
-                                                                axios.put(
-                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/skillid/" +
-                                                                        edit_skillid3,
-                                                                    rec6
-                                                                );
-                                                            }
-                                                            let rec7 = {
-                                                                UserId: userid,
-                                                                cvid: edit_cvid,
-                                                                interest:
-                                                                    interest1,
-                                                            };
-                                                            let rec8 = {
-                                                                UserId: userid,
-                                                                cvid: edit_cvid,
-                                                                interest:
-                                                                    interest2,
-                                                            };
-                                                            let rec9 = {
-                                                                UserId: userid,
-                                                                cvid: edit_cvid,
-                                                                interest:
-                                                                    interest3,
-                                                            };
-                                                            axios
-                                                                .put(
-                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/interestid/" +
-                                                                        edit_interestid1,
-                                                                    rec7
-                                                                )
-                                                                .then(
-                                                                    function () {
-                                                                        if (
-                                                                            edit_interestid2 ==
-                                                                                "" &&
-                                                                            interest2 !=
-                                                                                ""
-                                                                        ) {
-                                                                            axios.post(
-                                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest",
-                                                                                rec8
-                                                                            );
-                                                                        } else {
+                            if (summaryValidate()) {
+                                let rec1 = {
+                                    UserId: userid,
+                                    cvtitle: cv_title,
+                                    fname: fname,
+                                    lname: lname,
+                                    address: address,
+                                    city: personal_city,
+                                    state: personal_state,
+                                    phone: phoneno,
+                                    email: email,
+                                    pic: personal_pic_url,
+                                    dob: dob,
+                                    gender: gender,
+                                    profession: profession,
+                                };
+                                axios
+                                    .put(
+                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/cvid/" +
+                                            edit_cvid,
+                                        rec1
+                                    )
+                                    .then(function () {
+                                        let rec2 = {
+                                            UserId: userid,
+                                            schoolname: schoolname,
+                                            degree: degree,
+                                            field: field,
+                                            city: education_city,
+                                            state: education_state,
+                                        };
+                                        axios
+                                            .put(
+                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/cvid/" +
+                                                    edit_cvid,
+                                                rec2
+                                            )
+                                            .then(function () {
+                                                let rec3 = {
+                                                    UserId: userid,
+                                                    job_title: job_title,
+                                                    company_name: company_name,
+                                                    experience: experience_year,
+                                                    city: experience_city,
+                                                    state: experience_state,
+                                                };
+                                                axios
+                                                    .put(
+                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/cvid/" +
+                                                            edit_cvid,
+                                                        rec3
+                                                    )
+                                                    .then(function () {
+                                                        let rec4 = {
+                                                            UserId: userid,
+                                                            cvid: edit_cvid,
+                                                            skill: skill1,
+                                                            level: level1,
+                                                        };
+                                                        let rec5 = {
+                                                            UserId: userid,
+                                                            cvid: edit_cvid,
+                                                            skill: skill2,
+                                                            level: level2,
+                                                        };
+                                                        let rec6 = {
+                                                            UserId: userid,
+                                                            cvid: edit_cvid,
+                                                            skill: skill3,
+                                                            level: level3,
+                                                        };
+                                                        axios
+                                                            .put(
+                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/skillid/" +
+                                                                    edit_skillid1,
+                                                                rec4
+                                                            )
+                                                            .then(function () {
+                                                                if (
+                                                                    edit_skillid2 ==
+                                                                        "" &&
+                                                                    skill2 !=
+                                                                        "" &&
+                                                                    level2 != ""
+                                                                ) {
+                                                                    axios.post(
+                                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill",
+                                                                        rec5
+                                                                    );
+                                                                } else {
+                                                                    axios.put(
+                                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/skillid/" +
+                                                                            edit_skillid2,
+                                                                        rec5
+                                                                    );
+                                                                }
+                                                                if (
+                                                                    edit_skillid3 ==
+                                                                        "" &&
+                                                                    skill3 !=
+                                                                        "" &&
+                                                                    level3 != ""
+                                                                ) {
+                                                                    axios.post(
+                                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill",
+                                                                        rec6
+                                                                    );
+                                                                } else {
+                                                                    axios.put(
+                                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/skillid/" +
+                                                                            edit_skillid3,
+                                                                        rec6
+                                                                    );
+                                                                }
+                                                                let rec7 = {
+                                                                    UserId: userid,
+                                                                    cvid: edit_cvid,
+                                                                    interest:
+                                                                        interest1,
+                                                                };
+                                                                let rec8 = {
+                                                                    UserId: userid,
+                                                                    cvid: edit_cvid,
+                                                                    interest:
+                                                                        interest2,
+                                                                };
+                                                                let rec9 = {
+                                                                    UserId: userid,
+                                                                    cvid: edit_cvid,
+                                                                    interest:
+                                                                        interest3,
+                                                                };
+                                                                axios
+                                                                    .put(
+                                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/interestid/" +
+                                                                            edit_interestid1,
+                                                                        rec7
+                                                                    )
+                                                                    .then(
+                                                                        function () {
+                                                                            if (
+                                                                                edit_interestid2 ==
+                                                                                    "" &&
+                                                                                interest2 !=
+                                                                                    ""
+                                                                            ) {
+                                                                                axios.post(
+                                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest",
+                                                                                    rec8
+                                                                                );
+                                                                            } else {
+                                                                                axios.put(
+                                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/interestid/" +
+                                                                                        edit_interestid2,
+                                                                                    rec8
+                                                                                );
+                                                                            }
+                                                                            if (
+                                                                                edit_interestid3 ==
+                                                                                    "" &&
+                                                                                interest3 !=
+                                                                                    ""
+                                                                            ) {
+                                                                                axios.post(
+                                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest",
+                                                                                    rec9
+                                                                                );
+                                                                            } else {
+                                                                                axios.put(
+                                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/interestid/" +
+                                                                                        edit_interestid3,
+                                                                                    rec9
+                                                                                );
+                                                                            }
+                                                                            let summary_edit =
+                                                                                {
+                                                                                    UserId: userid,
+                                                                                    summary: my_summary
+                                                                                };
                                                                             axios.put(
-                                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/interestid/" +
-                                                                                    edit_interestid2,
-                                                                                rec8
-                                                                            );
+                                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/summary/cvid/" +
+                                                                                    edit_cvid,
+                                                                                summary_edit
+                                                                            ).then(function(){
+                                                                                let social_edit =
+                                                                                {
+                                                                                    UserId: userid,
+                                                                                    facebook: facebook_link,
+                                                                                    twitter: twitter_link,
+                                                                                    linkedin: linkedin_link,
+                                                                                    website: website_link
+                                                                                };
+                                                                                axios.put(
+                                                                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/social/cvid/" +
+                                                                                        edit_cvid,
+                                                                                    social_edit
+                                                                                ).then(function(){
+                                                                                    toggle10();
+                                                                                });
+                                                                            });
                                                                         }
-                                                                        if (
-                                                                            edit_interestid3 ==
-                                                                                "" &&
-                                                                            interest3 !=
-                                                                                ""
-                                                                        ) {
-                                                                            axios.post(
-                                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest",
-                                                                                rec9
-                                                                            );
-                                                                        } else {
-                                                                            axios.put(
-                                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/interestid/" +
-                                                                                    edit_interestid3,
-                                                                                rec9
-                                                                            );
-                                                                        }
-                                                                        toggle10();
-                                                                    }
-                                                                );
-                                                        });
-                                                });
-                                        });
-                                });
+                                                                    );
+                                                            });
+                                                    });
+                                            });
+                                    });
+                            }
                         }
                     }
                 }
@@ -1693,6 +1781,61 @@
                                                         response.data[2]
                                                             .interestid;
                                                 }
+
+                                                const options = {
+                                                    method: "GET",
+                                                    url:
+                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/summary/cvid/" +
+                                                        cvid,
+                                                };
+
+                                                axios
+                                                    .request(options)
+                                                    .then(function (response) {
+                                                        my_summary =
+                                                            response.data[0]
+                                                                .summary;
+
+                                                        const options = {
+                                                            method: "GET",
+                                                            url:
+                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/social/cvid/" +
+                                                                cvid,
+                                                        };
+
+                                                        axios
+                                                            .request(options)
+                                                            .then(function (
+                                                                response
+                                                            ) {
+                                                                facebook_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .facebook;
+                                                                twitter_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .twitter;
+                                                                linkedin_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .linkedin;
+                                                                website_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .website;
+                                                            })
+                                                            .catch(function (
+                                                                error
+                                                            ) {
+                                                                console.error(
+                                                                    error
+                                                                );
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.error(error);
+                                                    });
                                             })
                                             .catch(function (error) {
                                                 console.error(error);
@@ -1915,9 +2058,10 @@
                             id="myview-{i}"
                             on:click={() => setShowCV(rec.cvid)}
                         />
-                        <i class="bi bi-qr-code qrIcon" 
-                           id="myqr-{i}" 
-                           on:click={() => generateQRCode(rec.cvid)}
+                        <i
+                            class="bi bi-qr-code qrIcon"
+                            id="myqr-{i}"
+                            on:click={() => generateQRCode(rec.cvid)}
                         />
                         <i
                             class="bi bi-trash-fill deleteIcon"
@@ -2559,19 +2703,9 @@
                         <Button color="primary" on:click={showSkill}
                             >&laquo; Previous</Button
                         >
-                        <Button
-                            color="success"
-                            style="width: 120px; height: 38px; border-radius: 15px; font-size: 17px; display: flex; justify-content:center;"
-                            on:click={EditCV}
+                        <Button color="primary" on:click={showSummary}
+                            >Next &raquo;</Button
                         >
-                            {#if progress}
-                                <p><Spinner size="sm" /> Saving</p>
-                            {:else}
-                                <p>
-                                    <i class="bi bi-file-earmark-check-fill" /> Save
-                                </p>
-                            {/if}
-                        </Button>
                         <Button
                             color="danger"
                             on:click={toggle3}
@@ -2581,6 +2715,148 @@
                         >
                     </div>
                 </ModalFooter>
+            {/if}
+            {#if summary}
+                <div class="skill-page my-content">
+                    <ModalHeader style="padding-left: 36%;">
+                        <div class="page-header">
+                            <h1>Summary-Page</h1>
+                        </div>
+                    </ModalHeader>
+                    <div
+                        style="width: 100%; margin-top: 50px; padding-left: 16%;"
+                    >
+                        <div style="width: 80%;">
+                            <FormGroup>
+                                <FormGroup>
+                                    <Label
+                                        for="exampleText"
+                                        style="font-size: 25px;"
+                                        >Add-Summary</Label
+                                    >
+                                    <Input
+                                        type="textarea"
+                                        name="text"
+                                        id="exampleText"
+                                        bind:value={my_summary}
+                                        style={summary_border}
+                                    />
+                                </FormGroup>
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <ModalFooter>
+                        <div class="btncontainer">
+                            <Button color="primary" on:click={showInterest}
+                                >&laquo; Previous</Button
+                            >
+                            <Button color="primary" on:click={showSocial}
+                                >Next &raquo;</Button
+                            >
+                            <Button
+                                color="danger"
+                                on:click={toggle3}
+                                on:click={showPersonal}
+                                on:click={resetImage}
+                                on:click={progressStop}>CANCEL</Button
+                            >
+                        </div>
+                    </ModalFooter>
+                </div>
+            {/if}
+            {#if social}
+                <div class="interest-page my-content">
+                    <ModalHeader style="padding-left: 36%;">
+                        <div class="page-header">
+                            <h1>Social-Page</h1>
+                        </div>
+                    </ModalHeader>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%; margin-top: 5%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Facebook Link">
+                                <Input
+                                    placeholder="Enter Facebook Link"
+                                    style={facebook_link_border}
+                                    bind:value={facebook_link}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Twitter Link">
+                                <Input
+                                    placeholder="Enter Twitter Link"
+                                    style={twitter_link_border}
+                                    bind:value={twitter_link}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Linkedin Link">
+                                <Input
+                                    placeholder="Enter Linkedin Link"
+                                    style={linkedin_link_border}
+                                    bind:value={linkedin_link}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div
+                        class="form-row form-content"
+                        style="width: 100%; padding-left: 7%;"
+                    >
+                        <div class="form-group" style="width: 80%">
+                            <FormGroup floating label="Enter Website Link">
+                                <Input
+                                    placeholder="Enter Website Link"
+                                    style={website_link_border}
+                                    bind:value={website_link}
+                                />
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <ModalFooter>
+                        <div class="btncontainer">
+                            <Button color="primary" on:click={showSummary}
+                                >&laquo; Previous</Button
+                            >
+                            <Button
+                                color="success"
+                                style="width: 120px; height: 38px; border-radius: 15px; font-size: 17px; display: flex; justify-content:center;"
+                                on:click={EditCV}
+                            >
+                                {#if progress}
+                                    <p><Spinner size="sm" /> Saving</p>
+                                {:else}
+                                    <p>
+                                        <i
+                                            class="bi bi-file-earmark-check-fill"
+                                        /> Save
+                                    </p>
+                                {/if}
+                            </Button>
+                            <Button
+                                color="danger"
+                                on:click={toggle3}
+                                on:click={showPersonal}
+                                on:click={resetImage}
+                                on:click={progressStop}>CANCEL</Button
+                            >
+                        </div>
+                    </ModalFooter>
+                </div>
             {/if}
         </Modal>
         <!-- Empty Personal Page -->
@@ -2912,22 +3188,26 @@
                 </ModalFooter>
             </div>
         </Modal>
-         <!-- QR Code Popup -->
-         <Modal isOpen={open12}>
-            <ModalHeader style="padding-top: 10px; padding-bottom: 10px; display:flex; justify-content: center;">
+        <!-- QR Code Popup -->
+        <Modal isOpen={open12}>
+            <ModalHeader
+                style="padding-top: 10px; padding-bottom: 10px; display:flex; justify-content: center;"
+            >
                 <div class="qr-title-container">
                     <p class="qr-title">{cv_title}</p>
                 </div>
             </ModalHeader>
-            <ModalBody style="padding-top: 25px; padding-bottom: 25px; display:flex; justify-content: center;">
+            <ModalBody
+                style="padding-top: 25px; padding-bottom: 25px; display:flex; justify-content: center;"
+            >
                 <!-- svelte-ignore a11y-img-redundant-alt -->
-                <img  src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}" alt="no-image" />
+                <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}"
+                    alt="no-image"
+                />
             </ModalBody>
             <ModalFooter>
-                <Button
-                    color="danger"
-                    class="float-right"
-                    on:click={toggle12}
+                <Button color="danger" class="float-right" on:click={toggle12}
                     >Cancel</Button
                 >
             </ModalFooter>
