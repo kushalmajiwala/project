@@ -1,5 +1,5 @@
 <script>
-// @ts-nocheck
+    // @ts-nocheck
 
     import { Router, Link, Route } from "svelte-routing";
     import { onMount } from "svelte";
@@ -1607,10 +1607,9 @@
         let first_line;
         let second_line;
         let third_line;
-        if(my_summary.length > 100)
-        {
-            temp_line = my_summary.split('', 100);
-            first_line = temp_line.join('');
+        if (my_summary.length > 100) {
+            temp_line = my_summary.split("", 100);
+            first_line = temp_line.join("");
             second_line = my_summary.slice(100, 200);
             third_line = my_summary.slice(200, 300);
         }
@@ -1635,6 +1634,170 @@
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
         });
+
+        //Social
+        page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 650,
+        });
+        page.drawText("SOCIAL", {
+            x: 515,
+            y: 680,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: { x: 510, y: 675 },
+            end: { x: 680, y: 675 },
+            thickness: 3,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        if (
+            facebook_link !== "" ||
+            twitter_link !== "" ||
+            linkedin_link !== "" ||
+            website_link !== ""
+        ) {
+            if (facebook_link !== "") {
+                page.drawText("=> FACEBOOK : ", {
+                    x: 50,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(facebook_link, {
+                    x: 250,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            else
+            {
+                page.drawText("=> FACEBOOK : ", {
+                    x: 50,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 250,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            if (twitter_link !== "") {
+                page.drawText("=> TWITTER : ", {
+                    x: 50,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(twitter_link, {
+                    x: 230,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            else
+            {
+                page.drawText("=> TWITTER : ", {
+                    x: 50,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 230,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            if (linkedin_link !== "") {
+                page.drawText("=> LINKEDIN : ", {
+                    x: 50,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(linkedin_link, {
+                    x: 235,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            else
+            {
+                page.drawText("=> LINKEDIN : ", {
+                    x: 50,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 235,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            if (website_link !== "") {
+                page.drawText("=> WEBSITE : ", {
+                    x: 50,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(website_link, {
+                    x: 230,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            else
+            {
+                page.drawText("=> WEBSITE : ", {
+                    x: 50,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 230,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+        }
 
         if (personal_pic_url !== "") {
             const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
@@ -3299,24 +3462,24 @@
                     <ModalHeader style="position: relative; height: 180px;">
                         <div>
                             {#if facebook_link !== ""}
-                            <p class="main-name">
-                                <b>=> FACEBOOK</b> :- {facebook_link}
-                            </p>
+                                <p class="main-name">
+                                    <b>=> FACEBOOK</b> :- {facebook_link}
+                                </p>
                             {/if}
                             {#if twitter_link !== ""}
-                            <p class="main-name">
-                                <b>=> TWITTER</b> :- {twitter_link}
-                            </p>
+                                <p class="main-name">
+                                    <b>=> TWITTER</b> :- {twitter_link}
+                                </p>
                             {/if}
                             {#if linkedin_link !== ""}
-                            <p class="main-name">
-                                <b>=> LINKEDIN</b> :- {linkedin_link}
-                            </p>
+                                <p class="main-name">
+                                    <b>=> LINKEDIN</b> :- {linkedin_link}
+                                </p>
                             {/if}
                             {#if website_link !== ""}
-                            <p class="main-name">
-                                <b>=> WEBSITE</b> :- {website_link}
-                            </p>
+                                <p class="main-name">
+                                    <b>=> WEBSITE</b> :- {website_link}
+                                </p>
                             {/if}
                         </div>
                     </ModalHeader>
@@ -3382,8 +3545,7 @@
 </main>
 
 <style>
-    .summary_height
-    {
+    .summary_height {
         height: 180px;
     }
     .qr-title {

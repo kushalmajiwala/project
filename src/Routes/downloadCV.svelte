@@ -1,10 +1,3 @@
-<main>
-    <div>
-        <h1>Dowload Successfull</h1>
-    </div>
-</main>
-
-
 <script>
     import { onMount } from "svelte";
     import axios from "axios";
@@ -73,6 +66,14 @@
     let interest2 = "";
     let interest3 = "";
 
+    let my_summary = "";
+
+    //Social Page Variables
+    let facebook_link = "";
+    let twitter_link = "";
+    let linkedin_link = "";
+    let website_link = "";
+
     let totalCV = [];
     let checking = false;
 
@@ -93,7 +94,6 @@
     let edit_interestid2 = "";
     let edit_interestid3 = "";
 
-    
     //export let path;
 
     // let userid = localStorage.getItem(username);
@@ -116,7 +116,7 @@
         const page = pdfDoc.addPage();
         // @ts-ignore
         page.setWidth(1200);
-        page.setHeight(2000);
+        page.setHeight(2700);
 
         //CURRICULUM VITAE
         page.drawRectangle({
@@ -126,109 +126,109 @@
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 1910,
+            y: 2610,
         });
         page.drawText("CURRICULUM VITAE", {
             x: 370,
-            y: 1940,
+            y: 2640,
             size: 50,
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawLine({
-            start: { x: 370, y: 1935 },
-            end: { x: 870, y: 1935 },
+            start: { x: 370, y: 2635 },
+            end: { x: 870, y: 2635 },
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
         //Name
         page.drawText("=> NAME :- ", {
             x: 50,
-            y: 1850,
+            y: 2550,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(fname + " " + lname, {
             x: 163,
-            y: 1850,
+            y: 2550,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Gender
         page.drawText("=> GENDER :- ", {
             x: 50,
-            y: 1810,
+            y: 2510,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(gender, {
             x: 190,
-            y: 1810,
+            y: 2510,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Date Of Birth
         page.drawText("=> DATE OF BIRTH :- ", {
             x: 50,
-            y: 1770,
+            y: 2470,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(dob, {
             x: 255,
-            y: 1770,
+            y: 2470,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Profession
         page.drawText("=> PROFESSION :- ", {
             x: 50,
-            y: 1730,
+            y: 2430,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(profession, {
             x: 235,
-            y: 1730,
+            y: 2430,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Address
         page.drawText("=> ADDRESS :- ", {
             x: 50,
-            y: 1690,
+            y: 2390,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(address, {
             x: 200,
-            y: 1690,
+            y: 2390,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Phoneno
         page.drawText("=> PHONE NO :- ", {
             x: 50,
-            y: 1650,
+            y: 2350,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(phoneno, {
             x: 210,
-            y: 1650,
+            y: 2350,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Phoneno
         page.drawText("=> EMAIL :- ", {
             x: 50,
-            y: 1610,
+            y: 2310,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(email, {
             x: 165,
-            y: 1610,
+            y: 2310,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
@@ -240,71 +240,71 @@
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 1470,
+            y: 2170,
         });
         page.drawText("EDUCATION", {
             x: 490,
-            y: 1500,
+            y: 2200,
             size: 45,
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: { x: 490, y: 1495 },
-            end: { x: 755, y: 1495 },
+            start: { x: 490, y: 2195 },
+            end: { x: 755, y: 2195 },
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
         //Schoolname
         page.drawText("=> SECONDARY EDUCATION :- ", {
             x: 50,
-            y: 1410,
+            y: 2110,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(schoolname, {
             x: 355,
-            y: 1410,
+            y: 2110,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Education Address
         page.drawText("=> EDUCATION ADDRESS :- ", {
             x: 50,
-            y: 1370,
+            y: 2070,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(education_city + ", " + education_state + ".", {
             x: 325,
-            y: 1370,
+            y: 2070,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Degree
         page.drawText("=> DEGREE :- ", {
             x: 50,
-            y: 1330,
+            y: 2030,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(degree, {
             x: 190,
-            y: 1330,
+            y: 2030,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Field
         page.drawText("=> Field :- ", {
             x: 50,
-            y: 1290,
+            y: 1990,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(field, {
             x: 150,
-            y: 1290,
+            y: 1990,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
@@ -316,71 +316,71 @@
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 1160,
+            y: 1860,
         });
         page.drawText("EXPERIENCE", {
             x: 480,
-            y: 1190,
+            y: 1890,
             size: 45,
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: { x: 480, y: 1185 },
-            end: { x: 758, y: 1185 },
+            start: { x: 480, y: 1885 },
+            end: { x: 758, y: 1885 },
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
         //Job Title
         page.drawText("=> JOB TITLE :- ", {
             x: 50,
-            y: 1100,
+            y: 1800,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(job_title, {
             x: 205,
-            y: 1100,
+            y: 1800,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Company Name
         page.drawText("=> COMPANY NAME :- ", {
             x: 50,
-            y: 1060,
+            y: 1760,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(company_name, {
             x: 270,
-            y: 1060,
+            y: 1760,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Company Address
         page.drawText("=> COMPANY ADDRESS :- ", {
             x: 50,
-            y: 1020,
+            y: 1720,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(experience_city + ", " + experience_state + ".", {
             x: 310,
-            y: 1020,
+            y: 1720,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
         //Company Address
         page.drawText("=> YEAR OF EXPERIENCE :- ", {
             x: 50,
-            y: 980,
+            y: 1680,
             size: 20,
             color: rgb(0.0, 0.0, 0.0),
         });
         page.drawText(experience_year + " Years", {
             x: 330,
-            y: 980,
+            y: 1680,
             size: 20,
             color: rgb(0.4, 0.4, 0.4),
         });
@@ -392,26 +392,26 @@
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 850,
+            y: 1550,
         });
         page.drawText("SKILLS", {
             x: 535,
-            y: 880,
+            y: 1580,
             size: 45,
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: { x: 535, y: 875 },
-            end: { x: 690, y: 875 },
+            start: { x: 535, y: 1575 },
+            end: { x: 690, y: 1575 },
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
         if (skill1 !== "" && skill2 !== "" && skill3 !== "") {
             page.drawText("=> " + skill1 + " :-", {
                 x: 50,
-                y: 790,
+                y: 1490,
                 size: 20,
                 color: rgb(0.0, 0.0, 0.0),
             });
@@ -423,7 +423,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -435,7 +435,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -446,7 +446,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -458,7 +458,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -469,7 +469,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -480,14 +480,14 @@
                 const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
                 page.drawImage(jpgImage3, {
                     x: 440,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
             }
             page.drawText("=> " + skill2 + " :-", {
                 x: 50,
-                y: 750,
+                y: 1450,
                 size: 20,
                 color: rgb(0.0, 0.0, 0.0),
             });
@@ -499,7 +499,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -511,7 +511,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -522,7 +522,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -534,7 +534,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -545,7 +545,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -556,14 +556,14 @@
                 const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
                 page.drawImage(jpgImage3, {
                     x: 440,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
             }
             page.drawText("=> " + skill3 + " :-", {
                 x: 50,
-                y: 710,
+                y: 1410,
                 size: 20,
                 color: rgb(0.0, 0.0, 0.0),
             });
@@ -575,7 +575,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 695,
+                    y: 1395,
                     width: 70,
                     height: 50,
                 });
@@ -587,7 +587,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 695,
+                    y: 1395,
                     width: 70,
                     height: 50,
                 });
@@ -598,7 +598,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 695,
+                    y: 1395,
                     width: 70,
                     height: 50,
                 });
@@ -610,7 +610,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 695,
+                    y: 1395,
                     width: 70,
                     height: 50,
                 });
@@ -621,7 +621,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 695,
+                    y: 1395,
                     width: 70,
                     height: 50,
                 });
@@ -632,7 +632,7 @@
                 const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
                 page.drawImage(jpgImage3, {
                     x: 440,
-                    y: 695,
+                    y: 1395,
                     width: 70,
                     height: 50,
                 });
@@ -640,7 +640,7 @@
         } else if (skill1 !== "" && skill2 !== "") {
             page.drawText("=> " + skill1 + " :-", {
                 x: 50,
-                y: 790,
+                y: 1490,
                 size: 20,
                 color: rgb(0.0, 0.0, 0.0),
             });
@@ -652,7 +652,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -664,7 +664,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -675,7 +675,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -687,7 +687,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -698,7 +698,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -709,14 +709,14 @@
                 const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
                 page.drawImage(jpgImage3, {
                     x: 440,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
             }
             page.drawText("=> " + skill2 + " :-", {
                 x: 50,
-                y: 750,
+                y: 1450,
                 size: 20,
                 color: rgb(0.0, 0.0, 0.0),
             });
@@ -728,7 +728,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -740,7 +740,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -751,7 +751,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -763,7 +763,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -774,7 +774,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -785,7 +785,7 @@
                 const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
                 page.drawImage(jpgImage3, {
                     x: 440,
-                    y: 735,
+                    y: 1435,
                     width: 70,
                     height: 50,
                 });
@@ -793,7 +793,7 @@
         } else if (skill1 !== "") {
             page.drawText("=> " + skill1 + " :-", {
                 x: 50,
-                y: 790,
+                y: 1490,
                 size: 20,
                 color: rgb(0.0, 0.0, 0.0),
             });
@@ -805,7 +805,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -817,7 +817,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -828,7 +828,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -840,7 +840,7 @@
                 const jpgImage1 = await pdfDoc.embedJpg(jpgImageBytes1);
                 page.drawImage(jpgImage1, {
                     x: 340,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -851,7 +851,7 @@
                 const jpgImage2 = await pdfDoc.embedJpg(jpgImageBytes2);
                 page.drawImage(jpgImage2, {
                     x: 390,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -862,7 +862,7 @@
                 const jpgImage3 = await pdfDoc.embedJpg(jpgImageBytes3);
                 page.drawImage(jpgImage3, {
                     x: 440,
-                    y: 775,
+                    y: 1475,
                     width: 70,
                     height: 50,
                 });
@@ -876,40 +876,40 @@
             borderColor: rgb(0.9, 0.9, 0.9),
             color: rgb(0.9, 0.9, 0.9),
             x: 0,
-            y: 580,
+            y: 1280,
         });
         page.drawText("INTERESTS", {
             x: 500,
-            y: 610,
+            y: 1310,
             size: 45,
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
             opacity: 0.7,
         });
         page.drawLine({
-            start: { x: 500, y: 605 },
-            end: { x: 740, y: 605 },
+            start: { x: 500, y: 1305 },
+            end: { x: 740, y: 1305 },
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
         if (interest1 !== "" && interest2 !== "" && interest3 !== "") {
             page.drawText("=> " + interest1, {
                 x: 50,
-                y: 520,
+                y: 1220,
                 size: 25,
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
             });
             page.drawText("=> " + interest2, {
                 x: 50,
-                y: 470,
+                y: 1170,
                 size: 25,
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
             });
             page.drawText("=> " + interest3, {
                 x: 50,
-                y: 420,
+                y: 1120,
                 size: 25,
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
@@ -917,14 +917,14 @@
         } else if (interest1 !== "" && interest2 !== "") {
             page.drawText("=> " + interest1, {
                 x: 50,
-                y: 520,
+                y: 1220,
                 size: 25,
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
             });
             page.drawText("=> " + interest2, {
                 x: 50,
-                y: 470,
+                y: 1170,
                 size: 25,
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
@@ -932,11 +932,222 @@
         } else if (interest1 !== "") {
             page.drawText("=> " + interest1, {
                 x: 50,
-                y: 520,
+                y: 1220,
                 size: 25,
                 font: timesRomanFont,
                 color: rgb(0.0, 0.0, 0.0),
             });
+        }
+        //Summary
+        page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 970,
+        });
+        page.drawText("SUMMARY", {
+            x: 490,
+            y: 1000,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: { x: 490, y: 995 },
+            end: { x: 720, y: 995 },
+            thickness: 3,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        let temp_line;
+        let first_line;
+        let second_line;
+        let third_line;
+        if (my_summary.length > 100) {
+            temp_line = my_summary.split("", 100);
+            first_line = temp_line.join("");
+            second_line = my_summary.slice(100, 200);
+            third_line = my_summary.slice(200, 300);
+        }
+        page.drawText("=> " + first_line, {
+            x: 50,
+            y: 900,
+            size: 25,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(second_line, {
+            x: 50,
+            y: 870,
+            size: 25,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        page.drawText(third_line, {
+            x: 50,
+            y: 840,
+            size: 25,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+
+        //Social
+        page.drawRectangle({
+            width: 1200,
+            height: 80,
+            borderWidth: 1,
+            borderColor: rgb(0.9, 0.9, 0.9),
+            color: rgb(0.9, 0.9, 0.9),
+            x: 0,
+            y: 650,
+        });
+        page.drawText("SOCIAL", {
+            x: 515,
+            y: 680,
+            size: 45,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+            opacity: 0.7,
+        });
+        page.drawLine({
+            start: { x: 510, y: 675 },
+            end: { x: 680, y: 675 },
+            thickness: 3,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        if (
+            facebook_link !== "" ||
+            twitter_link !== "" ||
+            linkedin_link !== "" ||
+            website_link !== ""
+        ) {
+            if (facebook_link !== "") {
+                page.drawText("=> FACEBOOK : ", {
+                    x: 50,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(facebook_link, {
+                    x: 250,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            } else {
+                page.drawText("=> FACEBOOK : ", {
+                    x: 50,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 250,
+                    y: 550,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            if (twitter_link !== "") {
+                page.drawText("=> TWITTER : ", {
+                    x: 50,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(twitter_link, {
+                    x: 230,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            } else {
+                page.drawText("=> TWITTER : ", {
+                    x: 50,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 230,
+                    y: 500,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            if (linkedin_link !== "") {
+                page.drawText("=> LINKEDIN : ", {
+                    x: 50,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(linkedin_link, {
+                    x: 235,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            } else {
+                page.drawText("=> LINKEDIN : ", {
+                    x: 50,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 235,
+                    y: 450,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
+            if (website_link !== "") {
+                page.drawText("=> WEBSITE : ", {
+                    x: 50,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(website_link, {
+                    x: 230,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            } else {
+                page.drawText("=> WEBSITE : ", {
+                    x: 50,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.0, 0.0, 0.0),
+                });
+                page.drawText(" - ", {
+                    x: 230,
+                    y: 400,
+                    size: 25,
+                    font: timesRomanFont,
+                    color: rgb(0.4, 0.4, 0.4),
+                });
+            }
         }
 
         if (personal_pic_url !== "") {
@@ -947,7 +1158,7 @@
             const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
             page.drawImage(jpgImage, {
                 x: 900,
-                y: 1600,
+                y: 2300,
                 width: 180,
                 height: 250,
             });
@@ -1140,6 +1351,60 @@
                                                         response.data[2]
                                                             .interestid;
                                                 }
+                                                const options = {
+                                                    method: "GET",
+                                                    url:
+                                                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/summary/cvid/" +
+                                                        cvid,
+                                                };
+
+                                                axios
+                                                    .request(options)
+                                                    .then(function (response) {
+                                                        my_summary =
+                                                            response.data[0]
+                                                                .summary;
+
+                                                        const options = {
+                                                            method: "GET",
+                                                            url:
+                                                                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/social/cvid/" +
+                                                                cvid,
+                                                        };
+
+                                                        axios
+                                                            .request(options)
+                                                            .then(function (
+                                                                response
+                                                            ) {
+                                                                facebook_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .facebook;
+                                                                twitter_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .twitter;
+                                                                linkedin_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .linkedin;
+                                                                website_link =
+                                                                    response
+                                                                        .data[0]
+                                                                        .website;
+                                                            })
+                                                            .catch(function (
+                                                                error
+                                                            ) {
+                                                                console.error(
+                                                                    error
+                                                                );
+                                                            });
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.error(error);
+                                                    });
                                             })
                                             .catch(function (error) {
                                                 console.error(error);
@@ -1172,14 +1437,20 @@
     export let cvid;
 </script>
 
+<main>
+    <div>
+        <h1>Dowload Successfull</h1>
+    </div>
+</main>
+
 <style>
     div {
         display: flex;
-        justify-content: center;  
+        justify-content: center;
         color: black;
     }
     h1 {
-       margin-top: 20%;
+        margin-top: 20%;
     }
     @media screen and (max-width: 1000px) {
         h1 {
