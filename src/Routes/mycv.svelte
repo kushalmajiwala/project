@@ -1604,14 +1604,18 @@
             color: rgb(0.0, 0.0, 0.0),
         });
         let temp_line;
-        let first_line;
-        let second_line;
-        let third_line;
+        let first_line = "";
+        let second_line = "";
+        let third_line = "";
         if (my_summary.length > 100) {
             temp_line = my_summary.split("", 100);
             first_line = temp_line.join("");
             second_line = my_summary.slice(100, 200);
             third_line = my_summary.slice(200, 300);
+        }
+        else
+        {
+            first_line = my_summary;
         }
         page.drawText("=> " + first_line, {
             x: 50,
