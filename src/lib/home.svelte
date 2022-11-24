@@ -1304,6 +1304,7 @@
                     class="w3-bar w3-light-grey w3-round w3-display-bottommiddle w3-hide-small"
                     style="bottom:-16px"
                 >
+                    <!-- svelte-ignore a11y-invalid-attribute -->
                     <a href="#" class="w3-bar-item w3-button">Home</a>
                     <a href="#mycv" class="w3-bar-item w3-button">My-CV</a>
                     <a href="#myletter" class="w3-bar-item w3-button">My-Letters</a>
@@ -1316,6 +1317,7 @@
                 class="w3-center w3-light-grey w3-padding-16 w3-hide-large w3-hide-medium"
             >
                 <div class="w3-bar w3-light-grey" style="white-space: nowrap;">
+                    <!-- svelte-ignore a11y-invalid-attribute -->
                     <a href="#" class="w3-bar-item w3-button">Home</a>
                     <a href="#mycv" class="w3-bar-item w3-button">My-CV</a>
                     <a href="#myletter" class="w3-bar-item w3-button">My-Letters</a>
@@ -1347,7 +1349,7 @@
                 <p />
     
                     <div class="w3-section">
-                        <label>Name</label>
+                        <p>Name</p>
                         <input
                             class="w3-input w3-border"
                             type="text"
@@ -1356,7 +1358,7 @@
                         />
                     </div>
                     <div class="w3-section">
-                        <label>Email</label>
+                        <p>Email</p>
                         <input
                             class="w3-input w3-border"
                             type="text"
@@ -1365,7 +1367,7 @@
                         />
                     </div>
                     <div class="w3-section">
-                        <label>Message</label>
+                        <p>Message</p>
                         <input class="w3-input w3-border" required bind:value={cmsg}/>
                     </div>
                     <button class="w3-button w3-block w3-dark-grey"
