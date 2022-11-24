@@ -3282,8 +3282,8 @@
                         <p class="inner-class-education"><u>SUMMARY</u></p>
                     </div>
                 </ModalHeader>
-                <ModalHeader style="position: relative; height: 180px;">
-                    <div>
+                <ModalHeader style="position: relative;">
+                    <div class="summary_height">
                         {my_summary}
                     </div>
                 </ModalHeader>
@@ -3382,6 +3382,10 @@
 </main>
 
 <style>
+    .summary_height
+    {
+        height: 180px;
+    }
     .qr-title {
         font-size: 25px;
         white-space: nowrap;
@@ -3692,6 +3696,9 @@
         .cv-image {
             margin-left: 60%;
             margin-top: -40%;
+        }
+        .summary_height {
+            height: 240px;
         }
     }
     @media screen and (max-width: 900px) {
