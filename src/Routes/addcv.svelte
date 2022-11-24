@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import {
     Nav,
     NavItem,
@@ -1402,7 +1404,7 @@
         <div style="width: 80%;">
           <FormGroup>
             <Label for="exampleText" style="font-size: 25px;">Add-Summary</Label>
-            <Input type="textarea" name="text" id="exampleText" bind:value={my_summary} style={summary_border}/>
+            <Input type="textarea" name="text" id="exampleText" maxlength="300" bind:value={my_summary} style={summary_border}/>
           </FormGroup>
         </div>
       </div>
