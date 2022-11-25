@@ -1,6 +1,5 @@
 <script>
-// @ts-nocheck
-
+    // @ts-nocheck
     import {
         TabContent,
         TabPane,
@@ -8,8 +7,25 @@
         Spinner,
         FormGroup,
         Input,
-        Label
+        Label,
+        Modal,
+        ModalBody,
+        ModalFooter,
     } from "sveltestrap";
+
+    function progressStop() {
+        progress = false;
+    }
+
+    //Modal Variables
+    let open1 = false;
+    let open2 = false;
+    let open3 = false;
+
+    //Modal Functions
+    const toggle1 = () => (open1 = !open1);
+    const toggle2 = () => (open2 = !open2);
+    const toggle3 = () => (open3 = !open3);
 
     //Personal Page Variables
     let personal_information = true;
@@ -56,6 +72,7 @@
 
     let progress = false;
 
+    //Showing Functions
     function showPersonal() {
         personal_information = true;
         recipient_information = false;
@@ -70,6 +87,154 @@
         personal_information = false;
         recipient_information = false;
         letter_page = true;
+    }
+
+    //Validation Functions
+    function personalValidate() {
+        if (
+            letter_title !== "" &&
+            fname !== "" &&
+            lname !== "" &&
+            personal_address !== "" &&
+            phone !== "" &&
+            email !== "" &&
+            profession !== ""
+        ) {
+            letter_title_border = "border: 1px solid #4c89ca;";
+            fname_border = "border: 1px solid #4c89ca;";
+            lname_border = "border: 1px solid #4c89ca;";
+            personal_address_border = "border: 1px solid #4c89ca;";
+            phone_border = "border: 1px solid #4c89ca;";
+            email_border = "border: 1px solid #4c89ca;";
+            profession_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            letter_title == "" ||
+            fname == "" ||
+            lname == "" ||
+            personal_address == "" ||
+            phone == "" ||
+            email == "" ||
+            profession == ""
+        ) {
+            if (letter_title == "")
+                letter_title_border = "border: 1px solid red;";
+            else letter_title_border = "border: 1px solid #4c89ca;";
+            if (fname == "") fname_border = "border: 1px solid red;";
+            else fname_border = "border: 1px solid #4c89ca;";
+            if (lname == "") lname_border = "border: 1px solid red;";
+            else lname_border = "border: 1px solid #4c89ca;";
+            if (personal_address == "")
+                personal_address_border = "border: 1px solid red;";
+            else personal_address_border = "border: 1px solid #4c89ca;";
+            if (phone == "") phone_border = "border: 1px solid red;";
+            else phone_border = "border: 1px solid #4c89ca;";
+            if (email == "") email_border = "border: 1px solid red;";
+            else email_border = "border: 1px solid #4c89ca;";
+            if (profession == "") profession_border = "border: 1px solid red;";
+            else profession_border = "border: 1px solid #4c89ca;";
+            toggle1();
+            showPersonal();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function recipientValidate() {
+        if (
+            recipient_name !== "" &&
+            recipient_gender !== "" &&
+            company_name !== "" &&
+            company_address !== "" &&
+            company_city !== "" &&
+            company_state !== ""
+        ) {
+            recipient_name_border = "border: 1px solid #4c89ca;";
+            recipient_gender_border = "border: 1px solid #4c89ca;";
+            company_name_border = "border: 1px solid #4c89ca;";
+            company_address_border = "border: 1px solid #4c89ca;";
+            company_city_border = "border: 1px solid #4c89ca;";
+            company_state_border = "border: 1px solid #4c89ca;";
+        }
+        if(recipient_name == "" ||
+            recipient_gender == "" ||
+            company_name == "" ||
+            company_address == "" ||
+            company_city == "" ||
+            company_state == "")
+        {
+            if(recipient_name == "") recipient_name_border = "border: 1px solid red;";
+            else recipient_name_border = "border: 1px solid #4c89ca;";
+            if(recipient_gender == "") recipient_gender_border = "border: 1px solid red;";
+            else recipient_gender_border = "border: 1px solid #4c89ca;";
+            if(company_name == "") company_name_border = "border: 1px solid red;";
+            else company_name_border = "border: 1px solid #4c89ca;";
+            if(company_address == "") company_address_border = "border: 1px solid red;";
+            else company_address_border = "border: 1px solid #4c89ca;";
+            if(company_city == "") company_city_border = "border: 1px solid red;";
+            else company_city_border = "border: 1px solid #4c89ca;";
+            if(company_state == "") company_state_border = "border: 1px solid red;";
+            else company_state_border = "border: 1px solid #4c89ca;";
+            toggle2();
+            showRecipient();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    function lettercontentValidate() {
+        if(letter_content !== "")
+        {
+            letter_content_border = "border: 1px solid #4c89ca;height: 400px;";   
+        }
+        if(letter_content == "")
+        {
+            letter_content_border = "border: 1px solid red;height: 400px;";
+            toggle3();
+            showLettercontent();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    function resetAll()
+    {
+        letter_title = "";
+        fname = "";
+        lname = "";
+        personal_address = "";
+        phone = "";
+        email = "";
+        profession = "";
+
+        recipient_name = "";
+        recipient_gender = "";
+        company_name = "";
+        company_address = "";
+        company_city = "";
+        company_state = "";
+
+        letter_content = "";
+    }
+
+    //submit Letter
+    function submitLetter() {
+        progress = true;
+        if(personalValidate())
+        {
+            if(recipientValidate())
+            {
+                if(lettercontentValidate())
+                {
+            
+                }
+            }
+        }
     }
 </script>
 
@@ -322,19 +487,31 @@
             </div>
             <div style="width: 100%; margin-top: 80px; padding-left: 16%;">
                 <div style="width: 80%;">
-                  <FormGroup>
-                    <div style="width: 100%; display:flex; justify-content: center;"> 
-                        <Label for="exampleText" style="font-size: 25px;">Add-Content</Label>
-                    </div>
-                    <Input type="textarea" name="text" id="exampleText" maxlength="800" bind:value={letter_content} style={letter_content_border}/>
-                  </FormGroup>
+                    <FormGroup>
+                        <div
+                            style="width: 100%; display:flex; justify-content: center;"
+                        >
+                            <Label for="exampleText" style="font-size: 25px;"
+                                >Add-Content</Label
+                            >
+                        </div>
+                        <Input
+                            type="textarea"
+                            name="text"
+                            id="exampleText"
+                            maxlength="800"
+                            bind:value={letter_content}
+                            style={letter_content_border}
+                        />
+                    </FormGroup>
                 </div>
-              </div>
+            </div>
             <div class="btncontainer">
                 <p class="previous pagebtn" on:click={showRecipient}>
                     &laquo; Previous
                 </p>
                 <Button
+                    on:click={submitLetter}
                     color="success"
                     style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;"
                 >
@@ -347,6 +524,50 @@
             </div>
         </div>
     {/if}
+    <div class="Modals">
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open1}>
+            <ModalBody
+                >Fields Cannot be empty on Personal-Information Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle1}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+         <!-- empty-modal -->
+         <Modal header="Message" isOpen={open2}>
+            <ModalBody
+                >Fields Cannot be empty on Recipient-Information Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle2}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open3}>
+            <ModalBody
+                >Field Cannot be empty on Letter-Content Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle3}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+    </div>
 </main>
 
 <style>
