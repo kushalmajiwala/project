@@ -1155,17 +1155,32 @@
         }
 
         if (personal_pic_url !== "") {
-            const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
-                res.arrayBuffer()
-            );
+            if (personal_pic_url.includes("png")) {
+                console.log('its png')
+                const pngImageBytes = await fetch(personal_pic_url).then(
+                    (res) => res.arrayBuffer()
+                );
 
-            const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
-            page.drawImage(jpgImage, {
-                x: 900,
-                y: 2300,
-                width: 180,
-                height: 250,
-            });
+                const pngImage = await pdfDoc.embedPng(pngImageBytes);
+                page.drawImage(pngImage, {
+                    x: 900,
+                    y: 2300,
+                    width: 180,
+                    height: 250,
+                });
+            } else {
+                const jpgImageBytes = await fetch(personal_pic_url).then(
+                    (res) => res.arrayBuffer()
+                );
+
+                const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
+                page.drawImage(jpgImage, {
+                    x: 900,
+                    y: 2300,
+                    width: 180,
+                    height: 250,
+                });
+            }
         }
 
         const pdfBytes = await pdfDoc.save();

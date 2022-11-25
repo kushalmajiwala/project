@@ -1612,9 +1612,7 @@
             first_line = temp_line.join("");
             second_line = my_summary.slice(100, 200);
             third_line = my_summary.slice(200, 300);
-        }
-        else
-        {
+        } else {
             first_line = my_summary;
         }
         page.drawText("=> " + first_line, {
@@ -1684,9 +1682,7 @@
                     font: timesRomanFont,
                     color: rgb(0.4, 0.4, 0.4),
                 });
-            }
-            else
-            {
+            } else {
                 page.drawText("=> FACEBOOK : ", {
                     x: 50,
                     y: 550,
@@ -1717,9 +1713,7 @@
                     font: timesRomanFont,
                     color: rgb(0.4, 0.4, 0.4),
                 });
-            }
-            else
-            {
+            } else {
                 page.drawText("=> TWITTER : ", {
                     x: 50,
                     y: 500,
@@ -1750,9 +1744,7 @@
                     font: timesRomanFont,
                     color: rgb(0.4, 0.4, 0.4),
                 });
-            }
-            else
-            {
+            } else {
                 page.drawText("=> LINKEDIN : ", {
                     x: 50,
                     y: 450,
@@ -1783,9 +1775,7 @@
                     font: timesRomanFont,
                     color: rgb(0.4, 0.4, 0.4),
                 });
-            }
-            else
-            {
+            } else {
                 page.drawText("=> WEBSITE : ", {
                     x: 50,
                     y: 400,
@@ -1804,17 +1794,32 @@
         }
 
         if (personal_pic_url !== "") {
-            const jpgImageBytes = await fetch(personal_pic_url).then((res) =>
-                res.arrayBuffer()
-            );
+            if (personal_pic_url.includes("png")) {
+                console.log('its png')
+                const pngImageBytes = await fetch(personal_pic_url).then(
+                    (res) => res.arrayBuffer()
+                );
 
-            const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
-            page.drawImage(jpgImage, {
-                x: 900,
-                y: 2300,
-                width: 180,
-                height: 250,
-            });
+                const pngImage = await pdfDoc.embedPng(pngImageBytes);
+                page.drawImage(pngImage, {
+                    x: 900,
+                    y: 2300,
+                    width: 180,
+                    height: 250,
+                });
+            } else {
+                const jpgImageBytes = await fetch(personal_pic_url).then(
+                    (res) => res.arrayBuffer()
+                );
+
+                const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
+                page.drawImage(jpgImage, {
+                    x: 900,
+                    y: 2300,
+                    width: 180,
+                    height: 250,
+                });
+            }
         }
 
         const pdfBytes = await pdfDoc.save();
