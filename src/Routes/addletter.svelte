@@ -604,7 +604,7 @@
     }
     .my-content {
         background-color: white;
-        height: 950px;
+        height: 830px;
         width: 74%;
         margin-left: 2%;
         box-shadow: 2px 2px 5px 0px grey;
