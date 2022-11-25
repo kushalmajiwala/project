@@ -2408,6 +2408,7 @@
         width: 100%;
         display: inline-block;
         justify-content: center;
+        margin-top: -2%;
         /* margin-left: 14%; */
         /* background-color: white; */
     }
@@ -2449,6 +2450,7 @@
             padding-left: 22%;
             display: inline;
             justify-content: center;
+            margin-top: -2%;
         }
         .inner-cv {
             width: 70%;
@@ -2460,16 +2462,19 @@
             width: 100%;
             margin-left: 0%;
             padding-left: 25%;
+            margin-top: -2%;
         }
     }
     @media screen and (max-width: 1100px) {
         .cv-details {
             padding-left: 30%;
+            margin-top: -2%;
         }
     }
     @media screen and (max-width: 995px) {
         .cv-details {
             padding-left: 25%;
+            margin-top: -2%;
         }
         .inner-icon {
             margin-top: -20%;
@@ -2500,6 +2505,7 @@
         .cv-details {
             width: 100%;
             padding-left: 5%;
+            margin-top: -5%;
         }
         .inner-cv {
             width: 95%;
