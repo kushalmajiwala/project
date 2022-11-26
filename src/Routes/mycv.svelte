@@ -1795,7 +1795,7 @@
 
         if (personal_pic_url !== "") {
             if (personal_pic_url.includes("png")) {
-                console.log('its png')
+                console.log("its png");
                 const pngImageBytes = await fetch(personal_pic_url).then(
                     (res) => res.arrayBuffer()
                 );
@@ -2533,9 +2533,9 @@
                         </div>
                         <div
                             class="form-row form-content"
-                            style="width: 100%; padding-left: 7%;"
+                            style="width: 100%; padding-left: 1.5%;"
                         >
-                            <div class="form-group" style="width: 80%">
+                            <div class="form-group" style="width: 88%">
                                 <FormGroup floating label="Enter CV Title">
                                     <Input
                                         placeholder="Enter CV Title"
@@ -3007,11 +3007,15 @@
                         <div style="width: 80%;">
                             <FormGroup>
                                 <FormGroup>
-                                    <Label
-                                        for="exampleText"
-                                        style="font-size: 25px;"
-                                        >Add-Summary</Label
+                                    <div
+                                        style="width: 100%; display:flex; justify-content: center;"
                                     >
+                                        <Label
+                                            for="exampleText"
+                                            style="font-size: 25px;"
+                                            >Add-Summary</Label
+                                        >
+                                    </div>
                                     <Input
                                         type="textarea"
                                         name="text"

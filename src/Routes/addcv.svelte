@@ -1031,9 +1031,9 @@
         </div>
         <div
           class="form-row form-content"
-          style="width: 100%; padding-left: 7%;"
+          style="width: 100%; padding-left: 1.5%;"
         >
-          <div class="form-group" style="width: 80%">
+          <div class="form-group" style="width: 88%">
             <FormGroup floating label="Enter CV Title">
               <Input
                 placeholder="Enter CV Title"
