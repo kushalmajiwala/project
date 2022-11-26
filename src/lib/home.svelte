@@ -1639,7 +1639,7 @@
                     </div>
                 </div>
                 <div class="myletter" id="myletter">my Letters</div>
-                <div
+                <!-- <div
                     class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
                     id="contact"
                 >
@@ -1678,8 +1678,59 @@
                         on:click={showMsg}>Send</button
                     >
                     <br />
-                    <!-- <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p> -->
-                </div>
+                </div> -->
+                <div class="w3-container w3-padding-64 w3-theme-l5 w3-light-grey" id="contact">
+                    <div class="w3-row">
+                      <div class="w3-col m5">
+                      <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
+                        <h3>Address</h3>
+                        <p>Avinashi Ventures, Surat</p>
+                        <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i><span style="display: absolute; margin-left: 5%;">Surat, Gujarat</span></p>
+                        <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i><span style="display: absolute; margin-left: 3%;">+91 9106884674</span></p>
+                        <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i><span style="display: absolute; margin-left: 3%;">kushalmajiwala1212@gmail.com</span></p>
+                      </div>
+                      <div class="w3-col m7">
+                        <div class="w3-container w3-card-4 w3-padding-16 w3-white">
+                        <div class="w3-section">      
+                          <!-- svelte-ignore a11y-label-has-associated-control -->
+                          <label>Name</label>
+                          <input
+                            class="w3-input"
+                            type="text"
+                            required
+                            bind:value={cname}
+                        />
+                        </div>
+                        <div class="w3-section">      
+                          <!-- svelte-ignore a11y-label-has-associated-control -->
+                          <label>Email</label>
+                          <input
+                            class="w3-input"
+                            type="text"
+                            required
+                            bind:value={cemail}
+                        />
+                        </div>
+                        <div class="w3-section">      
+                          <!-- svelte-ignore a11y-label-has-associated-control -->
+                          <label>Message</label>
+                          <input
+                            class="w3-input"
+                            required
+                            bind:value={cmsg}
+                        />
+                        </div>  
+                        <input class="w3-check" type="checkbox" checked name="Like">
+                        <!-- svelte-ignore a11y-label-has-associated-control -->
+                        <label>I Like it!</label>
+                        <button
+                        class="w3-button w3-block w3-dark-grey"
+                        on:click={showMsg}>Send</button
+                    >
+                    </div>
+                      </div>
+                    </div>
+                  </div>
             </Router>
         </body>
     {:else if userFound == false}
@@ -2333,6 +2384,7 @@
         align-items: center;
         height: 500px;
         background-image: url("https://media.istockphoto.com/vectors/blue-abstract-geometric-dynamic-shape-paper-layers-subtle-background-vector-id1284691550?k=20&m=1284691550&s=612x612&w=0&h=M_gHdREUJ4UwnL4G5jrrO1jtat9pLDiv1ErqwxuQgLE=");
+        /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSQDdw3WuvlF5OjuGHmJVrp264IqG1G7qI7eQ-70lvOaU48kyvXUuusU16dNgCBD_qN3E&usqp=CAU"); */
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -2342,6 +2394,7 @@
         align-items: center;
         height: 500px;
         background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvsPtlayIOCOfQEMwNEKM7cILG0GfbhgGaWg&usqp=CAU");
+        /* background-image: url("https://media.istockphoto.com/id/1337977426/photo/dark-gray-and-black-grunge-cement-wall-studio-room-space-product-background-template.jpg?b=1&s=170667a&w=0&k=20&c=4dVCV5KtJKEhuQtp5dbnFmwMBAzNknz35VUIa0C3KoE="); */
         background-repeat: no-repeat;
         background-size: cover;
         color: white;
