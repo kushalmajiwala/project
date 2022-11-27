@@ -2424,6 +2424,7 @@
         align-items: center;
         padding-top: 1%;
         border-radius: 20px;
+        box-shadow: 0px 0px 10px 0px rgb(88, 111, 146);
     }
     .cvicon {
         margin-left: -2%;
@@ -2438,6 +2439,7 @@
     }
     .mycvinner:hover {
         background-color: #2f5a6c;
+        /* box-shadow: 0px 0px 15px 15px #8598d3; */
         /* box-shadow: 0px 0px 5px 5px rgb(141, 141, 143); */
     }
     @media screen and (max-width: 530px) {
