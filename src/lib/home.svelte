@@ -1629,7 +1629,7 @@
                         <p class="cvicon">
                             <i
                                 class="bi bi-file-person-fill"
-                                style="font-size: 80px; color: white;"
+                                style="font-size: 60px; color: white;"
                             />
                         </p>
                         <p class="cvtitle">My CV</p>
@@ -1638,7 +1638,22 @@
                         </p>
                     </div>
                 </div>
-                <div class="myletter" id="myletter">my Letters</div>
+                <div class="myletter" id="myletter">
+                    <!-- <div class="mycv" id="mycv">
+                        <div class="mycvinner" on:click={toggle1}>
+                            <p class="cvicon">
+                                <i
+                                    class="bi bi-file-person-fill"
+                                    style="font-size: 80px; color: white;"
+                                />
+                            </p>
+                            <p class="cvtitle">My CV</p>
+                            <p class="cvlength">
+                                <Badge color="danger">{number_of_cv}</Badge>
+                            </p>
+                        </div>
+                    </div> -->
+                </div>
                 <!-- <div
                     class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
                     id="contact"
@@ -2579,6 +2594,11 @@
         }
         .none-added {
             margin-top: 35%;
+        }
+        .mycvinner {
+            height: 100px;
+            width: 300px;
+            padding-top: 4%;
         }
     }
 </style>
