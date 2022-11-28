@@ -2549,6 +2549,7 @@
     .none-added {
         margin-top: 15%;
         font-size: 30px;
+        white-space: nowrap;
     }
     @media screen and (max-width: 1230px) {
         .cv-details {
