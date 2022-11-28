@@ -23,6 +23,7 @@
     let number_of_letter = 0;
     let uid = "";
     let totalCV = [];
+    let totalLetter = [];
     let show_cvid = "";
     let download_cvid = "";
     let qr_cvid = "";
@@ -122,6 +123,7 @@
                 "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/login/username/" +
                 username,
         };
+        //CV Exist or not and CV Length
         axios
             .request(options)
             .then(function (response) {
@@ -132,7 +134,8 @@
                 console.log(showLoading);
                 showLoading = false;
 
-                const options = {
+                //CV Exist or not and CV Length
+                const options1 = {
                     method: "GET",
                     url:
                         "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/userid/" +
@@ -140,7 +143,7 @@
                 };
 
                 axios
-                    .request(options)
+                    .request(options1)
                     .then(function (response) {
                         console.log(response.data);
                         number_of_cv = response.data.length;
@@ -151,6 +154,31 @@
                             cv_checking = false;
                         } else {
                             cv_checking = true;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+                //Letter Exist or not and Letter Length
+                const options2 = {
+                    method: "GET",
+                    url:
+                        "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/userid/" +
+                        uid,
+                };
+
+                axios
+                    .request(options2)
+                    .then(function (response) {
+                        console.log(response.data);
+                        number_of_letter = response.data.length;
+                        totalLetter = [];
+                        totalLetter.push(response.data);
+                        console.log("Length -> " + totalLetter[0].length);
+                        if (totalLetter[0].length == 0) {
+                            letter_checking = false;
+                        } else {
+                            letter_checking = true;
                         }
                     })
                     .catch(function (error) {
@@ -1273,11 +1301,26 @@
         getData(show_cvid);
         toggle3();
     }
-    function generateQRCode(cvid) {
+    function generateQRCodeForCv(cvid) {
         qr_cvid = cvid;
         getData(qr_cvid);
         toggle2();
     }
+    function setDownloadLetter(lid)
+    {
+
+    }
+
+    function setShowLetter(lid)
+    {
+
+    }
+
+    function generateQRCodeForLetter(lid)
+    {
+
+    }
+
     function getData(cvid) {
         const options = {
             method: "GET",
@@ -1850,7 +1893,7 @@
                                         class="bi bi-qr-code qrIcon"
                                         id="myqr-{i}"
                                         on:click={() =>
-                                            generateQRCode(rec.cvid)}
+                                            generateQRCodeForCv(rec.cvid)}
                                     />
                                 </div>
                             </div>
@@ -2230,6 +2273,59 @@
             >
                 {#if letter_checking == false}
                     <div class="none-added">No Letter Added Yet</div>
+                {:else}
+                    <div class="letter-details">
+                        {#each totalLetter[0] as rec, i}
+                            <div class="tooltip">
+                                <Tooltip
+                                    target="mydownload-{i}"
+                                    placement="bottom"
+                                >
+                                    Download
+                                </Tooltip>
+                                <Tooltip target="myview-{i}" placement="bottom"
+                                    >View</Tooltip
+                                >
+                                <Tooltip target="myqr-{i}" placement="bottom">
+                                    Generate QR
+                                </Tooltip>
+                            </div>
+                            <div class="card inner-letter">
+                                <div>
+                                    <i
+                                        class="bi bi-file-earmark-person-fill"
+                                        style="font-size: 70px; color: #598496;"
+                                    />
+                                </div>
+                                <div class="inner-content">
+                                    <div>
+                                        <p class="letter-title">{rec.title}</p>
+                                    </div>
+                                </div>
+                                <div class="inner-icon">
+                                    <i
+                                        class="bi bi-file-earmark-arrow-down-fill downloadIcon"
+                                        id="mydownload-{i}"
+                                        on:click={() =>
+                                            setDownloadLetter(rec.letterid)}
+                                    />
+                                    <i
+                                        class="bi bi-eye-fill showIcon"
+                                        id="myview-{i}"
+                                        on:click={() =>
+                                            setShowLetter(rec.letterid)}
+                                    />
+                                    <i
+                                        class="bi bi-qr-code qrIcon"
+                                        id="myqr-{i}"
+                                        on:click={() =>
+                                            generateQRCodeForLetter(rec.letterid)}
+                                    />
+                                </div>
+                            </div>
+                        {/each}
+                        <!-- <Button on:click={temp}>Click</Button> -->
+                    </div>
                 {/if}
             </ModalBody>
             <ModalFooter>
@@ -2345,6 +2441,13 @@
         padding-left: 0.5%;
         box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
     }
+    .inner-letter {
+        height: 100px;
+        margin-top: 2%;
+        width: 50%;
+        padding-left: 0.5%;
+        box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
+    }
     .inner-content {
         display: flex;
         justify-content: center;
@@ -2365,9 +2468,19 @@
         color: rgb(73, 61, 128);
         text-shadow: 0px 5px 5px rgba(183, 82, 82, 0.25);
     }
+    .letter-title {
+        font-size: 27px;
+        margin-top: 0%;
+        font-weight: bolder;
+        color: rgb(73, 61, 128);
+        text-shadow: 0px 5px 5px rgba(183, 82, 82, 0.25);
+    }
 
     @media screen and (max-width: 1230px) {
         .inner-cv {
+            width: 70%;
+        }
+        .inner-letter {
             width: 70%;
         }
     }
@@ -2388,6 +2501,9 @@
     }
     @media screen and (max-width: 500px) {
         .inner-cv {
+            width: 95%;
+        }
+        .inner-letter {
             width: 95%;
         }
         .inner-icon {
@@ -2412,6 +2528,9 @@
             margin-left: 15%;
         }
         .inner-cv {
+            margin-top: 5%;
+        }
+        .inner-letter {
             margin-top: 5%;
         }
         .cv-image {
@@ -2518,7 +2637,24 @@
         /* margin-left: 14%; */
         /* background-color: white; */
     }
+    .letter-details {
+        /* position: absolute; */
+        width: 100%;
+        display: inline-block;
+        justify-content: center;
+        margin-top: -2%;
+        /* margin-left: 14%; */
+        /* background-color: white; */
+    }
     .inner-cv {
+        height: 100px;
+        margin-top: 2%;
+        margin-left: 25%;
+        width: 50%;
+        padding-left: 0.5%;
+        box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
+    }
+    .inner-letter {
         height: 100px;
         margin-top: 2%;
         margin-left: 25%;
@@ -2546,6 +2682,13 @@
         color: rgb(73, 61, 128);
         text-shadow: 0px 5px 5px rgba(183, 82, 82, 0.25);
     }
+    .letter-title {
+        font-size: 27px;
+        margin-top: 0%;
+        font-weight: bolder;
+        color: rgb(73, 61, 128);
+        text-shadow: 0px 5px 5px rgba(183, 82, 82, 0.25);
+    }
     .none-added {
         margin-top: 15%;
         font-size: 25px;
@@ -2563,9 +2706,26 @@
             width: 70%;
             margin-left: 0%;
         }
+        .letter-details {
+            width: 100%;
+            padding-left: 22%;
+            display: inline;
+            justify-content: center;
+            margin-top: -2%;
+        }
+        .inner-letter {
+            width: 70%;
+            margin-left: 0%;
+        }
     }
     @media screen and (max-width: 1170px) {
         .cv-details {
+            width: 100%;
+            margin-left: 0%;
+            padding-left: 25%;
+            margin-top: -2%;
+        }
+        .letter-details {
             width: 100%;
             margin-left: 0%;
             padding-left: 25%;
@@ -2577,9 +2737,17 @@
             padding-left: 30%;
             margin-top: -2%;
         }
+        .letter-details {
+            padding-left: 30%;
+            margin-top: -2%;
+        }
     }
     @media screen and (max-width: 995px) {
         .cv-details {
+            padding-left: 25%;
+            margin-top: -2%;
+        }
+        .letter-details {
             padding-left: 25%;
             margin-top: -2%;
         }
@@ -2617,6 +2785,14 @@
         .inner-cv {
             width: 95%;
         }
+        .letter-details {
+            width: 100%;
+            padding-left: 5%;
+            margin-top: -5%;
+        }
+        .inner-letter {
+            width: 95%;
+        }
         .inner-icon {
             margin-top: -13%;
             margin-left: 10%;
@@ -2629,6 +2805,9 @@
             margin-left: 15%;
         }
         .inner-cv {
+            margin-top: 5%;
+        }
+        .inner-letter {
             margin-top: 5%;
         }
         .none-added {
