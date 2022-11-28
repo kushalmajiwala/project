@@ -2548,7 +2548,7 @@
     }
     .none-added {
         margin-top: 15%;
-        font-size: 30px;
+        font-size: 25px;
         white-space: nowrap;
     }
     @media screen and (max-width: 1230px) {
