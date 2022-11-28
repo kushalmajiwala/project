@@ -2422,7 +2422,7 @@
     @media screen and (max-width: 360px) {
         .none-added {
             margin-top: 19%;
-            margin-left: 16%;
+            /* margin-left: 10%; */
         }
         .cv-image {
             margin-left: 50%;
