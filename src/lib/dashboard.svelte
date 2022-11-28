@@ -26,17 +26,18 @@
     }
     function signout() {
         localStorage.removeItem(username);
-        let path = window.location.pathname;
-        if (
-            !path.includes("mycv") &&
-            !path.includes("mycover") &&
-            !path.includes("profile") &&
-            !path.includes("password") &&
-            !path.includes("addcv") &&
-            !path.includes("addletter")
-        ) {
-            window.location.replace(path);
-        }
+        //Logic to send on login page after signout
+        // let path = window.location.pathname;
+        // if (
+        //     !path.includes("mycv") &&
+        //     !path.includes("mycover") &&
+        //     !path.includes("profile") &&
+        //     !path.includes("password") &&
+        //     !path.includes("addcv") &&
+        //     !path.includes("addletter")
+        // ) {
+        //     window.location.replace(path);
+        // }
     }
     export let username;
     export let url = "";
@@ -102,6 +103,12 @@
                         Dashboard
                     </div>
                 </Link>
+                <Link to="/{username}" style="text-decoration: none;">
+                    <div class="nav-content">
+                        <i class="bi bi-house-fill myicon" />
+                        Home
+                    </div>
+                </Link>
                 <Link
                     to="/{username}/manage/mycv"
                     style="text-decoration: none;"
@@ -138,7 +145,7 @@
                         Password
                     </div>
                 </Link>
-                <Link to="/{username}/manage" style="text-decoration: none;">
+                <Link to="/{username}" style="text-decoration: none;">
                     <div class="nav-content" on:click={signout}>
                         <i class="bi bi-box-arrow-right myicon" />
                         Signout

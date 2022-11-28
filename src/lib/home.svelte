@@ -20,6 +20,7 @@
     let cvFound = true;
     let showLoading = true;
     let number_of_cv = 0;
+    let number_of_letter = 0;
     let uid = "";
     let totalCV = [];
     let show_cvid = "";
@@ -44,14 +45,17 @@
     let open3 = false;
     let open4 = false;
     let open5 = false;
+    let open6 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
     const toggle4 = () => (open4 = !open4);
     const toggle5 = () => (open5 = !open5);
+    const toggle6 = () => (open6 = !open6);
 
-    let checking = false;
+    let cv_checking = false;
+    let letter_checking = false;
 
     //Personal Details Variables
     let fname = "";
@@ -144,9 +148,9 @@
                         totalCV.push(response.data);
                         console.log("Length -> " + totalCV[0].length);
                         if (totalCV[0].length == 0) {
-                            checking = false;
+                            cv_checking = false;
                         } else {
-                            checking = true;
+                            cv_checking = true;
                         }
                     })
                     .catch(function (error) {
@@ -1027,9 +1031,7 @@
             first_line = temp_line.join("");
             second_line = my_summary.slice(100, 200);
             third_line = my_summary.slice(200, 300);
-        }
-        else
-        {
+        } else {
             first_line = my_summary;
         }
         page.drawText("=> " + first_line, {
@@ -1212,7 +1214,7 @@
 
         if (personal_pic_url !== "") {
             if (personal_pic_url.includes("png")) {
-                console.log('its png')
+                console.log("its png");
                 const pngImageBytes = await fetch(personal_pic_url).then(
                     (res) => res.arrayBuffer()
                 );
@@ -1624,6 +1626,7 @@
                     </div>
                 </div>
                 <!-- Page content -->
+                <!-- My Cv Details -->
                 <div class="mycv" id="mycv">
                     <div class="mycvinner" on:click={toggle1}>
                         <p class="cvicon">
@@ -1632,27 +1635,26 @@
                                 style="font-size: 60px; color: white;"
                             />
                         </p>
-                        <p class="cvtitle">My CV</p>
+                        <p class="cvtitle">MY CV</p>
                         <p class="cvlength">
                             <Badge color="danger">{number_of_cv}</Badge>
                         </p>
                     </div>
                 </div>
+                <!-- My Letter Details -->
                 <div class="myletter" id="myletter">
-                    <!-- <div class="mycv" id="mycv">
-                        <div class="mycvinner" on:click={toggle1}>
-                            <p class="cvicon">
-                                <i
-                                    class="bi bi-file-person-fill"
-                                    style="font-size: 80px; color: white;"
-                                />
-                            </p>
-                            <p class="cvtitle">My CV</p>
-                            <p class="cvlength">
-                                <Badge color="danger">{number_of_cv}</Badge>
-                            </p>
-                        </div>
-                    </div> -->
+                    <div class="mycvinner" on:click={toggle6}>
+                        <p class="cvicon">
+                            <i
+                                class="bi bi-file-person-fill"
+                                style="font-size: 60px; color: white;"
+                            />
+                        </p>
+                        <p class="cvtitle">MY LETTER</p>
+                        <p class="cvlength">
+                            <Badge color="danger">{number_of_letter}</Badge>
+                        </p>
+                    </div>
                 </div>
                 <!-- <div
                     class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
@@ -1694,69 +1696,103 @@
                     >
                     <br />
                 </div> -->
-                <div class="w3-container w3-padding-64 w3-theme-l5 w3-light-grey" id="contact">
+                <div
+                    class="w3-container w3-padding-64 w3-theme-l5 w3-light-grey"
+                    id="contact"
+                >
                     <div class="w3-row">
-                      <div class="w3-col m5">
-                      <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
-                        <h3>Address</h3>
-                        <p>Avinashi Ventures, Surat</p>
-                        <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i><span style="display: absolute; margin-left: 5%;">Surat, Gujarat</span></p>
-                        <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i><span style="display: absolute; margin-left: 3%;">+91 9106884674</span></p>
-                        <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i><span style="display: absolute; margin-left: 3%;">kushalmajiwala1212@gmail.com</span></p>
-                      </div>
-                      <div class="w3-col m7">
-                        <div class="w3-container w3-card-4 w3-padding-16 w3-white">
-                        <div class="w3-section">      
-                          <!-- svelte-ignore a11y-label-has-associated-control -->
-                          <label>Name</label>
-                          <input
-                            class="w3-input"
-                            type="text"
-                            required
-                            bind:value={cname}
-                        />
+                        <div class="w3-col m5">
+                            <div class="w3-padding-16">
+                                <span
+                                    class="w3-xlarge w3-border-teal w3-bottombar"
+                                    >Contact Us</span
+                                >
+                            </div>
+                            <h3>Address</h3>
+                            <p>Avinashi Ventures, Surat</p>
+                            <p>
+                                <i
+                                    class="fa fa-map-marker w3-text-teal w3-xlarge"
+                                /><span
+                                    style="display: absolute; margin-left: 5%;"
+                                    >Surat, Gujarat</span
+                                >
+                            </p>
+                            <p>
+                                <i
+                                    class="fa fa-phone w3-text-teal w3-xlarge"
+                                /><span
+                                    style="display: absolute; margin-left: 3%;"
+                                    >+91 9106884674</span
+                                >
+                            </p>
+                            <p>
+                                <i
+                                    class="fa fa-envelope-o w3-text-teal w3-xlarge"
+                                /><span
+                                    style="display: absolute; margin-left: 3%;"
+                                    >kushalmajiwala1212@gmail.com</span
+                                >
+                            </p>
                         </div>
-                        <div class="w3-section">      
-                          <!-- svelte-ignore a11y-label-has-associated-control -->
-                          <label>Email</label>
-                          <input
-                            class="w3-input"
-                            type="text"
-                            required
-                            bind:value={cemail}
-                        />
+                        <div class="w3-col m7">
+                            <div
+                                class="w3-container w3-card-4 w3-padding-16 w3-white"
+                            >
+                                <div class="w3-section">
+                                    <!-- svelte-ignore a11y-label-has-associated-control -->
+                                    <label>Name</label>
+                                    <input
+                                        class="w3-input"
+                                        type="text"
+                                        required
+                                        bind:value={cname}
+                                    />
+                                </div>
+                                <div class="w3-section">
+                                    <!-- svelte-ignore a11y-label-has-associated-control -->
+                                    <label>Email</label>
+                                    <input
+                                        class="w3-input"
+                                        type="text"
+                                        required
+                                        bind:value={cemail}
+                                    />
+                                </div>
+                                <div class="w3-section">
+                                    <!-- svelte-ignore a11y-label-has-associated-control -->
+                                    <label>Message</label>
+                                    <input
+                                        class="w3-input"
+                                        required
+                                        bind:value={cmsg}
+                                    />
+                                </div>
+                                <input
+                                    class="w3-check"
+                                    type="checkbox"
+                                    checked
+                                    name="Like"
+                                />
+                                <!-- svelte-ignore a11y-label-has-associated-control -->
+                                <label>I Like it!</label>
+                                <button
+                                    class="w3-button w3-block w3-dark-grey"
+                                    on:click={showMsg}>Send</button
+                                >
+                            </div>
                         </div>
-                        <div class="w3-section">      
-                          <!-- svelte-ignore a11y-label-has-associated-control -->
-                          <label>Message</label>
-                          <input
-                            class="w3-input"
-                            required
-                            bind:value={cmsg}
-                        />
-                        </div>  
-                        <input class="w3-check" type="checkbox" checked name="Like">
-                        <!-- svelte-ignore a11y-label-has-associated-control -->
-                        <label>I Like it!</label>
-                        <button
-                        class="w3-button w3-block w3-dark-grey"
-                        on:click={showMsg}>Send</button
-                    >
                     </div>
-                      </div>
-                    </div>
-                  </div>
+                </div>
             </Router>
         </body>
     {:else if userFound == false}
         <Usernotfound />
     {/if}
     <div class="Modals">
-        <!-- Main Modal -->
+        <!-- Main Modal For CV -->
         <Modal isOpen={open1} size="lg">
-            <ModalHeader
-                style="display: flex;justify-content: center;"
-            >
+            <ModalHeader style="display: flex;justify-content: center;">
                 <div class="mainHeader">
                     <h1>MY CV</h1>
                 </div>
@@ -1764,7 +1800,7 @@
             <ModalBody
                 style="display: flex;justify-content: center;  min-height: 350px;background-color: #dde0f2"
             >
-                {#if checking == false}
+                {#if cv_checking == false}
                     <div class="none-added">
                         <p>No CV Added Yet</p>
                     </div>
@@ -1778,14 +1814,10 @@
                                 >
                                     Download
                                 </Tooltip>
-                                <Tooltip
-                                    target="myview-{i}"
-                                    placement="bottom">View</Tooltip
+                                <Tooltip target="myview-{i}" placement="bottom"
+                                    >View</Tooltip
                                 >
-                                <Tooltip
-                                    target="myqr-{i}"
-                                    placement="bottom"
-                                >
+                                <Tooltip target="myqr-{i}" placement="bottom">
                                     Generate QR
                                 </Tooltip>
                             </div>
@@ -1807,22 +1839,18 @@
                                     <i
                                         class="bi bi-file-earmark-arrow-down-fill downloadIcon"
                                         id="mydownload-{i}"
-                                        on:click={() =>
-                                            setDownloadCV(rec.cvid)}
+                                        on:click={() => setDownloadCV(rec.cvid)}
                                     />
                                     <i
                                         class="bi bi-eye-fill showIcon"
                                         id="myview-{i}"
-                                        on:click={() =>
-                                            setShowCV(rec.cvid)}
+                                        on:click={() => setShowCV(rec.cvid)}
                                     />
                                     <i
                                         class="bi bi-qr-code qrIcon"
                                         id="myqr-{i}"
                                         on:click={() =>
-                                            generateQRCode(
-                                                rec.cvid
-                                            )}
+                                            generateQRCode(rec.cvid)}
                                     />
                                 </div>
                             </div>
@@ -1844,9 +1872,7 @@
                         Manage-CV
                     </Link>
                 </Button>
-                <Button color="danger" on:click={toggle1}
-                    >Cancle</Button
-                >
+                <Button color="danger" on:click={toggle1}>Cancle</Button>
             </ModalFooter>
         </Modal>
         <Modal isOpen={open2}>
@@ -1867,10 +1893,8 @@
                 />
             </ModalBody>
             <ModalFooter>
-                <Button
-                    color="danger"
-                    class="float-right"
-                    on:click={toggle2}>Cancel</Button
+                <Button color="danger" class="float-right" on:click={toggle2}
+                    >Cancel</Button
                 >
             </ModalFooter>
         </Modal>
@@ -1885,9 +1909,7 @@
                         </p>
                     </div>
                 </ModalHeader>
-                <ModalHeader
-                    style="position: relative; height: 280px;"
-                >
+                <ModalHeader style="position: relative; height: 280px;">
                     <div class="personal-container">
                         <div>
                             <p class="main-name">
@@ -1935,9 +1957,7 @@
                         </p>
                     </div>
                 </ModalHeader>
-                <ModalHeader
-                    style="position: relative; height: 180px;"
-                >
+                <ModalHeader style="position: relative; height: 180px;">
                     <div>
                         <p class="main-name">
                             <b>=> SECONDARY EDUCATION</b> :- {schoolname}
@@ -1964,9 +1984,7 @@
                         </p>
                     </div>
                 </ModalHeader>
-                <ModalHeader
-                    style="position: relative; height: 180px;"
-                >
+                <ModalHeader style="position: relative; height: 180px;">
                     <div>
                         <p class="main-name">
                             <b>=> JOB TITLE</b> :- {job_title}
@@ -1993,9 +2011,7 @@
                         </p>
                     </div>
                 </ModalHeader>
-                <ModalHeader
-                    style="position: relative; height: 140px;"
-                >
+                <ModalHeader style="position: relative; height: 140px;">
                     <div class="skill-show">
                         {#if skill1 !== "" && skill2 !== "" && skill3 !== ""}
                             <div>
@@ -2090,9 +2106,7 @@
                         </p>
                     </div>
                 </ModalHeader>
-                <ModalHeader
-                    style="position: relative; height: 140px;"
-                >
+                <ModalHeader style="position: relative; height: 140px;">
                     <div class="interest-show">
                         {#if interest1 !== "" && interest2 !== "" && interest3 !== ""}
                             <div>
@@ -2144,9 +2158,7 @@
                             </p>
                         </div>
                     </ModalHeader>
-                    <ModalHeader
-                        style="position: relative; height: 180px;"
-                    >
+                    <ModalHeader style="position: relative; height: 180px;">
                         <div>
                             {#if facebook_link !== ""}
                                 <p class="main-name">
@@ -2196,20 +2208,44 @@
             <ModalHeader>Contact-Us</ModalHeader>
             <ModalBody>Your response Submitted...</ModalBody>
             <ModalFooter>
-                <Button color="danger" on:click={toggle4}
-                    >Cancel</Button
-                >
+                <Button color="danger" on:click={toggle4}>Cancel</Button>
             </ModalFooter>
         </Modal>
         <Modal isOpen={open5} backdrop="static">
             <ModalHeader>Contact-Us</ModalHeader>
-            <ModalBody>
-                Contact us Fields Cannot be empty...
+            <ModalBody>Contact us Fields Cannot be empty...</ModalBody>
+            <ModalFooter>
+                <Button color="danger" on:click={toggle5}>Cancel</Button>
+            </ModalFooter>
+        </Modal>
+        <!-- Main Modal For Letter -->
+        <Modal isOpen={open6} size="lg">
+            <ModalHeader style="display: flex;justify-content: center;">
+                <div class="mainHeader">
+                    <h1>MY LETTER</h1>
+                </div>
+            </ModalHeader>
+            <ModalBody
+                style="display: flex;justify-content: center;  min-height: 350px;background-color: #dde0f2"
+            >
+                {#if letter_checking == false}
+                    <div class="none-added">No Letter Added Yet</div>
+                {/if}
             </ModalBody>
             <ModalFooter>
-                <Button color="danger" on:click={toggle5}
-                    >Cancel</Button
+                <Button
+                    color="primary"
+                    on:click={toggle6}
+                    on:click={refreshPage}
                 >
+                    <Link
+                        to="/{username}/manage/"
+                        style="text-decoration: none;"
+                    >
+                        Manage-CV
+                    </Link>
+                </Button>
+                <Button color="danger" on:click={toggle6}>Cancle</Button>
             </ModalFooter>
         </Modal>
     </div>
