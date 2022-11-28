@@ -2338,7 +2338,7 @@
                         to="/{username}/manage/"
                         style="text-decoration: none;"
                     >
-                        Manage-CV
+                        Manage-Letter
                     </Link>
                 </Button>
                 <Button color="danger" on:click={toggle6}>Cancle</Button>
