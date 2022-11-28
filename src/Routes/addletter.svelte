@@ -610,7 +610,8 @@
                     color="danger"
                     class="float-right"
                     on:click={toggle4}
-                    on:click={progressStop}>Cancel</Button
+                    on:click={progressStop}
+                    on:click={resetAll}>Cancel</Button
                 >
             </ModalFooter>
         </Modal>
