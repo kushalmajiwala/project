@@ -12,6 +12,8 @@
         ModalBody,
         ModalFooter,
     } from "sveltestrap";
+    import axios from "axios";
+    import { onMount } from "svelte";
 
     function progressStop() {
         progress = false;
@@ -21,11 +23,13 @@
     let open1 = false;
     let open2 = false;
     let open3 = false;
+    let open4 = false;
 
     //Modal Functions
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
+    const toggle4 = () => (open4 = !open4);
 
     //Personal Page Variables
     let personal_information = true;
@@ -71,7 +75,11 @@
     let letter_content_border = "border: 1px solid #4c89ca; height: 400px;";
 
     let progress = false;
+    let userid = "";
 
+    onMount(async () => {
+        userid = localStorage.getItem(username);
+    });
     //Showing Functions
     function showPersonal() {
         personal_information = true;
@@ -156,54 +164,54 @@
             company_city_border = "border: 1px solid #4c89ca;";
             company_state_border = "border: 1px solid #4c89ca;";
         }
-        if(recipient_name == "" ||
+        if (
+            recipient_name == "" ||
             recipient_gender == "" ||
             company_name == "" ||
             company_address == "" ||
             company_city == "" ||
-            company_state == "")
-        {
-            if(recipient_name == "") recipient_name_border = "border: 1px solid red;";
+            company_state == ""
+        ) {
+            if (recipient_name == "")
+                recipient_name_border = "border: 1px solid red;";
             else recipient_name_border = "border: 1px solid #4c89ca;";
-            if(recipient_gender == "") recipient_gender_border = "border: 1px solid red;";
+            if (recipient_gender == "")
+                recipient_gender_border = "border: 1px solid red;";
             else recipient_gender_border = "border: 1px solid #4c89ca;";
-            if(company_name == "") company_name_border = "border: 1px solid red;";
+            if (company_name == "")
+                company_name_border = "border: 1px solid red;";
             else company_name_border = "border: 1px solid #4c89ca;";
-            if(company_address == "") company_address_border = "border: 1px solid red;";
+            if (company_address == "")
+                company_address_border = "border: 1px solid red;";
             else company_address_border = "border: 1px solid #4c89ca;";
-            if(company_city == "") company_city_border = "border: 1px solid red;";
+            if (company_city == "")
+                company_city_border = "border: 1px solid red;";
             else company_city_border = "border: 1px solid #4c89ca;";
-            if(company_state == "") company_state_border = "border: 1px solid red;";
+            if (company_state == "")
+                company_state_border = "border: 1px solid red;";
             else company_state_border = "border: 1px solid #4c89ca;";
             toggle2();
             showRecipient();
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
     function lettercontentValidate() {
-        if(letter_content !== "")
-        {
-            letter_content_border = "border: 1px solid #4c89ca;height: 400px;";   
+        if (letter_content !== "") {
+            letter_content_border = "border: 1px solid #4c89ca;height: 400px;";
         }
-        if(letter_content == "")
-        {
+        if (letter_content == "") {
             letter_content_border = "border: 1px solid red;height: 400px;";
             toggle3();
             showLettercontent();
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
 
-    function resetAll()
-    {
+    function resetAll() {
         letter_title = "";
         fname = "";
         lname = "";
@@ -225,17 +233,45 @@
     //submit Letter
     function submitLetter() {
         progress = true;
-        if(personalValidate())
-        {
-            if(recipientValidate())
-            {
-                if(lettercontentValidate())
-                {
-            
+        if (personalValidate()) {
+            if (recipientValidate()) {
+                if (lettercontentValidate()) {
+                    const options = {
+                        method: "POST",
+                        url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter",
+                        data: {
+                            UserId: userid,
+                            title: letter_title,
+                            fname: fname,
+                            lname: lname,
+                            address: personal_address,
+                            phoneno: phone,
+                            email: email,
+                            profession: profession,
+                            letter_date: "'" + Date.now() + "'",
+                            recipient_name: recipient_name,
+                            recipient_gender: recipient_gender,
+                            company_name: company_name,
+                            company_address: company_address,
+                            company_city: company_city,
+                            company_state: company_state,
+                            letter_content: letter_content,
+                        },
+                    };
+
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            toggle4();
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
                 }
             }
         }
     }
+    export let username;
 </script>
 
 <main>
@@ -539,8 +575,8 @@
                 >
             </ModalFooter>
         </Modal>
-         <!-- empty-modal -->
-         <Modal header="Message" isOpen={open2}>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open2}>
             <ModalBody
                 >Fields Cannot be empty on Recipient-Information Page...</ModalBody
             >
@@ -563,6 +599,17 @@
                     color="danger"
                     class="float-right"
                     on:click={toggle3}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <Modal header="Message" isOpen={open4}>
+            <ModalBody>Cover Letter Created Successfully...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle4}
                     on:click={progressStop}>Cancel</Button
                 >
             </ModalFooter>
