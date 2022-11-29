@@ -2818,7 +2818,7 @@
 
     @media screen and (max-width: 400px) {
         .inner-icon {
-            margin-top: -16%;
+            margin-top: -18%;
             margin-left: 15%;
         }
         .inner-cv {
