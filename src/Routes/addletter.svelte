@@ -236,6 +236,8 @@
         if (personalValidate()) {
             if (recipientValidate()) {
                 if (lettercontentValidate()) {
+                    var d = new Date();
+                    var mydate = d.toDateString();
                     const options = {
                         method: "POST",
                         url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter",
@@ -248,7 +250,7 @@
                             phoneno: phone,
                             email: email,
                             profession: profession,
-                            letter_date: "'" + Date.now() + "'",
+                            letter_date: mydate,
                             recipient_name: recipient_name,
                             recipient_gender: recipient_gender,
                             company_name: company_name,

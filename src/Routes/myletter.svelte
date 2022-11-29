@@ -21,11 +21,13 @@
     let open2 = false;
     let open3 = false;
     let open4 = false;
+    let open5 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
     const toggle4 = () => (open4 = !open4);
+    const toggle5 = () => (open5 = !open5);
 
     //Personal Page Variables
     let personal_information = true;
@@ -210,6 +212,7 @@
     let progress = false;
     let edit_letterid = "";
     let delete_letterid = "";
+    let show_letterid = "";
 
     //Showing Functions
     function showPersonal() {
@@ -301,7 +304,10 @@
 
     function setDownloadLetter(lid) {}
 
-    function setShowLetter(lid) {}
+    function setShowLetter(lid) {
+        getData(lid);
+        toggle5();
+    }
 
     function generateQRCode(lid) {}
 
@@ -851,10 +857,92 @@
                 >
             </ModalFooter>
         </Modal>
+        <!-- Show Letter -->
+        <Modal isOpen={open5} size="lg">
+            <div class="letter-border">
+                <ModalHeader style="height: 235px; border-bottom: 2px solid black;">
+                    <div class="letter-header">
+                        <p>{ fname } { lname }</p>
+                    </div>
+                    <div class="personal-info">
+                        <p><i class="bi bi-envelope-check-fill"></i> { email }</p>
+                        <p><i class="bi bi-phone-fill"></i> { phone }</p>
+                        <p><i class="bi bi-geo-alt-fill"></i> { personal_address }</p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="border-bottom: 2px solid black;">
+                    <div class="letter-content-header">
+                        <p style="font-size: 15px;">To :</p>
+                        <p style="margin-top: -18px;">{ recipient_name }, CEO</p>
+                        <p style="margin-top: -18px;">{ company_name }</p>
+                        <p style="margin-top: -18px;">{ company_address }</p>
+                        <p style="margin-top: -18px">{ company_city }, { company_state }</p>
+                        <p style="margin-top: -18px">{ letter_date }</p>
+                    </div>
+                    <div class="letter-content">
+                        <p>Dear 
+                            {#if recipient_gender == "Male"}
+                                Mr.
+                            {:else}
+                                Ms.
+                            {/if}
+                            { recipient_name }
+                        </p>
+                        <p>{ letter_content }</p>
+                        <p style="margin-top: 30px;">Regards, </p>
+                        <p style="margin-top: -18px;">{ fname } { lname }</p>
+                        <p style="margin-top: -18px;">{ phone }</p>
+                        <p style="margin-top: -18px;">{ email }</p>
+                    </div>
+                </ModalHeader>
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        class="float-right"
+                        on:click={() => setDownloadLetter(show_letterid)}
+                    >
+                        <i
+                            style="margin-right: 5px;"
+                            class="bi bi-file-earmark-arrow-down-fill"
+                        />Download</Button
+                    >
+                    <Button
+                        color="danger"
+                        class="float-right"
+                        on:click={toggle5}>Cancel</Button
+                    >
+                </ModalFooter>
+            </div>
+        </Modal>
     </div>
 </main>
 
 <style>
+    .letter-header {
+        white-space: nowrap;
+        width: 95%;
+        padding: 0px;
+        font-size: 35px;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        color: rgb(25, 32, 90);
+        font-weight: 500;
+    }
+    .letter-content-header {
+        color: rgb(95, 93, 93);
+    }
+    .letter-content {
+        color: rgb(95, 93, 93);
+        margin-top: 5%;
+    }
+    .personal-info {
+        margin-top: 45%;
+        font-weight: 400;
+    }
+    .letter-border {
+        border: 6px solid black;
+    }
     .delete-txt {
         font-size: 20px;
     }
