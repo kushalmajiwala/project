@@ -443,6 +443,8 @@
         }
         .inner-letter {
             margin-top: 5%;
+            padding-top: 1%;
+            padding-left: 3%;
         }
     }
     @media screen and (max-width: 360px) {
