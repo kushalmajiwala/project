@@ -104,8 +104,8 @@
                 <div class="card inner-letter">
                     <div>
                         <i
-                            class="bi bi-file-earmark-person-fill"
-                            style="font-size: 70px; color: #598496;"
+                            class="bi bi-envelope-fill"
+                            style="font-size: 65px; color: #598496;"
                         />
                     </div>
                     <div class="inner-content">
@@ -183,7 +183,8 @@
         height: 100px;
         margin-top: 2%;
         width: 50%;
-        padding-left: 0.5%;
+        padding-left: 1.5%;
+        padding-top: 0.5%;
         box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
     }
     .letter-title {
@@ -387,10 +388,11 @@
             margin-top: 17%;
             margin-left: 25%;
         }
-        .letter-details {
-            width: 100%;
+        /* .letter-details {
+            width: 85%;
             padding-left: 5%;
-        }
+            margin-left: 15%;
+        } */
     }
     @media screen and (max-width: 500px) {
         .add-content {
@@ -407,6 +409,10 @@
         }
         .inner-letter {
             width: 95%;
+        }
+        .letter-details {
+            width: 100%;
+            padding-left: 5%;
         }
     }
     @media screen and (max-width: 450px) {
