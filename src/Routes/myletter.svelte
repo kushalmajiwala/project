@@ -319,7 +319,9 @@
     function deleteLetter(lid) {
         const options = {
             method: "DELETE",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/letterid/" + lid,
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/letterid/" +
+                lid,
         };
 
         axios
@@ -481,7 +483,6 @@
                             >
                                 <div class="form-group" style="width: 90%">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Letter Title"
                                     >
@@ -499,7 +500,6 @@
                             >
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter First Name"
                                     >
@@ -511,11 +511,7 @@
                                     </FormGroup>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <FormGroup
-                                        style="text-align:center"
-                                        floating
-                                        label="Enter Last Name"
-                                    >
+                                    <FormGroup floating label="Enter Last Name">
                                         <Input
                                             placeholder="Enter Last Name"
                                             style={lname_border}
@@ -529,11 +525,7 @@
                                 style="padding-left: 9.5%; width: 91.7%;"
                             >
                                 <div class="form-group col-md-6">
-                                    <FormGroup
-                                        style="text-align:center"
-                                        floating
-                                        label="Enter Address"
-                                    >
+                                    <FormGroup floating label="Enter Address">
                                         <Input
                                             placeholder="Enter Address"
                                             style={personal_address_border}
@@ -543,7 +535,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Phone Number"
                                     >
@@ -560,11 +551,7 @@
                                 style="padding-left: 9.5%; width: 91.7%;"
                             >
                                 <div class="form-group col-md-6">
-                                    <FormGroup
-                                        style="text-align:center"
-                                        floating
-                                        label="Enter Email"
-                                    >
+                                    <FormGroup floating label="Enter Email">
                                         <Input
                                             placeholder="Enter Email"
                                             style={email_border}
@@ -574,7 +561,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Profession"
                                     >
@@ -618,7 +604,6 @@
                             >
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Recipient Name"
                                     >
@@ -631,7 +616,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Select Recipient Gender"
                                     >
@@ -658,7 +642,6 @@
                             >
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Company Name"
                                     >
@@ -671,7 +654,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Company Address"
                                     >
@@ -689,7 +671,6 @@
                             >
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Company City"
                                     >
@@ -702,7 +683,6 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <FormGroup
-                                        style="text-align:center"
                                         floating
                                         label="Enter Company State"
                                     >
@@ -860,39 +840,47 @@
         <!-- Show Letter -->
         <Modal isOpen={open5} size="lg">
             <div class="letter-border">
-                <ModalHeader style="height: 235px; border-bottom: 2px solid black;">
+                <ModalHeader
+                    style="height: 235px; border-bottom: 2px solid black;"
+                >
                     <div class="letter-header">
-                        <p>{ fname } { lname }</p>
+                        <p>{fname} {lname}</p>
                     </div>
                     <div class="personal-info">
-                        <p><i class="bi bi-envelope-check-fill"></i> { email }</p>
-                        <p><i class="bi bi-phone-fill"></i> { phone }</p>
-                        <p><i class="bi bi-geo-alt-fill"></i> { personal_address }</p>
+                        <p><i class="bi bi-envelope-check-fill" /> {email}</p>
+                        <p><i class="bi bi-phone-fill" /> {phone}</p>
+                        <p>
+                            <i class="bi bi-geo-alt-fill" />
+                            {personal_address}
+                        </p>
                     </div>
                 </ModalHeader>
                 <ModalHeader style="border-bottom: 2px solid black;">
                     <div class="letter-content-header">
                         <p style="font-size: 15px;">To :</p>
-                        <p style="margin-top: -18px;">{ recipient_name }, CEO</p>
-                        <p style="margin-top: -18px;">{ company_name }</p>
-                        <p style="margin-top: -18px;">{ company_address }</p>
-                        <p style="margin-top: -18px">{ company_city }, { company_state }</p>
-                        <p style="margin-top: -18px">{ letter_date }</p>
+                        <p style="margin-top: -18px;">{recipient_name}, CEO</p>
+                        <p style="margin-top: -18px;">{company_name}</p>
+                        <p style="margin-top: -18px;">{company_address}</p>
+                        <p style="margin-top: -18px">
+                            {company_city}, {company_state}
+                        </p>
+                        <p style="margin-top: -18px">{letter_date}</p>
                     </div>
                     <div class="letter-content">
-                        <p>Dear 
+                        <p>
+                            Dear
                             {#if recipient_gender == "Male"}
                                 Mr.
                             {:else}
                                 Ms.
                             {/if}
-                            { recipient_name }
+                            {recipient_name}
                         </p>
-                        <p>{ letter_content }</p>
-                        <p style="margin-top: 30px;">Regards, </p>
-                        <p style="margin-top: -18px;">{ fname } { lname }</p>
-                        <p style="margin-top: -18px;">{ phone }</p>
-                        <p style="margin-top: -18px;">{ email }</p>
+                        <p>{letter_content}</p>
+                        <p style="margin-top: 30px;">Regards,</p>
+                        <p style="margin-top: -18px;">{fname} {lname}</p>
+                        <p style="margin-top: -18px;">{phone}</p>
+                        <p style="margin-top: -18px;">{email}</p>
                     </div>
                 </ModalHeader>
                 <ModalFooter>
