@@ -1689,8 +1689,8 @@
                     <div class="mycvinner" on:click={toggle6}>
                         <p class="cvicon">
                             <i
-                                class="bi bi-file-person-fill"
-                                style="font-size: 60px; color: white;"
+                                class="bi bi-envelope-paper-fill"
+                                style="font-size: 50px; color: white;"
                             />
                         </p>
                         <p class="cvtitle">MY LETTER</p>
@@ -2293,8 +2293,8 @@
                             <div class="card inner-letter">
                                 <div>
                                     <i
-                                        class="bi bi-file-earmark-person-fill"
-                                        style="font-size: 70px; color: #598496;"
+                                        class="bi bi-envelope-fill"
+                                        style="font-size: 65px; color: #598496;"
                                     />
                                 </div>
                                 <div class="inner-content">
@@ -2445,7 +2445,7 @@
         height: 100px;
         margin-top: 2%;
         width: 50%;
-        padding-left: 0.5%;
+        padding-left: 1.5%;
         box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
     }
     .inner-content {
@@ -2659,7 +2659,8 @@
         margin-top: 2%;
         margin-left: 25%;
         width: 50%;
-        padding-left: 0.5%;
+        padding-left: 2.5%;
+        padding-top: 0.5%;
         box-shadow: 0px 0px 7px 0px rgb(108, 105, 105);
     }
     .inner-content {
@@ -2734,11 +2735,11 @@
     }
     @media screen and (max-width: 1100px) {
         .cv-details {
-            padding-left: 30%;
+            padding-left: 25%;
             margin-top: -2%;
         }
         .letter-details {
-            padding-left: 30%;
+            padding-left: 25%;
             margin-top: -2%;
         }
     }
@@ -2746,10 +2747,18 @@
         .cv-details {
             padding-left: 25%;
             margin-top: -2%;
+            margin-left: -20%;
         }
         .letter-details {
             padding-left: 25%;
             margin-top: -2%;
+            margin-left: -20%;
+        }
+        .inner-cv {
+            width: 95%;
+        }
+        .inner-letter {
+            width: 95%;
         }
         .inner-icon {
             margin-top: -20%;
@@ -2757,6 +2766,12 @@
         }
         .none-added {
             margin-top: 25%;
+        }
+        .cv-title {
+            font-size: 23px;
+        }
+        .letter-title {
+            font-size: 23px;
         }
     }
 
@@ -2780,7 +2795,8 @@
         .cv-details {
             width: 100%;
             padding-left: 5%;
-            margin-top: -5%;
+            margin-top: -1.5%;
+            margin-left: 0%;
         }
         .inner-cv {
             width: 95%;
@@ -2788,7 +2804,8 @@
         .letter-details {
             width: 100%;
             padding-left: 5%;
-            margin-top: -5%;
+            margin-top: -2%;
+            margin-left: 0%;
         }
         .inner-letter {
             width: 95%;
