@@ -1,4 +1,6 @@
 <script>
+    // @ts-nocheck
+
     import { Router, Link, Route } from "svelte-routing";
     import axios from "axios";
     import { onMount } from "svelte";
@@ -12,12 +14,223 @@
         Input,
         Spinner,
         Label,
-        Tooltip
+        Tooltip,
     } from "sveltestrap";
+
+    let open1 = false;
+    let open2 = false;
+    let open3 = false;
+    let open4 = false;
+
+    const toggle1 = () => (open1 = !open1);
+    const toggle2 = () => (open2 = !open2);
+    const toggle3 = () => (open3 = !open3);
+    const toggle4 = () => (open4 = !open4);
+
+    //Personal Page Variables
+    let personal_information = true;
+    let letter_title = "";
+    let fname = "";
+    let lname = "";
+    let personal_address = "";
+    let phone = "";
+    let email = "";
+    let profession = "";
+    let letter_date = "";
+
+    //Personal Page Border Variables
+    let letter_title_border = "border: 1px solid #4c89ca;";
+    let fname_border = "border: 1px solid #4c89ca;";
+    let lname_border = "border: 1px solid #4c89ca;";
+    let personal_address_border = "border: 1px solid #4c89ca;";
+    let phone_border = "border: 1px solid #4c89ca;";
+    let email_border = "border: 1px solid #4c89ca;";
+    let profession_border = "border: 1px solid #4c89ca;";
+
+    //Recipient Page Variables
+    let recipient_information = false;
+    let recipient_name = "";
+    let recipient_gender = "";
+    let company_name = "";
+    let company_address = "";
+    let company_city = "";
+    let company_state = "";
+
+    //Recipient page Border Variables
+    let recipient_name_border = "border: 1px solid #4c89ca;";
+    let recipient_gender_border = "border: 1px solid #4c89ca;";
+    let company_name_border = "border: 1px solid #4c89ca;";
+    let company_address_border = "border: 1px solid #4c89ca;";
+    let company_city_border = "border: 1px solid #4c89ca;";
+    let company_state_border = "border: 1px solid #4c89ca;";
+
+    //Letter Page variables
+    let letter_page = false;
+    let letter_content = "";
+
+    //Letter Page Border Variables
+    let letter_content_border = "border: 1px solid #4c89ca; height: 400px;";
+
+    //Validation Functions
+    function personalValidate() {
+        if (
+            letter_title !== "" &&
+            fname !== "" &&
+            lname !== "" &&
+            personal_address !== "" &&
+            phone !== "" &&
+            email !== "" &&
+            profession !== ""
+        ) {
+            letter_title_border = "border: 1px solid #4c89ca;";
+            fname_border = "border: 1px solid #4c89ca;";
+            lname_border = "border: 1px solid #4c89ca;";
+            personal_address_border = "border: 1px solid #4c89ca;";
+            phone_border = "border: 1px solid #4c89ca;";
+            email_border = "border: 1px solid #4c89ca;";
+            profession_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            letter_title == "" ||
+            fname == "" ||
+            lname == "" ||
+            personal_address == "" ||
+            phone == "" ||
+            email == "" ||
+            profession == ""
+        ) {
+            if (letter_title == "")
+                letter_title_border = "border: 1px solid red;";
+            else letter_title_border = "border: 1px solid #4c89ca;";
+            if (fname == "") fname_border = "border: 1px solid red;";
+            else fname_border = "border: 1px solid #4c89ca;";
+            if (lname == "") lname_border = "border: 1px solid red;";
+            else lname_border = "border: 1px solid #4c89ca;";
+            if (personal_address == "")
+                personal_address_border = "border: 1px solid red;";
+            else personal_address_border = "border: 1px solid #4c89ca;";
+            if (phone == "") phone_border = "border: 1px solid red;";
+            else phone_border = "border: 1px solid #4c89ca;";
+            if (email == "") email_border = "border: 1px solid red;";
+            else email_border = "border: 1px solid #4c89ca;";
+            if (profession == "") profession_border = "border: 1px solid red;";
+            else profession_border = "border: 1px solid #4c89ca;";
+            toggle1();
+            showPersonal();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function recipientValidate() {
+        if (
+            recipient_name !== "" &&
+            recipient_gender !== "" &&
+            company_name !== "" &&
+            company_address !== "" &&
+            company_city !== "" &&
+            company_state !== ""
+        ) {
+            recipient_name_border = "border: 1px solid #4c89ca;";
+            recipient_gender_border = "border: 1px solid #4c89ca;";
+            company_name_border = "border: 1px solid #4c89ca;";
+            company_address_border = "border: 1px solid #4c89ca;";
+            company_city_border = "border: 1px solid #4c89ca;";
+            company_state_border = "border: 1px solid #4c89ca;";
+        }
+        if (
+            recipient_name == "" ||
+            recipient_gender == "" ||
+            company_name == "" ||
+            company_address == "" ||
+            company_city == "" ||
+            company_state == ""
+        ) {
+            if (recipient_name == "")
+                recipient_name_border = "border: 1px solid red;";
+            else recipient_name_border = "border: 1px solid #4c89ca;";
+            if (recipient_gender == "")
+                recipient_gender_border = "border: 1px solid red;";
+            else recipient_gender_border = "border: 1px solid #4c89ca;";
+            if (company_name == "")
+                company_name_border = "border: 1px solid red;";
+            else company_name_border = "border: 1px solid #4c89ca;";
+            if (company_address == "")
+                company_address_border = "border: 1px solid red;";
+            else company_address_border = "border: 1px solid #4c89ca;";
+            if (company_city == "")
+                company_city_border = "border: 1px solid red;";
+            else company_city_border = "border: 1px solid #4c89ca;";
+            if (company_state == "")
+                company_state_border = "border: 1px solid red;";
+            else company_state_border = "border: 1px solid #4c89ca;";
+            toggle2();
+            showRecipient();
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function lettercontentValidate() {
+        if (letter_content !== "") {
+            letter_content_border = "border: 1px solid #4c89ca;height: 400px;";
+        }
+        if (letter_content == "") {
+            letter_content_border = "border: 1px solid red;height: 400px;";
+            toggle3();
+            showLettercontent();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function resetAll() {
+        letter_title = "";
+        fname = "";
+        lname = "";
+        personal_address = "";
+        phone = "";
+        email = "";
+        profession = "";
+
+        recipient_name = "";
+        recipient_gender = "";
+        company_name = "";
+        company_address = "";
+        company_city = "";
+        company_state = "";
+
+        letter_content = "";
+    }
 
     let totalLetter = [];
     let userid = "";
     let checking = false;
+    let progress = false;
+    let edit_letterid = "";
+    let delete_letterid = "";
+
+    //Showing Functions
+    function showPersonal() {
+        personal_information = true;
+        recipient_information = false;
+        letter_page = false;
+    }
+    function showRecipient() {
+        personal_information = false;
+        recipient_information = true;
+        letter_page = false;
+    }
+    function showLettercontent() {
+        personal_information = false;
+        recipient_information = false;
+        letter_page = true;
+    }
+
+    function progressStop() {
+        progress = false;
+    }
 
     function checkLetterExist() {
         const options = {
@@ -43,29 +256,117 @@
                 console.error(error);
             });
     }
-    function setEditLetter(lid)
-    {
+    function getData(lid) {
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/letterid/" +
+                lid,
+        };
 
+        axios
+            .request(options)
+            .then(function (response) {
+                letter_title = response.data[0].title;
+                fname = response.data[0].fname;
+                lname = response.data[0].lname;
+                personal_address = response.data[0].address;
+                phone = response.data[0].phoneno;
+                email = response.data[0].email;
+                profession = response.data[0].profession;
+                letter_date = response.data[0].letter_date;
+                recipient_name = response.data[0].recipient_name;
+                recipient_gender = response.data[0].recipient_gender;
+                company_name = response.data[0].company_name;
+                company_address = response.data[0].company_address;
+                company_city = response.data[0].company_city;
+                company_state = response.data[0].company_state;
+                letter_content = response.data[0].letter_content;
+                console.log(response.data[0]);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 
-    function setDownloadLetter(lid)
-    {
-
+    function setEditLetter(lid) {
+        edit_letterid = lid;
+        getData(edit_letterid);
+        toggle1();
+    }
+    function refreshPage() {
+        let page_url = window.location.href;
+        window.location.replace(page_url);
     }
 
-    function setShowLetter(lid)
-    {
+    function setDownloadLetter(lid) {}
 
+    function setShowLetter(lid) {}
+
+    function generateQRCode(lid) {}
+
+    function setDeleteLetter(lid) {
+        delete_letterid = lid;
+        toggle3();
     }
 
-    function generateQRCode(lid)
-    {
+    function deleteLetter(lid) {
+        const options = {
+            method: "DELETE",
+            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/letterid/" + lid,
+        };
 
+        axios
+            .request(options)
+            .then(function (response) {
+                toggle4();
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 
-    function setDeleteLetter(lid)
-    {
+    function EditLetter() {
+        progress = true;
+        if (personalValidate()) {
+            if (recipientValidate()) {
+                if (lettercontentValidate()) {
+                    const options = {
+                        method: "PUT",
+                        url:
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/letterid/" +
+                            edit_letterid,
+                        data: {
+                            UserId: userid,
+                            title: letter_title,
+                            fname: fname,
+                            lname: lname,
+                            address: personal_address,
+                            phoneno: phone,
+                            email: email,
+                            profession: profession,
+                            letter_date: letter_date,
+                            recipient_name: recipient_name,
+                            recipient_gender: recipient_gender,
+                            company_name: company_name,
+                            company_address: company_address,
+                            company_city: company_city,
+                            company_state: company_state,
+                            letter_content: letter_content,
+                        },
+                    };
 
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            toggle2();
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                }
+            }
+        }
     }
     onMount(async () => {
         userid = localStorage.getItem(username);
@@ -156,9 +457,438 @@
             <p class="add-txt">New Letter</p>
         </div>
     </Router>
+    <div class="Modals">
+        <!-- Edit Modal -->
+        <Modal isOpen={open1} size="lg">
+            {#if personal_information}
+                <div class="personal-page">
+                    <ModalHeader style="padding-left: 35%;">
+                        <div class="page-header">
+                            <p>Personal-Information</p>
+                        </div>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div class="my-content">
+                            <div
+                                class="form-row form-content"
+                                style="width: 100%; padding-left: 10%;"
+                            >
+                                <div class="form-group" style="width: 90%">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Letter Title"
+                                    >
+                                        <Input
+                                            placeholder="Enter Letter Title"
+                                            style={letter_title_border}
+                                            bind:value={letter_title}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                            <div
+                                class="form-row form-content"
+                                style="padding-left: 9.5%; width: 91.7%;"
+                            >
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter First Name"
+                                    >
+                                        <Input
+                                            placeholder="Enter First Name"
+                                            style={fname_border}
+                                            bind:value={fname}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Last Name"
+                                    >
+                                        <Input
+                                            placeholder="Enter Last Name"
+                                            style={lname_border}
+                                            bind:value={lname}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                            <div
+                                class="form-row form-content"
+                                style="padding-left: 9.5%; width: 91.7%;"
+                            >
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Address"
+                                    >
+                                        <Input
+                                            placeholder="Enter Address"
+                                            style={personal_address_border}
+                                            bind:value={personal_address}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Phone Number"
+                                    >
+                                        <Input
+                                            placeholder="Enter Phone Number"
+                                            style={phone_border}
+                                            bind:value={phone}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                            <div
+                                class="form-row form-content"
+                                style="padding-left: 9.5%; width: 91.7%;"
+                            >
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Email"
+                                    >
+                                        <Input
+                                            placeholder="Enter Email"
+                                            style={email_border}
+                                            bind:value={email}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Profession"
+                                    >
+                                        <Input
+                                            placeholder="Enter Profession"
+                                            style={profession_border}
+                                            bind:value={profession}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <div class="btncontainer">
+                            <Button color="primary" on:click={showRecipient}
+                                >Next &raquo;</Button
+                            >
+                            <Button
+                                color="danger"
+                                on:click={toggle1}
+                                on:click={showPersonal}
+                                on:click={progressStop}>CANCEL</Button
+                            >
+                        </div>
+                    </ModalFooter>
+                </div>
+            {/if}
+            {#if recipient_information}
+                <div class="personal-page">
+                    <ModalHeader style="padding-left: 35%;">
+                        <div class="page-header">
+                            <p>Recipient-Information</p>
+                        </div>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div class="my-content">
+                            <div
+                                class="form-row form-content"
+                                style="padding-left: 9.5%; width: 91.7%;"
+                            >
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Recipient Name"
+                                    >
+                                        <Input
+                                            placeholder="Enter Recipient Name"
+                                            style={recipient_name_border}
+                                            bind:value={recipient_name}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Select Recipient Gender"
+                                    >
+                                        <Input
+                                            type="select"
+                                            name="select"
+                                            id="exampleSelect"
+                                            style={recipient_gender_border}
+                                            bind:value={recipient_gender}
+                                        >
+                                            <option style="cursor:pointer;"
+                                                >Male</option
+                                            >
+                                            <option style="cursor:pointer;"
+                                                >Female</option
+                                            >
+                                        </Input>
+                                    </FormGroup>
+                                </div>
+                            </div>
+                            <div
+                                class="form-row form-content"
+                                style="padding-left: 9.5%; width: 91.7%;"
+                            >
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Company Name"
+                                    >
+                                        <Input
+                                            placeholder="Enter Company Name"
+                                            style={company_name_border}
+                                            bind:value={company_name}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Company Address"
+                                    >
+                                        <Input
+                                            placeholder="Enter Company Address"
+                                            style={company_address_border}
+                                            bind:value={company_address}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                            <div
+                                class="form-row form-content"
+                                style="padding-left: 9.5%; width: 91.7%;"
+                            >
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Company City"
+                                    >
+                                        <Input
+                                            placeholder="Enter Company City"
+                                            style={company_city_border}
+                                            bind:value={company_city}
+                                        />
+                                    </FormGroup>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <FormGroup
+                                        style="text-align:center"
+                                        floating
+                                        label="Enter Company State"
+                                    >
+                                        <Input
+                                            placeholder="Enter Company State"
+                                            style={company_state_border}
+                                            bind:value={company_state}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <div class="btncontainer">
+                            <Button color="primary" on:click={showPersonal}
+                                >&laquo; Previous</Button
+                            >
+                            <Button color="primary" on:click={showLettercontent}
+                                >Next &raquo;</Button
+                            >
+                            <Button
+                                color="danger"
+                                on:click={toggle1}
+                                on:click={showPersonal}
+                                on:click={progressStop}>CANCEL</Button
+                            >
+                        </div>
+                    </ModalFooter>
+                </div>
+            {/if}
+            {#if letter_page}
+                <div class="personal-page">
+                    <ModalHeader style="padding-left: 38%;">
+                        <div class="page-header">
+                            <p>Letter-Content</p>
+                        </div>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div class="my-content">
+                            <div style="width: 100%; padding-left: 16%;">
+                                <div style="width: 80%;">
+                                    <FormGroup>
+                                        <div
+                                            style="width: 100%; display:flex; justify-content: center;"
+                                        >
+                                            <Label
+                                                for="exampleText"
+                                                style="font-size: 25px;"
+                                                >Add-Content</Label
+                                            >
+                                        </div>
+                                        <Input
+                                            type="textarea"
+                                            name="text"
+                                            id="exampleText"
+                                            maxlength="800"
+                                            bind:value={letter_content}
+                                            style={letter_content_border}
+                                        />
+                                    </FormGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <div class="btncontainer">
+                            <Button color="primary" on:click={showRecipient}
+                                >&laquo; Previous</Button
+                            >
+                            <Button
+                                color="success"
+                                style="width: 120px; height: 38px; border-radius: 15px; font-size: 17px; display: flex; justify-content:center;"
+                                on:click={EditLetter}
+                            >
+                                {#if progress}
+                                    <p><Spinner size="sm" /> Saving</p>
+                                {:else}
+                                    <p>
+                                        <i
+                                            class="bi bi-file-earmark-check-fill"
+                                        /> Save
+                                    </p>
+                                {/if}
+                            </Button>
+                            <Button
+                                color="danger"
+                                on:click={toggle1}
+                                on:click={showPersonal}
+                                on:click={progressStop}>CANCEL</Button
+                            >
+                        </div>
+                    </ModalFooter>
+                </div>
+            {/if}
+        </Modal>
+        <!-- Updated Successfully -->
+        <Modal header="Message" isOpen={open2}>
+            <ModalBody>Letter Details Updated Successfully...</ModalBody>
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle2}
+                    on:click={progressStop}
+                    on:click={toggle1}
+                    on:click={showPersonal}
+                    on:click={refreshPage}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Confirm Delete -->
+        <Modal isOpen={open3}>
+            <ModalFooter>
+                <div class="delete-symbol-container">
+                    <p style="font-size: 30px; font-weight: 500;">
+                        DELETE LETTER
+                    </p>
+                </div>
+                <div class="delete-symbol-container">
+                    <i class="bi bi-exclamation-circle delete-symbol" />
+                </div>
+                <br />
+                <div class="delete-symbol-container">
+                    <p class="delete-txt">
+                        Are you sure you want to delete this Letter ?
+                    </p>
+                </div>
+                <Button color="primary" on:click={toggle3}>Cancle</Button>
+                <Button
+                    color="danger"
+                    on:click={toggle3}
+                    on:click={() => deleteLetter(delete_letterid)}
+                    >Delete</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Deleted Successfully... -->
+        <Modal isOpen={open4}>
+            <ModalFooter>
+                <div class="delete-symbol-container">
+                    <i class="bi bi-check-circle deleted-symbol" />
+                </div>
+                <div class="delete-symbol-container">
+                    <p class="delete-txt">Your CV is Deleted...</p>
+                </div>
+                <Button
+                    color="primary"
+                    on:click={toggle4}
+                    on:click={checkLetterExist}
+                    style="width: 100px;">OK</Button
+                >
+            </ModalFooter>
+        </Modal>
+    </div>
 </main>
 
 <style>
+    .delete-txt {
+        font-size: 20px;
+    }
+    .delete-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .delete-symbol {
+        font-size: 70px;
+        color: rgb(234, 187, 100);
+    }
+    .deleted-symbol {
+        font-size: 70px;
+        color: rgb(39, 138, 63);
+    }
+    .page-header {
+        white-space: nowrap;
+        font-size: 30px;
+        /* width: 100%; */
+        display: flex;
+        justify-content: center;
+        /* padding-left: 35%; */
+    }
+    .my-content {
+        margin-top: 3%;
+    }
+    .btncontainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        /* padding-left: 43%; */
+    }
     .letter-details {
         position: absolute;
         width: 100%;
@@ -328,6 +1058,9 @@
         .letter-details {
             padding-left: 25%;
         }
+        .page-header {
+            margin-left: -35%;
+        }
     }
     @media screen and (max-width: 900px) {
         .add-content {
@@ -445,6 +1178,9 @@
             margin-top: 5%;
             padding-top: 1%;
             padding-left: 3%;
+        }
+        .page-header {
+            margin-left: -55%;
         }
     }
     @media screen and (max-width: 360px) {
