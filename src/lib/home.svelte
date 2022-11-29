@@ -1687,14 +1687,14 @@
                 <!-- My Letter Details -->
                 <div class="myletter" id="myletter">
                     <div class="mycvinner" on:click={toggle6}>
-                        <p class="cvicon">
+                        <p class="lettericon">
                             <i
                                 class="bi bi-envelope-paper-fill"
                                 style="font-size: 50px; color: white;"
                             />
                         </p>
-                        <p class="cvtitle">MY LETTER</p>
-                        <p class="cvlength">
+                        <p class="lettertitle">MY LETTER</p>
+                        <p class="letterlength">
                             <Badge color="danger">{number_of_letter}</Badge>
                         </p>
                     </div>
@@ -2584,13 +2584,25 @@
     .cvicon {
         margin-left: -2%;
     }
+    .lettericon {
+        margin-left: 3%;
+    }
     .cvtitle {
         margin-left: -10%;
         font-size: 25px;
         color: white;
     }
+    .lettertitle {
+        margin-left: -5%;
+        font-size: 25px;
+        color: white;
+    }
     .cvlength {
         font-size: 25px;
+    }
+    .letterlength {
+        font-size: 25px;
+        margin-left: -4%;
     }
     .mycvinner:hover {
         background-color: #2f5a6c;
