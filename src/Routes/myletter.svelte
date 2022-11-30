@@ -390,7 +390,7 @@
             }
         }
     }
-    async function generateLetterPDF() {
+    async function generateLetterPDF(lid) {
         const pdfDoc = await PDFDocument.create();
 
         // Embed the Times Roman font
