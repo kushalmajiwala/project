@@ -47,6 +47,7 @@
     let open4 = false;
     let open5 = false;
     let open6 = false;
+    let open7 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -54,6 +55,7 @@
     const toggle4 = () => (open4 = !open4);
     const toggle5 = () => (open5 = !open5);
     const toggle6 = () => (open6 = !open6);
+    const toggle7 = () => (open7 = !open7);
 
     let cv_checking = false;
     let letter_checking = false;
@@ -107,6 +109,30 @@
     let twitter_link = "";
     let linkedin_link = "";
     let website_link = "";
+
+    //Letter Variables
+    //Personal Page Variables
+    let letter_title = "";
+    let letter_fname = "";
+    let letter_lname = "";
+    let personal_address = "";
+    let phone = "";
+    let letter_email = "";
+    let letter_profession = "";
+    let letter_date = "";
+
+    //Recipient Page Variables
+    let recipient_name = "";
+    let recipient_gender = "";
+    let letter_company_name = "";
+    let company_address = "";
+    let company_city = "";
+    let company_state = "";
+
+    //Letter Page variables
+    let letter_content = "";
+
+    let show_letterid = "";
 
     function showMsg() {
         if (cname !== "" && cemail !== "" && cmsg !== "") {
@@ -1306,6 +1332,7 @@
         getData(qr_cvid);
         toggle2();
     }
+    //Letter Operations
     function setDownloadLetter(lid)
     {
 
@@ -1313,14 +1340,47 @@
 
     function setShowLetter(lid)
     {
-
+        show_letterid = lid;
+        getLetterData(show_letterid);
+        toggle7();
     }
 
     function generateQRCodeForLetter(lid)
     {
 
     }
+    function getLetterData(lid) {
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/letterid/" +
+                lid,
+        };
 
+        axios
+            .request(options)
+            .then(function (response) {
+                letter_title = response.data[0].title;
+                letter_fname = response.data[0].fname;
+                letter_lname = response.data[0].lname;
+                personal_address = response.data[0].address;
+                phone = response.data[0].phoneno;
+                letter_email = response.data[0].email;
+                letter_profession = response.data[0].profession;
+                letter_date = response.data[0].letter_date;
+                recipient_name = response.data[0].recipient_name;
+                recipient_gender = response.data[0].recipient_gender;
+                letter_company_name = response.data[0].company_name;
+                company_address = response.data[0].company_address;
+                company_city = response.data[0].company_city;
+                company_state = response.data[0].company_state;
+                letter_content = response.data[0].letter_content;
+                console.log(response.data[0]);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
     function getData(cvid) {
         const options = {
             method: "GET",
@@ -2344,10 +2404,100 @@
                 <Button color="danger" on:click={toggle6}>Cancle</Button>
             </ModalFooter>
         </Modal>
+        <!-- Show Letter -->
+        <Modal isOpen={open7} size="lg">
+            <div class="letter-border">
+                <ModalHeader
+                    style="height: 235px; border-bottom: 2px solid black;"
+                >
+                    <div class="letter-header">
+                        <p>{letter_fname} {letter_lname}</p>
+                    </div>
+                    <div class="personal-info">
+                        <p><i class="bi bi-envelope-check-fill" /> {letter_email}</p>
+                        <p><i class="bi bi-phone-fill" /> {phone}</p>
+                        <p>
+                            <i class="bi bi-geo-alt-fill" />
+                            {personal_address}
+                        </p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="border-bottom: 2px solid black;">
+                    <div class="letter-content-header">
+                        <p style="font-size: 15px;">To :</p>
+                        <p style="margin-top: -18px;">{recipient_name}, CEO</p>
+                        <p style="margin-top: -18px;">{letter_company_name}</p>
+                        <p style="margin-top: -18px;">{company_address}</p>
+                        <p style="margin-top: -18px">
+                            {company_city}, {company_state}
+                        </p>
+                        <p style="margin-top: -18px">{letter_date}</p>
+                    </div>
+                    <div class="letter-content">
+                        <p>
+                            Dear
+                            {#if recipient_gender == "Male"}
+                                Mr.
+                            {:else}
+                                Ms.
+                            {/if}
+                            {recipient_name}
+                        </p>
+                        <p>{letter_content}</p>
+                        <p style="margin-top: 30px;">Regards,</p>
+                        <p style="margin-top: -18px;">{letter_fname} {letter_lname}</p>
+                        <p style="margin-top: -18px;">{phone}</p>
+                        <p style="margin-top: -18px;">{letter_email}</p>
+                    </div>
+                </ModalHeader>
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        class="float-right"
+                        on:click={() => setDownloadLetter(show_letterid)}
+                    >
+                        <i
+                            style="margin-right: 5px;"
+                            class="bi bi-file-earmark-arrow-down-fill"
+                        />Download</Button
+                    >
+                    <Button
+                        color="danger"
+                        class="float-right"
+                        on:click={toggle7}>Cancel</Button
+                    >
+                </ModalFooter>
+            </div>
+        </Modal>
     </div>
 </div>
 
 <style>
+    .letter-header {
+        white-space: nowrap;
+        width: 95%;
+        padding: 0px;
+        font-size: 35px;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        color: rgb(25, 32, 90);
+        font-weight: 500;
+    }
+    .letter-content-header {
+        color: rgb(95, 93, 93);
+    }
+    .letter-content {
+        color: rgb(95, 93, 93);
+        margin-top: 5%;
+    }
+    .personal-info {
+        margin-top: 45%;
+        font-weight: 400;
+    }
+    .letter-border {
+        border: 6px solid black;
+    }
     .summary_height {
         height: 180px;
     }

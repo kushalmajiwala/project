@@ -1603,13 +1603,14 @@
             thickness: 3,
             color: rgb(0.0, 0.0, 0.0),
         });
-        let temp_line;
+        //let temp_line;
         let first_line = "";
         let second_line = "";
         let third_line = "";
         if (my_summary.length > 100) {
-            temp_line = my_summary.split("", 100);
-            first_line = temp_line.join("");
+            // temp_line = my_summary.split("", 100);
+            // first_line = temp_line.join("");
+            first_line = my_summary.slice(0, 100);
             second_line = my_summary.slice(100, 200);
             third_line = my_summary.slice(200, 300);
         } else {

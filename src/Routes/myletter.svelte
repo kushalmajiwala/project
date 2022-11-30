@@ -16,18 +16,25 @@
         Label,
         Tooltip,
     } from "sveltestrap";
+    import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
     let open1 = false;
     let open2 = false;
     let open3 = false;
     let open4 = false;
     let open5 = false;
+    let open6 = false;
+    let open7 = false;
+    let open8 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
     const toggle3 = () => (open3 = !open3);
     const toggle4 = () => (open4 = !open4);
     const toggle5 = () => (open5 = !open5);
+    const toggle6 = () => (open6 = !open6);
+    const toggle7 = () => (open7 = !open7);
+    const toggle8 = () => (open8 = !open8);
 
     //Personal Page Variables
     let personal_information = true;
@@ -117,7 +124,7 @@
             else email_border = "border: 1px solid #4c89ca;";
             if (profession == "") profession_border = "border: 1px solid red;";
             else profession_border = "border: 1px solid #4c89ca;";
-            toggle1();
+            toggle6();
             showPersonal();
             return false;
         } else {
@@ -166,7 +173,7 @@
             if (company_state == "")
                 company_state_border = "border: 1px solid red;";
             else company_state_border = "border: 1px solid #4c89ca;";
-            toggle2();
+            toggle7();
             showRecipient();
             return false;
         } else {
@@ -179,7 +186,7 @@
         }
         if (letter_content == "") {
             letter_content_border = "border: 1px solid red;height: 400px;";
-            toggle3();
+            toggle8();
             showLettercontent();
             return false;
         } else {
@@ -213,6 +220,7 @@
     let edit_letterid = "";
     let delete_letterid = "";
     let show_letterid = "";
+    let download_letterid = "";
 
     //Showing Functions
     function showPersonal() {
@@ -302,7 +310,13 @@
         window.location.replace(page_url);
     }
 
-    function setDownloadLetter(lid) {}
+    function setDownloadLetter(lid) {
+        download_letterid = lid;
+        getData(download_letterid);
+        setTimeout(function () {
+            generateLetterPDF(download_letterid);
+        }, 1000);
+    }
 
     function setShowLetter(lid) {
         getData(lid);
@@ -375,6 +389,51 @@
                 }
             }
         }
+    }
+    async function generateLetterPDF() {
+        const pdfDoc = await PDFDocument.create();
+
+        // Embed the Times Roman font
+        const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+        // Add a blank page to the document
+        // Get the width and height of the page
+        //const { width, height } = page.getSize();
+        const page = pdfDoc.addPage();
+        // @ts-ignore
+        page.setWidth(1200);
+        page.setHeight(2000);
+
+        //Letter Upper Name
+        page.drawText(fname + " " + lname, {
+            x: 20,
+            y: 1920,
+            size: 70,
+            font: timesRomanFont,
+            color: rgb(0.0, 0.0, 0.0),
+        });
+        //Email Symbol
+        const pngImageBytes1 = await fetch(
+            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hipsthetic.com%2Femail-icons%2F&psig=AOvVaw0qI0nohvfVRSrEXsccGxiN&ust=1669891331879000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLCtyo7c1fsCFQAAAAAdAAAAABAe"
+        ).then((res) => res.arrayBuffer());
+
+        const pngImage1 = await pdfDoc.embedJpg(pngImageBytes1);
+        page.drawImage(pngImage1, {
+            x: 340,
+            y: 1475,
+            width: 70,
+            height: 50,
+        });
+
+        const pdfBytes = await pdfDoc.save();
+        const arr = new Uint8Array(pdfBytes);
+        const blob = new Blob([arr], { type: "application/pdf" });
+        var a = window.document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = letter_title + ".pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
     onMount(async () => {
         userid = localStorage.getItem(username);
@@ -901,6 +960,48 @@
                     >
                 </ModalFooter>
             </div>
+        </Modal>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open6}>
+            <ModalBody
+                >Fields Cannot be empty on Personal-Information Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle6}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open7}>
+            <ModalBody
+                >Fields Cannot be empty on Recipient-Information Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle7}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- empty-modal -->
+        <Modal header="Message" isOpen={open8}>
+            <ModalBody
+                >Field Cannot be empty on Letter-Content Page...</ModalBody
+            >
+            <ModalFooter>
+                <Button
+                    color="danger"
+                    class="float-right"
+                    on:click={toggle8}
+                    on:click={progressStop}>Cancel</Button
+                >
+            </ModalFooter>
         </Modal>
     </div>
 </main>
