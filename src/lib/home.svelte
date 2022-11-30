@@ -1953,8 +1953,9 @@
     //Letter Operations
     function setDownloadLetter(lid)
     {
+        console.log(lid);
         download_letterid = lid;
-        getData(download_letterid);
+        getLetterData(download_letterid);
         setTimeout(function () {
             generateLetterPDF(download_letterid);
         }, 1000);
