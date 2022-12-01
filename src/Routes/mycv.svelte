@@ -3222,9 +3222,14 @@
             </ModalFooter>
         </Modal>
         <!-- Updated Successfully -->
-        <Modal header="Message" isOpen={open10}>
-            <ModalBody>CV Details Updated Successfully...</ModalBody>
+        <Modal isOpen={open10}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol"></i>
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">CV Details Updated Successfully...</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3675,10 +3680,10 @@
         justify-content: space-around;
         /* padding-left: 43%; */
     }
-    .delete-txt {
+    .delete-txt, .edit-txt {
         font-size: 20px;
     }
-    .delete-symbol-container {
+    .delete-symbol-container, .edit-symbol-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -3688,7 +3693,7 @@
         font-size: 70px;
         color: rgb(234, 187, 100);
     }
-    .deleted-symbol {
+    .deleted-symbol, .edit-symbol {
         font-size: 70px;
         color: rgb(39, 138, 63);
     }

@@ -1419,9 +1419,14 @@
             {/if}
         </Modal>
         <!-- Updated Successfully -->
-        <Modal header="Message" isOpen={open2}>
-            <ModalBody>Letter Details Updated Successfully...</ModalBody>
+        <Modal isOpen={open2}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol"></i>
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">Letter Details Updated Successfully...</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -1466,7 +1471,7 @@
                     <i class="bi bi-check-circle deleted-symbol" />
                 </div>
                 <div class="delete-symbol-container">
-                    <p class="delete-txt">Your CV is Deleted...</p>
+                    <p class="delete-txt">Your Letter is Deleted...</p>
                 </div>
                 <Button
                     color="primary"
@@ -1641,10 +1646,10 @@
     .letter-border {
         border: 6px solid black;
     }
-    .delete-txt {
+    .delete-txt, .edit-symbol {
         font-size: 20px;
     }
-    .delete-symbol-container {
+    .delete-symbol-container, .edit-symbol-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -1655,6 +1660,10 @@
         color: rgb(234, 187, 100);
     }
     .deleted-symbol {
+        font-size: 70px;
+        color: rgb(39, 138, 63);
+    }
+    .edit-symbol {
         font-size: 70px;
         color: rgb(39, 138, 63);
     }
