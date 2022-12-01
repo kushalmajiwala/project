@@ -564,11 +564,14 @@
     {/if}
     <div class="Modals">
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open1}>
-            <ModalBody
-                >Fields Cannot be empty on Personal-Information Page...</ModalBody
-            >
+        <Modal isOpen={open1}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on Personal-Information Page</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -578,11 +581,14 @@
             </ModalFooter>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open2}>
-            <ModalBody
-                >Fields Cannot be empty on Recipient-Information Page...</ModalBody
-            >
+        <Modal isOpen={open2}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on Recipient-Information Page</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -592,11 +598,14 @@
             </ModalFooter>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open3}>
-            <ModalBody
-                >Field Cannot be empty on Letter-Content Page...</ModalBody
-            >
+        <Modal isOpen={open3}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on letter-content Page</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -606,7 +615,7 @@
             </ModalFooter>
         </Modal>
         <Modal header="Message" isOpen={open4}>
-            <ModalBody>Cover Letter Created Successfully...</ModalBody>
+            <ModalBody>Cover Letter Created Successfully</ModalBody>
             <ModalFooter>
                 <Button
                     color="danger"
@@ -621,6 +630,16 @@
 </main>
 
 <style>
+    .empty-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
+    }
     .form-content {
         margin-top: 0%;
         width: 91.5%;

@@ -1425,7 +1425,7 @@
                     <i class="bi bi-check-all edit-symbol"></i>
                 </div>
                 <div class="edit-symbol-container">
-                    <p class="edit-txt">Letter Details Updated Successfully...</p>
+                    <p class="edit-txt">Letter Details Updated Successfully</p>
                 </div>
                 <Button
                     color="danger"
@@ -1471,7 +1471,7 @@
                     <i class="bi bi-check-circle deleted-symbol" />
                 </div>
                 <div class="delete-symbol-container">
-                    <p class="delete-txt">Your Letter is Deleted...</p>
+                    <p class="delete-txt">Your Letter is Deleted</p>
                 </div>
                 <Button
                     color="primary"
@@ -1547,11 +1547,14 @@
             </div>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open6}>
-            <ModalBody
-                >Fields Cannot be empty on Personal-Information Page...</ModalBody
-            >
+        <Modal isOpen={open6}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on Personal-Information Page</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -1561,11 +1564,14 @@
             </ModalFooter>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open7}>
-            <ModalBody
-                >Fields Cannot be empty on Recipient-Information Page...</ModalBody
-            >
+        <Modal isOpen={open7}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on Recipient-Information Page</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -1575,11 +1581,14 @@
             </ModalFooter>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open8}>
-            <ModalBody
-                >Field Cannot be empty on Letter-Content Page...</ModalBody
-            >
+        <Modal isOpen={open8}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on letter-content Page</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -1646,10 +1655,10 @@
     .letter-border {
         border: 6px solid black;
     }
-    .delete-txt, .edit-symbol {
+    .delete-txt, .edit-txt {
         font-size: 20px;
     }
-    .delete-symbol-container, .edit-symbol-container {
+    .delete-symbol-container, .edit-symbol-container, .empty-symbol-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -1658,6 +1667,10 @@
     .delete-symbol {
         font-size: 70px;
         color: rgb(234, 187, 100);
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
     }
     .deleted-symbol {
         font-size: 70px;

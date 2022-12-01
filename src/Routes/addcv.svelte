@@ -1,5 +1,5 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   import {
     Nav,
@@ -15,7 +15,7 @@
     ModalFooter,
     ModalHeader,
     Spinner,
-    Label
+    Label,
   } from "sveltestrap";
   import { createEventDispatcher } from "svelte";
   import axios from "axios";
@@ -387,15 +387,13 @@
   let my_summary = "";
 
   function summaryValidate() {
-    if(my_summary == "")
-    {
+    if (my_summary == "") {
       summary_border = "border: 1px solid red; height: 200px";
       toggle8();
       showSummary();
       return false;
     }
-    if(my_summary !== "")
-    {
+    if (my_summary !== "") {
       summary_border = "border: 1px solid #4c89ca;  height: 200px";
     }
     return true;
@@ -407,8 +405,7 @@
   let linkedin_link = "";
   let website_link = "";
 
-  function socialValidate()
-  {
+  function socialValidate() {
     return true;
   }
 
@@ -419,216 +416,228 @@
         if (experienceValidate()) {
           if (skillValidate()) {
             if (interestValidate()) {
-              if(summaryValidate()) {
-                if(socialValidate()) {
+              if (summaryValidate()) {
+                if (socialValidate()) {
                   //Personal Details Table Insert
-              let rec = {
-                UserId: userid,
-                cvtitle: cv_title,
-                fname: fname,
-                lname: lname,
-                gender: gender,
-                dob: dob,
-                profession: profession,
-                address: address,
-                city: personal_city,
-                state: personal_state,
-                phone: phoneno,
-                email: email,
-                pic: personal_pic_url,
-              };
-              axios
-                .post(
-                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/",
-                  rec
-                )
-                .then(function (response) {
-                  // console.log(response.data);
-                  cvid = response.data.cvid;
-                  // console.log(cvid);
-
-                  let rec_education = {
+                  let rec = {
                     UserId: userid,
-                    cvid: cvid,
-                    schoolname: schoolname,
-                    city: education_city,
-                    state: education_state,
-                    degree: degree,
-                    field: field,
+                    cvtitle: cv_title,
+                    fname: fname,
+                    lname: lname,
+                    gender: gender,
+                    dob: dob,
+                    profession: profession,
+                    address: address,
+                    city: personal_city,
+                    state: personal_state,
+                    phone: phoneno,
+                    email: email,
+                    pic: personal_pic_url,
                   };
                   axios
                     .post(
-                      "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/",
-                      rec_education
+                      "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/",
+                      rec
                     )
                     .then(function (response) {
-                      let rec_experience = {
+                      // console.log(response.data);
+                      cvid = response.data.cvid;
+                      // console.log(cvid);
+
+                      let rec_education = {
                         UserId: userid,
                         cvid: cvid,
-                        job_title: job_title,
-                        company_name: company_name,
-                        city: experience_city,
-                        state: experience_state,
-                        experience: experience_year,
+                        schoolname: schoolname,
+                        city: education_city,
+                        state: education_state,
+                        degree: degree,
+                        field: field,
                       };
                       axios
                         .post(
-                          "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/",
-                          rec_experience
+                          "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/education/",
+                          rec_education
                         )
                         .then(function (response) {
-                          // Skill Table Insert
-                          if (skill1 !== "" && skill2 !== "" && skill3 !== "") {
-                            let rec_skill1 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              skill: skill1,
-                              level: level1,
-                            };
-                            let rec_skill2 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              skill: skill2,
-                              level: level2,
-                            };
-                            let rec_skill3 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              skill: skill3,
-                              level: level3,
-                            };
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
-                              rec_skill1
-                            );
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
-                              rec_skill2
-                            );
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
-                              rec_skill3
-                            );
-                          } else if (skill1 !== "" && skill2 !== "") {
-                            let rec_skill1 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              skill: skill1,
-                              level: level1,
-                            };
-                            let rec_skill2 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              skill: skill2,
-                              level: level2,
-                            };
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
-                              rec_skill1
-                            );
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
-                              rec_skill2
-                            );
-                          } else {
-                            let rec_skill1 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              skill: skill1,
-                              level: level1,
-                            };
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
-                              rec_skill1
-                            );
-                          }
-                          //Interest Table Insert
-                          if (
-                            interest1 !== "" &&
-                            interest2 !== "" &&
-                            interest3 !== ""
-                          ) {
-                            let rec_interest1 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              interest: interest1,
-                            };
-                            let rec_interest2 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              interest: interest2,
-                            };
-                            let rec_interest3 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              interest: interest3,
-                            };
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
-                              rec_interest1
-                            );
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
-                              rec_interest2
-                            );
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
-                              rec_interest3
-                            );
-                          } else if (interest1 !== "" && interest2 !== "") {
-                            let rec_interest1 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              interest: interest1,
-                            };
-                            let rec_interest2 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              interest: interest2,
-                            };
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
-                              rec_interest1
-                            );
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
-                              rec_interest2
-                            );
-                          } else {
-                            let rec_interest1 = {
-                              UserId: userid,
-                              cvid: cvid,
-                              interest: interest1,
-                            };
-                            axios.post(
-                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
-                              rec_interest1
-                            );
-                          }
-                          //summary table insert
-                          let rec_summary = {
+                          let rec_experience = {
                             UserId: userid,
                             cvid: cvid,
-                            summary: my_summary
+                            job_title: job_title,
+                            company_name: company_name,
+                            city: experience_city,
+                            state: experience_state,
+                            experience: experience_year,
                           };
-                          axios.post("https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/summary/", rec_summary).then(function(response){
-                            let rec_social = {
-                              UserId: userid,
-                              cvid: cvid,
-                              facebook: facebook_link,
-                              twitter: twitter_link,
-                              linkedin: linkedin_link,
-                              website: website_link
-                            }
-                            axios.post("https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/social/", rec_social);
-                            toggle7();
-                          });
+                          axios
+                            .post(
+                              "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/experience/",
+                              rec_experience
+                            )
+                            .then(function (response) {
+                              // Skill Table Insert
+                              if (
+                                skill1 !== "" &&
+                                skill2 !== "" &&
+                                skill3 !== ""
+                              ) {
+                                let rec_skill1 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  skill: skill1,
+                                  level: level1,
+                                };
+                                let rec_skill2 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  skill: skill2,
+                                  level: level2,
+                                };
+                                let rec_skill3 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  skill: skill3,
+                                  level: level3,
+                                };
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                                  rec_skill1
+                                );
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                                  rec_skill2
+                                );
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                                  rec_skill3
+                                );
+                              } else if (skill1 !== "" && skill2 !== "") {
+                                let rec_skill1 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  skill: skill1,
+                                  level: level1,
+                                };
+                                let rec_skill2 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  skill: skill2,
+                                  level: level2,
+                                };
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                                  rec_skill1
+                                );
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                                  rec_skill2
+                                );
+                              } else {
+                                let rec_skill1 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  skill: skill1,
+                                  level: level1,
+                                };
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/skill/",
+                                  rec_skill1
+                                );
+                              }
+                              //Interest Table Insert
+                              if (
+                                interest1 !== "" &&
+                                interest2 !== "" &&
+                                interest3 !== ""
+                              ) {
+                                let rec_interest1 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  interest: interest1,
+                                };
+                                let rec_interest2 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  interest: interest2,
+                                };
+                                let rec_interest3 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  interest: interest3,
+                                };
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                                  rec_interest1
+                                );
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                                  rec_interest2
+                                );
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                                  rec_interest3
+                                );
+                              } else if (interest1 !== "" && interest2 !== "") {
+                                let rec_interest1 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  interest: interest1,
+                                };
+                                let rec_interest2 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  interest: interest2,
+                                };
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                                  rec_interest1
+                                );
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                                  rec_interest2
+                                );
+                              } else {
+                                let rec_interest1 = {
+                                  UserId: userid,
+                                  cvid: cvid,
+                                  interest: interest1,
+                                };
+                                axios.post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/interest/",
+                                  rec_interest1
+                                );
+                              }
+                              //summary table insert
+                              let rec_summary = {
+                                UserId: userid,
+                                cvid: cvid,
+                                summary: my_summary,
+                              };
+                              axios
+                                .post(
+                                  "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/summary/",
+                                  rec_summary
+                                )
+                                .then(function (response) {
+                                  let rec_social = {
+                                    UserId: userid,
+                                    cvid: cvid,
+                                    facebook: facebook_link,
+                                    twitter: twitter_link,
+                                    linkedin: linkedin_link,
+                                    website: website_link,
+                                  };
+                                  axios.post(
+                                    "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/social/",
+                                    rec_social
+                                  );
+                                  toggle7();
+                                });
+                            });
                         });
+                    })
+                    .catch(function (error) {
+                      console.error(error);
                     });
-                })
-                .catch(function (error) {
-                  console.error(error);
-                });
                 }
               }
             }
@@ -640,8 +649,7 @@
   function progressStop() {
     progress = false;
   }
-  function resetAll()
-  {
+  function resetAll() {
     fname = "";
     lname = "";
     gender = "";
@@ -683,7 +691,7 @@
     facebook_link = "";
     twitter_link = "";
     linkedin_link = "";
-    website_link = ""
+    website_link = "";
   }
 
   const dispatch = createEventDispatcher();
@@ -1388,117 +1396,133 @@
           </div>
         </div>
         <div class="btncontainer">
-          <p class="previous pagebtn" on:click={showSkill}>
-            &laquo; Previous
-          </p>
+          <p class="previous pagebtn" on:click={showSkill}>&laquo; Previous</p>
           <p class="next pagebtn" on:click={showSummary}>Next &raquo;</p>
         </div>
       </div>
     {/if}
     {#if summary}
-    <div class="skill-page my-content">
-      <div class="page-header">
-        <h1>Summary-page</h1>
-      </div>
-      <div style="width: 100%; margin-top: 80px; padding-left: 16%;">
-        <div style="width: 80%;">
-          <FormGroup>
-            <Label for="exampleText" style="font-size: 25px;">Add-Summary</Label>
-            <Input type="textarea" name="text" id="exampleText" maxlength="300" bind:value={my_summary} style={summary_border}/>
-          </FormGroup>
+      <div class="skill-page my-content">
+        <div class="page-header">
+          <h1>Summary-page</h1>
+        </div>
+        <div style="width: 100%; margin-top: 80px; padding-left: 16%;">
+          <div style="width: 80%;">
+            <FormGroup>
+              <Label for="exampleText" style="font-size: 25px;"
+                >Add-Summary</Label
+              >
+              <Input
+                type="textarea"
+                name="text"
+                id="exampleText"
+                maxlength="300"
+                bind:value={my_summary}
+                style={summary_border}
+              />
+            </FormGroup>
+          </div>
+        </div>
+        <div class="btncontainer">
+          <p class="previous pagebtn" on:click={showInterest}>
+            &laquo; Previous
+          </p>
+          <p class="next pagebtn" on:click={showSocial}>Next &raquo;</p>
         </div>
       </div>
-      <div class="btncontainer">
-        <p class="previous pagebtn" on:click={showInterest}>
-          &laquo; Previous
-        </p>
-        <p class="next pagebtn" on:click={showSocial}>Next &raquo;</p>
-      </div>
-    </div>
     {/if}
     {#if social}
-    <div class="interest-page my-content">
-      <div class="page-header">
-        <h1>Social-page</h1>
-      </div>
-      <div
-      class="form-row form-content"
-      style="width: 100%; padding-left: 7%; margin-top: 5%;"
-    >
-      <div class="form-group" style="width: 80%">
-        <FormGroup floating label="Enter Facebook Link">
-          <Input
-            placeholder="Enter Facebook Link"
-            style={facebook_link_border}
-            bind:value={facebook_link}
-          />
-        </FormGroup>
-      </div>
-    </div>
-    <div
-      class="form-row form-content"
-      style="width: 100%; padding-left: 7%;"
-    >
-      <div class="form-group" style="width: 80%">
-        <FormGroup floating label="Enter Twitter Link">
-          <Input
-            placeholder="Enter Twitter Link"
-            style={twitter_link_border}
-            bind:value={twitter_link}
-          />
-        </FormGroup>
-      </div>
-    </div>
-    <div
-      class="form-row form-content"
-      style="width: 100%; padding-left: 7%;"
-    >
-      <div class="form-group" style="width: 80%">
-        <FormGroup floating label="Enter Linkedin Link">
-          <Input
-            placeholder="Enter Linkedin Link"
-            style={linkedin_link_border}
-            bind:value={linkedin_link}
-          />
-        </FormGroup>
-      </div>
-    </div>
-    <div
-      class="form-row form-content"
-      style="width: 100%; padding-left: 7%;"
-    >
-      <div class="form-group" style="width: 80%">
-        <FormGroup floating label="Enter Website Link">
-          <Input
-            placeholder="Enter Website Link"
-            style={website_link_border}
-            bind:value={website_link}
-          />
-        </FormGroup>
-      </div>
-    </div>
-      <div class="btncontainer">
-        <p class="previous pagebtn" on:click={showSummary}>&laquo; Previous</p>
-        <Button
-          color="success"
-          on:click={submitCV}
-          style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;"
+      <div class="interest-page my-content">
+        <div class="page-header">
+          <h1>Social-page</h1>
+        </div>
+        <div
+          class="form-row form-content"
+          style="width: 100%; padding-left: 7%; margin-top: 5%;"
         >
-          {#if progress}
-            <p><Spinner size="sm" /> Saving</p>
-          {:else}
-            <p><i class="bi bi-file-earmark-check-fill" /> Save</p>
-          {/if}
-        </Button>
+          <div class="form-group" style="width: 80%">
+            <FormGroup floating label="Enter Facebook Link">
+              <Input
+                placeholder="Enter Facebook Link"
+                style={facebook_link_border}
+                bind:value={facebook_link}
+              />
+            </FormGroup>
+          </div>
+        </div>
+        <div
+          class="form-row form-content"
+          style="width: 100%; padding-left: 7%;"
+        >
+          <div class="form-group" style="width: 80%">
+            <FormGroup floating label="Enter Twitter Link">
+              <Input
+                placeholder="Enter Twitter Link"
+                style={twitter_link_border}
+                bind:value={twitter_link}
+              />
+            </FormGroup>
+          </div>
+        </div>
+        <div
+          class="form-row form-content"
+          style="width: 100%; padding-left: 7%;"
+        >
+          <div class="form-group" style="width: 80%">
+            <FormGroup floating label="Enter Linkedin Link">
+              <Input
+                placeholder="Enter Linkedin Link"
+                style={linkedin_link_border}
+                bind:value={linkedin_link}
+              />
+            </FormGroup>
+          </div>
+        </div>
+        <div
+          class="form-row form-content"
+          style="width: 100%; padding-left: 7%;"
+        >
+          <div class="form-group" style="width: 80%">
+            <FormGroup floating label="Enter Website Link">
+              <Input
+                placeholder="Enter Website Link"
+                style={website_link_border}
+                bind:value={website_link}
+              />
+            </FormGroup>
+          </div>
+        </div>
+        <div class="btncontainer">
+          <p class="previous pagebtn" on:click={showSummary}>
+            &laquo; Previous
+          </p>
+          <Button
+            color="success"
+            on:click={submitCV}
+            style="width: 120px; height: 50px; border-radius: 15px; font-size: 22px; margin-top: 25px;"
+          >
+            {#if progress}
+              <p><Spinner size="sm" /> Saving</p>
+            {:else}
+              <p><i class="bi bi-file-earmark-check-fill" /> Save</p>
+            {/if}
+          </Button>
+        </div>
       </div>
-    </div>
     {/if}
   </div>
   <div class="Modals">
     <!-- empty-modal -->
-    <Modal header="Message" isOpen={open1}>
-      <ModalBody>Fields Cannot be empty on Personal Details Page...</ModalBody>
+    <Modal isOpen={open1}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Fields Cannot be empty on Personal Details Page
+          </p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1508,9 +1532,16 @@
       </ModalFooter>
     </Modal>
     <!-- empty-modal -->
-    <Modal header="Message" isOpen={open2}>
-      <ModalBody>Fields Cannot be empty on Education Details Page...</ModalBody>
+    <Modal isOpen={open2}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Fields Cannot be empty on Education Details Page
+          </p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1520,10 +1551,16 @@
       </ModalFooter>
     </Modal>
     <!-- empty-modal -->
-    <Modal header="Message" isOpen={open3}>
-      <ModalBody>Fields Cannot be empty on Experience Details Page...</ModalBody
-      >
+    <Modal isOpen={open3}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Fields Cannot be empty on Experience Details Page
+          </p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1533,9 +1570,14 @@
       </ModalFooter>
     </Modal>
     <!-- empty-modal -->
-    <Modal header="Message" isOpen={open4}>
-      <ModalBody>Please select Atleast one skill...</ModalBody>
+    <Modal isOpen={open4}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">Please select Atleast one skill</p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1545,9 +1587,14 @@
       </ModalFooter>
     </Modal>
     <!-- empty-modal -->
-    <Modal header="Message" isOpen={open5}>
-      <ModalBody>Please select Atleast one Interest...</ModalBody>
+    <Modal isOpen={open5}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">Please select Atleast one Interest</p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1557,9 +1604,14 @@
       </ModalFooter>
     </Modal>
     <!-- empty-Level in Skill -->
-    <Modal header="Message" isOpen={open6}>
-      <ModalBody>Please Select the Level of your skill...</ModalBody>
+    <Modal isOpen={open6}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">Please Select the Level of your skill</p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1570,7 +1622,7 @@
     </Modal>
     <!-- CV created Successfully -->
     <Modal header="Message" isOpen={open7}>
-      <ModalBody>CV Created Successfully...</ModalBody>
+      <ModalBody>CV Created Successfully</ModalBody>
       <ModalFooter>
         <Button
           color="danger"
@@ -1581,15 +1633,21 @@
         >
       </ModalFooter>
     </Modal>
-    <Modal header="Message" isOpen={open8}>
-      <ModalBody>Fields Cannot be empty on Summary Details Page...</ModalBody>
+    <Modal isOpen={open8}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Fields Cannot be empty on Summary Details Page
+          </p>
+        </div>
         <Button
           color="danger"
           class="float-right"
           on:click={toggle8}
-          on:click={progressStop}
-          >Cancel</Button
+          on:click={progressStop}>Cancel</Button
         >
       </ModalFooter>
     </Modal>
@@ -1597,6 +1655,16 @@
 </main>
 
 <style>
+  .empty-symbol-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .empty-symbol {
+    font-size: 70px;
+    color: rgb(237, 59, 59);
+  }
   .avatar {
     display: flex;
     height: 150px;

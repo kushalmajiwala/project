@@ -3144,11 +3144,16 @@
             {/if}
         </Modal>
         <!-- Empty Personal Page -->
-        <Modal header="Message" isOpen={open4}>
-            <ModalBody
-                >Fields Cannot be empty on Personal Details Page...</ModalBody
-            >
+        <Modal isOpen={open4}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Fields Cannot be empty on Personal Details Page
+                    </p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3158,11 +3163,16 @@
             </ModalFooter>
         </Modal>
         <!-- Empty Education Page -->
-        <Modal header="Message" isOpen={open5}>
-            <ModalBody
-                >Fields Cannot be empty on Education Details Page...</ModalBody
-            >
+        <Modal isOpen={open5}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Fields Cannot be empty on Education Details Page
+                    </p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3172,11 +3182,16 @@
             </ModalFooter>
         </Modal>
         <!-- Empty Experience Page -->
-        <Modal header="Message" isOpen={open6}>
-            <ModalBody
-                >Fields Cannot be empty on Experience Details Page...</ModalBody
-            >
+        <Modal isOpen={open6}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Fields Cannot be empty on Experience Details Page
+                    </p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3186,9 +3201,14 @@
             </ModalFooter>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open7}>
-            <ModalBody>Please select Atleast one skill...</ModalBody>
+        <Modal isOpen={open7}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Please select Atleast one skill</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3198,9 +3218,17 @@
             </ModalFooter>
         </Modal>
         <!-- empty-Level in Skill -->
-        <Modal header="Message" isOpen={open9}>
-            <ModalBody>Please Select the Level of your skill...</ModalBody>
+        <Modal isOpen={open9}>
+            <ModalBody />
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Please Select the Level of your skill...
+                    </p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3210,9 +3238,14 @@
             </ModalFooter>
         </Modal>
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open8}>
-            <ModalBody>Please select Atleast one Interest...</ModalBody>
+        <Modal isOpen={open8}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Please select Atleast one Interest</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3225,7 +3258,7 @@
         <Modal isOpen={open10}>
             <ModalFooter>
                 <div class="edit-symbol-container">
-                    <i class="bi bi-check-all edit-symbol"></i>
+                    <i class="bi bi-check-all edit-symbol" />
                 </div>
                 <div class="edit-symbol-container">
                     <p class="edit-txt">CV Details Updated Successfully...</p>
@@ -3547,11 +3580,14 @@
                 >
             </ModalFooter>
         </Modal>
-        <Modal header="Message" isOpen={open13}>
-            <ModalBody
-                >Fields Cannot be empty on Summary Details Page...</ModalBody
-            >
+        <Modal isOpen={open13}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">Fields Cannot be empty on Summary Details Page</p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3680,10 +3716,13 @@
         justify-content: space-around;
         /* padding-left: 43%; */
     }
-    .delete-txt, .edit-txt {
+    .delete-txt,
+    .edit-txt {
         font-size: 20px;
     }
-    .delete-symbol-container, .edit-symbol-container {
+    .delete-symbol-container,
+    .edit-symbol-container,
+    .empty-symbol-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -3693,9 +3732,14 @@
         font-size: 70px;
         color: rgb(234, 187, 100);
     }
-    .deleted-symbol, .edit-symbol {
+    .deleted-symbol,
+    .edit-symbol {
         font-size: 70px;
         color: rgb(39, 138, 63);
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
     }
     .editIcon,
     .downloadIcon,
