@@ -391,9 +391,16 @@
     </div>
     <div class="Modals">
         <!-- No Image Selected... -->
-        <Modal header="Message" isOpen={open1}>
-            <ModalBody>Please Select an Image First...</ModalBody>
+        <Modal isOpen={open1}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Please Select an Image First
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -403,9 +410,14 @@
             </ModalFooter>
         </Modal>
         <!-- Profile Image Updated... -->
-        <Modal header="Message" isOpen={open2}>
-            <ModalBody>Profile Image Updated Successfully...</ModalBody>
+        <Modal isOpen={open2}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol" />
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">Profile Image Updated Successfully</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -416,9 +428,14 @@
             </ModalFooter>
         </Modal>
         <!-- Profile Image Set...  -->
-        <Modal header="Message" isOpen={open3}>
-            <ModalBody>Profile Image Set Successfully...</ModalBody>
+        <Modal isOpen={open3}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol" />
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">Profile Image Set Successfully</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -429,9 +446,16 @@
             </ModalFooter>
         </Modal>
         <!-- Empty Fields...  -->
-        <Modal header="Message" isOpen={open4}>
-            <ModalBody>Fields Cannot be empty...</ModalBody>
+        <Modal isOpen={open4}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                      Fields Cannot be empty
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -441,9 +465,16 @@
             </ModalFooter>
         </Modal>
         <!-- Invalid Email...  -->
-        <Modal header="Message" isOpen={open5}>
-            <ModalBody>Invalid Email...</ModalBody>
+        <Modal isOpen={open5}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                      Invalid Email
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -453,9 +484,16 @@
             </ModalFooter>
         </Modal>
         <!-- Username Already exists...  -->
-        <Modal header="Message" isOpen={open6}>
-            <ModalBody>Username Already Exists...</ModalBody>
+        <Modal isOpen={open6}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                      Username Already Exists
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -465,9 +503,16 @@
             </ModalFooter>
         </Modal>
         <!-- Email Already exists...  -->
-        <Modal header="Message" isOpen={open7}>
-            <ModalBody>Email Already Exists...</ModalBody>
+        <Modal isOpen={open7}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                      Email Already Exists
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -477,9 +522,16 @@
             </ModalFooter>
         </Modal>
         <!-- Something Went Wrong...  -->
-        <Modal header="Message" isOpen={open8}>
-            <ModalBody>Somthing went wrong...Please Try Again...</ModalBody>
+        <Modal isOpen={open8}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Somthing went wrong...Please Try Again
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -489,9 +541,14 @@
             </ModalFooter>
         </Modal>
         <!-- Updated Successfully...  -->
-        <Modal header="Message" isOpen={open9}>
-            <ModalBody>Data Updated...</ModalBody>
+        <Modal isOpen={open9}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol" />
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">Data Updated</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -501,9 +558,14 @@
                 >
             </ModalFooter>
         </Modal>
-        <Modal header="Message" isOpen={open10}>
-            <ModalBody>Data Updated...</ModalBody>
+        <Modal isOpen={open10}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol" />
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">Data Updated</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -557,6 +619,24 @@
 </main>
 
 <style>
+    .edit-txt {
+        font-size: 20px;
+    }
+    .edit-symbol-container,
+    .empty-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .edit-symbol {
+        font-size: 70px;
+        color: rgb(39, 138, 63);
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
+    }
     .uploadbtn {
         cursor: pointer;
         color: white;

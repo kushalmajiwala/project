@@ -157,9 +157,16 @@
     </div>
     <div class="Modals">
         <!-- empty-modal -->
-        <Modal header="Message" isOpen={open1}>
-            <ModalBody>Fields Cannot be empty...</ModalBody>
+        <Modal isOpen={open1}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Fields Cannot be empty
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -169,9 +176,16 @@
             </ModalFooter>
         </Modal>
         <!-- Invalid Current Password -->
-        <Modal header="Message" isOpen={open2}>
-            <ModalBody>Invalid Current Password...</ModalBody>
+        <Modal isOpen={open2}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Invalid Current Password
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -181,9 +195,16 @@
             </ModalFooter>
         </Modal>
         <!-- new and Confirm password not match -->
-        <Modal header="Message" isOpen={open3}>
-            <ModalBody>Confirm Password does not match with New Password...</ModalBody>
+        <Modal isOpen={open3}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Confirm Password does not match with New Password
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -193,9 +214,14 @@
             </ModalFooter>
         </Modal>
         <!-- Password Changed Successfully... -->
-        <Modal header="Message" isOpen={open4}>
-            <ModalBody>Password Changed Successfully...</ModalBody>
+        <Modal isOpen={open4}>
             <ModalFooter>
+                <div class="edit-symbol-container">
+                    <i class="bi bi-check-all edit-symbol" />
+                </div>
+                <div class="edit-symbol-container">
+                    <p class="edit-txt">Password Changed Successfully</p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -205,9 +231,16 @@
             </ModalFooter>
         </Modal>
         <!-- length less than 8 -->
-        <Modal header="Message" isOpen={open5}>
-            <ModalBody>Password must be 8 characters long...</ModalBody>
+        <Modal isOpen={open5}>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol" />
+                  </div>
+                  <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Password must be 8 characters long
+                    </p>
+                  </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -220,6 +253,24 @@
 </main>
 
 <style>
+    .edit-txt {
+        font-size: 20px;
+    }
+    .edit-symbol-container,
+    .empty-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .edit-symbol {
+        font-size: 70px;
+        color: rgb(39, 138, 63);
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
+    }
     .pass-container {
         height: 420px;
         width: 45%;

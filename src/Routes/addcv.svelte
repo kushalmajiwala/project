@@ -1621,9 +1621,17 @@
       </ModalFooter>
     </Modal>
     <!-- CV created Successfully -->
-    <Modal header="Message" isOpen={open7}>
-      <ModalBody>CV Created Successfully</ModalBody>
+    <Modal isOpen={open7}>
+      <ModalBody></ModalBody>
       <ModalFooter>
+        <div class="create-symbol-container">
+          <i class="bi bi-check-lg create-symbol" />
+        </div>
+        <div class="create-symbol-container">
+          <p class="create-txt">
+            CV Created Successfully
+          </p>
+        </div>
         <Button
           color="danger"
           class="float-right"
@@ -1655,7 +1663,7 @@
 </main>
 
 <style>
-  .empty-symbol-container {
+  .empty-symbol-container, .create-symbol-container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -1665,6 +1673,10 @@
     font-size: 70px;
     color: rgb(237, 59, 59);
   }
+  .create-symbol {
+        font-size: 70px;
+        color: rgb(18, 143, 18);
+    }
   .avatar {
     display: flex;
     height: 150px;
