@@ -49,6 +49,7 @@
     let open5 = false;
     let open6 = false;
     let open7 = false;
+    let open8 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -57,6 +58,7 @@
     const toggle5 = () => (open5 = !open5);
     const toggle6 = () => (open6 = !open6);
     const toggle7 = () => (open7 = !open7);
+    const toggle8 = () => (open8 = !open8);
 
     let cv_checking = false;
     let letter_checking = false;
@@ -134,6 +136,7 @@
     let letter_content = "";
 
     let show_letterid = "";
+    let qr_letterid = "";
 
     function showMsg() {
         if (cname !== "" && cemail !== "" && cmsg !== "") {
@@ -1970,7 +1973,10 @@
 
     function generateQRCodeForLetter(lid)
     {
-
+        qr_letterid = lid;
+        getData(qr_letterid);
+        console.log(qr_letterid);
+        toggle8();
     }
     function getLetterData(lid) {
         const options = {
@@ -3091,6 +3097,30 @@
                     >
                 </ModalFooter>
             </div>
+        </Modal>
+         <!-- QR Code Popup -->
+         <Modal isOpen={open8}>
+            <ModalHeader
+                style="padding-top: 10px; padding-bottom: 10px; display:flex; justify-content: center;"
+            >
+                <div class="qr-title-container">
+                    <p class="qr-title">{letter_title}</p>
+                </div>
+            </ModalHeader>
+            <ModalBody
+                style="padding-top: 25px; padding-bottom: 25px; display:flex; justify-content: center;"
+            >
+                <!-- svelte-ignore a11y-img-redundant-alt -->
+                <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/letter/{qr_letterid}"
+                    alt="no-image"
+                />
+            </ModalBody>
+            <ModalFooter>
+                <Button color="danger" class="float-right" on:click={toggle8}
+                    >Cancel</Button
+                >
+            </ModalFooter>
         </Modal>
     </div>
 </div>
