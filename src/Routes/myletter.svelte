@@ -26,6 +26,7 @@
     let open6 = false;
     let open7 = false;
     let open8 = false;
+    let open9 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -35,6 +36,7 @@
     const toggle6 = () => (open6 = !open6);
     const toggle7 = () => (open7 = !open7);
     const toggle8 = () => (open8 = !open8);
+    const toggle9 = () => (open9 = !open9);
 
     //Personal Page Variables
     let personal_information = true;
@@ -221,6 +223,7 @@
     let delete_letterid = "";
     let show_letterid = "";
     let download_letterid = "";
+    let qr_letterid = "";
 
     //Showing Functions
     function showPersonal() {
@@ -323,7 +326,11 @@
         toggle5();
     }
 
-    function generateQRCode(lid) {}
+    function generateQRCode(lid) {
+        qr_letterid = lid;
+        getData(qr_letterid);
+        toggle9();
+    }
 
     function setDeleteLetter(lid) {
         delete_letterid = lid;
@@ -1575,10 +1582,39 @@
                 >
             </ModalFooter>
         </Modal>
+         <!-- QR Code Popup -->
+         <Modal isOpen={open9}>
+            <ModalHeader
+                style="padding-top: 10px; padding-bottom: 10px; display:flex; justify-content: center;"
+            >
+                <div class="qr-title-container">
+                    <p class="qr-title">{letter_title}</p>
+                </div>
+            </ModalHeader>
+            <ModalBody
+                style="padding-top: 25px; padding-bottom: 25px; display:flex; justify-content: center;"
+            >
+                <!-- svelte-ignore a11y-img-redundant-alt -->
+                <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/letter/{qr_letterid}"
+                    alt="no-image"
+                />
+            </ModalBody>
+            <ModalFooter>
+                <Button color="danger" class="float-right" on:click={toggle9}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
     </div>
 </main>
 
 <style>
+     .qr-title {
+        font-size: 25px;
+        white-space: nowrap;
+        font-weight: 500;
+    }
     .letter-header {
         white-space: nowrap;
         width: 95%;
