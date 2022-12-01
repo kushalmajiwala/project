@@ -208,65 +208,112 @@
   </html>
   <div class="modals">
     <!-- empty-modal -->
-    <Modal header="Message" isOpen={open1}>
-      <ModalBody>Fields Cannot be empty...</ModalBody>
+    <Modal isOpen={open1}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Fields Cannot be empty
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle1} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
     </Modal>
     <!-- username Checking Modal -->
-    <Modal header="Message" isOpen={open2}>
-      <ModalBody
-        >Username Already Exists...Please Select other username...</ModalBody
-      >
+    <Modal isOpen={open2}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Username Already Exists...Please Select other username
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle2} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
     </Modal>
     <!-- email Checking Modal -->
-    <Modal header="Message" isOpen={open3}>
-      <ModalBody>Email Already Exists...Please Select other email...</ModalBody>
+    <Modal isOpen={open3}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Email Already Exists...Please Select other email
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle3} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
     </Modal>
     <!-- Password Checking Modal -->
-    <Modal header="Message" isOpen={open4}>
-      <ModalBody>Password and Confirm Password does not match...</ModalBody>
+    <Modal isOpen={open4}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Password and Confirm Password does not match
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle4} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
     </Modal>
     <!-- Email Validation  -->
-    <Modal header="Message" isOpen={open6}>
-      <ModalBody>Invalid Email...</ModalBody>
+    <Modal isOpen={open6}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Invalid Email
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle6} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
     </Modal>
      <!-- Password Validation  -->
-     <Modal header="Message" isOpen={open7}>
-      <ModalBody>Password must be 8 characters long...</ModalBody>
+     <Modal isOpen={open7}>
       <ModalFooter>
+        <div class="empty-symbol-container">
+          <i class="bi bi-x-circle empty-symbol" />
+        </div>
+        <div class="empty-symbol-container">
+          <p class="empty-txt">
+            Password must be 8 characters long
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle7} on:click={changeName}
           >Cancel</Button
         >
       </ModalFooter>
     </Modal>
     <!-- Successfull Registration -->
-    <Modal header="Message" isOpen={open5}>
-      <ModalBody>You are Registered Successfully...</ModalBody>
+    <Modal isOpen={open5}>
       <ModalFooter>
+        <div class="create-symbol-container">
+          <i class="bi bi-check-lg create-symbol" />
+        </div>
+        <div class="create-symbol-container">
+          <p class="create-txt">
+            You are Registered Successfully
+          </p>
+        </div>
         <Button color="danger" class="float-right" on:click={toggle5} on:click={changeName}
           >Cancel</Button
         >
@@ -276,6 +323,24 @@
 </main>
 
 <style>
+  .create-txt {
+        font-size: 20px;
+    }
+    .create-symbol-container,
+    .empty-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .create-symbol {
+        font-size: 70px;
+        color: rgb(39, 138, 63);
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
+    }
   .logocontainer {
     display: flex;
     justify-content: center;

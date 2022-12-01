@@ -124,9 +124,16 @@
             </html>
             <div class="modals">
                 <!-- empty-modal -->
-                <Modal header="Message" isOpen={open1}>
-                    <ModalBody>Fields Cannot be empty...</ModalBody>
+                <Modal isOpen={open1}>
                     <ModalFooter>
+                        <div class="empty-symbol-container">
+                            <i class="bi bi-x-circle empty-symbol" />
+                          </div>
+                          <div class="empty-symbol-container">
+                            <p class="empty-txt">
+                                Fields Cannot be empty
+                            </p>
+                          </div>
                         <Button
                             color="danger"
                             class="float-right"
@@ -136,9 +143,16 @@
                     </ModalFooter>
                 </Modal>
                 <!-- Invalid Password -->
-                <Modal header="Message" isOpen={open2}>
-                    <ModalBody>Invalid Password...</ModalBody>
+                <Modal isOpen={open2}>
                     <ModalFooter>
+                        <div class="empty-symbol-container">
+                            <i class="bi bi-x-circle empty-symbol" />
+                          </div>
+                          <div class="empty-symbol-container">
+                            <p class="empty-txt">
+                                Invalid Password
+                            </p>
+                          </div>
                         <Button
                             color="danger"
                             class="float-right"
@@ -148,9 +162,16 @@
                     </ModalFooter>
                 </Modal>
                 <!-- Invalid Username -->
-                <Modal header="Message" isOpen={open3}>
-                    <ModalBody>Invalid Username...</ModalBody>
+                <Modal isOpen={open3}>
                     <ModalFooter>
+                        <div class="empty-symbol-container">
+                            <i class="bi bi-x-circle empty-symbol" />
+                          </div>
+                          <div class="empty-symbol-container">
+                            <p class="empty-txt">
+                                Invalid Username
+                            </p>
+                          </div>
                         <Button
                             color="danger"
                             class="float-right"
@@ -170,6 +191,16 @@
 </main>
 
 <style>
+    .empty-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
+    }
     .usernameicon {
         background-image: url("../assets/images/usernameIcon.png");
     }
