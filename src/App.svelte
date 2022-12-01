@@ -61,7 +61,7 @@
           <!-- {#if localStorage.getItem(params.username)} -->
           <!-- <Dashboard username={params.username} operation="addletter" /> -->
           <!-- {/if} -->
-          <DownloadLetter letterid={params.cvid}/>
+          <DownloadLetter letterid={params.letterid}/>
         </Route>
     </div>
   </Router>

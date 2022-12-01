@@ -329,6 +329,7 @@
     function generateQRCode(lid) {
         qr_letterid = lid;
         getData(qr_letterid);
+        console.log(qr_letterid);
         toggle9();
     }
 
