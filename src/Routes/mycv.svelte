@@ -2392,7 +2392,7 @@
                     <i class="bi bi-check-circle deleted-symbol" />
                 </div>
                 <div class="delete-symbol-container">
-                    <p class="delete-txt">Your CV is Deleted...</p>
+                    <p class="delete-txt">Your CV is Deleted</p>
                 </div>
                 <Button
                     color="primary"
@@ -3226,7 +3226,7 @@
                 </div>
                 <div class="empty-symbol-container">
                     <p class="empty-txt">
-                        Please Select the Level of your skill...
+                        Please Select the Level of your skill
                     </p>
                 </div>
                 <Button
@@ -3261,7 +3261,7 @@
                     <i class="bi bi-check-all edit-symbol" />
                 </div>
                 <div class="edit-symbol-container">
-                    <p class="edit-txt">CV Details Updated Successfully...</p>
+                    <p class="edit-txt">CV Details Updated Successfully</p>
                 </div>
                 <Button
                     color="danger"

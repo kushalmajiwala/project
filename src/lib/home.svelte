@@ -2938,14 +2938,14 @@
         </Modal>
         <Modal isOpen={open4} backdrop="static">
             <ModalHeader>Contact-Us</ModalHeader>
-            <ModalBody>Your response Submitted...</ModalBody>
+            <ModalBody>Your response Submitted</ModalBody>
             <ModalFooter>
                 <Button color="danger" on:click={toggle4}>Cancel</Button>
             </ModalFooter>
         </Modal>
         <Modal isOpen={open5} backdrop="static">
             <ModalHeader>Contact-Us</ModalHeader>
-            <ModalBody>Contact us Fields Cannot be empty...</ModalBody>
+            <ModalBody>Contact us Fields Cannot be empty</ModalBody>
             <ModalFooter>
                 <Button color="danger" on:click={toggle5}>Cancel</Button>
             </ModalFooter>
