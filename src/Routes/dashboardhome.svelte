@@ -62,7 +62,7 @@
     .add-content1:hover {
         opacity: 1;
     }
-    .add-content1:hover {
+    .add-content2:hover {
         opacity: 1;
     }
     .text-content {
