@@ -1,16 +1,98 @@
 <script>
+    import {
+        TabContent,
+        TabPane,
+        Button,
+        Spinner,
+        FormGroup,
+        Input,
+        Label,
+        Modal,
+        ModalBody,
+        ModalFooter,
+        ModalHeader,
+    } from "sveltestrap";
+    import { onMount } from "svelte";
+    import _default from "pdf-lib/cjs/core/objects/PDFNull";
+
+    //variables for adding format in the database
+    let selected_cv = "one";
+    let selected_letter = "";
+
+    //Modal Variables
+    let open1 = false;
+    let open2 = false;
+
+    //Modal Functions
+    const toggle1 = () => (open1 = !open1);
+    const toggle2 = () => (open2 = !open2);
+
+    //Adding Functionality
+    function addcv1() {
+        document.getElementById("cv1").style.border =
+            "3px solid rgb(192, 252, 101)";
+        document.getElementById("cv2").style.border = "none";
+        selected_cv = "one";
+    }
+    function addcv2() {
+        document.getElementById("cv2").style.border =
+            "3px solid rgb(192, 252, 101)";
+        document.getElementById("cv1").style.border = "none";
+        selected_cv = "two";
+    }
+    function addletter1() {
+        document.getElementById("letter1").style.border =
+            "3px solid rgb(192, 252, 101)";
+        document.getElementById("letter2").style.border = "none";
+        selected_letter = "one";
+    }
+    function addletter2() {
+        document.getElementById("letter2").style.border =
+            "3px solid rgb(192, 252, 101)";
+        document.getElementById("letter1").style.border = "none";
+        selected_letter = "two";
+    }
+    function toggleSelection() {
+        //CV Selection
+        if (selected_cv == "one") {
+            document.getElementById("cv1").style.border =
+                "3px solid rgb(192, 252, 101)";
+            document.getElementById("cv2").style.border = "none";
+        } else if (selected_cv == "two") {
+            alert("two");
+            document.getElementById("cv2").style.border =
+                "3px solid rgb(192, 252, 101)";
+            document.getElementById("cv1").style.border = "border: none";
+        }
+        //Letter Selection
+        if (selected_letter == "one") {
+            document.getElementById("letter1").style.border =
+                "3px solid rgb(192, 252, 101)";
+
+            document.getElementById("letter2").style.border = "none";
+        } else if (selected_letter == "two") {
+            document.getElementById("letter2").style.border =
+                "3px solid rgb(192, 252, 101)";
+
+            document.getElementById("letter1").style.border = "none";
+        }
+    }
+    onMount(async () => {
+        await toggleSelection();
+    });
+    export let username;
 </script>
 
 <main>
     <div class="add-container">
-        <div class="add-content1">
+        <div class="add-content1" on:click={toggle1}>
             <i
                 class="bi bi-gear-fill"
                 style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
             />
             <p class="text-content">Set CV Format</p>
         </div>
-        <div class="add-content2">
+        <div class="add-content2" on:click={toggle2}>
             <i
                 class="bi bi-gear-fill"
                 style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
@@ -18,13 +100,99 @@
             <p class="text-content">Set Letter Format</p>
         </div>
     </div>
+    <div class="Modals">
+        <!-- CV Formats -->
+        <Modal isOpen={open1}>
+            <ModalHeader style="display:flex; justify-content: center;">
+                <p class="format-heading">Select CV Format</p>
+            </ModalHeader>
+            <ModalBody style="text-align: center;">
+                <div>
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <img
+                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/cvformat1.png"
+                        on:click={addcv1}
+                        id="cv1"
+                        class="formatpic cv1"
+                        height="300"
+                        width="200"
+                    />
+                </div>
+                <div class="cv-format">
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <img
+                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/cvformat2.png"
+                        on:click={addcv2}
+                        id="cv2"
+                        class="formatpic cv2"
+                        height="300"
+                        width="200"
+                    />
+                </div>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary">Set CV</Button>
+                <Button color="danger" class="float-right" on:click={toggle1}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Letter Formats -->
+        <Modal isOpen={open2}>
+            <ModalHeader style="display:flex; justify-content: center;">
+                <p class="format-heading">Select Letter Format</p>
+            </ModalHeader>
+            <ModalBody style="text-align: center;">
+                <div>
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <img
+                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat1.png"
+                        on:click={addletter1}
+                        id="letter1"
+                        class="formatpic letter1"
+                        height="300"
+                        width="200"
+                    />
+                </div>
+                <div class="cv-format">
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <img
+                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat2.png"
+                        on:click={addletter2}
+                        id="letter2"
+                        class="formatpic letter2"
+                        height="300"
+                        width="200"
+                    />
+                </div>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary">Set Letter</Button>
+                <Button color="danger" class="float-right" on:click={toggle2}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+    </div>
 </main>
 
 <style>
+    .formatpic {
+        box-shadow: 0px 0px 5px 0px grey;
+        cursor: pointer;
+    }
+    .formatpic:hover {
+        border: 3px solid rgb(192, 252, 101);
+        cursor: pointer;
+    }
+    .cv-format {
+        margin-top: 5%;
+    }
+    .format-heading {
+        font-size: 25px;
+    }
     .add-container {
         display: flex;
-        /* justify-content: center; */
-        /* margin-left: 10px; */
         width: 100%;
         margin-top: -40px;
         padding-left: 2%;
@@ -58,39 +226,39 @@
         margin-left: 8%;
     }
     @media screen and (max-width: 820px) {
-       .add-container {
-        display: block;
-        padding-left: 30%;
-       }
+        .add-container {
+            display: block;
+            padding-left: 30%;
+        }
     }
     @media screen and (max-width: 670px) {
-       .add-container {
-        padding-left: 25%;
-       }
+        .add-container {
+            padding-left: 25%;
+        }
     }
     @media screen and (max-width: 600px) {
-       .add-container {
-        padding-left: 20%;
-       }
+        .add-container {
+            padding-left: 20%;
+        }
     }
     @media screen and (max-width: 500px) {
-       .add-container {
-        padding-left: 15%;
-       }
+        .add-container {
+            padding-left: 15%;
+        }
     }
     @media screen and (max-width: 450px) {
-       .add-container {
-        padding-left: 10%;
-       }
+        .add-container {
+            padding-left: 10%;
+        }
     }
     @media screen and (max-width: 400px) {
-       .add-container {
-        padding-left: 5%;
-       }
+        .add-container {
+            padding-left: 5%;
+        }
     }
     @media screen and (max-width: 360px) {
-       .add-container {
-        padding-left: 2%;
-       }
+        .add-container {
+            padding-left: 2%;
+        }
     }
 </style>
