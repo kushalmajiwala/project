@@ -203,7 +203,7 @@
         text-align: center;
         box-shadow: 3px 3px 5px 0px grey;
         border-radius: 3%;
-        opacity: 0.8;
+        opacity: 0.9;
         cursor: pointer;
         padding-top: 1%;
         padding-right: 2%;
