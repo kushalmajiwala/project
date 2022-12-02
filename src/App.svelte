@@ -51,6 +51,11 @@
           <Dashboard username={params.username} operation="addletter" />
           {/if}
         </Route>
+        <Route path="/:username/manage/format" let:params>
+          {#if localStorage.getItem(params.username)}
+          <Dashboard username={params.username} operation="changeFormat" />
+          {/if}
+        </Route>
         <Route path="/download/cv/:cvid" let:params>
           <!-- {#if localStorage.getItem(params.username)} -->
           <!-- <Dashboard username={params.username} operation="addletter" /> -->

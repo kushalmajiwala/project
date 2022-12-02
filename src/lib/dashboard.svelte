@@ -7,6 +7,7 @@
     import Password from "../Routes/password.svelte";
     import Addcv from "../Routes/addcv.svelte";
     import Addletter from "../Routes/addletter.svelte";
+    import ManageFormat from "../Routes/manageFormat.svelte";
     import { onMount } from "svelte";
     import { Tooltip } from "sveltestrap";
     import axios from "axios";
@@ -128,6 +129,15 @@
                     </div>
                 </Link>
                 <Link
+                    to="/{username}/manage/format"
+                    style="text-decoration: none;"
+                >
+                    <div class="nav-content">
+                        <i class="bi bi-gear-fill myicon" />
+                        Manage Format
+                    </div>
+                </Link>
+                <Link
                     to="/{username}/manage/profile"
                     style="text-decoration: none;"
                 >
@@ -194,6 +204,9 @@
                 {/if}
                 {#if operation == "addletter"}
                     <Route path="/" component={Addletter} />
+                {/if}
+                {#if operation == "changeFormat"}
+                    <Route path="/" component={ManageFormat} />
                 {/if}
                 <Route path="/" component={Dashboardhome} />
             </div>
