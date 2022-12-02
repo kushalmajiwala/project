@@ -13,11 +13,10 @@
         ModalHeader,
     } from "sveltestrap";
     import { onMount } from "svelte";
-    import _default from "pdf-lib/cjs/core/objects/PDFNull";
 
     //variables for adding format in the database
     let selected_cv = "one";
-    let selected_letter = "";
+    let selected_letter = "one";
 
     //Modal Variables
     let open1 = false;
@@ -52,47 +51,45 @@
         document.getElementById("letter1").style.border = "none";
         selected_letter = "two";
     }
-    function toggleSelection() {
+    function toggleCVSelection() {
         //CV Selection
         if (selected_cv == "one") {
             document.getElementById("cv1").style.border =
                 "3px solid rgb(192, 252, 101)";
             document.getElementById("cv2").style.border = "none";
         } else if (selected_cv == "two") {
-            alert("two");
             document.getElementById("cv2").style.border =
                 "3px solid rgb(192, 252, 101)";
             document.getElementById("cv1").style.border = "border: none";
         }
-        //Letter Selection
-        if (selected_letter == "one") {
+    }
+    function toggleLetterSelection()
+    {
+         //Letter Selection
+         if (selected_letter == "one") {
             document.getElementById("letter1").style.border =
                 "3px solid rgb(192, 252, 101)";
-
             document.getElementById("letter2").style.border = "none";
         } else if (selected_letter == "two") {
             document.getElementById("letter2").style.border =
                 "3px solid rgb(192, 252, 101)";
-
             document.getElementById("letter1").style.border = "none";
         }
     }
-    onMount(async () => {
-        await toggleSelection();
-    });
+    onMount(async () => {});
     export let username;
 </script>
 
 <main>
     <div class="add-container">
-        <div class="add-content1" on:click={toggle1}>
+        <div class="add-content1" on:click={toggle1} on:click={toggleCVSelection}>
             <i
                 class="bi bi-gear-fill"
                 style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
             />
             <p class="text-content">Set CV Format</p>
         </div>
-        <div class="add-content2" on:click={toggle2}>
+        <div class="add-content2" on:click={toggle2} on:click={toggleLetterSelection}>
             <i
                 class="bi bi-gear-fill"
                 style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
@@ -179,10 +176,6 @@
 <style>
     .formatpic {
         box-shadow: 0px 0px 5px 0px grey;
-        cursor: pointer;
-    }
-    .formatpic:hover {
-        border: 3px solid rgb(192, 252, 101);
         cursor: pointer;
     }
     .cv-format {
