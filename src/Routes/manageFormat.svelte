@@ -111,7 +111,7 @@
                 <div>
                     <!-- svelte-ignore a11y-missing-attribute -->
                     <img
-                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/cvformat1.png"
+                        src="/public/cvformat1.png"
                         on:click={addcv1}
                         id="cv1"
                         bind:this={selecttip1}
@@ -123,7 +123,7 @@
                 <div class="cv-format">
                     <!-- svelte-ignore a11y-missing-attribute -->
                     <img
-                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/cvformat2.png"
+                        src="/public/cvformat2.png"
                         on:click={addcv2}
                         id="cv2"
                         bind:this={selecttip2}
@@ -149,7 +149,7 @@
                 <div>
                     <!-- svelte-ignore a11y-missing-attribute -->
                     <img
-                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat1.png"
+                        src="/public/letterformat1.png"
                         on:click={addletter1}
                         id="letter1"
                         bind:this={selecttip3}
@@ -161,7 +161,7 @@
                 <div class="cv-format">
                     <!-- svelte-ignore a11y-missing-attribute -->
                     <img
-                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat2.png"
+                        src="/public/letterformat2.png"
                         on:click={addletter2}
                         id="letter2"
                         bind:this={selecttip4}
