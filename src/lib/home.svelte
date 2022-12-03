@@ -141,6 +141,9 @@
     function showMsg() {
         if (cname !== "" && cemail !== "" && cmsg !== "") {
             toggle4();
+            cname = "";
+            cemail = "";
+            cmsg = "";
         } else {
             toggle5();
         }
@@ -2937,16 +2940,26 @@
             </div>
         </Modal>
         <Modal isOpen={open4} backdrop="static">
-            <ModalHeader>Contact-Us</ModalHeader>
-            <ModalBody>Your response Submitted</ModalBody>
             <ModalFooter>
+                <div class="create-symbol-container">
+                    <i class="bi bi-check-lg create-symbol" />
+                  </div>
+                  <div class="create-symbol-container">
+                    <p class="create-txt">
+                        Your Response Submitted
+                    </p>
+                  </div>
                 <Button color="danger" on:click={toggle4}>Cancel</Button>
             </ModalFooter>
         </Modal>
         <Modal isOpen={open5} backdrop="static">
-            <ModalHeader>Contact-Us</ModalHeader>
-            <ModalBody>Contact us Fields Cannot be empty</ModalBody>
             <ModalFooter>
+                <div class="empty-symbol-container">
+                    <i class="bi bi-x-circle empty-symbol"></i>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">Contact us Fields Cannot be empty</p>
+                </div>
                 <Button color="danger" on:click={toggle5}>Cancel</Button>
             </ModalFooter>
         </Modal>
@@ -3126,6 +3139,20 @@
 </div>
 
 <style>
+     .empty-symbol-container, .create-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .empty-symbol {
+        font-size: 70px;
+        color: rgb(237, 59, 59);
+    }
+    .create-symbol {
+        font-size: 70px;
+        color: rgb(18, 143, 18);
+    }
     .letter-header {
         white-space: nowrap;
         width: 95%;

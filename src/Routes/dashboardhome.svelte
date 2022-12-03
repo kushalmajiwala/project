@@ -11,8 +11,7 @@
             <Link to="/{username}/manage/addcv" style="text-decoration: none;">
                 <div class="add-content1">
                     <i
-                        class="bi bi-plus-circle-fill"
-                        style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
+                        class="bi bi-plus-circle-fill plusicon"
                     />
                     <span class="text-content">Create New CV</span>
                 </div>
@@ -20,8 +19,7 @@
             <Link to="/{username}/manage/addletter" style="text-decoration: none;">
             <div class="add-content2">
                 <i
-                    class="bi bi-plus-circle-fill"
-                    style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
+                    class="bi bi-plus-circle-fill plusicon"
                 />
                 <span class="text-content">Create New Cover Letter</span>
             </div>
@@ -31,6 +29,11 @@
 </main>
 
 <style>
+    .plusicon {
+        color:rgb(100, 86, 167); 
+        font-size:60px; 
+        margin-left: 7%;
+    }
     .add-container {
         display: flex;
         justify-content: left;
@@ -61,9 +64,23 @@
     }
     .add-content1:hover {
         opacity: 1;
+        box-shadow: 3px 3px 10px 1px grey;
     }
     .add-content2:hover {
         opacity: 1;
+        box-shadow: 3px 3px 10px 1px grey;
+    }
+    .add-content1:hover .text-content {
+        color: rgb(6, 6, 89);
+    }
+    .add-content2:hover .text-content {
+        color: rgb(6, 6, 89);
+    }
+    .add-content1:hover .plusicon {
+        color: rgb(32, 32, 139);
+    }
+    .add-content2:hover .plusicon {
+        color: rgb(32, 32, 139);
     }
     .text-content {
         font-size: 20px;

@@ -11,8 +11,14 @@
         ModalBody,
         ModalFooter,
         ModalHeader,
+        Tooltip
     } from "sveltestrap";
     import { onMount } from "svelte";
+
+    let selecttip1;
+    let selecttip2;
+    let selecttip3;
+    let selecttip4;
 
     //variables for adding format in the database
     let selected_cv = "one";
@@ -84,15 +90,13 @@
     <div class="add-container">
         <div class="add-content1" on:click={toggle1} on:click={toggleCVSelection}>
             <i
-                class="bi bi-gear-fill"
-                style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
+                class="bi bi-gear-fill seticon"
             />
             <p class="text-content">Set CV Format</p>
         </div>
         <div class="add-content2" on:click={toggle2} on:click={toggleLetterSelection}>
             <i
-                class="bi bi-gear-fill"
-                style="color:rgb(100, 86, 167); font-size:60px; margin-left: 7%;"
+                class="bi bi-gear-fill seticon"
             />
             <p class="text-content">Set Letter Format</p>
         </div>
@@ -110,6 +114,7 @@
                         src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/cvformat1.png"
                         on:click={addcv1}
                         id="cv1"
+                        bind:this={selecttip1}
                         class="formatpic cv1"
                         height="300"
                         width="200"
@@ -121,6 +126,7 @@
                         src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/cvformat2.png"
                         on:click={addcv2}
                         id="cv2"
+                        bind:this={selecttip2}
                         class="formatpic cv2"
                         height="300"
                         width="200"
@@ -146,6 +152,7 @@
                         src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat1.png"
                         on:click={addletter1}
                         id="letter1"
+                        bind:this={selecttip3}
                         class="formatpic letter1"
                         height="300"
                         width="200"
@@ -157,6 +164,7 @@
                         src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat2.png"
                         on:click={addletter2}
                         id="letter2"
+                        bind:this={selecttip4}
                         class="formatpic letter2"
                         height="300"
                         width="200"
@@ -171,9 +179,28 @@
             </ModalFooter>
         </Modal>
     </div>
+    <div class="Tooltips">
+        <Tooltip target={selecttip1} placement="right">
+            Click To Select
+        </Tooltip>
+        <Tooltip target={selecttip2} placement="right">
+            Click To Select
+        </Tooltip>
+        <Tooltip target={selecttip3} placement="right">
+            Click To Select
+        </Tooltip>
+        <Tooltip target={selecttip4} placement="right">
+            Click To Select
+        </Tooltip>
+    </div>
 </main>
 
 <style>
+    .seticon {
+        color:rgb(100, 86, 167); 
+        font-size:60px; 
+        margin-left: 7%;
+    }
     .formatpic {
         box-shadow: 0px 0px 5px 0px grey;
         cursor: pointer;
@@ -209,10 +236,24 @@
         padding-right: 2%;
     }
     .add-content1:hover {
-        opacity: 1;
+        opacity: 1; 
+        box-shadow: 3px 3px 10px 1px grey;
     }
     .add-content2:hover {
         opacity: 1;
+        box-shadow: 3px 3px 10px 1px grey;
+    }
+    .add-content1:hover .text-content {
+        color: rgb(6, 6, 89);
+    }
+    .add-content2:hover .text-content {
+        color: rgb(6, 6, 89);
+    }
+    .add-content1:hover .seticon {
+        color: rgb(32, 32, 139);
+    }
+    .add-content2:hover .seticon {
+        color: rgb(32, 32, 139);
     }
     .text-content {
         font-size: 20px;
