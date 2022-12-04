@@ -35,25 +35,25 @@
     //Adding Functionality
     function addcv1() {
         document.getElementById("cv1").style.border =
-            "3px solid rgb(192, 252, 101)";
+            "3px solid rgb(50, 252, 50)";
         document.getElementById("cv2").style.border = "none";
         selected_cv = "one";
     }
     function addcv2() {
         document.getElementById("cv2").style.border =
-            "3px solid rgb(192, 252, 101)";
+            "3px solid rgb(50, 252, 50)";
         document.getElementById("cv1").style.border = "none";
         selected_cv = "two";
     }
     function addletter1() {
         document.getElementById("letter1").style.border =
-            "3px solid rgb(192, 252, 101)";
+            "3px solid rgb(50, 252, 50)";
         document.getElementById("letter2").style.border = "none";
         selected_letter = "one";
     }
     function addletter2() {
         document.getElementById("letter2").style.border =
-            "3px solid rgb(192, 252, 101)";
+            "3px solid rgb(50, 252, 50)";
         document.getElementById("letter1").style.border = "none";
         selected_letter = "two";
     }
@@ -61,11 +61,11 @@
         //CV Selection
         if (selected_cv == "one") {
             document.getElementById("cv1").style.border =
-                "3px solid rgb(192, 252, 101)";
+                "3px solid rgb(50, 252, 50)";
             document.getElementById("cv2").style.border = "none";
         } else if (selected_cv == "two") {
             document.getElementById("cv2").style.border =
-                "3px solid rgb(192, 252, 101)";
+                "3px solid rgb(50, 252, 50)";
             document.getElementById("cv1").style.border = "border: none";
         }
     }
@@ -74,11 +74,11 @@
          //Letter Selection
          if (selected_letter == "one") {
             document.getElementById("letter1").style.border =
-                "3px solid rgb(192, 252, 101)";
+                "3px solid rgb(50, 252, 50)";
             document.getElementById("letter2").style.border = "none";
         } else if (selected_letter == "two") {
             document.getElementById("letter2").style.border =
-                "3px solid rgb(192, 252, 101)";
+                "3px solid rgb(50, 252, 50)";
             document.getElementById("letter1").style.border = "none";
         }
     }
@@ -149,7 +149,7 @@
                 <div>
                     <!-- svelte-ignore a11y-missing-attribute -->
                     <img
-                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat1.png?t=2022-12-03T13%3A49%3A51.164Z"
+                        src="https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/letterformat1.png"
                         on:click={addletter1}
                         id="letter1"
                         bind:this={selecttip3}
