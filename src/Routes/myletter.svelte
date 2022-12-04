@@ -1798,7 +1798,7 @@
         cursor: pointer;
     }
     .plusbtn:hover {
-        color: rgb(85, 69, 155);
+        color: rgb(54, 39, 117);
     }
     @media screen and (min-width: 1350px) {
         .add-content {
