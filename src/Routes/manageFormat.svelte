@@ -179,18 +179,18 @@
             </ModalFooter>
         </Modal>
     </div>
-    <div class="Tooltips">
+    <div class="Tooltips" style="display: none;"> 
         <Tooltip target={selecttip1} placement="right">
-            Click To Select
+            Select
         </Tooltip>
         <Tooltip target={selecttip2} placement="right">
-            Click To Select
+            Select
         </Tooltip>
         <Tooltip target={selecttip3} placement="right">
-            Click To Select
+            Select
         </Tooltip>
         <Tooltip target={selecttip4} placement="right">
-            Click To Select
+            Select
         </Tooltip>
     </div>
 </main>
