@@ -11,9 +11,12 @@
         ModalBody,
         ModalFooter,
         ModalHeader,
-        Tooltip
+        Tooltip,
     } from "sveltestrap";
     import { onMount } from "svelte";
+    import axios from "axios";
+
+    let userid;
 
     let selecttip1;
     let selecttip2;
@@ -21,16 +24,20 @@
     let selecttip4;
 
     //variables for adding format in the database
-    let selected_cv = "one";
-    let selected_letter = "one";
+    let selected_cv = "";
+    let selected_letter = "";
 
     //Modal Variables
     let open1 = false;
     let open2 = false;
+    let open3 = false;
+    let open4 = false;
 
     //Modal Functions
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
+    const toggle3 = () => (open3 = !open3);
+    const toggle4 = () => (open4 = !open4);
 
     //Adding Functionality
     function addcv1() {
@@ -59,45 +66,225 @@
     }
     function toggleCVSelection() {
         //CV Selection
-        if (selected_cv == "one") {
-            document.getElementById("cv1").style.border =
-                "3px solid rgb(50, 252, 50)";
-            document.getElementById("cv2").style.border = "none";
-        } else if (selected_cv == "two") {
-            document.getElementById("cv2").style.border =
-                "3px solid rgb(50, 252, 50)";
-            document.getElementById("cv1").style.border = "border: none";
-        }
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                console.log(response.data.length);
+                if (response.data.length == 0) {
+                    selected_cv = "one";
+                    console.log(selected_cv);
+                }
+                if (
+                    response.data.length > 0 &&
+                    response.data[0].format == "one"
+                ) {
+                    selected_cv = "one";
+                    console.log(selected_cv);
+                }
+                if (
+                    response.data.length > 0 &&
+                    response.data[0].format == "two"
+                ) {
+                    selected_cv = "two";
+                    console.log(selected_cv);
+                }
+                if (selected_cv == "one") {
+                    document.getElementById("cv1").style.border =
+                        "3px solid rgb(50, 252, 50)";
+                    document.getElementById("cv2").style.border = "none";
+                } else if (selected_cv == "two") {
+                    document.getElementById("cv2").style.border =
+                        "3px solid rgb(50, 252, 50)";
+                    document.getElementById("cv1").style.border =
+                        "border: none";
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
-    function toggleLetterSelection()
-    {
-         //Letter Selection
-         if (selected_letter == "one") {
-            document.getElementById("letter1").style.border =
-                "3px solid rgb(50, 252, 50)";
-            document.getElementById("letter2").style.border = "none";
-        } else if (selected_letter == "two") {
-            document.getElementById("letter2").style.border =
-                "3px solid rgb(50, 252, 50)";
-            document.getElementById("letter1").style.border = "none";
-        }
+    function toggleLetterSelection() {
+        //Letter Selection
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letterformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                console.log(response.data.length);
+                if (response.data.length == 0) {
+                    selected_letter = "one";
+                    console.log(selected_letter);
+                }
+                if (
+                    response.data.length > 0 &&
+                    response.data[0].format == "one"
+                ) {
+                    selected_letter = "one";
+                    console.log(selected_letter);
+                }
+                if (
+                    response.data.length > 0 &&
+                    response.data[0].format == "two"
+                ) {
+                    selected_letter = "two";
+                    console.log(selected_letter);
+                }
+                if (selected_letter == "one") {
+                    document.getElementById("letter1").style.border =
+                        "3px solid rgb(50, 252, 50)";
+                    document.getElementById("letter2").style.border = "none";
+                } else if (selected_letter == "two") {
+                    document.getElementById("letter2").style.border =
+                        "3px solid rgb(50, 252, 50)";
+                    document.getElementById("letter1").style.border = "none";
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
-    onMount(async () => {});
+    function setCV() {
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length > 0) {
+                    const options = {
+                        method: "PUT",
+                        url:
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                            userid,
+                        data: {
+                            UserId: userid,
+                            format: selected_cv,
+                        },
+                    };
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            toggle3();
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                } else if (response.data.length == 0) {
+                    const options = {
+                        method: "POST",
+                        url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat",
+                        data: {
+                            UserId: userid,
+                            format: selected_cv
+                        },
+                    };
+
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            toggle3();
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
+    function setLetter() {
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letterformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length > 0) {
+                    const options = {
+                        method: "PUT",
+                        url:
+                            "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letterformat/userid/" +
+                            userid,
+                        data: {
+                            UserId: userid,
+                            format: selected_letter,
+                        },
+                    };
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            toggle4();
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                } else if (response.data.length == 0) {
+                    const options = {
+                        method: "POST",
+                        url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letterformat",
+                        data: {
+                            UserId: userid,
+                            format: selected_letter
+                        },
+                    };
+
+                    axios
+                        .request(options)
+                        .then(function (response) {
+                            toggle4();
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
+    onMount(async () => {
+        userid = localStorage.getItem(username);
+    });
     export let username;
 </script>
 
 <main>
     <div class="add-container">
-        <div class="add-content1" on:click={toggle1} on:click={toggleCVSelection}>
-            <i
-                class="bi bi-gear-fill seticon"
-            />
+        <div
+            class="add-content1"
+            on:click={toggle1}
+            on:click={toggleCVSelection}
+        >
+            <i class="bi bi-gear-fill seticon" />
             <p class="text-content">Set CV Format</p>
         </div>
-        <div class="add-content2" on:click={toggle2} on:click={toggleLetterSelection}>
-            <i
-                class="bi bi-gear-fill seticon"
-            />
+        <div
+            class="add-content2"
+            on:click={toggle2}
+            on:click={toggleLetterSelection}
+        >
+            <i class="bi bi-gear-fill seticon" />
             <p class="text-content">Set Letter Format</p>
         </div>
     </div>
@@ -134,7 +321,7 @@
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary">Set CV</Button>
+                <Button color="primary" on:click={setCV}>Set CV</Button>
                 <Button color="danger" class="float-right" on:click={toggle1}
                     >Cancel</Button
                 >
@@ -172,33 +359,63 @@
                 </div>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary">Set Letter</Button>
+                <Button color="primary" on:click={setLetter}>Set Letter</Button>
                 <Button color="danger" class="float-right" on:click={toggle2}
                     >Cancel</Button
                 >
             </ModalFooter>
         </Modal>
+        <!-- CV Set -->
+        <Modal isOpen={open3}>
+            <ModalFooter>
+                <div class="set-symbol-container">
+                    <i class="bi bi-check-lg set-symbol" />
+                </div>
+                <div class="set-symbol-container">
+                    <p class="set-txt">CV Set Successfully</p>
+                </div>
+                <Button color="danger" class="float-right" on:click={toggle3} on:click={toggle1}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
+        <!-- Letter Set -->
+        <Modal isOpen={open4}>
+            <ModalFooter>
+                <div class="set-symbol-container">
+                    <i class="bi bi-check-lg set-symbol" />
+                </div>
+                <div class="set-symbol-container">
+                    <p class="set-txt">Letter Set Successfully</p>
+                </div>
+                <Button color="danger" class="float-right" on:click={toggle4} on:click={toggle2}
+                    >Cancel</Button
+                >
+            </ModalFooter>
+        </Modal>
     </div>
-    <div class="Tooltips" style="display: none;"> 
-        <Tooltip target={selecttip1} placement="right">
-            Select
-        </Tooltip>
-        <Tooltip target={selecttip2} placement="right">
-            Select
-        </Tooltip>
-        <Tooltip target={selecttip3} placement="right">
-            Select
-        </Tooltip>
-        <Tooltip target={selecttip4} placement="right">
-            Select
-        </Tooltip>
+    <div class="Tooltips" style="display: none;">
+        <Tooltip target={selecttip1} placement="right">Select</Tooltip>
+        <Tooltip target={selecttip2} placement="right">Select</Tooltip>
+        <Tooltip target={selecttip3} placement="right">Select</Tooltip>
+        <Tooltip target={selecttip4} placement="right">Select</Tooltip>
     </div>
 </main>
 
 <style>
+    .set-symbol-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .set-symbol {
+        font-size: 70px;
+        color: rgb(18, 143, 18);
+    }
     .seticon {
-        color:rgb(100, 86, 167); 
-        font-size:60px; 
+        color: rgb(100, 86, 167);
+        font-size: 60px;
         margin-left: 7%;
     }
     .formatpic {
@@ -236,7 +453,7 @@
         padding-right: 2%;
     }
     .add-content1:hover {
-        opacity: 1; 
+        opacity: 1;
         box-shadow: 3px 3px 10px 1px grey;
     }
     .add-content2:hover {

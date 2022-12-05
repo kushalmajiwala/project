@@ -142,6 +142,7 @@
     let open11 = false;
     let open12 = false;
     let open13 = false;
+    let open14 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -156,6 +157,7 @@
     const toggle11 = () => (open11 = !open11);
     const toggle12 = () => (open12 = !open12);
     const toggle13 = () => (open13 = !open13);
+    const toggle14 = () => (open14 = !open14);
 
     let totalCV = [];
     let checking = false;
@@ -744,6 +746,9 @@
         qr_cvid = cvid;
         getData(qr_cvid);
         toggle12();
+    }
+    async function generatePDFFormat2(cvid) {
+        alert('hello');
     }
     async function generatePDF(cvid) {
         const pdfDoc = await PDFDocument.create();
@@ -1840,15 +1845,66 @@
         console.log(fname);
         console.log(personal_pic_url);
         console.log(lname);
-        setTimeout(function () {
-            generatePDF(download_cvid);
-        }, 1000);
+
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length == 0) {
+                    setTimeout(function () {
+                        generatePDF(download_cvid);
+                    }, 1000);
+                } else if (response.data.length > 0) {
+                    if (response.data[0].format == "one") {
+                        setTimeout(function () {
+                            generatePDF(download_cvid);
+                        }, 1000);
+                    } else if (response.data[0].format == "two") {
+                        setTimeout(function () {
+                            generatePDFFormat2(download_cvid);
+                        }, 1000);
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
+
     function setShowCV(cvid) {
         show_cvid = cvid;
         console.log(show_cvid);
         getData(show_cvid);
-        toggle11();
+
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length == 0) {
+                    toggle11();
+                } else if (response.data.length > 0) {
+                    if (response.data[0].format == "one") {
+                        toggle11();
+                    } else if (response.data[0].format == "two") {
+                        toggle14();
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
     function getData(cvid) {
         const options = {
@@ -3556,6 +3612,287 @@
                 </ModalFooter>
             </div>
         </Modal>
+        <Modal isOpen={open14} size="lg">
+            <div class="cv-border">
+                <ModalHeader
+                    style="position: relative; height: 60px; background-color: rgb(220, 219, 219); color: blue; font-weight: 900; border-bottom: 2px solid black; backgrounc-color: grey;"
+                >
+                    <div class="header-class">
+                        <p class="inner-class"><u>CURRICULUM VITAE</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 280px;">
+                    <div class="personal-container">
+                        <div>
+                            <p class="main-name">
+                                <b>=> NAME</b> :- {fname}
+                                {lname}
+                            </p>
+                            <p class="main-name">
+                                <b>=> GENDER</b> :- {gender}
+                            </p>
+                            <p class="main-name">
+                                <b>=> DATE OF BIRTH</b> :- {dob}
+                            </p>
+                            <p class="main-name">
+                                <b>=> PROFESSION</b> :- {profession}
+                            </p>
+                            <p class="main-name">
+                                <b>=> ADDRESS</b> :- {address}, {personal_city}, {personal_state}.
+                            </p>
+                            <p class="main-name">
+                                <b>=> PHONE NO</b> :- {phoneno}
+                            </p>
+                            <p class="main-name"><b>=> EMAIL</b> :- {email}</p>
+                        </div>
+                        {#if personal_pic_url !== ""}
+                            <div class="cv-image">
+                                <img
+                                    class="avatar1"
+                                    src={personal_pic_url}
+                                    alt="d"
+                                />
+                            </div>
+                        {/if}
+                    </div>
+                </ModalHeader>
+                <!-- Education Details -->
+                <ModalHeader
+                    style="position: relative; height: 45px;  border-top: 2px solid black; border-bottom: 2px solid black;"
+                >
+                    <div class="header-class-format2">
+                        <p class="inner-class-education"><u>EDUCATION</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 180px;">
+                    <div>
+                        <p class="main-name">
+                            <b>=> SECONDARY EDUCATION</b> :- {schoolname}
+                        </p>
+                        <p class="main-name">
+                            <b>=> EDUCATION ADDRESS</b> :- {education_city}, {education_state}.
+                        </p>
+                        <p class="main-name"><b>=> DEGREE</b> :- {degree}</p>
+                        <p class="main-name"><b>=> FIELD</b> :- {field}</p>
+                    </div>
+                </ModalHeader>
+                <!-- Experience Details -->
+                <ModalHeader
+                    style="position: relative; height: 45px;  border-top: 2px solid black; border-bottom: 2px solid black;"
+                >
+                    <div class="header-class-format2">
+                        <p class="inner-class-education"><u>EXPERIENCE</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 180px;">
+                    <div>
+                        <p class="main-name">
+                            <b>=> JOB TITLE</b> :- {job_title}
+                        </p>
+                        <p class="main-name">
+                            <b>=> COMPANY NAME</b> :- {company_name}
+                        </p>
+                        <p class="main-name">
+                            <b>=> COMAPNY ADDRESS</b> :- {experience_city}, {experience_state}.
+                        </p>
+                        <p class="main-name">
+                            <b>=> YEAR OF EXPERIENCE</b> :- {experience_year} years.
+                        </p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader
+                    style="position: relative; height: 45px;  border-top: 2px solid black; border-bottom: 2px solid black;"
+                >
+                    <div class="header-class-format2">
+                        <p class="inner-class-education"><u>SKILLS</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 140px;">
+                    <div class="skill-show">
+                        {#if skill1 !== "" && skill2 !== "" && skill3 !== ""}
+                            <div>
+                                {skill1}:-
+                                {#if level1 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                            <div>
+                                {skill2}:-
+                                {#if level2 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                            <div>
+                                {skill3}:-
+                                {#if level3 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level3 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level3 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                        {:else if skill1 !== "" && skill2 !== ""}
+                            <div>
+                                {skill1}:-
+                                {#if level1 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                            <div>
+                                {skill2}:-
+                                {#if level2 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level2 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                        {:else}
+                            <div>
+                                {skill1}:-
+                                {#if level1 === "Beginner"}
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Intermediate"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {:else if level1 === "Expert"}
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                    <i class="bi bi-star-fill" />
+                                {/if}
+                            </div>
+                        {/if}
+                    </div>
+                </ModalHeader>
+                <ModalHeader
+                    style="position: relative; height: 45px;  border-top: 2px solid black; border-bottom: 2px solid black;"
+                >
+                    <div class="header-class-format2">
+                        <p class="inner-class-education"><u>INTERESTS</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative; height: 140px;">
+                    <div class="interest-show">
+                        {#if interest1 !== "" && interest2 !== "" && interest3 !== ""}
+                            <div>
+                                {interest1}
+                            </div>
+                            <div>
+                                {interest2}
+                            </div>
+                            <div>
+                                {interest3}
+                            </div>
+                        {:else if interest1 !== "" && interest2 !== ""}
+                            <div>
+                                {interest1}
+                            </div>
+                            <div>
+                                {interest2}
+                            </div>
+                        {:else}
+                            <div>
+                                {interest1}
+                            </div>
+                        {/if}
+                    </div>
+                </ModalHeader>
+                <!-- Summary showing -->
+                <ModalHeader
+                    style="position: relative; height: 45px;  border-top: 2px solid black; border-bottom: 2px solid black;"
+                >
+                    <div class="header-class-format2">
+                        <p class="inner-class-education"><u>SUMMARY</u></p>
+                    </div>
+                </ModalHeader>
+                <ModalHeader style="position: relative;">
+                    <div class="summary_height">
+                        {my_summary}
+                    </div>
+                </ModalHeader>
+                <!-- Social showing -->
+                {#if facebook_link !== "" || twitter_link !== "" || linkedin_link !== "" || website_link !== ""}
+                    <ModalHeader
+                        style="position: relative; height: 45px;  border-top: 2px solid black; border-bottom: 2px solid black;"
+                    >
+                        <div class="header-class-format2">
+                            <p class="inner-class-education"><u>SOCIAL</u></p>
+                        </div>
+                    </ModalHeader>
+                    <ModalHeader style="position: relative; height: 180px;">
+                        <div>
+                            {#if facebook_link !== ""}
+                                <p class="main-name">
+                                    <b>=> FACEBOOK</b> :- {facebook_link}
+                                </p>
+                            {/if}
+                            {#if twitter_link !== ""}
+                                <p class="main-name">
+                                    <b>=> TWITTER</b> :- {twitter_link}
+                                </p>
+                            {/if}
+                            {#if linkedin_link !== ""}
+                                <p class="main-name">
+                                    <b>=> LINKEDIN</b> :- {linkedin_link}
+                                </p>
+                            {/if}
+                            {#if website_link !== ""}
+                                <p class="main-name">
+                                    <b>=> WEBSITE</b> :- {website_link}
+                                </p>
+                            {/if}
+                        </div>
+                    </ModalHeader>
+                {/if}
+                <!-- Download or Cancel Buttons -->
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        class="float-right"
+                        on:click={() => setDownloadCV(show_cvid)}
+                    >
+                        <i
+                            style="margin-right: 5px;"
+                            class="bi bi-file-earmark-arrow-down-fill"
+                        />Download</Button
+                    >
+                    <Button
+                        color="danger"
+                        class="float-right"
+                        on:click={toggle14}>Cancel</Button
+                    >
+                </ModalFooter>
+            </div>
+        </Modal>
         <!-- QR Code Popup -->
         <Modal isOpen={open12}>
             <ModalHeader
@@ -3584,10 +3921,12 @@
             <ModalFooter>
                 <div class="empty-symbol-container">
                     <i class="bi bi-x-circle empty-symbol" />
-                  </div>
-                  <div class="empty-symbol-container">
-                    <p class="empty-txt">Fields Cannot be empty on Summary Details Page</p>
-                  </div>
+                </div>
+                <div class="empty-symbol-container">
+                    <p class="empty-txt">
+                        Fields Cannot be empty on Summary Details Page
+                    </p>
+                </div>
                 <Button
                     color="danger"
                     class="float-right"
@@ -3633,6 +3972,12 @@
         position: absolute;
         display: flex;
         justify-content: center;
+    }
+    .header-class-format2 {
+        width: 100%;
+        position: absolute;
+        margin-left: 12%;
+        color: rgb(17, 17, 252);
     }
     /* .personal-container {
         width: 100%;
