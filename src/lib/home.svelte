@@ -28,6 +28,7 @@
     let download_cvid = "";
     let download_letterid = "";
     let qr_cvid = "";
+    let qrFormat = "";
 
     //Contact Us Form
     let cname = "";
@@ -3093,6 +3094,29 @@
     function generateQRCodeForCv(cvid) {
         qr_cvid = cvid;
         getData(qr_cvid);
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                uid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length == 0) {
+                    qrFormat = "one";
+                } else if (response.data.length > 0) {
+                    if (response.data[0].format == "one") {
+                        qrFormat = "one";
+                    } else if (response.data[0].format == "two") {
+                        qrFormat = "two";
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
         toggle2();
     }
     //Letter Operations
@@ -3762,7 +3786,7 @@
             >
                 <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}"
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/cv/{qr_cvid}{qrFormat}"
                     alt="no-image"
                 />
             </ModalBody>
