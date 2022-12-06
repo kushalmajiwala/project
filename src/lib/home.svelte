@@ -5426,6 +5426,12 @@
         font-size: 70px;
         color: rgb(18, 143, 18);
     }
+    .header-class-format2 {
+        width: 100%;
+        position: absolute;
+        margin-left: 12%;
+        color: rgb(17, 17, 252);
+    }
     .letter-header {
         white-space: nowrap;
         width: 95%;
