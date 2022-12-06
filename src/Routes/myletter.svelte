@@ -27,6 +27,7 @@
     let open7 = false;
     let open8 = false;
     let open9 = false;
+    let open10 = false;
 
     const toggle1 = () => (open1 = !open1);
     const toggle2 = () => (open2 = !open2);
@@ -37,6 +38,7 @@
     const toggle7 = () => (open7 = !open7);
     const toggle8 = () => (open8 = !open8);
     const toggle9 = () => (open9 = !open9);
+    const toggle10 = () => (open10 = !open10);
 
     //Personal Page Variables
     let personal_information = true;
@@ -323,7 +325,29 @@
 
     function setShowLetter(lid) {
         getData(lid);
-        toggle5();
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letterformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length == 0) {
+                    toggle5();
+                } else if (response.data.length > 0) {
+                    if (response.data[0].format == "one") {
+                        toggle5();
+                    } else if (response.data[0].format == "two") {
+                        toggle10();
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 
     function generateQRCode(lid) {
@@ -1422,7 +1446,7 @@
         <Modal isOpen={open2}>
             <ModalFooter>
                 <div class="edit-symbol-container">
-                    <i class="bi bi-check-all edit-symbol"></i>
+                    <i class="bi bi-check-all edit-symbol" />
                 </div>
                 <div class="edit-symbol-container">
                     <p class="edit-txt">Letter Details Updated Successfully</p>
@@ -1546,14 +1570,86 @@
                 </ModalFooter>
             </div>
         </Modal>
+        <!-- Letter Second Format -->
+        <Modal isOpen={open10} size="lg">
+            <div class="letter-border">
+                <ModalHeader
+                    style="height: 235px; border-bottom: 2px solid black;background-color: rgb(235, 235, 235);"
+                >
+                        <div class="header-content">
+                            <div class="letter-header-second">
+                                <p class="name-box">{ fname[0] } { lname[0] }</p>
+                                <p >{fname}</p>
+                                <p style="margin-top: -15%;">{lname}</p>
+                            </div>
+                            <div class="personal-info-second">
+                                <p class="context" style="font-size: 30px; font-weight:600;">Contact</p>
+                                <p class="context"><i class="bi bi-envelope-check-fill" /> {email}</p>
+                                <p class="context"><i class="bi bi-phone-fill" /> {phone}</p>
+                                <p class="context">
+                                    <i class="bi bi-geo-alt-fill" />
+                                    {personal_address}
+                                </p>
+                            </div>
+                        </div>
+                </ModalHeader>
+                <ModalHeader style="border-bottom: 2px solid black;">
+                    <div class="letter-content-header">
+                        <p style="font-size: 15px;">To :</p>
+                        <p style="margin-top: -18px;">{recipient_name}, CEO</p>
+                        <p style="margin-top: -18px;">{company_name}</p>
+                        <p style="margin-top: -18px;">{company_address}</p>
+                        <p style="margin-top: -18px">
+                            {company_city}, {company_state}
+                        </p>
+                        <p style="margin-top: -18px">{letter_date}</p>
+                    </div>
+                    <div class="letter-content">
+                        <p>
+                            Dear
+                            {#if recipient_gender == "Male"}
+                                Mr.
+                            {:else}
+                                Ms.
+                            {/if}
+                            {recipient_name}
+                        </p>
+                        <p>{letter_content}</p>
+                        <p style="margin-top: 30px;">Regards,</p>
+                        <p style="margin-top: -18px;">{fname} {lname}</p>
+                        <p style="margin-top: -18px;">{phone}</p>
+                        <p style="margin-top: -18px;">{email}</p>
+                    </div>
+                </ModalHeader>
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        class="float-right"
+                        on:click={() => setDownloadLetter(show_letterid)}
+                    >
+                        <i
+                            style="margin-right: 5px;"
+                            class="bi bi-file-earmark-arrow-down-fill"
+                        />Download</Button
+                    >
+                    <Button
+                        color="danger"
+                        class="float-right"
+                        on:click={toggle10}>Cancel</Button
+                    >
+                </ModalFooter>
+            </div>
+        </Modal>
         <!-- empty-modal -->
         <Modal isOpen={open6}>
             <ModalFooter>
                 <div class="empty-symbol-container">
-                    <i class="bi bi-x-circle empty-symbol"></i>
+                    <i class="bi bi-x-circle empty-symbol" />
                 </div>
                 <div class="empty-symbol-container">
-                    <p class="empty-txt">Fields Cannot be empty on Personal-Information Page</p>
+                    <p class="empty-txt">
+                        Fields Cannot be empty on Personal-Information Page
+                    </p>
                 </div>
                 <Button
                     color="danger"
@@ -1567,10 +1663,12 @@
         <Modal isOpen={open7}>
             <ModalFooter>
                 <div class="empty-symbol-container">
-                    <i class="bi bi-x-circle empty-symbol"></i>
+                    <i class="bi bi-x-circle empty-symbol" />
                 </div>
                 <div class="empty-symbol-container">
-                    <p class="empty-txt">Fields Cannot be empty on Recipient-Information Page</p>
+                    <p class="empty-txt">
+                        Fields Cannot be empty on Recipient-Information Page
+                    </p>
                 </div>
                 <Button
                     color="danger"
@@ -1584,10 +1682,12 @@
         <Modal isOpen={open8}>
             <ModalFooter>
                 <div class="empty-symbol-container">
-                    <i class="bi bi-x-circle empty-symbol"></i>
+                    <i class="bi bi-x-circle empty-symbol" />
                 </div>
                 <div class="empty-symbol-container">
-                    <p class="empty-txt">Fields Cannot be empty on letter-content Page</p>
+                    <p class="empty-txt">
+                        Fields Cannot be empty on letter-content Page
+                    </p>
                 </div>
                 <Button
                     color="danger"
@@ -1597,8 +1697,8 @@
                 >
             </ModalFooter>
         </Modal>
-         <!-- QR Code Popup -->
-         <Modal isOpen={open9}>
+        <!-- QR Code Popup -->
+        <Modal isOpen={open9}>
             <ModalHeader
                 style="padding-top: 10px; padding-bottom: 10px; display:flex; justify-content: center;"
             >
@@ -1625,7 +1725,28 @@
 </main>
 
 <style>
-     .qr-title {
+    .name-box {
+        width: 140px;
+        height: 80px;
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* line-height: 100px; */
+        border: 2px solid black;
+        color: black;
+        font-size: 35px;
+        /* padding-top: 7%; */
+    }
+    .header-content {
+        width: 750px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .context {
+        white-space: nowrap;
+    }
+    .qr-title {
         font-size: 25px;
         white-space: nowrap;
         font-weight: 500;
@@ -1641,6 +1762,17 @@
         color: rgb(25, 32, 90);
         font-weight: 500;
     }
+    .letter-header-second {
+        white-space: nowrap;
+        /* width: 95%; */
+        padding: 0px;
+        font-size: 35px;
+        /* display: flex; */
+        /* justify-content: center; */
+        /* position: absolute; */
+        color: rgb(25, 32, 90);
+        font-weight: 500;
+    }
     .letter-content-header {
         color: rgb(95, 93, 93);
     }
@@ -1652,13 +1784,20 @@
         margin-top: 45%;
         font-weight: 400;
     }
+    .personal-info-second {
+        font-weight: 400;
+        /* width: 50%; */
+    }
     .letter-border {
         border: 6px solid black;
     }
-    .delete-txt, .edit-txt {
+    .delete-txt,
+    .edit-txt {
         font-size: 20px;
     }
-    .delete-symbol-container, .edit-symbol-container, .empty-symbol-container {
+    .delete-symbol-container,
+    .edit-symbol-container,
+    .empty-symbol-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -1869,6 +2008,9 @@
         .page-header {
             margin-left: -35%;
         }
+        .header-content {
+            width: 500px;
+        }
     }
     @media screen and (max-width: 900px) {
         .add-content {
@@ -1934,6 +2076,9 @@
             padding-left: 5%;
             margin-left: 15%;
         } */
+        .header-content {
+            width: 450px;
+        }
     }
     @media screen and (max-width: 500px) {
         .add-content {
@@ -1955,6 +2100,9 @@
             width: 100%;
             padding-left: 5%;
         }
+        .header-content {
+            width: 430px;
+        }
     }
     @media screen and (max-width: 450px) {
         .add-content {
@@ -1964,6 +2112,18 @@
         .none-added {
             margin-top: 18%;
             margin-left: 19%;
+        }
+        .header-content {
+            width: 400px;
+        }
+        .name-box {
+            width: 115px;
+            font-size: 30px;
+        }
+    }
+    @media screen and (max-width: 430px) {
+        .header-content {
+            width: 360px;
         }
     }
     @media screen and (max-width: 400px) {
@@ -1989,6 +2149,17 @@
         }
         .page-header {
             margin-left: -55%;
+        }
+        .header-content {
+            width: 340px;
+        }
+        .letter-header-second {
+            font-size: 30px;
+        }
+    }
+    @media screen and (max-width: 380px) {
+        .header-content {
+            width: 330px;
         }
     }
     @media screen and (max-width: 360px) {
