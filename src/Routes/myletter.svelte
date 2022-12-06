@@ -1744,6 +1744,7 @@
         justify-content: space-around;
     }
     .context {
+        overflow: hidden;
         white-space: nowrap;
     }
     .qr-title {
@@ -2011,6 +2012,9 @@
         .header-content {
             width: 500px;
         }
+        .context {
+            width: 210px;
+        }
     }
     @media screen and (max-width: 900px) {
         .add-content {
@@ -2078,6 +2082,9 @@
         } */
         .header-content {
             width: 450px;
+        }
+        .context {
+            width: 180px;
         }
     }
     @media screen and (max-width: 500px) {
@@ -2155,6 +2162,9 @@
         }
         .letter-header-second {
             font-size: 30px;
+        }
+        .context {
+            width: 150px;
         }
     }
     @media screen and (max-width: 380px) {
