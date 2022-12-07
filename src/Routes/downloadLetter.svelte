@@ -62,7 +62,7 @@
             });
     }
 
-    async function generateLetterPDF(lid) {
+    async function generateLetterPDF() {
         const pdfDoc = await PDFDocument.create();
 
         // Embed the Times Roman font
