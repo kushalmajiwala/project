@@ -8,13 +8,15 @@
     import Addcv from "../Routes/addcv.svelte";
     import Addletter from "../Routes/addletter.svelte";
     import ManageFormat from "../Routes/manageFormat.svelte";
+    import Feedback from "../Routes/feedback.svelte";
     import { onMount } from "svelte";
     import { Tooltip } from "sveltestrap";
     import axios from "axios";
     let showProfile;
     let userid = "";
     let imageurl = "";
-    let profile_image_style = "height: 70px;width: 70px;border-radius: 100%;background-repeat: no-repeat;background-size: cover;background-position: center center;position: relative; margin-top: 0%;filter: drop-shadow(0 0 0 red);";
+    let profile_image_style =
+        "height: 70px;width: 70px;border-radius: 100%;background-repeat: no-repeat;background-size: cover;background-position: center center;position: relative; margin-top: 0%;filter: drop-shadow(0 0 0 red);";
     // Script to open and close sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
@@ -48,7 +50,9 @@
         userid = localStorage.getItem(username);
         const options = {
             method: "GET",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" + userid,
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/profileimage/fetchimage/" +
+                userid,
         };
         axios
             .request(options)
@@ -72,19 +76,26 @@
             >
                 <div class="firstmenu">
                     <div
-                            on:click={w3_close}
-                            class="w3-right closelogo w3-hide-large"
-                            title="close menu"
-                        >
-                            <i class="fa fa-remove" style="color:red; font-size: 25px;" />
-                        </div>
+                        on:click={w3_close}
+                        class="w3-right closelogo w3-hide-large"
+                        title="close menu"
+                    >
+                        <i
+                            class="fa fa-remove"
+                            style="color:red; font-size: 25px;"
+                        />
+                    </div>
                     <div class="w3-container firstmenu1">
                         {#if imageurl === ""}
-                            <div class="defaultimage"/>
+                            <div class="defaultimage" />
                         {/if}
                         {#if imageurl !== ""}
                             <!-- svelte-ignore a11y-img-redundant-alt -->
-                            <img src={imageurl} alt="no-image" style={profile_image_style}>
+                            <img
+                                src={imageurl}
+                                alt="no-image"
+                                style={profile_image_style}
+                            />
                         {/if}
 
                         <Link
@@ -94,7 +105,9 @@
                             <div class="showusername" bind:this={showProfile}>
                                 {username}
                             </div>
-                            <Tooltip target={showProfile} placement="bottom">Profile</Tooltip>
+                            <Tooltip target={showProfile} placement="bottom"
+                                >Profile</Tooltip
+                            >
                         </Link>
                     </div>
                 </div>
@@ -155,6 +168,15 @@
                         Password
                     </div>
                 </Link>
+                <Link
+                    to="/{username}/manage/feedback"
+                    style="text-decoration: none;"
+                >
+                    <div class="nav-content">
+                        <i class="bi bi-chat-left-text-fill myicon" />
+                        Feedback
+                    </div>
+                </Link>
                 <Link to="/{username}" style="text-decoration: none;">
                     <div class="nav-content" on:click={signout}>
                         <i class="bi bi-box-arrow-right myicon" />
@@ -207,6 +229,9 @@
                 {/if}
                 {#if operation == "changeFormat"}
                     <Route path="/" component={ManageFormat} />
+                {/if}
+                {#if operation == "feedback"}
+                    <Route path="/" component={Feedback} />
                 {/if}
                 <Route path="/" component={Dashboardhome} />
             </div>
@@ -273,7 +298,7 @@
         padding: 10px;
         box-shadow: 2px 2px 20px 0px grey;
         z-index: 1;
-        height: 92px; 
+        height: 92px;
         line-height: 92px;
     }
     .mainlogo {
@@ -294,9 +319,9 @@
         padding-left: 30%;
     }
     .head-text {
-       margin-left: 2%;
-       font-size: 25px;
-       margin-top: -1.3%;
+        margin-left: 2%;
+        font-size: 25px;
+        margin-top: -1.3%;
     }
     .showusername {
         /* margin-left: 30%; */
@@ -319,12 +344,11 @@
         justify-content: space-between; */
         box-shadow: 2px 2px 5px 0px grey;
         cursor: pointer;
-       
+
         /* border-radius: 25px; */
         background-color: rgb(228, 245, 245);
     }
     @media screen and (min-width: 1350px) {
-        
     }
     @media screen and (max-width: 1350px) {
         /* .header {
@@ -366,9 +390,9 @@
             width: 80px;
         } */
         .set-header {
-        display: flex;
-        padding-left: 32%;
-    }
+            display: flex;
+            padding-left: 32%;
+        }
     }
     @media screen and (min-width: 993px) {
         .page-content {
