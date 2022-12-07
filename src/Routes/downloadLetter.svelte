@@ -1354,9 +1354,6 @@
 
     onMount(async () => {
         await getData(letterid);
-        setTimeout(function () {
-            generateLetterPDF(letterid);
-        }, 1000);
         if (format == "one" || format == "") {
             setTimeout(function () {
                 generateLetterPDF();
