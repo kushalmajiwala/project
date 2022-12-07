@@ -5384,7 +5384,7 @@
             >
                 <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/letter/{qr_letterid}{letterQrFormat}"
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/letter/{qr_letterid}/{letterQrFormat}"
                     alt="no-image"
                 />
             </ModalBody>
