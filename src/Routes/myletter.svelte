@@ -18,6 +18,8 @@
     } from "sveltestrap";
     import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
+    let qrFormat = "";
+
     let open1 = false;
     let open2 = false;
     let open3 = false;
@@ -380,6 +382,29 @@
         qr_letterid = lid;
         getData(qr_letterid);
         console.log(qr_letterid);
+        const options = {
+            method: "GET",
+            url:
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                userid,
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                if (response.data.length == 0) {
+                    qrFormat = "one";
+                } else if (response.data.length > 0) {
+                    if (response.data[0].format == "one") {
+                        qrFormat = "one";
+                    } else if (response.data[0].format == "two") {
+                        qrFormat = "two";
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
         toggle9();
     }
 
@@ -491,8 +516,8 @@
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
         });
-         //Last Name Letter in Box
-         page.drawText(lname[0], {
+        //Last Name Letter in Box
+        page.drawText(lname[0], {
             x: 290,
             y: 1855,
             size: 70,
@@ -506,7 +531,7 @@
             y: 1720,
             size: 70,
             font: timesRomanFont,
-            color: rgb(0.0, 0.0, 0.60),
+            color: rgb(0.0, 0.0, 0.6),
         });
         //Last Name
         page.drawText(lname, {
@@ -514,7 +539,7 @@
             y: 1650,
             size: 70,
             font: timesRomanFont,
-            color: rgb(0.0, 0.0, 0.60),
+            color: rgb(0.0, 0.0, 0.6),
         });
         //Contact Text
         page.drawText("Contact", {
@@ -524,8 +549,8 @@
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
         });
-         //Email Symbol
-         const pngImageBytes3 = await fetch(
+        //Email Symbol
+        const pngImageBytes3 = await fetch(
             "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/mail.png?t=2022-12-06T12%3A27%3A33.422Z"
         ).then((res) => res.arrayBuffer());
 
@@ -544,7 +569,7 @@
             font: timesRomanFont,
             color: rgb(0.0, 0.0, 0.0),
         });
-        
+
         //Phone Symbol
         const pngImageBytes1 = await fetch(
             "https://duiyhomqwkysqswlkipx.supabase.co/storage/v1/object/public/images/phone.png"
@@ -2274,22 +2299,33 @@
                 <ModalHeader
                     style="height: 235px; border-bottom: 2px solid black;background-color: rgb(235, 235, 235);"
                 >
-                        <div class="header-content">
-                            <div class="letter-header-second">
-                                <p class="name-box">{ fname[0] } { lname[0] }</p>
-                                <p >{fname}</p>
-                                <p style="margin-top: -15%;">{lname}</p>
-                            </div>
-                            <div class="personal-info-second">
-                                <p class="context" style="font-size: 30px; font-weight:600;">Contact</p>
-                                <p class="context"><i class="bi bi-envelope-check-fill" /> {email}</p>
-                                <p class="context"><i class="bi bi-phone-fill" /> {phone}</p>
-                                <p class="context">
-                                    <i class="bi bi-geo-alt-fill" />
-                                    {personal_address}
-                                </p>
-                            </div>
+                    <div class="header-content">
+                        <div class="letter-header-second">
+                            <p class="name-box">{fname[0]} {lname[0]}</p>
+                            <p>{fname}</p>
+                            <p style="margin-top: -15%;">{lname}</p>
                         </div>
+                        <div class="personal-info-second">
+                            <p
+                                class="context"
+                                style="font-size: 30px; font-weight:600;"
+                            >
+                                Contact
+                            </p>
+                            <p class="context">
+                                <i class="bi bi-envelope-check-fill" />
+                                {email}
+                            </p>
+                            <p class="context">
+                                <i class="bi bi-phone-fill" />
+                                {phone}
+                            </p>
+                            <p class="context">
+                                <i class="bi bi-geo-alt-fill" />
+                                {personal_address}
+                            </p>
+                        </div>
+                    </div>
                 </ModalHeader>
                 <ModalHeader style="border-bottom: 2px solid black;">
                     <div class="letter-content-header">
@@ -2409,7 +2445,7 @@
             >
                 <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/letter/{qr_letterid}"
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=project-2hu.pages.dev/download/letter/{qr_letterid}{qrFormat}"
                     alt="no-image"
                 />
             </ModalBody>

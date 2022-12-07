@@ -7,7 +7,7 @@
   import Dashboard from "./lib/dashboard.svelte";
   import DownloadCv from "./Routes/downloadCV.svelte";
   import DownloadLetter from "./Routes/downloadLetter.svelte";
-  let data = [];
+  
   export let url = "";
 </script>
 
@@ -63,11 +63,11 @@
           <!-- {/if} -->
           <DownloadCv cvid={params.cvid} format={params.format}/>
         </Route>
-        <Route path="/download/letter/:letterid" let:params>
+        <Route path="/download/letter/:letterid/:format" let:params>
           <!-- {#if localStorage.getItem(params.username)} -->
           <!-- <Dashboard username={params.username} operation="addletter" /> -->
           <!-- {/if} -->
-          <DownloadLetter letterid={params.letterid}/>
+          <DownloadLetter letterid={params.letterid} format={params.format}/>
         </Route>
     </div>
   </Router>
