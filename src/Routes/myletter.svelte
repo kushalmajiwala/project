@@ -385,7 +385,7 @@
         const options = {
             method: "GET",
             url:
-                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/cvformat/userid/" +
+                "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letterformat/userid/" +
                 userid,
         };
 
