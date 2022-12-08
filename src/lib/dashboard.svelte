@@ -177,12 +177,14 @@
                         Feedback
                     </div>
                 </Link>
-                <Link to="/{username}" style="text-decoration: none;">
-                    <div class="nav-content" on:click={signout}>
-                        <i class="bi bi-box-arrow-right myicon" />
-                        Signout
-                    </div>
-                </Link>
+                <span class="signout-tab">
+                    <Link to="/{username}" style="text-decoration: none;">
+                        <div class="nav-content" on:click={signout}>
+                            <i class="bi bi-box-arrow-right myicon" />
+                            Signout
+                        </div>
+                    </Link>
+                </span>
             </nav>
             <div
                 class="w3-overlay w3-hide-large w3-animate-opacity"
@@ -209,7 +211,7 @@
                         <Link to="/{username}" style="text-decoration: none;">
                             <div on:click={signout}>
                                 <Button
-                                    color="danger"
+                                    color="primary"
                                     style="font-size: 17px; padding: 8px; padding-left: 10px; padding-right: 20px;"
                                 >
                                     <i class="bi bi-box-arrow-right myicon" />
@@ -253,6 +255,9 @@
 </main>
 
 <style>
+    .signout-tab {
+        display: none;
+    }
     .signoutbtn {
         margin-left: 32%;
         margin-top: -1.5%;
@@ -452,6 +457,9 @@
         .set-header {
             /* display: flex; */
             padding-left: 39%;
+        }
+        .signout-tab {
+            display: block;
         }
     }
     @media screen and (max-width: 600px) {
