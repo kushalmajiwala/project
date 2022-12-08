@@ -10,7 +10,7 @@
     import ManageFormat from "../Routes/manageFormat.svelte";
     import Feedback from "../Routes/feedback.svelte";
     import { onMount } from "svelte";
-    import { Tooltip } from "sveltestrap";
+    import { Tooltip, Button } from "sveltestrap";
     import axios from "axios";
     let showProfile;
     let userid = "";
@@ -205,6 +205,19 @@
                 <div class="set-header w3-container">
                     <div class="mainlogo" />
                     <div class="head-text"><p>CV Creator</p></div>
+                    <div class="signoutbtn">
+                        <Link to="/{username}" style="text-decoration: none;">
+                            <div on:click={signout}>
+                                <Button
+                                    color="danger"
+                                    style="font-size: 17px; padding: 8px; padding-left: 10px; padding-right: 20px;"
+                                >
+                                    <i class="bi bi-box-arrow-right myicon" />
+                                    Signout
+                                </Button>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <br /><br /><br /><br /><br /><br /><br />
@@ -240,6 +253,10 @@
 </main>
 
 <style>
+    .signoutbtn {
+        margin-left: 32%;
+        margin-top: -1.5%;
+    }
     .defaultimage {
         height: 70px;
         width: 70px;
@@ -349,6 +366,10 @@
         background-color: rgb(228, 245, 245);
     }
     @media screen and (min-width: 1350px) {
+        .signoutbtn {
+            margin-left: 40%;
+            margin-top: -1.5%;
+        }
     }
     @media screen and (max-width: 1350px) {
         /* .header {
@@ -367,6 +388,10 @@
             /* display: flex; */
             padding-left: 32%;
         }
+        .signoutbtn {
+            margin-left: 38%;
+            margin-top: -1.5%;
+        }
     }
     @media screen and (max-width: 1165px) {
         /* .header {
@@ -379,6 +404,10 @@
         .set-header {
             /* display: flex; */
             padding-left: 34%;
+        }
+        .signoutbtn {
+            margin-left: 30%;
+            margin-top: -1.5%;
         }
     }
     @media screen and (max-width: 1055px) {
@@ -411,6 +440,9 @@
         /* .head-text {
             margin-top: -2%;
         } */
+        .signoutbtn {
+           display: none;
+        }
         .header {
             position: absolute;
         }
