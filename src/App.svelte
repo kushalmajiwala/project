@@ -7,6 +7,7 @@
   import Dashboard from "./lib/dashboard.svelte";
   import DownloadCv from "./Routes/downloadCV.svelte";
   import DownloadLetter from "./Routes/downloadLetter.svelte";
+  import AdminLogin from './lib/adminlogin.svelte';
   
   export let url = "";
 </script>
@@ -22,6 +23,10 @@
       <Route path="/:username/manage" let:params
         ><Login username={params.username} /></Route
       >
+      <Route path="/admin" let:params>
+        <!-- <Dashboard username={params.username} operation="feedback" /> -->
+        <AdminLogin username="admin"/>
+      </Route>
         <Route path="/:username/manage/mycv" let:params>
           {#if localStorage.getItem(params.username)}
           <Dashboard username={params.username} operation="mycv" />
