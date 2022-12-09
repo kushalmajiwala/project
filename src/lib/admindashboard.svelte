@@ -190,7 +190,7 @@
     @media screen and (max-width: 370px) {
         .main-container {
             display: block;
-            padding-left: 2%;
+            padding-left: 1.5%;
         }
     }
 </style>
