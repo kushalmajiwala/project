@@ -1,6 +1,6 @@
 <script>
     import axios from "axios";
-    import { Chart } from 'chart.js/auto'
+    import { Chart } from "chart.js/auto";
     import {
         Badge,
         Form,
@@ -22,7 +22,8 @@
     var yValues = [55, 49, 44, 24, 15];
     var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
 
-    new Chart("myChart", {
+    // var ctx = document.getElementById("myChart").getContext("2d");
+    new Chart('myChart', {
         type: "pie",
         data: {
             labels: xValues,
@@ -34,7 +35,7 @@
             ],
         },
         options: {
-             
+            
         },
     });
 
@@ -95,6 +96,7 @@
     </div>
     <div class="round-graph">
         <canvas id="myChart" style="width:100%;max-width:600px" />
+        <!-- <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div> -->
     </div>
 </main>
 
@@ -109,7 +111,6 @@
         width: 100%;
         height: 100%;
         padding-bottom: 20%;
-        background-color: green;
     }
     .total-user {
         background-color: rgb(214, 162, 131);
@@ -127,5 +128,63 @@
         width: 350px;
         border-radius: 25px;
     }
-   
+    @media screen and (max-width: 1100px) {
+        .main-container {
+            display: block;
+            padding-left: 35%;
+        }
+        .total-user,
+        .total-cv,
+        .total-letter {
+            margin-top: 2%;
+        }
+    }
+    @media screen and (max-width: 950px) {
+        .main-container {
+            display: block;
+            padding-left: 30%;
+        }
+    }
+    @media screen and (max-width: 900px) {
+        .main-container {
+            display: block;
+            padding-left: 27%;
+        }
+    }
+    @media screen and (max-width: 750px) {
+        .main-container {
+            display: block;
+            padding-left: 25%;
+        }
+    }
+    @media screen and (max-width: 650px) {
+        .main-container {
+            display: block;
+            padding-left: 20%;
+        }
+    }
+    @media screen and (max-width: 535px) {
+        .main-container {
+            display: block;
+            padding-left: 15%;
+        }
+    }
+    @media screen and (max-width: 460px) {
+        .main-container {
+            display: block;
+            padding-left: 10%;
+        }
+    }
+    @media screen and (max-width: 425px) {
+        .main-container {
+            display: block;
+            padding-left: 5%;
+        }
+    }
+    @media screen and (max-width: 400px) {
+        .main-container {
+            display: block;
+            padding-left: 3%;
+        }
+    }
 </style>
