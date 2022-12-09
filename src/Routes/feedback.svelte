@@ -204,7 +204,7 @@
             <Button
                 color="primary"
                 on:click={submitFeedback}
-                style="height: 45px; width: 127px; font-size: 18px; text-align:center;"
+                style="height: 45px; width: 127px; font-size: 18px;"
                 >Send-Message</Button
             >
         </div>
