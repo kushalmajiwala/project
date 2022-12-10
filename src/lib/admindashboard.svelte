@@ -16,6 +16,9 @@
     let total_cv = "";
     let total_letter = "";
 
+    let dark = true;
+    let light = false;
+
     onMount(async () => {
         //Total User
         const options1 = {
@@ -61,11 +64,43 @@
                 console.error(error);
             });
     });
+    function togglebtn()
+    {
+        if(dark)
+        {
+            document.getElementById('main').style.backgroundColor = "aliceblue";
+            dark = false;
+        }
+        else
+        {
+            dark = true;
+        }
+        if(light)
+        {
+            document.getElementById('main').style.backgroundColor = "rgb(10, 9, 10)";
+            light = false;
+        }
+        else
+        {
+            light = true;
+        }
+    }
 
     export let username;
 </script>
 
-<main class="main">
+<main class="main" id="main">
+    <nav class="navbar navbar-dark bg-dark" style="color: white;">
+        <div class="togglebtn" on:click={togglebtn}>
+            {#if dark}
+            <p><i class="bi bi-brightness-high"></i><span style="margin-left: 7%;">Light Mode</span></p>
+            {/if}
+            {#if light}
+            <p><i class="bi bi-moon"></i><span style="margin-left: 7%;">Dark Mode</span></p>
+            {/if}
+        </div>
+    </nav>
+
     <div class="main-container">
         <!-- Total User -->
         <div class="total-user">
@@ -85,7 +120,7 @@
         <div class="total-cv">
             <div class="inner-user-total">
                 <p>Total-CV</p>
-                <p><i class="bi bi-file-earmark-person-fill"></i></p>
+                <p><i class="bi bi-file-earmark-person-fill" /></p>
             </div>
             <div class="inner-user-total1">
                 <p>{total_cv}</p>
@@ -99,7 +134,7 @@
         <div class="total-letter">
             <div class="inner-user-total">
                 <p>Total-Letter</p>
-                <p><i class="bi bi-envelope-paper-fill"></i></p>
+                <p><i class="bi bi-envelope-paper-fill" /></p>
             </div>
             <div class="inner-user-total1">
                 <p>{total_letter}</p>
@@ -114,6 +149,20 @@
 </main>
 
 <style>
+    .togglebtn {
+        background-color:rgb(31, 30, 31);
+        color: white;
+        height: 50px;
+        width: 150px;
+        border-radius: 15px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        margin-left: 90%;
+    }
+    .togglebtn:hover {
+        background-color:rgb(44, 39, 44);
+    }
     .inner-user-total {
         display: flex;
         justify-content: space-around;
@@ -131,7 +180,8 @@
         font-size: 15px;
     }
     .main {
-        background-color: rgb(253, 250, 250);
+        background-color: rgb(10, 9, 10);
+        height: 800px;
     }
     .main-container {
         display: flex;
@@ -143,15 +193,27 @@
     }
     .total-user {
         /* background-color: rgb(253, 92, 18); */
-        background-image: linear-gradient(to right, rgb(250, 180, 180), rgb(253, 92, 18));
+        background-image: linear-gradient(
+            to right,
+            rgb(250, 170, 170),
+            rgb(253, 92, 18)
+        );
     }
     .total-cv {
         /* background-color: rgb(15, 129, 251); */
-        background-image: linear-gradient(to right,  rgb(180, 180, 251),  rgb(15, 129, 251));
+        background-image: linear-gradient(
+            to right,
+            rgb(170, 170, 251),
+            rgb(15, 129, 251)
+        );
     }
     .total-letter {
         /* background-color: rgb(37, 209, 34); */
-        background-image: linear-gradient(to right,  rgb(180, 209, 180),  rgb(37, 209, 34));
+        background-image: linear-gradient(
+            to right,
+            rgb(170, 209, 170),
+            rgb(37, 209, 34)
+        );
     }
     .total-user,
     .total-cv,
@@ -171,6 +233,10 @@
         .total-cv,
         .total-letter {
             margin-top: 2%;
+        }
+        .togglebtn {
+            width: 150px;
+            margin-left: 80%;
         }
     }
     @media screen and (max-width: 950px) {
@@ -197,6 +263,11 @@
             padding-left: 20%;
         }
     }
+    @media screen and (max-width: 600px) {
+       .togglebtn {
+        margin-left: 70%;
+       }
+    }
     @media screen and (max-width: 535px) {
         .main-container {
             display: block;
@@ -213,6 +284,9 @@
         .main-container {
             display: block;
             padding-left: 5%;
+        }
+        .togglebtn {
+            margin-left: 60%;
         }
     }
     @media screen and (max-width: 400px) {
