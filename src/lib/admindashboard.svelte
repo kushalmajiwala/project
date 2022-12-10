@@ -1,6 +1,5 @@
 <script>
     import axios from "axios";
-    import { Chart } from "chart.js/auto";
     import {
         Badge,
         Form,
@@ -16,28 +15,6 @@
     let total_user = "";
     let total_cv = "";
     let total_letter = "";
-
-    //Round Graph Logic
-    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues = [55, 49, 44, 24, 15];
-    var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
-
-    // var ctx = document.getElementById("myChart").getContext("2d");
-    new Chart('myChart', {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [
-                {
-                    backgroundColor: barColors,
-                    data: yValues,
-                },
-            ],
-        },
-        options: {
-            
-        },
-    });
 
     onMount(async () => {
         //Total User
@@ -90,17 +67,69 @@
 
 <main class="main">
     <div class="main-container">
-        <div class="total-user" />
-        <div class="total-cv" />
-        <div class="total-letter" />
+        <!-- Total User -->
+        <div class="total-user">
+            <div class="inner-user-total">
+                <p>Total-User</p>
+                <p><i class="bi bi-people-fill" /></p>
+            </div>
+            <div class="inner-user-total1">
+                <p>{total_user}</p>
+                <p />
+            </div>
+            <div class="inner-user-total2">
+                <p>Increased By 2%</p>
+            </div>
+        </div>
+        <!-- Total CV -->
+        <div class="total-cv">
+            <div class="inner-user-total">
+                <p>Total-CV</p>
+                <p><i class="bi bi-file-earmark-person-fill"></i></p>
+            </div>
+            <div class="inner-user-total1">
+                <p>{total_cv}</p>
+                <p />
+            </div>
+            <div class="inner-user-total2">
+                <p>Increased By 3%</p>
+            </div>
+        </div>
+        <!-- Total Letter -->
+        <div class="total-letter">
+            <div class="inner-user-total">
+                <p>Total-Letter</p>
+                <p><i class="bi bi-envelope-paper-fill"></i></p>
+            </div>
+            <div class="inner-user-total1">
+                <p>{total_letter}</p>
+                <p />
+            </div>
+            <div class="inner-user-total2">
+                <p>Increased By 1%</p>
+            </div>
+        </div>
     </div>
-    <div class="round-graph">
-        <canvas id="myChart" style="width:100%;max-width:600px" />
-        <!-- <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div> -->
-    </div>
+    <div class="round-graph" />
 </main>
 
 <style>
+    .inner-user-total {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 8%;
+    }
+    .inner-user-total1 {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 2%;
+    }
+    .inner-user-total2 {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 2%;
+        font-size: 15px;
+    }
     .main {
         background-color: rgb(253, 250, 250);
     }
@@ -113,13 +142,16 @@
         padding-bottom: 20%;
     }
     .total-user {
-        background-color: rgb(214, 162, 131);
+        /* background-color: rgb(253, 92, 18); */
+        background-image: linear-gradient(to right, rgb(250, 180, 180), rgb(253, 92, 18));
     }
     .total-cv {
-        background-color: rgb(106, 145, 188);
+        /* background-color: rgb(15, 129, 251); */
+        background-image: linear-gradient(to right,  rgb(180, 180, 251),  rgb(15, 129, 251));
     }
     .total-letter {
-        background-color: rgb(122, 189, 121);
+        /* background-color: rgb(37, 209, 34); */
+        background-image: linear-gradient(to right,  rgb(180, 209, 180),  rgb(37, 209, 34));
     }
     .total-user,
     .total-cv,
@@ -127,6 +159,8 @@
         height: 200px;
         width: 350px;
         border-radius: 25px;
+        color: white;
+        font-size: 25px;
     }
     @media screen and (max-width: 1100px) {
         .main-container {

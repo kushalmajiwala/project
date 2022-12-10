@@ -16,8 +16,6 @@
   "dependencies": {
     "@supabase/storage-js": "^1.7.3",
     "axios": "^0.27.2",
-    "chart.js": "^4.0.1",
-    "framework7-svelte": "^7.0.9",
     "pdf-lib": "^1.17.1",
     "svelte-routing": "^1.6.0",
     "sveltestrap": "^5.9.0"
