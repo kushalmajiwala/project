@@ -12,6 +12,8 @@
         ModalHeader,
     } from "sveltestrap";
     import { onMount } from "svelte";
+    import Mychart from './chart.svelte'
+
     let total_user = "";
     let total_cv = "";
     let total_letter = "";
@@ -64,24 +66,18 @@
                 console.error(error);
             });
     });
-    function togglebtn()
-    {
-        if(dark)
-        {
-            document.getElementById('main').style.backgroundColor = "aliceblue";
+    function togglebtn() {
+        if (dark) {
+            document.getElementById("main").style.backgroundColor = "aliceblue";
             dark = false;
-        }
-        else
-        {
+        } else {
             dark = true;
         }
-        if(light)
-        {
-            document.getElementById('main').style.backgroundColor = "rgb(10, 9, 10)";
+        if (light) {
+            document.getElementById("main").style.backgroundColor =
+                "rgb(10, 9, 10)";
             light = false;
-        }
-        else
-        {
+        } else {
             light = true;
         }
     }
@@ -93,10 +89,18 @@
     <nav class="navbar navbar-dark bg-dark" style="color: white;">
         <div class="togglebtn" on:click={togglebtn}>
             {#if dark}
-            <p><i class="bi bi-brightness-high"></i><span style="margin-left: 7%;">Light Mode</span></p>
+                <p>
+                    <i class="bi bi-brightness-high" /><span
+                        style="margin-left: 7%;">Light Mode</span
+                    >
+                </p>
             {/if}
             {#if light}
-            <p><i class="bi bi-moon"></i><span style="margin-left: 7%;">Dark Mode</span></p>
+                <p>
+                    <i class="bi bi-moon" /><span style="margin-left: 7%;"
+                        >Dark Mode</span
+                    >
+                </p>
             {/if}
         </div>
     </nav>
@@ -145,12 +149,17 @@
             </div>
         </div>
     </div>
-    <div class="round-graph" />
+    <div class="round-graph">
+        <div>
+           Something
+        </div>
+        <div>Hello</div>
+    </div>
 </main>
 
 <style>
     .togglebtn {
-        background-color:rgb(31, 30, 31);
+        background-color: rgb(31, 30, 31);
         color: white;
         height: 50px;
         width: 150px;
@@ -161,7 +170,7 @@
         margin-left: 90%;
     }
     .togglebtn:hover {
-        background-color:rgb(44, 39, 44);
+        background-color: rgb(45, 45, 45);
     }
     .inner-user-total {
         display: flex;
@@ -181,7 +190,7 @@
     }
     .main {
         background-color: rgb(10, 9, 10);
-        height: 800px;
+        height: 100%;
     }
     .main-container {
         display: flex;
@@ -264,9 +273,9 @@
         }
     }
     @media screen and (max-width: 600px) {
-       .togglebtn {
-        margin-left: 70%;
-       }
+        .togglebtn {
+            margin-left: 70%;
+        }
     }
     @media screen and (max-width: 535px) {
         .main-container {
