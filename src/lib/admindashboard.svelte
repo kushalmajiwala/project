@@ -12,7 +12,6 @@
         ModalHeader,
     } from "sveltestrap";
     import { onMount } from "svelte";
-    import Mychart from './chart.svelte'
 
     let total_user = "";
     let total_cv = "";
