@@ -397,6 +397,9 @@
         color: red;
         cursor: pointer;
     }
+    .deletebtn:hover {
+        color: rgb(190, 3, 3);
+    }
     .no-feedback {
         font-size: 30px;
         display: flex;
