@@ -32,54 +32,84 @@
             .request(options1)
             .then(function (response) {
                 total_user = response.data.length;
+
+                //Total CV
+                const options2 = {
+                    method: "GET",
+                    url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/",
+                };
+
+                axios
+                    .request(options2)
+                    .then(function (response) {
+                        total_cv = response.data.length;
+
+                        //Total Letters
+                        const options3 = {
+                            method: "GET",
+                            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/",
+                        };
+
+                        axios
+                            .request(options3)
+                            .then(function (response) {
+                                total_letter = response.data.length;
+
+                                //For Bar Chart
+                                var xArray = ["User", "CV", "Letter"];
+                                var yArray = [
+                                    total_user,
+                                    total_cv,
+                                    total_letter,
+                                ];
+
+                                var data = [
+                                    {
+                                        x: xArray,
+                                        y: yArray,
+                                        type: "bar",
+                                    },
+                                ];
+
+                                var layout = {
+                                    title: "Bar Chart of Application",
+                                };
+
+                                Plotly.newPlot("barPlot", data, layout);
+
+                                //For Pie Chart
+                                var xArray1 = ["User", "CV", "Letter"];
+                                var yArray1 = [
+                                    total_user,
+                                    total_cv,
+                                    total_letter,
+                                ];
+
+                                var layout1 = {
+                                    title: "Pie Chart of Application",
+                                };
+
+                                var data1 = [
+                                    {
+                                        labels: xArray1,
+                                        values: yArray1,
+                                        type: "pie",
+                                    },
+                                ];
+
+                                Plotly.newPlot("piePlot", data1, layout1);
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
             })
             .catch(function (error) {
                 console.error(error);
             });
-        //Total CV
-        const options2 = {
-            method: "GET",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/personal/",
-        };
-
-        axios
-            .request(options2)
-            .then(function (response) {
-                total_cv = response.data.length;
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
-
-        //Total Letters
-        const options3 = {
-            method: "GET",
-            url: "https://lsk35tbplh.execute-api.ap-south-1.amazonaws.com/Prod/api/letter/",
-        };
-
-        axios
-            .request(options3)
-            .then(function (response) {
-                total_letter = response.data.length;
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
-        
-        var xArray = ["User", "CV", "Letter"];
-        var yArray = [8, 5, 4];
-
-        var data = [
-            {
-                x: xArray,
-                y: yArray,
-                type: "bar",
-            },
-        ];
-
-        var layout = { title: "All Data of Application" };
-
-        Plotly.newPlot("myPlot", data, layout);
     });
     function togglebtn() {
         if (dark) {
@@ -164,12 +194,20 @@
             </div>
         </div>
     </div>
-    <div class="round-graph">
-        <div id="myPlot" style="width:100%;max-width:700px" />
+    <div class="charts">
+        <div id="barPlot" class="bar-plot"/>
+        <div id="piePlot" class="pie-plot"/>
     </div>
 </main>
 
 <style>
+    .bar-plot, .pie-plot {
+        width: 500px;
+    }
+    .charts {
+        display: flex;
+        justify-content: space-around;
+    }
     .togglebtn {
         background-color: rgb(31, 30, 31);
         color: white;
@@ -210,7 +248,7 @@
         padding-top: 5%;
         width: 100%;
         height: 100%;
-        padding-bottom: 20%;
+        padding-bottom: 5%;
     }
     .total-user {
         /* background-color: rgb(253, 92, 18); */
@@ -249,6 +287,11 @@
         .main-container {
             display: block;
             padding-left: 35%;
+            padding-bottom: 3%;
+        }
+        .charts {
+            display: block;
+            padding-left: 27%;
         }
         .total-user,
         .total-cv,
@@ -259,11 +302,18 @@
             width: 150px;
             margin-left: 80%;
         }
+        .pie-plot {
+            margin-top: 2%;
+        }
     }
     @media screen and (max-width: 950px) {
         .main-container {
             display: block;
             padding-left: 30%;
+        }
+        .charts {
+            display: block;
+            padding-left: 21%;
         }
     }
     @media screen and (max-width: 900px) {
@@ -271,17 +321,29 @@
             display: block;
             padding-left: 27%;
         }
+        .charts {
+            display: block;
+            padding-left: 17.5%;
+        }
     }
     @media screen and (max-width: 750px) {
         .main-container {
             display: block;
             padding-left: 25%;
         }
+        .charts {
+            display: block;
+            padding-left: 13%;
+        }
     }
     @media screen and (max-width: 650px) {
         .main-container {
             display: block;
             padding-left: 20%;
+        }
+        .charts {
+            display: block;
+            padding-left: 5%;
         }
     }
     @media screen and (max-width: 600px) {
@@ -294,15 +356,35 @@
             display: block;
             padding-left: 15%;
         }
+        .charts {
+            display: block;
+            padding-left: 8%;
+        }
+        .pie-plot, .bar-plot {
+            width: 400px;
+            height: 400px;
+        }
     }
     @media screen and (max-width: 460px) {
         .main-container {
             display: block;
             padding-left: 10%;
         }
+        .charts {
+            display: block;
+            padding-left: 10%;
+        }
+        .pie-plot, .bar-plot {
+            width: 350px;
+            height: 350px;
+        }
     }
     @media screen and (max-width: 425px) {
         .main-container {
+            display: block;
+            padding-left: 5%;
+        }
+        .charts {
             display: block;
             padding-left: 5%;
         }
@@ -315,9 +397,17 @@
             display: block;
             padding-left: 3%;
         }
+        .charts {
+            display: block;
+            padding-left: 3%;
+        }
     }
     @media screen and (max-width: 370px) {
         .main-container {
+            display: block;
+            padding-left: 1.5%;
+        }
+        .charts {
             display: block;
             padding-left: 1.5%;
         }
