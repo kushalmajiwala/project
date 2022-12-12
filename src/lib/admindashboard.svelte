@@ -12,10 +12,11 @@
         ModalHeader,
     } from "sveltestrap";
     import { onMount } from "svelte";
+    import Plotly from "plotly.js-dist-min";
 
-    let total_user = "";
-    let total_cv = "";
-    let total_letter = "";
+    let total_user = 0;
+    let total_cv = 0;
+    let total_letter = 0;
 
     let dark = true;
     let light = false;
@@ -64,6 +65,21 @@
             .catch(function (error) {
                 console.error(error);
             });
+        
+        var xArray = ["User", "CV", "Letter"];
+        var yArray = [8, 5, 4];
+
+        var data = [
+            {
+                x: xArray,
+                y: yArray,
+                type: "bar",
+            },
+        ];
+
+        var layout = { title: "All Data of Application" };
+
+        Plotly.newPlot("myPlot", data, layout);
     });
     function togglebtn() {
         if (dark) {
@@ -149,10 +165,7 @@
         </div>
     </div>
     <div class="round-graph">
-        <div>
-           Something
-        </div>
-        <div>Hello</div>
+        <div id="myPlot" style="width:100%;max-width:700px" />
     </div>
 </main>
 

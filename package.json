@@ -17,6 +17,8 @@
     "@supabase/storage-js": "^1.7.3",
     "axios": "^0.27.2",
     "pdf-lib": "^1.17.1",
+    "plotly.js": "^2.16.4",
+    "plotly.js-dist-min": "^2.16.4",
     "svelte-routing": "^1.6.0",
     "sveltestrap": "^5.9.0"
   }
