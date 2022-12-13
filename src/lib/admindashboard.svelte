@@ -202,7 +202,7 @@
             });
     }
 
-    export let username;
+    // export let username;
 </script>
 
 <main class="main" id="main">
@@ -437,17 +437,6 @@
         display: flex;
         justify-content: space-around;
     }
-    .togglebtn {
-        background-color: rgb(31, 30, 31);
-        color: white;
-        height: 50px;
-        width: 150px;
-        border-radius: 15px;
-        text-align: center;
-        line-height: 50px;
-        cursor: pointer;
-        margin-left: 90%;
-    }
     .togglebutton {
         background-color: rgb(31, 30, 31);
         color: white;
@@ -538,10 +527,6 @@
         .total-letter {
             margin-top: 2%;
         }
-        .togglebtn {
-            width: 150px;
-            margin-left: 80%;
-        }
         .pie-plot {
             margin-top: 2%;
         }
@@ -586,11 +571,6 @@
             padding-left: 5%;
         }
     }
-    @media screen and (max-width: 600px) {
-        .togglebtn {
-            margin-left: 70%;
-        }
-    }
     @media screen and (max-width: 535px) {
         .main-container {
             display: block;
@@ -629,9 +609,6 @@
         .charts {
             display: block;
             padding-left: 5%;
-        }
-        .togglebtn {
-            margin-left: 60%;
         }
     }
     @media screen and (max-width: 400px) {
