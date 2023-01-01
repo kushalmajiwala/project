@@ -290,7 +290,7 @@
     </div>
     <div class="Modals">
         <!-- CV Formats -->
-        <Modal isOpen={open1}>
+        <Modal isOpen={open1} scrollable>
             <ModalHeader style="display:flex; justify-content: center;">
                 <p class="format-heading">Select CV Format</p>
             </ModalHeader>
@@ -328,7 +328,7 @@
             </ModalFooter>
         </Modal>
         <!-- Letter Formats -->
-        <Modal isOpen={open2}>
+        <Modal isOpen={open2} scrollable>
             <ModalHeader style="display:flex; justify-content: center;">
                 <p class="format-heading">Select Letter Format</p>
             </ModalHeader>
